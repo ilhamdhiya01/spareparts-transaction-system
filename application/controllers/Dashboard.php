@@ -10,10 +10,12 @@ class Dashboard extends CI_Controller
         parent::__construct();
     }
 
-    public function index()
+    public function index($id)
     {
         $data =  [
-            'judul' => 'dashboard'
+            'judul' => 'dashboard',
+            'id' => $id,
+            'users' => $this->db->get_where('users',['username' => $this->session->userdata('username')])->row_array()
         ];
 
         $this->load->view('templete/header', $data);

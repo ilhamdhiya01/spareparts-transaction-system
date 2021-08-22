@@ -1,8 +1,36 @@
-/**
- *
- * You can write your CSS code here, DO NOT touch the default JavaScript file
- * because it will make it harder for you to update.
- * 
- */
+/* auth */
+.card-primary {
+    position: relative;
+}
+.auth-alert{
+    position: absolute;
+    width: 100%;
+}
+.auth-alert .close {
+    outline: none;
+}
+.text-danger {
+    position: absolute;
+    padding: 3px 0;
+}
+.form-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FDFDFF;
+    border: 1px solid #c9c9ca;
+    border-radius: 5px;
+}
+.form-input i {
+    margin-right: 8px;
+    cursor: pointer;
+}
+#username {
+    background-color: #FDFDFF;
+    border: 1px solid #c9c9ca;
+}
+.form-input input {
+    border: none;
+}
 
-/*# sourceMappingURL=custom.css.map */
+/* /auth */

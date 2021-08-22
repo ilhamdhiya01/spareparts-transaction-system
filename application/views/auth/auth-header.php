@@ -21,10 +21,9 @@
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/custom.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/components.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div id="app">
-        <section class="section">
-            <div class="d-flex flex-wrap align-items-stretch">
