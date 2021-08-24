@@ -182,18 +182,59 @@
                     <div class="sidebar-brand">
                         <a href="index.html">Stisla</a>
                     </div>
-                    <div class="sidebar-brand sidebar-brand-sm">
+                    <?php
+                    ini_set('display_errors', 1);
+                    ini_set('display_startup_errors', 1);
+                    error_reporting(E_ALL);
+                    $level_id = $this->session->userdata('level_id');
+                    $this->db->select('tb_user_menu.id,nama_menu');
+                    $this->db->from('tb_user_menu');
+                    $this->db->join('tb_user_access_menu', 'tb_user_access_menu.menu_id = tb_user_menu.id');
+                    $this->db->where('level_id', $level_id);
+
+                    $query = $this->db->get()->result_array();
+                    ?>
+                    <!-- <div class="sidebar-brand sidebar-brand-sm">
                         <a href="index.html">St</a>
-                    </div>
+                    </div> -->
                     <ul class="sidebar-menu">
-                        <li class="menu-header">Dashboard</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
-                                <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
-                            </ul>
-                        </li>
+                        <?php foreach ($query as $menu) : ?>
+                            <li class="menu-header"><?= $menu['nama_menu']; ?></li>
+                            <?php
+                            $menu_id = $menu['id'];
+                            $this->db->select('tb_user_sub_menu.*');
+                            $this->db->from('tb_user_sub_menu');
+                            $this->db->join('tb_user_menu', 'tb_user_sub_menu.menu_id = tb_user_menu.id');
+                            $this->db->where('menu_id', $menu_id);
+                            $this->db->where('is_active', 1);
+                            $query_subMenu = $this->db->get()->result_array();
+                            foreach ($query_subMenu as $sub_menu) :
+                                if ($sub_menu['dropdown'] == 1) :
+                            ?>
+                                    <li class="nav-item dropdown">
+                                        <a href="#" class="nav-link has-dropdown"><i class="<?= $sub_menu['icon']; ?>"></i><span><?= $sub_menu['sub_menu']; ?></span></a>
+                                        <?php
+                                        $sub_menu_id = $sub_menu['id'];
+                                        $this->db->select('dropdown_menu.*');
+                                        $this->db->from('dropdown_menu');
+                                        $this->db->join('tb_user_sub_menu', 'dropdown_menu.sub_menu_id = tb_user_sub_menu.id');
+                                        $this->db->where('sub_menu_id', $sub_menu_id);
+                                        $query_dropdown = $this->db->get()->result_array();
+                                        ?>
+                                        <ul class="dropdown-menu">
+                                            <?php foreach ($query_dropdown as $dropdown) : ?>
+                                                <li><a class="nav-link" href="<?= $dropdown['url'] ?>"><?= $dropdown['dropdown_nama']; ?></a></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </li>
+                                <?php else : ?>
+                                    <li class="nav-item">
+                                        <a href="<?= $sub_menu['url']; ?>" class="nav-link"><i class="<?= $sub_menu['icon']; ?>"></i><span><?= $sub_menu['sub_menu']; ?></span></a>
+                                        <!-- <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Forms</span></a> -->
+                                    </li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
                 </aside>
             </div>

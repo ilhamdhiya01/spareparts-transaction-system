@@ -45,7 +45,7 @@ class Auth extends CI_Controller
                         ];
                         $this->session->set_userdata($data);
                         if ($users['level_id'] == 1) {
-                            redirect('dashboard/index/' . $users['level_id']);
+                            redirect('menu');
                         }
                     } else {
                         $this->session->set_flashdata('message', '<div class="alert alert-danger auth-alert alert-dismissible fade show" role="alert">
