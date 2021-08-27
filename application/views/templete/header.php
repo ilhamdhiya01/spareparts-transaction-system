@@ -223,13 +223,13 @@
                                         ?>
                                         <ul class="dropdown-menu">
                                             <?php foreach ($query_dropdown as $dropdown) : ?>
-                                                <li><a class="nav-link" href="<?= $dropdown['url'] ?>"><?= $dropdown['dropdown_nama']; ?></a></li>
+                                                <li><a class="nav-link" href="<?= base_url($dropdown['url']); ?>"><?= $dropdown['dropdown_nama']; ?></a></li>
                                             <?php endforeach; ?>
                                         </ul>
                                     </li>
                                 <?php else : ?>
                                     <li class="nav-item">
-                                        <a href="<?= $sub_menu['url']; ?>" class="nav-link"><i class="<?= $sub_menu['icon']; ?>"></i><span><?= $sub_menu['sub_menu']; ?></span></a>
+                                        <a href="<?= base_url($sub_menu['url']); ?>" class="nav-link"><i class="<?= $sub_menu['icon']; ?>"></i><span><?= $sub_menu['sub_menu']; ?></span></a>
                                         <!-- <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Forms</span></a> -->
                                     </li>
                                 <?php endif; ?>
@@ -238,3 +238,5 @@
                     </ul>
                 </aside>
             </div>
+            <div class="main-content">
+                <section class="section">

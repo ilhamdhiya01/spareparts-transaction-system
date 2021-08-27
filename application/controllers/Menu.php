@@ -14,11 +14,23 @@ class Menu extends CI_Controller
     {
         $data =  [
             'judul' => 'dashboard',
-            'users' => $this->db->get_where('users',['username' => $this->session->userdata('username')])->row_array()
+            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
         ];
 
-        $this->load->view('templete/header', $data);
+        $this->load->view('templete/-header', $data);
         $this->load->view('dashboard/index');
+        $this->load->view('templete/-footer');
+    }
+
+
+    public function tambahDataService()
+    {
+        $data =  [
+            'judul' => 'dashboard',
+            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
+        ];
+        $this->load->view('templete/header', $data);
+        $this->load->view('menu/tambah-data-service');
         $this->load->view('templete/footer');
     }
 }
