@@ -89,14 +89,14 @@
                                                 ?>
                                                 <ul class="nav child_menu">
                                                     <?php foreach ($query_dropdown as $dropdown) : ?>
-                                                        <li><a href="index.html"><?= $dropdown['dropdown_nama']; ?></a></li>
+                                                        <li><a href="<?= base_url($dropdown['url']); ?>"><?= $dropdown['dropdown_nama']; ?></a></li>
                                                     <?php endforeach; ?>
                                                 </ul>
                                             </li>
                                         </ul>
                                     <?php else : ?>
                                         <ul class="nav side-menu">
-                                            <li><a href="javascript:void(0)"><i class="<?= $sub_menu['icon'] ?>"></i> <?= $sub_menu['sub_menu']; ?></a></li>
+                                            <li><a href="<?= base_url($sub_menu['url']) ?>"><i class="<?= $sub_menu['icon'] ?>"></i> <?= $sub_menu['sub_menu']; ?></a></li>
                                         </ul>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
@@ -116,7 +116,7 @@
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
                             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?= base_url(); ?>auth/logout">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -216,3 +216,6 @@
                 </div>
             </div>
             <!-- /top navigation -->
+            <!-- page content -->
+            
+                                    <!-- /page content -->
