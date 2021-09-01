@@ -18,11 +18,20 @@
     <link href="<?= base_url(); ?>assets/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- jQuery custom content scroller -->
     <link href="<?= base_url(); ?>assets/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
-
+    <!-- Datatables -->
+    <link href="<?= base_url(); ?>assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>assets/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>assets/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="<?= base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/izitoast/dist/css/iziToast.min.css">
+    <!-- my css -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/custom.css">
 </head>
 
 <body class="nav-md">

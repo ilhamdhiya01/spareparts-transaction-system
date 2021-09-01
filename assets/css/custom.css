@@ -32,5 +32,14 @@
 .form-input input {
     border: none;
 }
-
 /* /auth */
+/* sub menu */
+.btn-sub-menu {
+    display: flex;
+}
+.btn-sub-menu ul li{
+    display: inline-block;
+    align-items: center;
+    list-style-type: none;
+}
+/* /sub menu */

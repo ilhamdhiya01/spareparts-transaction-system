@@ -1,4 +1,3 @@
-
 <!-- footer content -->
 <footer>
     <div class="pull-right">
@@ -16,6 +15,25 @@
 <script src="<?= base_url(); ?>assets/vendors/fastclick/lib/fastclick.js"></script>
 <!-- NProgress -->
 <script src="<?= base_url(); ?>assets/vendors/nprogress/nprogress.js"></script>
+<!-- Datatables -->
+<script src="<?= base_url(); ?>assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/jszip/dist/jszip.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/pdfmake/build/pdfmake.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/pdfmake/build/vfs_fonts.js"></script>
+<!-- JS Libraies -->
+<script src="<?= base_url(); ?>assets/vendors/izitoast/dist/js/iziToast.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/sweetalert/dist/sweetalert.min.js"></script>
 <!-- jQuery custom content scroller -->
 <script src="<?= base_url(); ?>assets/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="<?= base_url(); ?>assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>

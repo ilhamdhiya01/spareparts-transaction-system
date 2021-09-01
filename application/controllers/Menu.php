@@ -8,6 +8,8 @@ class Menu extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        // Sub menu model
+        $this->load->model('SubMenu_model');
     }
 
     public function index()
@@ -96,7 +98,7 @@ class Menu extends CI_Controller
             'id' => $this->input->post('id-menu'),
             'nama_menu' => $this->input->post('nama-menu')
         ];
-        $this->db->update('tb_user_menu',$data,['id' => $data['id']]);
+        $this->db->update('tb_user_menu', $data, ['id' => $data['id']]);
         $this->session->set_flashdata('flash', '<div class="alert alert-success auth-alert alert-dismissible fade show" role="alert">
         Ubah menu success
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -104,5 +106,34 @@ class Menu extends CI_Controller
         </button>
         </div>');
         redirect('menu/dropdown_userMenu');
+    }
+
+    // setting dropdown_submenu
+    public function dropdown_subMenu()
+    {
+        $data = [
+            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
+            'user_menu' => $this->db->get('tb_user_menu')->result_array(),
+            'subMenu' => $this->SubMenu_model->getAllSubMenu()
+        ];
+        $this->load->view('templete/-header', $data);
+        $this->load->view('menu/dropdown-user-sub-menu', $data);
+        $this->load->view('templete/-footer');
+    }
+    public function delete_subMenu()
+    {
+        $id = $_POST['id'];
+        if($this->db->delete('tb_user_sub_menu',['id' => $id])){
+            $data = [
+                'response' => 'success',
+                'message' => 'Data berhasil di hapus'
+            ];
+        } else {
+            $data = [
+                'response' => 'error',
+                'message' => 'Data gagal di hapus'
+            ];
+        }
+        echo json_encode($data);
     }
 }
