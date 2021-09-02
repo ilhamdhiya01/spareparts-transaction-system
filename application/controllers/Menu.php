@@ -120,10 +120,23 @@ class Menu extends CI_Controller
         $this->load->view('menu/dropdown-user-sub-menu', $data);
         $this->load->view('templete/-footer');
     }
+    public function tambah_subMenu()
+    {
+        $data = [
+            'menu_id' => $this->input->post('user-menu'),
+            'sub_menu' => $this->input->post('sub_menu'),
+            'url' => $this->input->post('url'),
+            'icon' => $this->input->post('icon'),
+            'is_active' => $this->input->post('is_active')
+        ];
+        $this->db->insert('tb_user_sub_menu', $data);
+        echo json_encode($data);
+    }
+
     public function delete_subMenu()
     {
         $id = $_POST['id'];
-        if($this->db->delete('tb_user_sub_menu',['id' => $id])){
+        if ($this->db->delete('tb_user_sub_menu', ['id' => $id])) {
             $data = [
                 'response' => 'success',
                 'message' => 'Data berhasil di hapus'

@@ -16,7 +16,7 @@
                         </div>
                         <div class="btn-sub-menu">
                             <ul>
-                                <li><a href="" class="btn btn-primary btn-sm"><i class="fa fa-plus-square"></i> Tambah Sub Menu</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#tambah-sub-menu" class="btn btn-primary btn-sm"><i class="fa fa-plus-square"></i> Tambah Sub Menu</a></li>
                                 <li><a href="" class="btn btn-info btn-sm"><i class="fa fa-plus-square"></i> Tambah Dropdown Menu</a></li>
                                 <li><a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus Semua</a></li>
                             </ul>
@@ -63,12 +63,61 @@
                                                 <?php endforeach; ?>
                                             </tbody>
                                         </table>
+                                        <div class="tampil-data"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="tambah-sub-menu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Sub Menu</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" class="form-sub-menu">
+                    <div class="form-group">
+                        <label class="control-label ">Pilih Menu<span class="required text-danger pl-1">*</span></label>
+                        <select class="form-control" name="user-menu">
+                            <option>-- Pilih --</option>
+                            <?php foreach ($user_menu as $menu) : ?>
+                                <option value="<?= $menu['id']; ?>"><?= $menu['nama_menu']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nama Sub Menu<span class="required text-danger pl-1">*</span></label>
+                        <input type="text" class="form-control" name="sub_menu" id="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Url<span class="required text-danger pl-1">*</span></label>
+                        <input type="text" class="form-control" name="url" id="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Icon<span class="required text-danger pl-1">*</span></label>
+                        <input type="text" class="form-control" name="icon" id="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Aktivasi Menu<span class="required text-danger pl-1">*</span></label><br>
+                        <label>
+                            <input type="checkbox" class="js-switch aktivasi-menu" value="0" name="is_active">
+                        </label>
+                        <label id="status">Tidak Aktif</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-sm btn-sub-menu">Tambah</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -116,5 +165,32 @@
                 }
             });
         e.preventDefault();
+    });
+
+    $('.btn-sub-menu').click(function() {
+        let data = $('.form-sub-menu').serialize();
+        $.ajax({
+            url: '<?= base_url(); ?>menu/tambah_subMenu',
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            success: function() {
+                iziToast.success({
+                    title: 'Success',
+                    message: 'ok',
+                    position: 'topRight'
+                });
+            }
+        })
+    });
+
+    $('.aktivasi-menu').click(function() {
+        if ($(this).is(':checked')) {
+            $('#status').html('Aktif');
+            $(this).attr('value', '1');
+        } else {
+            $('#status').html('Tidak Aktif');
+            $(this).attr('value', '0');
+        }
     })
 </script>
