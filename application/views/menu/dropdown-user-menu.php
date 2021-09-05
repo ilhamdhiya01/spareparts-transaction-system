@@ -91,7 +91,7 @@
                 data: {
                     id: id
                 },
-                method: 'post',
+                type: 'post',
                 dataType: 'json',
                 success: function(data) {
                     $("#id-menu").val(data.id);

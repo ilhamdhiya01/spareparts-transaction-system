@@ -114,11 +114,22 @@ class Menu extends CI_Controller
         $data = [
             'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
             'user_menu' => $this->db->get('tb_user_menu')->result_array(),
-            'subMenu' => $this->SubMenu_model->getAllSubMenu()
         ];
         $this->load->view('templete/-header', $data);
         $this->load->view('menu/dropdown-user-sub-menu', $data);
         $this->load->view('templete/-footer');
+    }
+    // ambil data sub menu
+    public function ambilDataSubMenu()
+    {
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'sub_menu' => $this->SubMenu_model->getAllSubMenu()
+            ];
+            echo json_encode($this->load->view('menu/ajax-data-sub-menu',$data));
+        } else {
+            echo "data tidak ditemukan";
+        }
     }
     public function tambah_subMenu()
     {
@@ -129,7 +140,23 @@ class Menu extends CI_Controller
             'icon' => $this->input->post('icon'),
             'is_active' => $this->input->post('is_active')
         ];
-        $this->db->insert('tb_user_sub_menu', $data);
+        if ($this->db->insert('tb_user_sub_menu', $data)) {
+            $data = [
+                'response' => 'success',
+                'message' => 'Sub menu berhasil ditambahkan'
+            ];
+        } else {
+            $data = [
+                'response' => 'error',
+                'message' => 'Sub menu gagal ditambahkan'
+            ];
+        }
+        echo json_encode($data);
+    }
+    public function get_subMenuById()
+    {
+        $id = $this->input->post('id');
+        $data = $this->db->get_where('tb_user_sub_menu', ['id' => $id])->row_array();
         echo json_encode($data);
     }
 
