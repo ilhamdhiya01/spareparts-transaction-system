@@ -24,21 +24,8 @@
                         <div class="x_content">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="card-box table-responsive" id="view-data">
-                                        <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
-                                            <thead>
-                                                <tr class="text-center">
-                                                    <th>No</th>
-                                                    <th>User Menu</th>
-                                                    <th>Sub Menu</th>
-                                                    <th>Url</th>
-                                                    <th>Icon</th>
-                                                    <th>Status</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tbody">
-                                            </tbody>
+                                    <div class="card-box table-responsive">
+                                        <table id="datatable-fixed-header" class="table table-striped table-bordered view-data" style="width:100%">
                                         </table>
                                     </div>
                                 </div>
@@ -100,19 +87,23 @@
     </div>
 </div>
 <script>
-    // data table serverside
+    // tampil data
     $(document).ready(function() {
+        readSubMenu();
+    });
+
+    function readSubMenu() {
         $.ajax({
             url: "<?= base_url(); ?>menu/ambilDataSubMenu",
-            type : "get",
+            type: "get",
             success: function(data) {
-                $("#tbody").html(data);
+                $(".view-data").html(data);
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
             }
         });
-    });
+    }
     // delete sub menu
     $('.delete-sub-menu').click(function(e) {
         $(this).closest('#tr').addClass('hapus-sub-menu');
@@ -141,9 +132,7 @@
                                     position: 'topRight'
                                 });
                                 $('.hapus-sub-menu').fadeOut(1500);
-                                // setTimeout(() => {
-                                //     document.location.href = '<?= base_url(); ?>menu/dropdown_subMenu';
-                                // }, 2000)
+                                readSubMenu();
                             } else {
                                 iziToast.warning({
                                     title: 'Failed',
@@ -178,10 +167,9 @@
                         message: data.message,
                         position: 'topRight'
                     });
-                    $('#tambah-sub-menu').modal('hide');
-                    setTimeout(() => {
-                        document.location.href = '<?= base_url(); ?>menu/dropdown_subMenu';
-                    }, 2000)
+                    $('.close').click();
+                    readSubMenu();
+                    $('#sub_menu').val('');
                 } else {
                     iziToast.error({
                         title: 'Error',

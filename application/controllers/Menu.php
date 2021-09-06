@@ -126,7 +126,7 @@ class Menu extends CI_Controller
             $data = [
                 'sub_menu' => $this->SubMenu_model->getAllSubMenu()
             ];
-            echo json_encode($this->load->view('menu/ajax-data-sub-menu',$data));
+            echo json_encode($this->load->view('menu/ajax-request/data-sub-menu',$data));
         } else {
             echo "data tidak ditemukan";
         }
