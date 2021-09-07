@@ -43,70 +43,86 @@ class Menu extends CI_Controller
         $data =  [
             'judul' => 'User Menu',
             'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
-            'user_menu' => $this->db->get('tb_user_menu')->result_array()
+
+
         ];
         $this->load->view('templete/-header', $data);
         $this->load->view('menu/dropdown-user-menu');
         $this->load->view('templete/-footer');
     }
-    public function delete_userMenu($id)
+    public function ambilDataUserMenu()
     {
-        $this->db->delete('tb_user_menu', ['id' => $id]);
-        $this->session->set_flashdata('flash', '<div class="alert alert-success auth-alert alert-dismissible fade show" role="alert">
-        Delete success
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-        </div>');
-        redirect('menu/dropdown_userMenu');
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'user_menu' => $this->db->get('tb_user_menu')->result_array()
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/data-user-menu', $data));
+        } else {
+            echo "Data tidak ditemukan";
+        }
+    }
+    public function formUserMenu()
+    {
+        if ($this->input->is_ajax_request()) {
+            echo json_encode($this->load->view('menu/ajax-request/form-user-menu'));
+        } else {
+            echo "Data tidak ditemukan";
+        }
+    }
+    public function delete_userMenu()
+    {
+        $id = $_POST['id'];
+        if ($this->input->is_ajax_request()) {
+            if ($this->db->delete('tb_user_menu', ['id' => $id])) {
+                $data = [
+                    'response' => 'success',
+                    'message' => 'Data berhasil di hapus'
+                ];
+            } else {
+                $data = [
+                    'response' => 'error',
+                    'message' => 'Data gagal di hapus'
+                ];
+            }
+            echo json_encode($data);
+        } else {
+            echo "Request failed";
+        }
     }
     public function tambah_userMenu()
     {
         $data = [
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
-            'user_menu' => $this->db->get('tb_user_menu')->result_array()
+            'nama_menu' => $this->input->post('nama-menu')
         ];
-        $this->form_validation->set_rules('nama-menu', 'nama menu', 'required');
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templete/-header', $data);
-            $this->load->view('menu/dropdown-user-menu');
-            $this->load->view('templete/-footer');
-        } else {
-            $nama_menu = $this->input->post('nama-menu');
+        if ($this->db->insert('tb_user_menu', $data)) {
             $data = [
-                'nama_menu' => $nama_menu
+                'response' => 'success',
+                'message' => 'Data berhasil ditambahkan'
             ];
-            $this->db->insert('tb_user_menu', $data);
-            $this->session->set_flashdata('flash', '<div class="alert alert-success auth-alert alert-dismissible fade show" role="alert">
-            Tambah menu success
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-            </div>');
-            redirect('menu/dropdown_userMenu');
+        } else {
+            $data = [
+                'response' => 'error',
+                'message' => 'Data gagal ditambahkan'
+            ];
         }
+        echo json_encode($data);
     }
     public function get_userMenuById()
     {
         $id =  $_POST['id'];
-        $data = $this->db->get_where('tb_user_menu', ['id' => $id])->row_array();
+        $data = [
+            'menu' => $this->db->get_where('tb_user_menu', ['id' => $id])->row_array()
+        ];
         echo json_encode($data);
     }
-    public function ubah_userMenu()
-    {
-        $data = [
-            'id' => $this->input->post('id-menu'),
-            'nama_menu' => $this->input->post('nama-menu')
-        ];
-        $this->db->update('tb_user_menu', $data, ['id' => $data['id']]);
-        $this->session->set_flashdata('flash', '<div class="alert alert-success auth-alert alert-dismissible fade show" role="alert">
-        Ubah menu success
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-        </div>');
-        redirect('menu/dropdown_userMenu');
-    }
+    // public function ubah_userMenu()
+    // {
+    //     $id = $_POST['id'];
+    //     $data = [
+    //         'menu_id' => $this->db->get_where('tb_user_menu',['id' => $id])->row_array()
+    //     ];
+    //     echo json_encode($data);
+    // }
 
     // setting dropdown_submenu
     public function dropdown_subMenu()
@@ -126,7 +142,7 @@ class Menu extends CI_Controller
             $data = [
                 'sub_menu' => $this->SubMenu_model->getAllSubMenu()
             ];
-            echo json_encode($this->load->view('menu/ajax-request/data-sub-menu',$data));
+            echo json_encode($this->load->view('menu/ajax-request/data-sub-menu', $data));
         } else {
             echo "data tidak ditemukan";
         }

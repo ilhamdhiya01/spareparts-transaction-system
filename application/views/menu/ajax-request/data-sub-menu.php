@@ -14,7 +14,7 @@
     $no = 1;
     foreach ($sub_menu as $sub_menu) :
     ?>
-        <tr id="tr">
+        <tr id="tr-sub-menu">
             <td class="text-center"><?= $no++; ?></td>
             <td><?= $sub_menu['nama_menu']; ?></td>
             <td><?= $sub_menu['sub_menu']; ?></td>
@@ -46,7 +46,7 @@
 <script>
     // delete sub menu
     $('.delete-sub-menu').click(function(e) {
-        $(this).closest('#tr').addClass('hapus-sub-menu');
+        $(this).closest('#tr-sub-menu').addClass('hapus-sub-menu');
         let id = $(this).data('id');
         swal({
                 title: 'Hapus data ini ?',
