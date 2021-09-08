@@ -91,21 +91,44 @@ class Menu extends CI_Controller
     }
     public function tambah_userMenu()
     {
-        $data = [
-            'nama_menu' => $this->input->post('nama-menu')
+        $rules = [
+            [
+                'field' => 'nama-menu',
+                'label' => 'Nama menu',
+                'rules' => 'required'
+            ]
         ];
-        if ($this->db->insert('tb_user_menu', $data)) {
-            $data = [
-                'response' => 'success',
-                'message' => 'Data berhasil ditambahkan'
-            ];
-        } else {
-            $data = [
+        $this->form_validation->set_rules($rules);
+        $this->form_validation->set_message('required', '{field} tidak boleh kosong');
+        if ($this->form_validation->run() == false) {
+            $msg = [
+                'nama_menu' => form_error('nama-menu'),
                 'response' => 'error',
                 'message' => 'Data gagal ditambahkan'
             ];
+            echo json_encode($msg);
+        } else {
+            $data = [
+                'nama_menu' => $this->input->post('nama-menu')
+            ];
+            if ($this->db->insert('tb_user_menu', $data)) {
+                $msg = [
+                    'response' => 'success',
+                    'message' => 'Data berhasil ditambahkan'
+                ];
+                echo json_encode($msg);
+            }
         }
-        echo json_encode($data);
+
+        // if () {
+
+        // } else {
+        //     $data = [
+        //         'response' => 'error',
+        //         'message' => 'Data gagal ditambahkan'
+        //     ];
+        // }
+        // echo json_encode($data);
     }
     public function get_userMenuById()
     {
@@ -115,14 +138,25 @@ class Menu extends CI_Controller
         ];
         echo json_encode($data);
     }
-    // public function ubah_userMenu()
-    // {
-    //     $id = $_POST['id'];
-    //     $data = [
-    //         'menu_id' => $this->db->get_where('tb_user_menu',['id' => $id])->row_array()
-    //     ];
-    //     echo json_encode($data);
-    // }
+    public function proses_ubahUserMenu()
+    {
+        $data = [
+            'id' => $_POST['id_menu'],
+            'nama_menu' => $_POST['nama_menu']
+        ];
+        if ($this->db->update('tb_user_menu', $data, ['id' => $data['id']])) {
+            $data = [
+                'response' => 'success',
+                'message' => 'Data berhasil di ubah'
+            ];
+        } else {
+            $data = [
+                'response' => 'error',
+                'message' => 'Data gagal di ubah'
+            ];
+        }
+        echo json_encode($data);
+    }
 
     // setting dropdown_submenu
     public function dropdown_subMenu()
