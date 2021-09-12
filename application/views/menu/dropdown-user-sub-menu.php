@@ -24,9 +24,8 @@
                         <div class="x_content">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="card-box table-responsive">
-                                        <table id="datatable-fixed-header" class="table table-striped table-bordered view-data" style="width:100%">
-                                        </table>
+                                    <div class="card-box table-responsive" id="view-sub-menu">
+
                                     </div>
                                 </div>
                             </div>
@@ -61,22 +60,35 @@
                     </div>
                     <div class="form-group">
                         <label for="">Nama Sub Menu<span class="required text-danger pl-1">*</span></label>
-                        <input type="text" class="form-control" name="sub_menu" id="sub_menu">
+                        <input type="text" class="form-control" value="" name="sub_menu" id="sub_menu">
+                        <div id="validationServer03Feedback" class="invalid-feedback sub-menu-error">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="">Url<span class="required text-danger pl-1">*</span></label>
-                        <input type="text" class="form-control" name="url" id="url">
+                        <input type="text" class="form-control" value="" name="url" id="url">
+                        <div id="validationServer03Feedback" class="invalid-feedback url-menu-error">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="">Icon<span class="required text-danger pl-1">*</span></label>
-                        <input type="text" class="form-control" name="icon" id="icon">
+                        <input type="text" class="form-control" value="" name="icon" id="icon">
+                        <div id="validationServer03Feedback" class="invalid-feedback icon-menu-error">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Aktivasi Menu<span class="required text-danger pl-1">*</span></label><br>
+                        <label for="">Aktivasi Menu</label><br>
                         <label>
-                            <input type="checkbox" class="js-switch aktivasi-menu" value="" name="is_active">
+                            <input type="checkbox" class="js-switch aktivasi-menu" value="0" name="is_active" id="is_active">
                         </label>
                         <label id="status">Tidak Aktif</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Dropdown Menu</label><br>
+                        <label>
+                            <input type="checkbox" class="js-switch dropdown-menu" value="0" name="dropdown" id="dropdown">
+                        </label>
+                        <label id="dropdown-status">Tidak</label>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary btn-sm tambah-sub-menu">Tambah</button>
@@ -97,7 +109,7 @@
             url: "<?= base_url(); ?>menu/ambilDataSubMenu",
             type: "get",
             success: function(data) {
-                $(".view-data").html(data);
+                $("#view-sub-menu").html(data);
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
@@ -151,17 +163,34 @@
 
 
     // tambah sub menu
-    $('.tambah-sub-menu').on('click', function(e) {
+    $('.tambah-sub-menu').click(function(e) {
         $('.modal-title').html('Tambah Sub Menu');
         $('.tambah-sub-menu').html('Tambah');
-        let data = $('.form-sub-menu').serialize();
+        // let data = $('.form-sub-menu').serialize();
         $.ajax({
             url: '<?= base_url(); ?>menu/tambah_subMenu',
             method: 'post',
             dataType: 'json',
-            data: data,
+            data: {
+                menu: $("#user-menu").val(),
+                sub_menu: $("#sub_menu").val(),
+                url: $("#url").val(),
+                icon: $("#icon").val(),
+                is_active: $("#is_active").val(),
+                dropdown: $("#dropdown").val()
+            },
             success: function(data) {
-                if (data.response == 'success') {
+                if (data.response !== 'success') {
+                    $('#sub_menu').addClass('is-invalid');
+                    $('.sub-menu-error').html(data.sub_menu);
+
+                    $('#url').addClass('is-invalid');
+                    $('.url-menu-error').html(data.url);
+
+                    $('#icon').addClass('is-invalid');
+                    $('.icon-menu-error').html(data.icon);
+                    console.log(data);
+                } else {
                     iziToast.success({
                         title: 'Success',
                         message: data.message,
@@ -169,14 +198,27 @@
                     });
                     $('.close').click();
                     readSubMenu();
+                    $('#user-menu').val('');
                     $('#sub_menu').val('');
-                } else {
-                    iziToast.error({
-                        title: 'Error',
-                        message: data.message,
-                        position: 'topRight'
-                    });
+                    $('#url').val('');
+                    $('#icon').val('');
+                    $('#is_active').is(':unchecked');
+                    $('#dropdown').is(':unchecked');
+                    
+                    $('#sub_menu').removeClass('is-invalid');
+                    $('.sub-menu-error').html('');
+
+                    $('#url').removeClass('is-invalid');
+                    $('.url-menu-error').html('');
+
+                    $('#icon').removeClass('is-invalid');
+                    $('.icon-menu-error').html('');
                 }
+                // console.log(data.error.sub_menu);
+                // $('#url').attr('style', 'border-color:#E46673;')
+                // $('.url-sub-menu-error').html(data.url);
+                // $('#icon').attr('style', 'border-color:#E46673;')
+                // $('.icon-sub-menu-error').html(data.icon);
             }
         });
         e.preventDefault();
@@ -207,12 +249,22 @@
     //     e.preventDefault();
     // });
 
-    $('.aktivasi-menu').click(function() {
+    $('.aktivasi-menu').change(function() {
         if ($(this).is(':checked')) {
             $('#status').html('Aktif');
             $(this).attr('value', 1);
-        } else if ($(this).is(':unchecked')) {
+        } else {
             $('#status').html('Tidak Aktif');
+            $(this).attr('value', 0);
+        }
+    });
+
+    $('.dropdown-menu').click(function() {
+        if ($(this).is(':checked')) {
+            $('#dropdown-status').html('Ya');
+            $(this).attr('value', 1);
+        } else {
+            $('#dropdown-status').html('Tidak');
             $(this).attr('value', 0);
         }
     })

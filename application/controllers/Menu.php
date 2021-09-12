@@ -183,25 +183,52 @@ class Menu extends CI_Controller
     }
     public function tambah_subMenu()
     {
-        $data = [
-            'menu_id' => $this->input->post('user-menu'),
-            'sub_menu' => $this->input->post('sub_menu'),
-            'url' => $this->input->post('url'),
-            'icon' => $this->input->post('icon'),
-            'is_active' => $this->input->post('is_active')
+        $rules = [
+            [
+                'field' => 'sub_menu',
+                'label' => 'Sub menu',
+                'rules' => 'required',
+                'error' => 'error'
+            ],
+            [
+                'field' => 'url',
+                'label' => 'Url',
+                'rules' => 'required',
+                'error' => 'error'
+            ],
+            [
+                'field' => 'icon',
+                'label' => 'Icon',
+                'rules' => 'required',
+                'error' => 'error'
+            ]
         ];
-        if ($this->db->insert('tb_user_sub_menu', $data)) {
-            $data = [
-                'response' => 'success',
-                'message' => 'Sub menu berhasil ditambahkan'
+        $this->form_validation->set_rules($rules);
+        $this->form_validation->set_message('required', '{field} tidak boleh kosong');
+        if ($this->form_validation->run() == false) {
+            $msg = [
+                'sub_menu' => form_error('sub_menu'),
+                'url' => form_error('url'),
+                'icon' => form_error('icon')
             ];
+            echo json_encode($msg);
         } else {
             $data = [
-                'response' => 'error',
-                'message' => 'Sub menu gagal ditambahkan'
+                'menu_id' => $_POST['menu'],
+                'sub_menu' => $_POST['sub_menu'],
+                'url' => $_POST['url'],
+                'icon' => $_POST['icon'],
+                'is_active' => $_POST['is_active'],
+                'dropdown' => $_POST['dropdown']
             ];
+            if ($this->db->insert('tb_user_sub_menu', $data)) {
+                $msg = [
+                    'response' => 'success',
+                    'message' => 'Sub menu berhasil ditambahkan'
+                ];
+                echo json_encode($msg);
+            }
         }
-        echo json_encode($data);
     }
     public function get_subMenuById()
     {

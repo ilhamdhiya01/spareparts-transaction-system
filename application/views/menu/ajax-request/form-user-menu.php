@@ -103,7 +103,6 @@
                                     position: 'topRight'
                                 });
                             }
-                            console.log(data);
                         }
                     });
                     event.preventDefault();
