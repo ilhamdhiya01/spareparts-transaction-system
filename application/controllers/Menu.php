@@ -195,23 +195,6 @@ class Menu extends CI_Controller
         }
     }
 
-    // public function getOptionsUserMenu(){
-    //     if($this->input->is_ajax_request()){
-    //         $query = "SELECT * FROM tb_user_menu";
-    //         $rows = [];
-    //         while($row = mysqli_fetch($query)){
-    //             $rows[] = $row;
-    //         }
-    //         echo json_encode($rows);
-    //     }else {
-    //         $data = [
-    //             'response' => 'error',
-    //             'message' => 'data tidak ditemukan'
-    //         ];
-    //         echo json_encode($data);
-    //     }
-    // }
-
     public function tambah_subMenu()
     {
         $rules = [
@@ -264,8 +247,20 @@ class Menu extends CI_Controller
     public function get_subMenuById()
     {
         $id = $_POST['id'];
-        $data = $this->db->get_where('tb_user_sub_menu', ['id' => $id])->row_array();
-        echo json_encode($data);
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'sub_menu_by_id' => $this->db->get_where('tb_user_sub_menu', ['id' => $id])->row_array(),
+                'response' => 'success',
+                'message' => 'Request succes'
+            ];
+            echo json_encode($data);
+        } else {
+            $data = [
+                'response' => 'error',
+                'message' => 'Request failed'
+            ];
+            echo json_encode($data);
+        }
     }
 
     public function delete_subMenu()

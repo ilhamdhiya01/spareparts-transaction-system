@@ -37,7 +37,7 @@
     <div class="form-group">
         <label for="">Dropdown Menu</label>
         <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input dropdown-menu"  value="0" name="dropdown" id="dropdown">
+            <input type="checkbox" class="custom-control-input dropdown-menu" value="0" name="dropdown" id="dropdown">
             <label class="custom-control-label" for="dropdown" id="dropdown-status">Tidak</label>
         </div>
     </div>
@@ -46,21 +46,6 @@
     </div>
 </form>
 <script>
-    // $("#modal-tambah-sub-menu").click(function(e){
-    //     alert('ok');
-    //     $.ajax({
-    //         url : '<?= base_url(); ?>menu/getOptionsUserMenu',
-    //         type : 'post',
-    //         dataType : 'json',
-    //         success : function(data){
-    //             // for(let i = 0; i < data.user_menu.length; i++){
-    //                 // $("#user-menu").html("<option value='"+ data.user_menu.id + "'>" + data.user_menu.nama_menu + "</option>");
-    //             // }
-    //             console.log(data.hasil);
-    //         }
-    //     });
-    //     e.preventDefault();
-    // });
     // tambah sub menu
     $('.tambah-sub-menu').click(function(e) {
         $('.modal-title').html('Tambah Sub Menu');
@@ -115,30 +100,6 @@
         e.preventDefault();
     });
 
-    // ubah sub menu
-    $('.ubah-sub-menu').click(function(e) {
-        let id = $(this).data('id');
-        $.ajax({
-            url: "<?= base_url(); ?>menu/get_subMenuById",
-            type: "post",
-            dataType: "json",
-            data: {
-                id: id
-            },
-            success: function(data) {
-                $("#sub_menu").val(data.sub_menu_byId.sub_menu);
-                $("#url").val(data.sub_menu_byId.url);
-                $("#icon").val(data.sub_menu_byId.icon);
-                if(data.sub_menu_byId.is_active > $("#is_active").val()){
-                    $("#is_active").attr('checked','checked');
-                }
-                if(data.sub_menu_byId.dropdown > $("#dropdown").val()){
-                    $("#dropdown").attr('checked','checked');
-                }
-            }
-        });
-        e.preventDefault();
-    });
 
     $('.aktivasi-menu').change(function() {
         if ($(this).is(':checked')) {

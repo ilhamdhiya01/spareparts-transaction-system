@@ -44,6 +44,43 @@
     </tbody>
 </table>
 <script>
+    // ubah sub menu
+    $('.ubah-sub-menu').click(function(e) {
+        let id = $(this).data('id');
+        $("#sub-menu-title").html("Ubah Sub Menu");
+        $.ajax({
+            url: "<?= base_url(); ?>menu/get_subMenuById",
+            type: "post",
+            dataType: "json",
+            data: {
+                id: id
+            },
+            success: function(data) {
+                if (data.response == 'success') {
+                    $("#sub_menu").val(data.sub_menu_by_id.sub_menu);
+                    $("#url").val(data.sub_menu_by_id.url);
+                    $("#icon").val(data.sub_menu_by_id.icon);
+                    if (data.sub_menu_by_id.is_active == 1) {
+                        $("#is_active").attr("checked", "checked");
+                    } else {
+                        $("#is_active").removeAttr("checked", "checked");
+                    }
+                    if (data.sub_menu_by_id.dropdown == 1) {
+                        $("#dropdown").attr("checked", "checked");
+                    } else {
+                        $("#dropdown").removeAttr("checked", "checked");
+                    }
+                    $(".close").click(function(){
+                        document.location.href = "<?= base_url(); ?>menu/dropdown_subMenu";
+                    });
+                } else {
+                    $("#url").val(data.response);
+                }
+                console.log(data.sub_menu_by_id);
+            }
+        })
+        e.preventDefault();
+    });
     // delete sub menu
     $('.delete-sub-menu').click(function(e) {
         $(this).closest('#tr-sub-menu').addClass('hapus-sub-menu');
