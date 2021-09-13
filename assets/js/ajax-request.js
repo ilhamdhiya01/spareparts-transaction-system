@@ -1,8 +1,12 @@
-// Ajax User Menu
 $(document).ready(function () {
+	// user menu
 	readUserMenu();
 	readFormUserMenu();
+	// sub menu
+	readSubMenu();
+	readFormSubMenu();
 });
+// Ajax User Menu
 // Tampilkan tabel user menu
 function readUserMenu() {
 	$.ajax({
@@ -10,7 +14,7 @@ function readUserMenu() {
 		type: "get",
 		success: function (data) {
 			$(".view-user-menu").html(data);
-		}
+		},
 	});
 }
 // tampilkan form user menu
@@ -20,6 +24,33 @@ function readFormUserMenu() {
 		type: "get",
 		success: function (data) {
 			$(".view-form-user-menu").html(data);
-		}
+		},
+	});
+}
+
+// Ajax request Sub menu
+function readSubMenu() {
+	$.ajax({
+		url: "http://localhost/spareparts-transaction-system/menu/ambilDataSubMenu",
+		type: "get",
+		success: function (data) {
+			$("#view-sub-menu").html(data);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+		},
+	});
+}
+
+function readFormSubMenu() {
+	$.ajax({
+		url: "http://localhost/spareparts-transaction-system/menu/formSubMenu",
+		type: "get",
+		success: function (data) {
+			$(".view-form-sub-menu").html(data);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+		},
 	});
 }

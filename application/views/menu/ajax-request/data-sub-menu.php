@@ -1,5 +1,4 @@
-<table id="datatable-fixed-header" class="table table-striped table-bordered view-data" style="width:100%">
-
+<table id="table-sub-menu" class="table table-striped table-bordered view-data" style="width:100%">
     <thead>
         <tr class="text-center">
             <th>No</th>
@@ -38,13 +37,12 @@
                 </td>
                 <td class="text-center">
                     <a href="" data-id="<?= $sub_menu['id']; ?>" class="badge badge-danger delete-sub-menu">Delete</a>
-                    <a href="" data-toggle="modal" data-id="<?= $sub_menu['id']; ?>" data-target="#tambah-sub-menu" class="badge badge-info update-sub-menu">Update</a>
+                    <a href="" data-toggle="modal" data-id="<?= $sub_menu['id']; ?>" data-target="#tambah-sub-menu" class="badge badge-info ubah-sub-menu">Update</a>
                 </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
-
 <script>
     // delete sub menu
     $('.delete-sub-menu').click(function(e) {

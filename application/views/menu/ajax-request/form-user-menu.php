@@ -1,9 +1,10 @@
-<form action="" class="needs-validation" novalidate id="form-user-menu" method="post">
+<form action="" method="post" class="form-sub-menu" id="form-user-menu">
     <input type="hidden" class="form-control" value="" name="id-menu" id="id-menu">
     <div class="form-group">
         <label id="label-nama-menu">Nama Menu</label>
         <input type="text" class="form-control" value="" name="nama-menu" id="nama-menu">
-        <small class="text-danger nama-menu-error"></small>
+        <div id="validationServer03Feedback" class="invalid-feedback nama-menu-error">
+        </div>
     </div>
     <div class="ln_solid"></div>
     <div class="form-group">
@@ -33,18 +34,19 @@
             },
             success: function(data) {
                 if (data.response !== 'success') {
-                    $('#nama-menu').attr('style','border-color:#E46673;')
+                    $('#nama-menu').addClass('is-invalid');
                     $('.nama-menu-error').html(data.nama_menu);
                 } else {
-                    $('#nama-menu').attr('style','');
+                    $('#nama-menu').attr('style', '');
                     iziToast.success({
                         title: 'Success',
                         message: data.message,
                         position: 'topRight'
                     });
                     readUserMenu();
-                    $('#nama-menu').val('');
-                    $('.text-danger').html('');
+
+                    $('#nama-menu').removeClass('is-invalid');
+                    $('.nama-menu-error').html('');
                 }
             }
         })

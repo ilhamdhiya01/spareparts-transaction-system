@@ -43,8 +43,6 @@ class Menu extends CI_Controller
         $data =  [
             'judul' => 'User Menu',
             'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
-
-
         ];
         $this->load->view('templete/-header', $data);
         $this->load->view('menu/dropdown-user-menu');
@@ -162,8 +160,7 @@ class Menu extends CI_Controller
     public function dropdown_subMenu()
     {
         $data = [
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
-            'user_menu' => $this->db->get('tb_user_menu')->result_array(),
+            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
         ];
         $this->load->view('templete/-header', $data);
         $this->load->view('menu/dropdown-user-sub-menu', $data);
@@ -181,6 +178,40 @@ class Menu extends CI_Controller
             echo "data tidak ditemukan";
         }
     }
+
+    public function formSubMenu()
+    {
+        $data = [
+            'user_menu' => $this->db->get('tb_user_menu')->result_array()
+        ];
+        if ($this->input->is_ajax_request()) {
+            echo json_encode($this->load->view('menu/ajax-request/form-user-sub-menu', $data));
+        } else {
+            $data = [
+                'response' => 'error',
+                'message' => 'Data tidak ditemukan'
+            ];
+            echo json_encode($data);
+        }
+    }
+
+    // public function getOptionsUserMenu(){
+    //     if($this->input->is_ajax_request()){
+    //         $query = "SELECT * FROM tb_user_menu";
+    //         $rows = [];
+    //         while($row = mysqli_fetch($query)){
+    //             $rows[] = $row;
+    //         }
+    //         echo json_encode($rows);
+    //     }else {
+    //         $data = [
+    //             'response' => 'error',
+    //             'message' => 'data tidak ditemukan'
+    //         ];
+    //         echo json_encode($data);
+    //     }
+    // }
+
     public function tambah_subMenu()
     {
         $rules = [
@@ -232,7 +263,7 @@ class Menu extends CI_Controller
     }
     public function get_subMenuById()
     {
-        $id = $this->input->post('id');
+        $id = $_POST['id'];
         $data = $this->db->get_where('tb_user_sub_menu', ['id' => $id])->row_array();
         echo json_encode($data);
     }
