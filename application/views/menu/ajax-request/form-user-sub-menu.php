@@ -1,11 +1,11 @@
 <form action="" method="post" class="form-sub-menu">
     <input type="hidden" name="id" value="" id="id-sub-menu">
-    <div class="form-group">
+    <div class="form-group" id="options">
         <label class="control-label ">Pilih Menu<span class="required text-danger pl-1">*</span></label>
-        <select class="form-control" name="user-menu" id="user-menu">
+        <select class="form-control option" name="user-menu" id="user-menu">
             <option>-- Pilih --</option>
             <?php foreach ($user_menu as $menu) : ?>
-                <option value="<?= $menu['id']; ?>"><?= $menu['nama_menu']; ?></option>
+                <option value="<?= $menu['id']; ?>" id="value"><?= $menu['nama_menu']; ?></option>
             <?php endforeach; ?>
         </select>
     </div>
@@ -42,14 +42,13 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-sm tambah-sub-menu">Tambah</button>
+        <button type="submit" class="btn btn-primary btn-sm tambah-sub-menu" id="btn-form">Tambah</button>
     </div>
 </form>
 <script>
     // tambah sub menu
     $('.tambah-sub-menu').click(function(e) {
         $('.modal-title').html('Tambah Sub Menu');
-        $('.tambah-sub-menu').html('Tambah');
         $.ajax({
             url: '<?= base_url(); ?>menu/tambah_subMenu',
             method: 'post',
@@ -62,17 +61,34 @@
                 is_active: $("#is_active").val(),
                 dropdown: $("#dropdown").val()
             },
+            beforeSend: function() {
+                $(".tambah-sub-menu").attr('disable', 'disabled');
+                $(".tambah-sub-menu").html('<i class="fa fa-spin fa-spinner"></i>');
+            },
+            complete: function() {
+                $(".tambah-sub-menu").removeAttr('disable');
+                $(".tambah-sub-menu").html('Tambah');
+            },
             success: function(data) {
                 if (data.response !== 'success') {
-                    $('#sub_menu').addClass('is-invalid');
-                    $('.sub-menu-error').html(data.sub_menu);
-
-                    $('#url').addClass('is-invalid');
-                    $('.url-menu-error').html(data.url);
-
-                    $('#icon').addClass('is-invalid');
-                    $('.icon-menu-error').html(data.icon);
-                    console.log(data);
+                    if ($('#sub_menu').val() == "") {
+                        $('#sub_menu').addClass('is-invalid');
+                        $('.sub-menu-error').html(data.sub_menu);
+                    } else {
+                        $('#sub_menu').removeClass('is-invalid');
+                    }
+                    if ($('#url').val() == "") {
+                        $('#url').addClass('is-invalid');
+                        $('.url-menu-error').html(data.url);
+                    } else {
+                        $('#url').removeClass('is-invalid');
+                    }
+                    if ($('#icon').val() == "") {
+                        $('#icon').addClass('is-invalid');
+                        $('.icon-menu-error').html(data.icon);
+                    } else {
+                        $('#icon').removeClass('is-invalid');
+                    }
                 } else {
                     iziToast.success({
                         title: 'Success',
@@ -100,24 +116,23 @@
         e.preventDefault();
     });
 
-
-    $('.aktivasi-menu').change(function() {
-        if ($(this).is(':checked')) {
-            $('#status').html('Aktif');
-            $(this).attr('value', 1);
+    $(".aktivasi-menu").change(function() {
+        if ($(this).is(":checked")) {
+            $("#status").html("Aktif");
+            $(this).attr("value", 1);
         } else {
-            $('#status').html('Tidak Aktif');
-            $(this).attr('value', 0);
+            $("#status").html("Tidak Aktif");
+            $(this).attr("value", 0);
         }
     });
 
-    $('.dropdown-menu').change(function() {
-        if ($(this).is(':checked')) {
-            $('#dropdown-status').html('Ya');
-            $(this).attr('value', 1);
+    $(".dropdown-menu").change(function() {
+        if ($(this).is(":checked")) {
+            $("#dropdown-status").html("Ya");
+            $(this).attr("value", 1);
         } else {
-            $('#dropdown-status').html('Tidak');
-            $(this).attr('value', 0);
+            $("#dropdown-status").html("Tidak");
+            $(this).attr("value", 0);
         }
     });
 </script>

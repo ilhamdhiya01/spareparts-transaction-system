@@ -5,6 +5,7 @@ $(document).ready(function () {
 	// sub menu
 	readSubMenu();
 	readFormSubMenu();
+	// readFormUbahSubMenu();
 });
 // Ajax User Menu
 // Tampilkan tabel user menu
@@ -54,3 +55,4 @@ function readFormSubMenu() {
 		},
 	});
 }
+

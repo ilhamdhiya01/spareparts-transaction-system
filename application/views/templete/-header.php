@@ -26,24 +26,24 @@
     <link href="<?= base_url(); ?>assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="<?= base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
-    <!-- jQuery -->
-    <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/izitoast/dist/css/iziToast.min.css">
     <!-- iCheck -->
-	<link href="<?= base_url(); ?>assets/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-	<!-- bootstrap-wysiwyg -->
-	<link href="<?= base_url(); ?>assets/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
-	<!-- Select2 -->
-	<link href="<?= base_url(); ?>assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
-	<!-- Switchery -->
-	<link href="<?= base_url(); ?>assets/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
-	<!-- starrr -->
-	<link href="<?= base_url(); ?>assets/vendors/starrr/dist/starrr.css" rel="stylesheet">
-	<!-- bootstrap-daterangepicker -->
-	<link href="<?= base_url(); ?>assets/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>assets/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="<?= base_url(); ?>assets/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="<?= base_url(); ?>assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="<?= base_url(); ?>assets/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="<?= base_url(); ?>assets/vendors/starrr/dist/starrr.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="<?= base_url(); ?>assets/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- my css -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/custom.css">
+    <!-- jQuery -->
+    <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
 </head>
 
 <body class="nav-md">

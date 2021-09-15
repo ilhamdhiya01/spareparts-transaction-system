@@ -241,27 +241,42 @@ class Menu extends CI_Controller
                     'message' => 'Sub menu berhasil ditambahkan'
                 ];
                 echo json_encode($msg);
+            } else {
+                $msg = [
+                    'response' => 'error',
+                    'message' => 'Sub menu berhasil ditambahkan'
+                ];
+                echo json_encode($msg);
             }
         }
     }
-    public function get_subMenuById()
+    public function get_subMenuById($id)
     {
-        $id = $_POST['id'];
-        if ($this->input->is_ajax_request()) {
-            $data = [
-                'sub_menu_by_id' => $this->db->get_where('tb_user_sub_menu', ['id' => $id])->row_array(),
-                'response' => 'success',
-                'message' => 'Request succes'
-            ];
-            echo json_encode($data);
-        } else {
-            $data = [
-                'response' => 'error',
-                'message' => 'Request failed'
-            ];
-            echo json_encode($data);
-        }
+        $data = [
+            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
+            'subMenu_byId' => $this->db->get_where('tb_user_sub_menu', ['id' => $id])->row_array(),
+            'user_menu' => $this->db->get('tb_user_menu')->result_array()
+        ];
+        $this->load->view('templete/-header', $data);
+        $this->load->view('menu/ajax-request/ubahSubMenu', $data);
+        $this->load->view('templete/-footer');
     }
+
+    // public function formUbahSubMenu()
+    // {
+    //     if ($this->input->is_ajax_request()) {
+    //         $data = [
+    //             'response' => 'success'
+    //         ];
+    //         echo json_encode($this->load->view('menu/ajax-request/optionsSubMenu'));
+    //     } else {
+    //         $data = [
+    //             'response' => 'success',
+    //             'message' => 'Request failed'
+    //         ];
+    //         echo json_encode($data);
+    //     }
+    // }
 
     public function delete_subMenu()
     {
