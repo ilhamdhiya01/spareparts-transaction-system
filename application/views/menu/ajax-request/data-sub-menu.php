@@ -37,99 +37,70 @@
                 </td>
                 <td class="text-center">
                     <a href="" data-id="<?= $sub_menu['id']; ?>" class="badge badge-danger delete-sub-menu">Delete</a>
-                    <a href="<?= base_url(); ?>menu/get_subMenuById/<?= $sub_menu['id']; ?>" class="badge badge-info ubah-sub-menu">Update</a>
+                    <a href="" data-id="<?= $sub_menu['id']; ?>" data-toggle="modal" data-target="#tambah-sub-menu" class="badge badge-info btn-ubah">Update</a>
                 </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 <script>
-    // $('.ubah-sub-menu').click(function() {
-    //     readFormUbahSubMenu();
-    // });
+    //  get edit
+    $('.btn-ubah').click(function(e) {
+        $('#modal-sub-menu-title').html('Ubah Sub Menu');
+        $('.tambah-sub-menu').css('display', 'none')
+        $('.ubah-sub-menu').css('display', '');
+        $('#sub_menu').removeClass('is-invalid');
+        $('.sub-menu-error').html('');
 
-    // function readFormUbahSubMenu() {
-    //     $.ajax({
-    //         url: 'http://localhost/spareparts-transaction-system/menu/formUbahSubMenu',
-    //         type: 'get',
-    //         success: function(data) {
-    //             $('.view-ubah-sub-menu').html(data);
-    //         },
-    //         error: function(xhr, ajaxOptions, thrownError) {
-    //             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-    //         }
-    //     })
-    // }
-    // ubah sub menu
-    // $('.ubah-sub-menu').click(function(e) {
-    //     $('#btn-form').removeClass('tambah-sub-menu');
-    //     $('#btn-form').addClass('ubah-sub-menu');
-    //     let id = $(this).data('id');
-    //     let id_menu = $('.option').val();
-    //     $("#sub-menu-title").html("Ubah Sub Menu");
-    //     $.ajax({
-    //         url: "<?= base_url(); ?>menu/get_subMenuById",
-    //         type: "post",
-    //         dataType: "json",
-    //         data: {
-    //             id: id
-    //         },
-    //         success: function(data) {
-    //             console.log(id_menu);
-    //             if (data.response == 'success') {
-    //                 $("#id-sub-menu").val(data.sub_menu_by_id.id);
-    //                 $("#sub_menu").val(data.sub_menu_by_id.sub_menu);
-    //                 $("#url").val(data.sub_menu_by_id.url);
-    //                 $("#icon").val(data.sub_menu_by_id.icon);
-    //                 if (data.sub_menu_by_id.is_active == 1) {
-    //                     $("#is_active").attr("checked", "checked");
-    //                 } else {
-    //                     $("#is_active").removeAttr("checked", "checked");
-    //                 }
-    //                 if (data.sub_menu_by_id.dropdown > 0) {
-    //                     $("#dropdown").attr("checked", "checked");
-    //                 } else {
-    //                     $("#dropdown").removeAttr("checked", "checked");
-    //                 }
-    //                 $(".ubah-sub-menu").click(function(e) {
-    //                     $(".option").change(function() {
-    //                         let id = $("#id-sub-menu").val();
-    //                         let user_menu = $(this).val();
-    //                         let sub_menu = $("#sub_menu").val();
-    //                         let url = $("#url").val();
-    //                         let icon = $("#icon").val();
-    //                         let is_active = $("#is_active");
-    //                         let dropdown = $("#dropdown").val();
-    //                         $.ajax({
-    //                             url: "<?= base_url(); ?>menu/proses_ubahSubMenu",
-    //                             type: "poost",
-    //                             data: {
-    //                                 id : id,
-    //                                 user_menu : user_menu,
-    //                                 sub_menu : sub_menu,
-    //                                 url : url,
-    //                                 icon : icon,
-    //                                 is_active : is_active,
-    //                                 dropdown : dropdown
-    //                             },
-    //                             success : function(data){
-    //                                 console.log('ok');
-    //                             }
-    //                         })
-    //                     })
-    //                     e.preventDefault();
-    //                 });
-    //                 $(".close").click(function() {
-    //                     document.location.href = "<?= base_url(); ?>menu/dropdown_subMenu";
-    //                 });
-    //             } else {
-    //                 $("#url").val(data.response);
-    //             }
-    //             console.log(data.sub_menu_by_id);
-    //         }
-    //     })
-    //     e.preventDefault();
-    // });
+        $('#url').removeClass('is-invalid');
+        $('.url-menu-error').html('');
+
+        $('#icon').removeClass('is-invalid');
+        $('.icon-menu-error').html('');
+
+        const id = $(this).data('id');
+        $.ajax({
+            url: '<?= base_url(); ?>menu/get_subMenuById',
+            type: 'post',
+            data: {
+                id_sub: id
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.response == 'success') {
+                    $('#id-sub-menu').val(data.subMenu_byId.id);
+                    $('#user-menu').val(data.subMenu_byId.menu_id);
+                    $('#sub_menu').val(data.subMenu_byId.sub_menu);
+                    $('#url').val(data.subMenu_byId.url);
+                    $('#icon').val(data.subMenu_byId.icon);
+                    $('#is_active').val(data.subMenu_byId.is_active);
+                    $('#dropdown').val(data.subMenu_byId.dropdown);
+
+                    if ($('#is_active').val() == 1) {
+                        $("#is_active").attr("checked", "checked")
+                        $("#status").html("Aktif");
+                    } else {
+                        $("#is_active").removeAttr("checked", "checked");
+                        $("#status").html("Tidak Aktif");
+                    }
+
+                    if ($("#dropdown").val() == 1) {
+                        $("#dropdown").attr("checked", "checked");
+                        $("#dropdown-status").html("Ya");
+                    } else {
+                        $("#dropdown").removeAttr("checked", "checked");
+                        $("#dropdown-status").html("Tidak");
+                    }
+
+                    $('.close').click(function() {
+                        document.location.href = "<?= base_url(); ?>menu/dropdown_subMenu";
+                    });
+                }
+            }
+        });
+        e.preventDefault()
+    });
+
     // delete sub menu
     $('.delete-sub-menu').click(function(e) {
         $(this).closest('#tr-sub-menu').addClass('hapus-sub-menu');

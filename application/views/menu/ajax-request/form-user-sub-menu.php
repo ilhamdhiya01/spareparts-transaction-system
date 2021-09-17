@@ -43,9 +43,82 @@
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary btn-sm tambah-sub-menu" id="btn-form">Tambah</button>
+        <button type="submit" class="btn btn-primary btn-sm ubah-sub-menu" id="btn-form">Ubah</button>
     </div>
 </form>
 <script>
+    // proses ubah
+    $('#modal-tambah-sub-menu').click(function() {
+        $('#modal-sub-menu-title').html('Tambah Sub Menu');
+        $('.ubah-sub-menu').css('display', 'none');
+        $('.tambah-sub-menu').css('display', '');
+        $('#user-menu').val('-- Pilih --');
+        $('#sub_menu').val('');
+        $('#url').val('');
+        $('#icon').val('');
+        
+        if ($('#is_active').val() == 1) {
+            $("#is_active").attr("checked", "checked")
+            $("#status").html("Aktif");
+        } else {
+            $("#is_active").removeAttr("checked", "checked");
+            $("#status").html("Tidak Aktif");
+        }
+
+        if ($("#dropdown").val() == 1) {
+            $("#dropdown").attr("checked", "checked");
+            $("#dropdown-status").html("Ya");
+        } else {
+            $("#dropdown").removeAttr("checked", "checked");
+            $("#dropdown-status").html("Tidak");
+        }
+
+        $('#sub_menu').removeClass('is-invalid');
+        $('.sub-menu-error').html('');
+
+        $('#url').removeClass('is-invalid');
+        $('.url-menu-error').html('');
+
+        $('#icon').removeClass('is-invalid');
+        $('.icon-menu-error').html('');
+    });
+
+    // proses ubah sub menu
+    $('.ubah-sub-menu').click(function(event) {
+        $.ajax({
+            url: '<?= base_url(); ?>menu/ubah_sub_menu',
+            type: 'post',
+            data: {
+                id: $('#id-sub-menu').val(),
+                menu_id: $('#user-menu').change().val(),
+                sub_menu: $('#sub_menu').val(),
+                url: $('#url').val(),
+                icon: $('#icon').val(),
+                is_active: $('#is_active').val(),
+                dropdown: $('#dropdown').val()
+            },
+            dataType: 'json',
+            success: function(value) {
+                if (value.response == 'success') {
+                    iziToast.success({
+                        title: 'Success',
+                        message: value.message,
+                        position: 'topRight'
+                    });
+                    $('.close').click();
+                    readSubMenu();
+
+                } else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'Data gagal diubah',
+                        position: 'topRight'
+                    });
+                }
+            }
+        });
+        event.preventDefault();
+    });
     // tambah sub menu
     $('.tambah-sub-menu').click(function(e) {
         $('.modal-title').html('Tambah Sub Menu');

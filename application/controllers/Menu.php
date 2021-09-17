@@ -250,18 +250,39 @@ class Menu extends CI_Controller
             }
         }
     }
-    public function get_subMenuById($id)
+
+    public function get_subMenuById()
     {
-        $data = [
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
-            'subMenu_byId' => $this->db->get_where('tb_user_sub_menu', ['id' => $id])->row_array(),
-            'user_menu' => $this->db->get('tb_user_menu')->result_array()
-        ];
-        $this->load->view('templete/-header', $data);
-        $this->load->view('menu/ajax-request/ubahSubMenu', $data);
-        $this->load->view('templete/-footer');
+        $id = $_POST['id_sub'];
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'response' => 'success',
+                'subMenu_byId' => $this->db->get_where('tb_user_sub_menu', ['id' => $id])->row_array()
+            ];
+            echo json_encode($data);
+        }
     }
 
+    public function ubah_sub_menu()
+    {
+        $id = $_POST['id'];
+        if($this->input->is_ajax_request()){
+            $data = [
+                'menu_id' => $_POST['menu_id'],
+                'sub_menu' => $_POST['sub_menu'],
+                'url' => $_POST['url'],
+                'icon' => $_POST['icon'],
+                'is_active' => $_POST['is_active'],
+                'dropdown' => $_POST['dropdown']
+            ];
+            $this->db->update('tb_user_sub_menu',$data,['id' => $id]);
+            $msg = [
+                'response' => 'success',
+                'message' => 'Data berhasil diubah'
+            ];
+            echo json_encode($msg);
+        }
+    }
     // public function formUbahSubMenu()
     // {
     //     if ($this->input->is_ajax_request()) {

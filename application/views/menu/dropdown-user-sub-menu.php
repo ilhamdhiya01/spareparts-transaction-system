@@ -40,7 +40,7 @@
     <div class="modal-dialog  modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="sub-menu-title">Tambah Sub Menu</h5>
+                <h5 class="modal-title" id="modal-sub-menu-title">Tambah Sub Menu</h5>
                 <button type="button" class="close" style="outline:none;" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -52,18 +52,9 @@
     </div>
 </div>
 
-<div class="modal fade" id="ubah-sub-menu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="sub-menu-title">Ubah Sub Menu</h5>
-                <button type="button" class="close" style="outline:none;" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body view-ubah-sub-menu">
-                
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+    // $('#modal-tambah-sub-menu').click(function(e) {
+    //     $('.uba-sub-menu').css('display', 'none');
+    //     e.preventDefault();
+    // });
+</script>
