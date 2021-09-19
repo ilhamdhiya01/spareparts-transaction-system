@@ -80,7 +80,7 @@
                         $("#is_active").attr("checked", "checked")
                         $("#status").html("Aktif");
                     } else {
-                        $("#is_active").removeAttr("checked", "checked");
+                        $("#is_active").removeAttr("checked");
                         $("#status").html("Tidak Aktif");
                     }
 
@@ -88,12 +88,51 @@
                         $("#dropdown").attr("checked", "checked");
                         $("#dropdown-status").html("Ya");
                     } else {
-                        $("#dropdown").removeAttr("checked", "checked");
+                        $("#dropdown").removeAttr("checked");
                         $("#dropdown-status").html("Tidak");
                     }
-
-                    $('.close').click(function() {
-                        document.location.href = "<?= base_url(); ?>menu/dropdown_subMenu";
+                    // proses ubah
+                    $('.ubah-sub-menu').click(function(e) {
+                        $.ajax({
+                            url: '<?= base_url(); ?>menu/ubah_sub_menu',
+                            type: 'post',
+                            data: {
+                                id: $('#id-sub-menu').val(),
+                                menu_id: $('#user-menu').change().val(),
+                                sub_menu: $('#sub_menu').val(),
+                                url: $('#url').val(),
+                                icon: $('#icon').val(),
+                                is_active: $('#is_active').val(),
+                                dropdown: $('#dropdown').val()
+                            },
+                            dataType: 'json',
+                            beforeSend: function() {
+                                $(".ubah-sub-menu").attr('disable', 'disabled');
+                                $(".ubah-sub-menu").html('<i class="fa fa-spin fa-spinner"></i>');
+                            },
+                            complete: function() {
+                                $(".ubah-sub-menu").removeAttr('disable');
+                                $(".ubah-sub-menu").html('Ubah');
+                            },
+                            success: function(value) {
+                                if (value.response == 'success') {
+                                    iziToast.success({
+                                        title: 'Success',
+                                        message: value.message,
+                                        position: 'topRight'
+                                    });
+                                    $('.close').click();
+                                    readSubMenu();
+                                } else {
+                                    iziToast.error({
+                                        title: 'Error',
+                                        message: 'Data gagal diubah',
+                                        position: 'topRight'
+                                    });
+                                }
+                            }
+                        });
+                        e.preventDefault();
                     });
                 }
             }

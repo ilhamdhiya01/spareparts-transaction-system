@@ -56,21 +56,17 @@
         $('#sub_menu').val('');
         $('#url').val('');
         $('#icon').val('');
-        
-        if ($('#is_active').val() == 1) {
-            $("#is_active").attr("checked", "checked")
-            $("#status").html("Aktif");
-        } else {
-            $("#is_active").removeAttr("checked", "checked");
-            $("#status").html("Tidak Aktif");
+
+        if ($('.aktivasi-menu').val() == 0) {
+            $(this).attr("checked");
         }
 
-        if ($("#dropdown").val() == 1) {
-            $("#dropdown").attr("checked", "checked");
-            $("#dropdown-status").html("Ya");
-        } else {
-            $("#dropdown").removeAttr("checked", "checked");
-            $("#dropdown-status").html("Tidak");
+        if ($('#is_active').val() == 0) {
+            $(this).removeAttr("checked", "checked");
+        }
+
+        if ($('#dropdown').val() == 0) {
+            $(this).removeAttr("checked", "checked");
         }
 
         $('#sub_menu').removeClass('is-invalid');
@@ -83,42 +79,6 @@
         $('.icon-menu-error').html('');
     });
 
-    // proses ubah sub menu
-    $('.ubah-sub-menu').click(function(event) {
-        $.ajax({
-            url: '<?= base_url(); ?>menu/ubah_sub_menu',
-            type: 'post',
-            data: {
-                id: $('#id-sub-menu').val(),
-                menu_id: $('#user-menu').change().val(),
-                sub_menu: $('#sub_menu').val(),
-                url: $('#url').val(),
-                icon: $('#icon').val(),
-                is_active: $('#is_active').val(),
-                dropdown: $('#dropdown').val()
-            },
-            dataType: 'json',
-            success: function(value) {
-                if (value.response == 'success') {
-                    iziToast.success({
-                        title: 'Success',
-                        message: value.message,
-                        position: 'topRight'
-                    });
-                    $('.close').click();
-                    readSubMenu();
-
-                } else {
-                    iziToast.error({
-                        title: 'Error',
-                        message: 'Data gagal diubah',
-                        position: 'topRight'
-                    });
-                }
-            }
-        });
-        event.preventDefault();
-    });
     // tambah sub menu
     $('.tambah-sub-menu').click(function(e) {
         $('.modal-title').html('Tambah Sub Menu');
@@ -189,7 +149,7 @@
         e.preventDefault();
     });
 
-    $(".aktivasi-menu").change(function() {
+    $(".aktivasi-menu").click(function() {
         if ($(this).is(":checked")) {
             $("#status").html("Aktif");
             $(this).attr("value", 1);
@@ -199,7 +159,7 @@
         }
     });
 
-    $(".dropdown-menu").change(function() {
+    $(".dropdown-menu").click(function() {
         if ($(this).is(":checked")) {
             $("#dropdown-status").html("Ya");
             $(this).attr("value", 1);
