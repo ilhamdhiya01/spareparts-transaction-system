@@ -10,6 +10,7 @@ class Menu extends CI_Controller
         parent::__construct();
         // Sub menu model
         $this->load->model('SubMenu_model');
+        $this->load->model('Model_access_menu');
     }
 
     public function index()
@@ -117,17 +118,8 @@ class Menu extends CI_Controller
                 echo json_encode($msg);
             }
         }
-
-        // if () {
-
-        // } else {
-        //     $data = [
-        //         'response' => 'error',
-        //         'message' => 'Data gagal ditambahkan'
-        //     ];
-        // }
-        // echo json_encode($data);
     }
+
     public function get_userMenuById()
     {
         $id =  $_POST['id'];
@@ -136,6 +128,7 @@ class Menu extends CI_Controller
         ];
         echo json_encode($data);
     }
+
     public function proses_ubahUserMenu()
     {
         $data = [
@@ -266,7 +259,7 @@ class Menu extends CI_Controller
     public function ubah_sub_menu()
     {
         $id = $_POST['id'];
-        if($this->input->is_ajax_request()){
+        if ($this->input->is_ajax_request()) {
             $data = [
                 'menu_id' => $_POST['menu_id'],
                 'sub_menu' => $_POST['sub_menu'],
@@ -275,7 +268,7 @@ class Menu extends CI_Controller
                 'is_active' => $_POST['is_active'],
                 'dropdown' => $_POST['dropdown']
             ];
-            $this->db->update('tb_user_sub_menu',$data,['id' => $id]);
+            $this->db->update('tb_user_sub_menu', $data, ['id' => $id]);
             $msg = [
                 'response' => 'success',
                 'message' => 'Data berhasil diubah'
@@ -283,21 +276,6 @@ class Menu extends CI_Controller
             echo json_encode($msg);
         }
     }
-    // public function formUbahSubMenu()
-    // {
-    //     if ($this->input->is_ajax_request()) {
-    //         $data = [
-    //             'response' => 'success'
-    //         ];
-    //         echo json_encode($this->load->view('menu/ajax-request/optionsSubMenu'));
-    //     } else {
-    //         $data = [
-    //             'response' => 'success',
-    //             'message' => 'Request failed'
-    //         ];
-    //         echo json_encode($data);
-    //     }
-    // }
 
     public function delete_subMenu()
     {
@@ -314,5 +292,28 @@ class Menu extends CI_Controller
             ];
         }
         echo json_encode($data);
+    }
+
+    // dropdown user access menu
+    public function dropdown_access_menu()
+    {
+        $data = [
+            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
+        ];
+        $this->load->view('templete/-header', $data);
+        $this->load->view('menu/dropdown-user-access-menu', $data);
+        $this->load->view('templete/-footer');
+    }
+
+    public function ambilDataAccessMenu()
+    {
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'access_menu' => $this->Model_access_menu->getAccessMenu()
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/data-access-menu', $data));
+        } else {
+            echo json_encode('Data tidak ditemukan');
+        }
     }
 }

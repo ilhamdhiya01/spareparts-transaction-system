@@ -5,7 +5,8 @@ $(document).ready(function () {
 	// sub menu
 	readSubMenu();
 	readFormSubMenu();
-	// readFormUbahSubMenu();
+	// access menu
+	readAccessMenu()
 });
 // Ajax User Menu
 // Tampilkan tabel user menu
@@ -56,3 +57,16 @@ function readFormSubMenu() {
 	});
 }
 
+// ajax request access menu
+function readAccessMenu() {
+	$.ajax({
+		url : "http://localhost/spareparts-transaction-system/menu/ambilDataAccessMenu",
+		type : "get",
+		success : function(data){
+			$(".view-access-menu").html(data);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+		}
+	});
+}
