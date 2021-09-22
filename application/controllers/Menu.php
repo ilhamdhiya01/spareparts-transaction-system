@@ -316,4 +316,115 @@ class Menu extends CI_Controller
             echo json_encode('Data tidak ditemukan');
         }
     }
+
+    public function formAccessMenu()
+    {
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'posisi' => $this->db->get('tb_posisi')->result_array(),
+                'level' => $this->db->get('level_user')->result_array()
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/form-access-menu', $data));
+        } else {
+            echo json_encode('Data tidak ditemukan');
+        }
+    }
+
+    public function add_user()
+    {
+        $rules = [
+            // [
+            //     'field' => 'nama_pegawai',
+            //     'label' => 'Nama pegawai',
+            //     'rules' => 'required',
+            //     'errors' => [
+            //         'required' => '{field} tidak boleh kosong'
+            //     ]
+            // ],
+            [
+                'field' => 'username',
+                'label' => 'Username',
+                'rules' => 'required|is_unique[users.username]',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'is_unique' => 'Username atau email sudah digunakan'
+                ]
+            ],
+            [
+                'field' => 'password',
+                'label' => 'Password',
+                'rules' => 'required|min_length[8]|matches[konfirmasi_password]',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'min_length' => 'Password minimal 8 karakter',
+                    'matches' => 'Password dan Konfirmasi password harus sama'
+                ]
+            ],
+            [
+                'field' => 'konfirmasi_password',
+                'label' => 'Konfirmasi password',
+                'rules' => 'required|min_length[8]|matches[password]',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'min_length' => 'Password minimal 8 karakter',
+                    'matches' => 'Password dan Konfirmasi password harus sama'
+                ]
+            ]
+        ];
+        $this->form_validation->set_rules($rules);
+        if ($this->form_validation->run() == false) {
+            $msg = [
+                // 'nama_pegawai' => form_error('nama_pegawai'),
+                'username' => form_error('username'),
+                'password' => form_error('password'),
+                'konfirmasi_password' => form_error('konfirmasi_password')
+            ];
+            echo json_encode($msg);
+        } else {
+            $data = [
+                'nama_pegawai' => $_POST['nama'],
+                'id_posisi' => $_POST['posisi'],
+                'gambar' => $_POST['gambar'],
+                'username' => $_POST['username'],
+                'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                'level_id' => $_POST['level'],
+                'is_active' => $_POST['is_active'],
+                // 'konfirmasi_password' => $_POST['konfirmasi_password'],
+                'date_created' => time()
+            ];
+            if ($this->db->insert('users', $data)) {
+                $msg = [
+                    'response' => 'success',
+                    'message' => 'Data berhasil ditambahkan'
+                ];
+                echo json_encode($msg);
+            } else {
+                $msg = [
+                    'response' => 'error',
+                    'message' => 'Data gagal ditambahkan'
+                ];
+                echo json_encode($msg);
+            }
+        }
+    }
+
+    public function delete_access_menu()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id = $_POST['id'];
+            if ($this->db->delete('users', ['id' => $id])) {
+                $msg = [
+                    'response' => 'success',
+                    'message' => 'Data berhasil dihapus'
+                ];
+                echo json_encode($msg);
+            } else {
+                $msg = [
+                    'response' => 'error',
+                    'message' => 'Data gagal dihapus'
+                ];
+                echo json_encode($msg);
+            }
+        }
+    }
 }

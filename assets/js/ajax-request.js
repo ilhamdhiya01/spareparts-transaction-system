@@ -6,7 +6,8 @@ $(document).ready(function () {
 	readSubMenu();
 	readFormSubMenu();
 	// access menu
-	readAccessMenu()
+	readAccessMenu();
+	readFormAccessMenu();
 });
 // Ajax User Menu
 // Tampilkan tabel user menu
@@ -60,10 +61,24 @@ function readFormSubMenu() {
 // ajax request access menu
 function readAccessMenu() {
 	$.ajax({
-		url : "http://localhost/spareparts-transaction-system/menu/ambilDataAccessMenu",
-		type : "get",
-		success : function(data){
+		url: "http://localhost/spareparts-transaction-system/menu/ambilDataAccessMenu",
+		type: "get",
+		success: function (data) {
 			$(".view-access-menu").html(data);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+		}
+	});
+}
+
+// load form user access menu
+function readFormAccessMenu() {
+	$.ajax({
+		url: "http://localhost/spareparts-transaction-system/menu/formAccessMenu",
+		type: "get",
+		success: function(data) {
+			$(".view-form-access-menu").html(data);
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 			alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
