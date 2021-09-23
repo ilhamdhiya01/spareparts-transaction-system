@@ -5,9 +5,9 @@
         <input type="file" name="gambar" value="" id="gambar" class="form-control-file">
     </div>
     <div class="form-group">
-        <label for="">Nama Pegawai<span class="required text-danger pl-1">*</span></label>
-        <input type="text" class="form-control" value="" name="nama_pegawai" id="nama_pegawai">
-        <div id="validationServer03Feedback" class="invalid-feedback nama_pegawai_error">
+        <label for="">Nama Pegawai<span class="text-danger pl-1">*</span></label>
+        <input type="text" class="form-control" value="" name="nama" id="nama">
+        <div id="validationServer03Feedback" class="invalid-feedback nama_error">
         </div>
     </div>
     <div class="row">
@@ -15,22 +15,26 @@
             <div class="form-group" id="options">
                 <label class="control-label ">Posisi<span class="required text-danger pl-1">*</span></label>
                 <select class="form-control option" name="posisi" id="posisi">
-                    <option class="text-center">-- Pilih --</option>
+                    <option value="" class="text-center">-- Pilih --</option>
                     <?php foreach ($posisi as $data_posisi) : ?>
                         <option value="<?= $data_posisi['id']; ?>"><?= $data_posisi['nama_posisi']; ?></option>
                     <?php endforeach; ?>
                 </select>
+                <div id="validationServer03Feedback" class="invalid-feedback posisi_error">
+                </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group" id="options">
                 <label class="control-label ">Level User<span class="required text-danger pl-1">*</span></label>
-                <select class="form-control option" name="level_user" id="level_user">
-                    <option class="text-center">-- Pilih --</option>
+                <select class="form-control option" name="level" id="level">
+                    <option value="" class="text-center">-- Pilih --</option>
                     <?php foreach ($level as $data_level) : ?>
                         <option value="<?= $data_level['id']; ?>"><?= $data_level['level']; ?></option>
                     <?php endforeach; ?>
                 </select>
+                <div id="validationServer03Feedback" class="invalid-feedback level_error">
+                </div>
             </div>
         </div>
         <div class="col-md-12">
@@ -73,13 +77,13 @@
 </form>
 <script>
     $("#tambah-user").click(function(e) {
-        const nama = $("#nama_pegawai").val();
+        const nama = $("#nama").val();
         const posisi = $("#posisi").val();
         const gambar = $("#gambar").val();
         const username = $("#username").val();
         const password = $("#password").val();
         const konfirmasi_password = $("#konfirmasi_password").val();
-        const level = $("#level_user").val();
+        const level = $("#level").val();
         let is_active = $("#is_active").val();
         console.log(nama);
         $.ajax({
@@ -97,33 +101,55 @@
                 is_active: is_active
             },
             success: function(data) {
-                if (data.response !== 'success') {
-                    // if ($("#nama_pegawai").val() == "") {
-                    //     $("#nama_pegawai").addClass("is-invalid");
-                    //     $(".nama_pegawai_error").html(data.nama_pegawai);
-                    // } else {
-                    //     $("#nama_pegawai").removeClass("is-invalid")
-                    // }
-                    // if (data.nama_pegawai) {
-                    //     $("#nama_pegawai").addClass("is-invalid");
-                    //     $(".nama_pegawai_error").html(data.nama_pegawai);
-                    // }
+                if (data.error) {
+                    if (data.error.nama_pegawai) {
+                        $("#nama").addClass("is-invalid");
+                        $(".nama_error").html(data.error.nama_pegawai);
+                    } else {
+                        $("#nama").removeClass("is-invalid");
+                        $(".nama_error").html('');
+                    }
 
-                    if (data.username) {
+                    if (data.error.posisi_pegawai) {
+                        $("#posisi").addClass("is-invalid");
+                        $(".posisi_error").html(data.error.posisi_pegawai);
+                    } else {
+                        $("#posisi").removeClass("is-invalid");
+                        $(".posisi_error").html('');
+                    }
+
+                    if (data.error.level_id) {
+                        $("#level").addClass("is-invalid");
+                        $(".level_error").html(data.error.level_id);
+                    } else {
+                        $("#level").removeClass("is-invalid");
+                        $(".level_error").html('');
+                    }
+
+                    if (data.error.username) {
                         $("#username").addClass("is-invalid");
-                        $(".username_error").html(data.username);
+                        $(".username_error").html(data.error.username);
+                    } else {
+                        $("#username").removeClass("is-invalid");
+                        $(".username_error").html('');
                     }
 
 
-                    if (data.password) {
+                    if (data.error.password) {
                         $("#password").addClass("is-invalid");
-                        $(".password_error").html(data.password);
+                        $(".password_error").html(data.error.password);
+                    } else {
+                        $("#password").removeClass("is-invalid");
+                        $(".password_error").html('');
                     }
 
 
-                    if (data.konfirmasi_password) {
+                    if (data.error.konfirmasi_password) {
                         $("#konfirmasi_password").addClass("is-invalid");
-                        $(".konfirmasi_password_error").html(data.konfirmasi_password);
+                        $(".konfirmasi_password_error").html(data.error.konfirmasi_password);
+                    } else {
+                        $("#konfirmasi_password").removeClass("is-invalid");
+                        $(".konfirmasi_password_error").html('');
                     }
 
                     // if ($("#password").val() == "") {
@@ -139,7 +165,7 @@
                     // } else {
                     //     $("#konfirmasi_password").removeClass("is-invalid")
                     // }
-                } else if(data.response == 'success'){
+                } else if (data.response == 'success') {
                     iziToast.success({
                         title: 'Success',
                         message: data.message,

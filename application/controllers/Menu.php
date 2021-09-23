@@ -333,14 +333,30 @@ class Menu extends CI_Controller
     public function add_user()
     {
         $rules = [
-            // [
-            //     'field' => 'nama_pegawai',
-            //     'label' => 'Nama pegawai',
-            //     'rules' => 'required',
-            //     'errors' => [
-            //         'required' => '{field} tidak boleh kosong'
-            //     ]
-            // ],
+            [
+                'field' => 'nama',
+                'label' => 'Nama pegawai',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            [
+                'field' => 'posisi',
+                'label' => 'Posisi',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            [
+                'field' => 'level',
+                'label' => 'Level user',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
             [
                 'field' => 'username',
                 'label' => 'Username',
@@ -374,10 +390,14 @@ class Menu extends CI_Controller
         $this->form_validation->set_rules($rules);
         if ($this->form_validation->run() == false) {
             $msg = [
-                // 'nama_pegawai' => form_error('nama_pegawai'),
-                'username' => form_error('username'),
-                'password' => form_error('password'),
-                'konfirmasi_password' => form_error('konfirmasi_password')
+                "error" => [
+                    'nama_pegawai' => form_error('nama'),
+                    'posisi_pegawai' => form_error('posisi'),
+                    'level_id' => form_error('level'),
+                    'username' => form_error('username'),
+                    'password' => form_error('password'),
+                    'konfirmasi_password' => form_error('konfirmasi_password')
+                ]
             ];
             echo json_encode($msg);
         } else {
