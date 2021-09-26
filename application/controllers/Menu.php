@@ -192,31 +192,47 @@ class Menu extends CI_Controller
     {
         $rules = [
             [
+                'field' => 'menu',
+                'label' => 'User menu',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'User menu wajib di isi'
+                ]
+            ],
+            [
                 'field' => 'sub_menu',
                 'label' => 'Sub menu',
                 'rules' => 'required',
-                'error' => 'error'
+                'errors' => [
+                    'required' => 'Sub menu wajib di isi'
+                ]
             ],
             [
                 'field' => 'url',
                 'label' => 'Url',
                 'rules' => 'required',
-                'error' => 'error'
+                'errors' => [
+                    'required' => 'Url wajib di isi'
+                ]
             ],
             [
                 'field' => 'icon',
                 'label' => 'Icon',
                 'rules' => 'required',
-                'error' => 'error'
+                'errors' => [
+                    'required' => 'Icon wajib di isi'
+                ]
             ]
         ];
         $this->form_validation->set_rules($rules);
-        $this->form_validation->set_message('required', '{field} tidak boleh kosong');
         if ($this->form_validation->run() == false) {
             $msg = [
-                'sub_menu' => form_error('sub_menu'),
-                'url' => form_error('url'),
-                'icon' => form_error('icon')
+                'error' => [
+                    'menu_user' => form_error('menu'),
+                    'sub_menu' => form_error('sub_menu'),
+                    'url' => form_error('url'),
+                    'icon' => form_error('icon')
+                ]
             ];
             echo json_encode($msg);
         } else {
@@ -404,7 +420,7 @@ class Menu extends CI_Controller
             $data = [
                 'nama_pegawai' => $_POST['nama'],
                 'id_posisi' => $_POST['posisi'],
-                'gambar' => $_POST['gambar'],
+                'gambar' => 'default.png',
                 'username' => $_POST['username'],
                 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                 'level_id' => $_POST['level'],
@@ -422,6 +438,48 @@ class Menu extends CI_Controller
                 $msg = [
                     'response' => 'error',
                     'message' => 'Data gagal ditambahkan'
+                ];
+                echo json_encode($msg);
+            }
+        }
+    }
+
+    public function get_access_menu_by_id()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id = $_POST['id'];
+            $data = [
+                'response' => 'success',
+                'data_by_id' => $this->db->get_where('users', ['id' => $id])->row_array()
+            ];
+            echo json_encode($data);
+        }
+    }
+
+    public function proses_ubah_access_menu()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id = $_POST['id'];
+            $data = [
+                'nama_pegawai' => $_POST['nama_pegawai'],
+                'id_posisi' => $_POST['id_posisi'],
+                'gambar' => $_POST['gambar'],
+                'username' => $_POST['username'],
+                'password' => $_POST['password'],
+                'level_id' => $_POST['level_id'],
+                'is_active' => $_POST['is_active'],
+                'date_created' => $_POST['date_created']
+            ];
+            if ($this->db->update('users', $data, ['id' => $id])) {
+                $msg = [
+                    'response' => 'success',
+                    'message' => 'Daa berhasil diubah'
+                ];
+                echo json_encode($msg);
+            } else {
+                $msg = [
+                    'response' => 'error',
+                    'message' => 'Daa gagal diubah'
                 ];
                 echo json_encode($msg);
             }

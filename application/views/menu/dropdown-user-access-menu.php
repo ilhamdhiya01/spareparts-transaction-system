@@ -30,8 +30,10 @@
                             </ul>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="x_content view-access-menu">
+                        <div class="x_content">
+                            <div class="table-responsive view-access-menu">
 
+                            </div>
                         </div>
                     </div>
                 </div>

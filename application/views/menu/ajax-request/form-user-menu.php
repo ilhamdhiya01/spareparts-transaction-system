@@ -44,7 +44,7 @@
                         position: 'topRight'
                     });
                     readUserMenu();
-
+                    $('#nama-menu').val('');
                     $('#nama-menu').removeClass('is-invalid');
                     $('.nama-menu-error').html('');
                 }
@@ -98,6 +98,7 @@
                                     position: 'topRight'
                                 });
                                 readUserMenu();
+                                $('#nama-menu').val('');
                             } else {
                                 iziToast.error({
                                     title: 'Error',

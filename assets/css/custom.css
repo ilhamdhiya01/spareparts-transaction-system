@@ -19,7 +19,7 @@
     align-items: center;
     background-color: #FDFDFF;
     border: 1px solid #c9c9ca;
-    border-radius: 5px;
+    /* border-radius: 5px; */
 }
 .form-input i {
     margin-right: 8px;

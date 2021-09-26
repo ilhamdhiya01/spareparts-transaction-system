@@ -1,9 +1,7 @@
 <form action="" method="post" class="access-menu">
-    <input type="hidden" name="id" value="" id="id-sub-menu">
-    <div class="form-group">
-        <label for="exampleFormControlFile1">Gambar</label>
-        <input type="file" name="gambar" value="" id="gambar" class="form-control-file">
-    </div>
+    <input type="hidden" name="id" value="" id="id_access">
+    <input type="hidden" class="form-control" value="" name="gambar" id="gambar">
+    <input type="hidden" class="form-control" value="" name="date_created" id="date_created">
     <div class="form-group">
         <label for="">Nama Pegawai<span class="text-danger pl-1">*</span></label>
         <input type="text" class="form-control" value="" name="nama" id="nama">
@@ -46,17 +44,21 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="form-group password">
                 <label for="">Password<span class="required text-danger pl-1">*</span></label>
-                <input type="text" class="form-control" value="" name="password" id="password">
+
+                <input type="password" class="form-control" value="" name="password" id="password">
+                <i class="fa fa-eye-slash hide"></i>
+
                 <div id="validationServer03Feedback" class="invalid-feedback password_error">
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="form-group konfirmasi_password">
                 <label for="">Konfirmasi Password<span class="required text-danger pl-1">*</span></label>
-                <input type="text" class="form-control" value="" name="konfirmasi_password" id="konfirmasi_password">
+                <input type="password" class="form-control" value="" name="konfirmasi_password" id="konfirmasi_password">
+                <i class="fa fa-eye-slash"></i>
                 <div id="validationServer03Feedback" class="invalid-feedback konfirmasi_password_error">
                 </div>
             </div>
@@ -73,13 +75,13 @@
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary btn-sm" id="tambah-user">Tambah</button>
+        <button type="submit" style="display:none;" class="btn btn-primary btn-sm" id="ubah-user">Ubah</button>
     </div>
 </form>
 <script>
     $("#tambah-user").click(function(e) {
         const nama = $("#nama").val();
         const posisi = $("#posisi").val();
-        const gambar = $("#gambar").val();
         const username = $("#username").val();
         const password = $("#password").val();
         const konfirmasi_password = $("#konfirmasi_password").val();
@@ -93,12 +95,19 @@
             data: {
                 nama: nama,
                 posisi: posisi,
-                gambar: gambar,
                 username: username,
                 password: password,
                 konfirmasi_password: konfirmasi_password,
                 level: level,
                 is_active: is_active
+            },
+            beforeSend: function() {
+                $("#tambah-user").attr('disable', 'disabled');
+                $("#tambah-user").html('<i class="fa fa-spin fa-spinner"></i>');
+            },
+            complete: function() {
+                $("#tambah-user").removeAttr('disable');
+                $("#tambah-user").html('Tambah');
             },
             success: function(data) {
                 if (data.error) {
@@ -152,19 +161,6 @@
                         $(".konfirmasi_password_error").html('');
                     }
 
-                    // if ($("#password").val() == "") {
-                    //     $("#password").addClass("is-invalid");
-                    //     $(".password_error").html(data.password);
-                    // } else {
-                    //     $("#password").removeClass("is-invalid")
-                    // }
-
-                    // if ($("#konfirmasi_password").val() == "") {
-                    //     $("#konfirmasi_password").addClass("is-invalid");
-                    //     $(".konfirmasi_password_error").html(data.konfirmasi_password);
-                    // } else {
-                    //     $("#konfirmasi_password").removeClass("is-invalid")
-                    // }
                 } else if (data.response == 'success') {
                     iziToast.success({
                         title: 'Success',
@@ -172,6 +168,37 @@
                         position: 'topRight'
                     });
                     readAccessMenu();
+                    $("#gambar").val("");
+
+                    $("#nama").removeClass("is-invalid");
+                    $("#nama").val("");
+                    $(".nama_error").html('');
+
+                    $("#posisi").removeClass("is-invalid");
+                    $("#posisi").val("");
+                    $(".posisi_error").html('');
+
+                    $("#level").removeClass("is-invalid");
+                    $("#level").val("");
+                    $(".level_error").html('');
+
+                    $("#username").removeClass("is-invalid");
+                    $("#username").val("");
+                    $(".username_error").html('');
+
+                    $("#password").removeClass("is-invalid");
+                    $("#password").val("");
+                    $(".password_error").html('');
+
+                    $("#konfirmasi_password").removeClass("is-invalid");
+                    $("#konfirmasi_password").val("");
+                    $(".konfirmasi_password_error").html('');
+
+                    if (is_active == 1) {
+                        $("#is_active").removeAttr("checked");
+                        $("#is_active").val(0);
+                        $("#status").html("Tidak Aktif");
+                    }
                 }
             }
         });
@@ -187,4 +214,22 @@
             $(this).attr("value", 0);
         }
     });
+
+    $(".fa-eye-slash").click(function() {
+        if ($("#password").attr("type") == "password") {
+            $("#password").attr("type", "text");
+            $(this).attr("class", "fa fa-eye");
+        } else {
+            $("#password").attr("type", "password");
+            $(this).attr("class", "fa fa-eye-slash");
+        }
+
+        if ($("#konfirmasi_password").attr("type") == "password") {
+            $("#konfirmasi_password").attr("type", "text");
+            $(this).attr("class", "fa fa-eye");
+        } else {
+            $("#konfirmasi_password").attr("type", "password");
+            $(this).attr("class", "fa fa-eye-slash");
+        }
+    })
 </script>
