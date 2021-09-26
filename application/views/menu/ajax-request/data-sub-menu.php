@@ -58,6 +58,8 @@
         $('#icon').removeClass('is-invalid');
         $('.icon-menu-error').html('');
 
+        $("#myTab").css("display", "");
+
         const id = $(this).data('id');
         $.ajax({
             url: '<?= base_url(); ?>menu/get_subMenuById',
@@ -69,12 +71,13 @@
             success: function(data) {
                 if (data.response == 'success') {
                     $('#id-sub-menu').val(data.subMenu_byId.id);
-                    $('#user-menu').val(data.subMenu_byId.menu_id);
+                    $('#menu').val(data.subMenu_byId.menu_id);
                     $('#sub_menu').val(data.subMenu_byId.sub_menu);
                     $('#url').val(data.subMenu_byId.url);
                     $('#icon').val(data.subMenu_byId.icon);
                     $('#is_active').val(data.subMenu_byId.is_active);
                     $('#dropdown').val(data.subMenu_byId.dropdown);
+                    $('#dropdown_nama').html('<option value="' + data.subMenu_byId.id + '">' + data.subMenu_byId.sub_menu + '</option>');
 
                     if ($('#is_active').val() == 1) {
                         $("#is_active").attr("checked", "checked")
@@ -98,7 +101,7 @@
                             type: 'post',
                             data: {
                                 id: $('#id-sub-menu').val(),
-                                menu_id: $('#user-menu').change().val(),
+                                menu_id: $('#menu').change().val(),
                                 sub_menu: $('#sub_menu').val(),
                                 url: $('#url').val(),
                                 icon: $('#icon').val(),

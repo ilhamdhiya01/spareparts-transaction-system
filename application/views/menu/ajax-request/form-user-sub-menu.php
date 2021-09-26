@@ -1,13 +1,13 @@
 <ul class="nav nav-tabs bar_tabs" id="myTab" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tambah Sub Menu</a>
+        <a class="nav-link active" id="tab-ubah-sub-menu" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ubah Sub Menu</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tambah Dropdown</a>
+        <a class="nav-link" id="tab-tambah-dropdown" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tambah Dropdown</a>
     </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="sub-menu">
         <form action="" method="post" class="form-sub-menu">
             <input type="hidden" name="id" value="" id="id-sub-menu">
             <div class="form-group" id="options">
@@ -60,37 +60,67 @@
         </form>
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
-        booth letterpress, commodo enim craft beer mlkshk aliquip
-    </div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-        xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
-        booth letterpress, commodo enim craft beer mlkshk
+        <form action="" method="post" class="form-dropdown-menu">
+            <div class="form-group" id="options">
+                <label class="control-label ">Menu<span class="required text-danger pl-1">*</span></label>
+                <select class="form-control option" name="dropdown_nama" id="dropdown_nama" disabled>
+                </select>
+                <div id="validationServer03Feedback" class="invalid-feedback menu_error">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-sm tambah-sub-menu" id="btn-form">Tambah</button>
+                <button type="submit" class="btn btn-primary btn-sm ubah-sub-menu" id="btn-form">Ubah</button>
+            </div>
+        </form>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Sub Menu</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Url</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $no = 1;
+                    foreach ($dropdown_menu as $dropdown) :
+                    ?>
+                        <tr>
+                            <th scope="row"><?= $no++; ?></th>
+                            <td><?= $dropdown['sub_menu']; ?></td>
+                            <td><?= $dropdown['dropdown_nama']; ?></td>
+                            <td><?= $dropdown['url']; ?></td>
+                            <td></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <script>
     // proses ubah
     $('#modal-tambah-sub-menu').click(function() {
-        $('#modal-sub-menu-title').html('Tambah Sub Menu');
         $('.ubah-sub-menu').css('display', 'none');
         $('.tambah-sub-menu').css('display', '');
-        $('#user-menu').val('-- Pilih --');
+        $('#modal-sub-menu-title').html('Tambah Sub Menu');
+        $("#myTab").css("display", "none");
         $('#sub_menu').val('');
         $('#url').val('');
         $('#icon').val('');
 
         if ($('.aktivasi-menu').val() == 1) {
-            $(this).attr("checked");
+            $(this).removeAttr("checked");
             $(this).val(0)
         }
 
         if ($('#is_active').val() == 1) {
             $(this).removeAttr("checked");
             $(this).val(0)
-        }
-
-        if ($('#dropdown').val() == 0) {
-            $(this).removeAttr("checked", "checked");
         }
 
         $('#sub_menu').removeClass('is-invalid');
@@ -103,6 +133,12 @@
         $('.icon-menu-error').html('');
     });
 
+    $("#tab-tambah-dropdown").click(function() {
+        $('#modal-sub-menu-title').html('Tambah Dropdown Menu');
+    });
+    $("#tab-ubah-sub-menu").click(function() {
+        $('#modal-sub-menu-title').html('Ubah Sub Menu');
+    });
     // tambah sub menu
     $('.tambah-sub-menu').click(function(e) {
         $('.modal-title').html('Tambah Sub Menu');

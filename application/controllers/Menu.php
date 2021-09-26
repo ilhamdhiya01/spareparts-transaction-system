@@ -175,16 +175,17 @@ class Menu extends CI_Controller
     public function formSubMenu()
     {
         $data = [
-            'user_menu' => $this->db->get('tb_user_menu')->result_array()
+            'user_menu' => $this->db->get('tb_user_menu')->result_array(),
+            'dropdown_menu'=> $this->SubMenu_model->getAllDropdownMenu()
         ];
         if ($this->input->is_ajax_request()) {
             echo json_encode($this->load->view('menu/ajax-request/form-user-sub-menu', $data));
         } else {
-            $data = [
+            $msg = [
                 'response' => 'error',
                 'message' => 'Data tidak ditemukan'
             ];
-            echo json_encode($data);
+            echo json_encode($msg);
         }
     }
 
