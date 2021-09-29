@@ -63,47 +63,119 @@
         <form action="" method="post" class="form-dropdown-menu">
             <div class="form-group" id="options">
                 <label class="control-label ">Menu<span class="required text-danger pl-1">*</span></label>
-                <select class="form-control option" name="dropdown_nama" id="dropdown_nama" disabled>
+                <select class="form-control option" name="sub_menu_id" id="sub_menu_id" disabled>
                 </select>
                 <div id="validationServer03Feedback" class="invalid-feedback menu_error">
                 </div>
             </div>
+            <div class="form-group">
+                <label for="">Dropdown Menu<span class="required text-danger pl-1">*</span></label>
+                <input type="text" class="form-control" value="" required name="nama_dropdown" id="nama_dropdown">
+                <div id="validationServer03Feedback" class="invalid-feedback nama_dropdown_error">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Url Dropdown<span class="required text-danger pl-1">*</span></label>
+                <input type="text" class="form-control" value="" name="url_dropdown" id="url_dropdown">
+                <div id="validationServer03Feedback" class="invalid-feedback url_dropdown_error">
+                </div>
+            </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-sm tambah-sub-menu" id="btn-form">Tambah</button>
-                <button type="submit" class="btn btn-primary btn-sm ubah-sub-menu" id="btn-form">Ubah</button>
+                <!-- <button type="submit" class="btn btn-primary btn-sm tambah-sub-menu" id="btn-form">Tambah</button> -->
+                <button type="submit" class="btn btn-primary btn-sm tambah-dropdown">Tambah</button>
             </div>
         </form>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Sub Menu</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Url</th>
-                        <th scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $no = 1;
-                    foreach ($dropdown_menu as $dropdown) :
-                    ?>
-                        <tr>
-                            <th scope="row"><?= $no++; ?></th>
-                            <td><?= $dropdown['sub_menu']; ?></td>
-                            <td><?= $dropdown['dropdown_nama']; ?></td>
-                            <td><?= $dropdown['url']; ?></td>
-                            <td></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+        <div class="table-responsive view-dropdown-menu">
+
         </div>
     </div>
 </div>
 <script>
-    // proses ubah
+    $(document).ready(function() {
+        // dropdown menu
+        readDropdownMenu();
+    });
+
+    function readDropdownMenu() {
+        $.ajax({
+            url: "http://localhost/spareparts-transaction-system/menu/ambilDataDropdownMenu",
+            tye: "get",
+            success: function(data) {
+                $(".view-dropdown-menu").html(data);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            },
+        });
+    }
+    // tambah dropdown menu
+    $(".tambah-dropdown").click(function(e) {
+        const sub_menu_id = $("#sub_menu_id").val();
+        const dropdown_menu = $("#nama_dropdown").val();
+        const url_dropdown = $("#url_dropdown").val();
+        const id = $("#id-sub-menu").val();
+
+        $.ajax({
+            url: "<?= base_url(); ?>menu/cek_dropdown_aktif_atau_tidak",
+            type: "post",
+            dataType: "json",
+            data: {
+                id: $("#id-sub-menu").val()
+            },
+            success: function(data) {
+                if (data.response == 'success') {
+                    if (data.aktivasi_dropdown.dropdown == 0) {
+                        iziToast.error({
+                            title: 'Error',
+                            message: data.message,
+                            position: 'topRight'
+                        });
+                    } else {
+                        $.ajax({
+                            url: "<?= base_url(); ?>menu/tambah_dropdown_menu",
+                            type: "post",
+                            dataType: "json",
+                            data: {
+                                sub_menu_id: sub_menu_id,
+                                dropdown_menu: dropdown_menu,
+                                url_dropdown: url_dropdown
+                            },
+                            success: function(data) {
+                                if (data.response !== 'success') {
+                                    if ($("#nama_dropdown").val() == "") {
+                                        $("#nama_dropdown").addClass("is-invalid");
+                                        $(".nama_dropdown_error").html("Nama dropdown tidak boleh kososng");
+                                    } else {
+                                        $("#nama_dropdown").removeClass("is-invalid");
+                                        $(".nama_dropdown_error").html('');
+                                    }
+
+                                    if ($("#url_dropdown").val() == "") {
+                                        $("#url_dropdown").addClass("is-invalid");
+                                        $(".url_dropdown_error").html(data.url_dropdown);
+                                    } else {
+
+                                        $("#url_dropdown").removeClass("is-invalid");
+                                        $(".url_dropdown_error").html('');
+                                    }
+
+                                } else {
+                                    iziToast.success({
+                                        title: 'Success',
+                                        message: 'Data berhasil ditambahkan',
+                                        position: 'topRight'
+                                    });
+                                    readDropdownMenu();
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        e.preventDefault();
+    });
+
     $('#modal-tambah-sub-menu').click(function() {
         $('.ubah-sub-menu').css('display', 'none');
         $('.tambah-sub-menu').css('display', '');

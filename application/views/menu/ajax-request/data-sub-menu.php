@@ -77,7 +77,7 @@
                     $('#icon').val(data.subMenu_byId.icon);
                     $('#is_active').val(data.subMenu_byId.is_active);
                     $('#dropdown').val(data.subMenu_byId.dropdown);
-                    $('#dropdown_nama').html('<option value="' + data.subMenu_byId.id + '">' + data.subMenu_byId.sub_menu + '</option>');
+                    $('#sub_menu_id').html('<option value="' + data.subMenu_byId.id + '">' + data.subMenu_byId.sub_menu + '</option>');
 
                     if ($('#is_active').val() == 1) {
                         $("#is_active").attr("checked", "checked")

@@ -37,7 +37,6 @@
                     $('#nama-menu').addClass('is-invalid');
                     $('.nama-menu-error').html(data.nama_menu);
                 } else {
-                    $('#nama-menu').attr('style', '');
                     iziToast.success({
                         title: 'Success',
                         message: data.message,

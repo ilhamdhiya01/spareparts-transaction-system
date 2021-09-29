@@ -8,6 +8,8 @@ $(document).ready(function () {
 	// access menu
 	readAccessMenu();
 	readFormAccessMenu();
+	// dropdown menu
+	// readDropdownMenu();
 });
 // Ajax User Menu
 // Tampilkan tabel user menu
@@ -68,7 +70,7 @@ function readAccessMenu() {
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 			alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-		}
+		},
 	});
 }
 
@@ -77,11 +79,13 @@ function readFormAccessMenu() {
 	$.ajax({
 		url: "http://localhost/spareparts-transaction-system/menu/formAccessMenu",
 		type: "get",
-		success: function(data) {
+		success: function (data) {
 			$(".view-form-access-menu").html(data);
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 			alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-		}
+		},
 	});
 }
+
+

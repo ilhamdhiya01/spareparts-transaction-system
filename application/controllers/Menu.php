@@ -175,8 +175,7 @@ class Menu extends CI_Controller
     public function formSubMenu()
     {
         $data = [
-            'user_menu' => $this->db->get('tb_user_menu')->result_array(),
-            'dropdown_menu'=> $this->SubMenu_model->getAllDropdownMenu()
+            'user_menu' => $this->db->get('tb_user_menu')->result_array()
         ];
         if ($this->input->is_ajax_request()) {
             echo json_encode($this->load->view('menu/ajax-request/form-user-sub-menu', $data));
@@ -501,6 +500,98 @@ class Menu extends CI_Controller
                 $msg = [
                     'response' => 'error',
                     'message' => 'Data gagal dihapus'
+                ];
+                echo json_encode($msg);
+            }
+        }
+    }
+
+    // dropdown menu
+    public function tambah_dropdown_menu()
+    {
+        $rules = [
+            [
+                'field' => 'url_dropdown',
+                'label' => 'Url dropdown',
+                'rules' => 'required'
+            ]
+        ];
+
+        $this->form_validation->set_rules($rules);
+        $this->form_validation->set_message("required", "{field} tidak boleh kosong");
+        if ($this->form_validation->run() == false) {
+            $msg = [
+                'url_dropdown' => form_error('url_dropdown'),
+                'response' => 'error'
+            ];
+            echo json_encode($msg);
+        } else {
+            $data = [
+                'sub_menu_id' => $_POST['sub_menu_id'],
+                'dropdown_nama' => $_POST['dropdown_menu'],
+                'url' => $_POST['url_dropdown']
+            ];
+            if ($this->db->insert('dropdown_menu', $data)) {
+                $msg = [
+                    'response' => 'success',
+                    'message' => 'Data berhasil ditambahkan'
+                ];
+                echo json_encode($msg);
+            } else {
+                $msg = [
+                    'response' => 'error',
+                    'message' => 'Data gagal ditambahkan'
+                ];
+                echo json_encode($msg);
+            }
+        }
+    }
+
+    public function ambilDataDropdownMenu()
+    {
+        $data = [
+            'dropdown_menu' => $this->SubMenu_model->getAllDropdownMenu()
+        ];
+        if ($this->input->is_ajax_request()) {
+            echo json_encode($this->load->view('menu/ajax-request/data-dropdown-menu', $data));
+        } else {
+            echo json_encode("Data tidak ditemukan");
+        }
+    }
+
+    public function cek_dropdown_aktif_atau_tidak()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id = $_POST['id'];
+            $this->db->select('tb_user_sub_menu.dropdown');
+            $this->db->from('tb_user_sub_menu');
+            $this->db->where('id', $id);
+
+            $msg = [
+                'response' => 'success',
+                'aktivasi_dropdown' => $this->db->get()->row_array(),
+                'message' => 'Menu dropdown belum di aktifkan'
+            ];
+            echo json_encode($msg);
+        } else {
+            echo json_encode("Request failed");
+        }
+    }
+
+    public function hapus_dropdown_menu()
+    {
+        if($this->input->is_ajax_request()){
+            $id = $_POST['id'];
+            if($this->db->delete('dropdown_menu',['id' => $id])){
+                $msg = [
+                    'response' => 'success',
+                    'message' => 'Data berhasil di hapus'
+                ];
+                echo json_encode($msg);
+            } else {
+                $msg = [
+                    'response' => 'error',
+                    'message' => 'Data gagal di hapus'
                 ];
                 echo json_encode($msg);
             }

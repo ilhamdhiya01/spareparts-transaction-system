@@ -23,7 +23,9 @@
     <!-- my css -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/custom.css">
     <!-- jQuery -->
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/libraies/dataTables/jquery.dataTables.min.js"> -->
     <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
+    
 </head>
 
 <body class="nav-md">
