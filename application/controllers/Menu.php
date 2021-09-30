@@ -549,8 +549,9 @@ class Menu extends CI_Controller
 
     public function ambilDataDropdownMenu()
     {
+        // $id = $_GET["id_sub"];
         $data = [
-            'dropdown_menu' => $this->SubMenu_model->getAllDropdownMenu()
+            'dropdown_menu' => $this->SubMenu_model->getAllDropdownMenu($_GET['id_sub'])
         ];
         if ($this->input->is_ajax_request()) {
             echo json_encode($this->load->view('menu/ajax-request/data-dropdown-menu', $data));
@@ -580,9 +581,9 @@ class Menu extends CI_Controller
 
     public function hapus_dropdown_menu()
     {
-        if($this->input->is_ajax_request()){
+        if ($this->input->is_ajax_request()) {
             $id = $_POST['id'];
-            if($this->db->delete('dropdown_menu',['id' => $id])){
+            if ($this->db->delete('dropdown_menu', ['id' => $id])) {
                 $msg = [
                     'response' => 'success',
                     'message' => 'Data berhasil di hapus'
@@ -595,6 +596,18 @@ class Menu extends CI_Controller
                 ];
                 echo json_encode($msg);
             }
+        }
+    }
+
+    public function get_dropdown_by_id()
+    {
+        if($this->input->is_ajax_request()){
+            $id = $_POST['id'];
+            $data = [
+                'dropdown_by_id' => $this->db->get_where('dropdown_menu',['id' => $id])->row_array(),
+                'response' => 'success'
+            ];
+            echo json_encode($data);
         }
     }
 }

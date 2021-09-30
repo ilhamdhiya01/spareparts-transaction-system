@@ -17,11 +17,12 @@ class SubMenu_model extends CI_Model
         return $query;
     }
 
-    public function getAllDropdownMenu()
+    public function getAllDropdownMenu($id)
     {
         $this->db->select('dropdown_menu.*, tb_user_sub_menu.sub_menu');
         $this->db->from('dropdown_menu');
         $this->db->join('tb_user_sub_menu', 'tb_user_sub_menu.id = dropdown_menu.sub_menu_id');
+        $this->db->where('sub_menu_id',$id);
         $this->db->order_by('id','DESC');
         $query = $this->db->get()->result_array();
         return $query;

@@ -60,7 +60,24 @@
 
         $("#myTab").css("display", "");
 
+        $("#tab-dropdown").attr("style", "");
+
         const id = $(this).data('id');
+
+        $.ajax({
+            url: "http://localhost/spareparts-transaction-system/menu/ambilDataDropdownMenu",
+            type: "get",
+            data: {
+                id_sub: id,
+            },
+            success: function(data) {
+                $(".view-dropdown-menu").html(data);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            },
+        });
+
         $.ajax({
             url: '<?= base_url(); ?>menu/get_subMenuById',
             type: 'post',

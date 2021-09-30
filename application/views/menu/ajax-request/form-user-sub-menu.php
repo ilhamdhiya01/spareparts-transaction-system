@@ -3,7 +3,7 @@
         <a class="nav-link active" id="tab-ubah-sub-menu" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Ubah Sub Menu</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="tab-tambah-dropdown" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tambah Dropdown</a>
+        <a class="nav-link" id="tab-tambah-dropdown" data-toggle="tab" href="#tab-dropdown" role="tab" aria-controls="profile" aria-selected="false">Tambah Dropdown</a>
     </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -59,8 +59,9 @@
             </div>
         </form>
     </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="tab-pane fade" style="display:none;" id="tab-dropdown" role="tabpanel" aria-labelledby="profile-tab">
         <form action="" method="post" class="form-dropdown-menu">
+            <input type="hidden" name="id_dropdown" id="id_dropdown" value="">
             <div class="form-group" id="options">
                 <label class="control-label ">Menu<span class="required text-danger pl-1">*</span></label>
                 <select class="form-control option" name="sub_menu_id" id="sub_menu_id" disabled>
@@ -85,29 +86,15 @@
                 <button type="submit" class="btn btn-primary btn-sm tambah-dropdown">Tambah</button>
             </div>
         </form>
+        <div class="id-sub">
+
+        </div>
         <div class="table-responsive view-dropdown-menu">
 
         </div>
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-        // dropdown menu
-        readDropdownMenu();
-    });
-
-    function readDropdownMenu() {
-        $.ajax({
-            url: "http://localhost/spareparts-transaction-system/menu/ambilDataDropdownMenu",
-            tye: "get",
-            success: function(data) {
-                $(".view-dropdown-menu").html(data);
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-            },
-        });
-    }
     // tambah dropdown menu
     $(".tambah-dropdown").click(function(e) {
         const sub_menu_id = $("#sub_menu_id").val();
@@ -165,7 +152,28 @@
                                         message: 'Data berhasil ditambahkan',
                                         position: 'topRight'
                                     });
-                                    readDropdownMenu();
+
+                                    $.ajax({
+                                        url: "http://localhost/spareparts-transaction-system/menu/ambilDataDropdownMenu",
+                                        type: "get",
+                                        data: {
+                                            id_sub: id,
+                                        },
+                                        success: function(data) {
+                                            $(".view-dropdown-menu").html(data);
+                                        },
+                                        error: function(xhr, ajaxOptions, thrownError) {
+                                            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                                        },
+                                    });
+
+                                    $("#nama_dropdown").removeClass("is-invalid");
+                                    $("#nama_dropdown").val("");
+                                    $(".nama_dropdown_error").html('');
+
+                                    $("#url_dropdown").removeClass("is-invalid");
+                                    $("#url_dropdown").val("");
+                                    $(".url_dropdown_error").html('');
                                 }
                             }
                         });
@@ -184,6 +192,7 @@
         $('#sub_menu').val('');
         $('#url').val('');
         $('#icon').val('');
+        $("#tab-dropdown").css("display", "none");
 
         if ($('.aktivasi-menu').val() == 1) {
             $(this).removeAttr("checked");

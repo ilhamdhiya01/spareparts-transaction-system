@@ -1,4 +1,4 @@
-<table class="table table-bordered" id="example">
+<table class="table table-bordered" id="myTable">
     <thead>
         <tr>
             <th scope="col">No</th>
@@ -28,6 +28,24 @@
 </table>
 
 <script>
+    $(".btn-ubah-dropdown").click(function(e) {
+        const id = $(this).data('id');
+        $.ajax({
+            url : "<?= base_url(); ?>menu/get_dropdown_by_id",
+            type : "post",
+            data : {
+                id : id
+            },
+            dataType : "json",
+            success : function(data){
+                $("#id_dropdown").val(data.dropdown_by_id.id);
+                $("#nama_dropdown").val(data.dropdown_by_id.dropdown_nama);
+                $("#url_dropdown").val(data.dropdown_by_id.url);
+            }
+        });
+        e.preventDefault();
+    });
+
     $(".delete-dropdown-menu").click(function(e) {
         $(this).closest("#tr-dropdown-menu").addClass('hapus-dropdown-menu');
         const id = $(this).data("id");
@@ -43,7 +61,7 @@
                     $.ajax({
                         url: "<?= base_url(); ?>menu/hapus_dropdown_menu",
                         type: "post",
-                        dataType : "json",
+                        dataType: "json",
                         data: {
                             id: id
                         },
