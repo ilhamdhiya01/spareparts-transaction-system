@@ -141,7 +141,6 @@
                                         message: value.message,
                                         position: 'topRight'
                                     });
-                                    $('.close').click();
                                     readSubMenu();
                                 } else {
                                     iziToast.error({

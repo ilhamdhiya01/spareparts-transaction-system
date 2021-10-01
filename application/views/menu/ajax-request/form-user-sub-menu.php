@@ -60,6 +60,7 @@
         </form>
     </div>
     <div class="tab-pane fade" style="display:none;" id="tab-dropdown" role="tabpanel" aria-labelledby="profile-tab">
+        <button type="button" class="btn btn-sm btn-primary" id="tambahDropdown" style="display:none;">Tambah Dropdown</button>
         <form action="" method="post" class="form-dropdown-menu">
             <input type="hidden" name="id_dropdown" id="id_dropdown" value="">
             <div class="form-group" id="options">
@@ -82,19 +83,26 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <!-- <button type="submit" class="btn btn-primary btn-sm tambah-sub-menu" id="btn-form">Tambah</button> -->
+                <button type="submit" style="display:none;" class="btn btn-primary btn-sm ubah-dropdown">Ubah</button>
                 <button type="submit" class="btn btn-primary btn-sm tambah-dropdown">Tambah</button>
             </div>
         </form>
-        <div class="id-sub">
-
-        </div>
         <div class="table-responsive view-dropdown-menu">
 
         </div>
     </div>
 </div>
 <script>
+    $("#tambahDropdown").click(function(e) {
+        $(this).css("display", "none");
+        $(".ubah-dropdown").css("display", "none");
+        $(".tambah-dropdown").css("display", "");
+        $("#id_dropdown").val("");
+        $("#nama_dropdown").val("");
+        $("#url_dropdown").val("");
+        e.preventDefault();
+    });
+
     // tambah dropdown menu
     $(".tambah-dropdown").click(function(e) {
         const sub_menu_id = $("#sub_menu_id").val();
@@ -161,6 +169,7 @@
                                         },
                                         success: function(data) {
                                             $(".view-dropdown-menu").html(data);
+                                            console.log(data);
                                         },
                                         error: function(xhr, ajaxOptions, thrownError) {
                                             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);

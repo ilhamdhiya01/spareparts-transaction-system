@@ -29,18 +29,74 @@
 
 <script>
     $(".btn-ubah-dropdown").click(function(e) {
+        $("#nama_dropdown").removeClass("is-invalid");
+        $(".nama_dropdown_error").html('');
+
+        $("#url_dropdown").removeClass("is-invalid");
+        $(".url_dropdown_error").html('');
+
         const id = $(this).data('id');
+        $(".tambah-dropdown").css("display", "none");
+        $(".ubah-dropdown").removeAttr("style");
+        $("#tambahDropdown").removeAttr("style");
         $.ajax({
-            url : "<?= base_url(); ?>menu/get_dropdown_by_id",
-            type : "post",
-            data : {
-                id : id
+            url: "<?= base_url(); ?>menu/get_dropdown_by_id",
+            type: "post",
+            data: {
+                id: id
             },
-            dataType : "json",
-            success : function(data){
+            dataType: "json",
+            success: function(data) {
                 $("#id_dropdown").val(data.dropdown_by_id.id);
                 $("#nama_dropdown").val(data.dropdown_by_id.dropdown_nama);
                 $("#url_dropdown").val(data.dropdown_by_id.url);
+
+                $(".ubah-dropdown").click(function(event) {
+                    const id_dropdown = $("#id_dropdown").val();
+                    const sub_menu_id = $("#sub_menu_id").val();
+                    const nama_dropdown = $("#nama_dropdown").val();
+                    const url_dropdown = $("#url_dropdown").val();
+
+                    $.ajax({
+                        url: "<?= base_url(); ?>menu/proses_ubah_dropdown",
+                        type: "post",
+                        data: {
+                            id_dropdown: id_dropdown,
+                            sub_menu_id: sub_menu_id,
+                            nama_dropdown: nama_dropdown,
+                            url_dropdown: url_dropdown
+                        },
+                        dataType: "json",
+                        success: function(data) {
+                            if (data.response == "success") {
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                    position: 'topRight'
+                                });
+
+                                function readDropdownMenu() {
+                                    $.ajax({
+                                        url: "http://localhost/spareparts-transaction-system/menu/ambilDataDropdownMenu",
+                                        type: "get",
+                                        data: {
+                                            id_sub: $("#id-sub-menu").val(),
+                                        },
+                                        success: function(data) {
+                                            $(".view-dropdown-menu").html(data);
+                                            console.log(data);
+                                        },
+                                        error: function(xhr, ajaxOptions, thrownError) {
+                                            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                                        },
+                                    });
+                                }
+                                readDropdownMenu();
+                            }
+                        }
+                    });
+                    event.preventDefault();
+                });
             }
         });
         e.preventDefault();

@@ -601,13 +601,39 @@ class Menu extends CI_Controller
 
     public function get_dropdown_by_id()
     {
-        if($this->input->is_ajax_request()){
+        if ($this->input->is_ajax_request()) {
             $id = $_POST['id'];
             $data = [
-                'dropdown_by_id' => $this->db->get_where('dropdown_menu',['id' => $id])->row_array(),
+                'dropdown_by_id' => $this->db->get_where('dropdown_menu', ['id' => $id])->row_array(),
                 'response' => 'success'
             ];
             echo json_encode($data);
+        }
+    }
+
+    public function proses_ubah_dropdown()
+    {
+        if($this->input->is_ajax_request()){
+            $id = $_POST['id_dropdown'];
+            $data = [
+                'sub_menu_id' => $_POST['sub_menu_id'],
+                'dropdown_nama' => $_POST['nama_dropdown'],
+                'url' => $_POST['url_dropdown']
+            ];
+            $query = $this->db->update('dropdown_menu',$data,['id' => $id]);
+            if(!$query){
+                $msg = [
+                    'response' => 'error',
+                    'message' => 'Data gagal diubah'
+                ];
+                echo json_encode($msg);
+            } else {
+                $msg = [
+                    'response' => 'success',
+                    'message' => 'Data berhasil diubah'
+                ];
+                echo json_encode($msg);
+            }
         }
     }
 }
