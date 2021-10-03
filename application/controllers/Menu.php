@@ -613,15 +613,15 @@ class Menu extends CI_Controller
 
     public function proses_ubah_dropdown()
     {
-        if($this->input->is_ajax_request()){
+        if ($this->input->is_ajax_request()) {
             $id = $_POST['id_dropdown'];
             $data = [
                 'sub_menu_id' => $_POST['sub_menu_id'],
                 'dropdown_nama' => $_POST['nama_dropdown'],
                 'url' => $_POST['url_dropdown']
             ];
-            $query = $this->db->update('dropdown_menu',$data,['id' => $id]);
-            if(!$query){
+            $query = $this->db->update('dropdown_menu', $data, ['id' => $id]);
+            if (!$query) {
                 $msg = [
                     'response' => 'error',
                     'message' => 'Data gagal diubah'
@@ -631,6 +631,47 @@ class Menu extends CI_Controller
                 $msg = [
                     'response' => 'success',
                     'message' => 'Data berhasil diubah'
+                ];
+                echo json_encode($msg);
+            }
+        }
+    }
+
+    public function userAccess()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id = $_GET['id'];
+            $data = [
+                'response' => 'success',
+                'level_user' => $this->db->get_where('level_user', ['id' => $id])->row_array(),
+                'user_access' => $this->db->get('tb_user_menu')->result_array()
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/data-user-access', $data));
+        } else {
+            echo json_encode("Data tidak ditemukan");
+        }
+    }
+
+    public function change_access()
+    {
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'level_id' => $_POST['level_id'],
+                'menu_id' => $_POST['menu_id']
+            ];
+            $result = $this->db->get_where('tb_user_access_menu', $data);
+            if ($result->num_rows() < 1) {
+                $this->db->insert('tb_user_access_menu', $data);
+                $msg = [
+                    'response' => 'add',
+                    'message' => 'Access ditambahkan'
+                ];
+                echo json_encode($msg);
+            } else {
+                $this->db->delete('tb_user_access_menu', $data);
+                $msg = [
+                    'response' => 'delete',
+                    'message' => 'Access dihapus'
                 ];
                 echo json_encode($msg);
             }

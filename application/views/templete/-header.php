@@ -20,6 +20,7 @@
     <link href="<?= base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/izitoast/dist/css/iziToast.min.css">
+    <link href="<?= base_url(); ?>assets/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
     <!-- my css -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/custom.css">
     <!-- jQuery -->
@@ -60,7 +61,7 @@
                         ini_set('display_startup_errors', 1);
                         error_reporting(E_ALL);
                         $level_id = $this->session->userdata('level_id');
-                        $this->db->select('tb_user_menu.id,nama_menu');
+                        $this->db->select('tb_user_menu.*');
                         $this->db->from('tb_user_menu');
                         $this->db->join('tb_user_access_menu', 'tb_user_access_menu.menu_id = tb_user_menu.id');
                         $this->db->where('level_id', $level_id);

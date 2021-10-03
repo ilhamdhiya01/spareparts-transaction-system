@@ -9,6 +9,8 @@
 <!-- Bootstrap -->
 <script src="<?= base_url(); ?>assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <!-- JS Libraies -->
+<!-- Switchery -->
+<script src="<?= base_url(); ?>assets/vendors/switchery/dist/switchery.min.js"></script>
 <script src="<?= base_url(); ?>assets/vendors/izitoast/dist/js/iziToast.min.js"></script>
 <script src="<?= base_url(); ?>assets/vendors/sweetalert/dist/sweetalert.min.js"></script>
 <script src="<?= base_url(); ?>assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>

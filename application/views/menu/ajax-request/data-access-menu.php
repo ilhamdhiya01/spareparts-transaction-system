@@ -28,7 +28,7 @@
                 </td>
                 <td>
                     <a href="" data-id="<?= $am['id']; ?>" class="badge badge-danger delete-access">Delete</a>
-                    <a href="" data-id="<?= $am['id']; ?>" class="badge badge-info get-access-by-id">Update</a>
+                    <a href="" data-id="<?= $am['id']; ?>" data-level="<?= $am['level']; ?>" data-levelid="<?= $am['level_id']; ?>" class="badge badge-info get-access-by-id">Update</a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -37,12 +37,14 @@
 <script>
     $(".get-access-by-id").click(function(e) {
         // Ubah tampilan form
+        console.log($(this).data("levelid"));
         $("#ubah-user").removeAttr("style");
         $("#form-title-menu").html("Ubah Data User");
         $("#tambah-user").css("display", "none");
         $("#password").attr("readonly", "readonly");
         $("#konfirmasi_password").attr("readonly", "readonly");
         const id = $(this).data("id");
+        const level = $(this).data("level");
 
         // Hilangkan tampilan error
         $("#nama").removeClass("is-invalid");
@@ -57,6 +59,10 @@
         $(".password_error").html('');
         $("#konfirmasi_password").removeClass("is-invalid");
         $(".konfirmasi_password_error").html('');
+
+        // tampilkan tab
+        $("#tab-user-access").removeAttr("style");
+        $("#level-title").html(level);
 
         // get ubah
         $.ajax({

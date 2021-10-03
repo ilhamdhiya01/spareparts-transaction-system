@@ -1,83 +1,99 @@
-<form action="" method="post" class="access-menu">
-    <input type="hidden" name="id" value="" id="id_access">
-    <input type="hidden" class="form-control" value="" name="gambar" id="gambar">
-    <input type="hidden" class="form-control" value="" name="date_created" id="date_created">
-    <div class="form-group">
-        <label for="">Nama Pegawai<span class="text-danger pl-1">*</span></label>
-        <input type="text" class="form-control" value="" name="nama" id="nama">
-        <div id="validationServer03Feedback" class="invalid-feedback nama_error">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group" id="options">
-                <label class="control-label ">Posisi<span class="required text-danger pl-1">*</span></label>
-                <select class="form-control option" name="posisi" id="posisi">
-                    <option value="" class="text-center">-- Pilih --</option>
-                    <?php foreach ($posisi as $data_posisi) : ?>
-                        <option value="<?= $data_posisi['id']; ?>"><?= $data_posisi['nama_posisi']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <div id="validationServer03Feedback" class="invalid-feedback posisi_error">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group" id="options">
-                <label class="control-label ">Level User<span class="required text-danger pl-1">*</span></label>
-                <select class="form-control option" name="level" id="level">
-                    <option value="" class="text-center">-- Pilih --</option>
-                    <?php foreach ($level as $data_level) : ?>
-                        <option value="<?= $data_level['id']; ?>"><?= $data_level['level']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <div id="validationServer03Feedback" class="invalid-feedback level_error">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
+<ul class="nav nav-tabs bar_tabs" id="tab-user-access" role="tablist" style="display:none;">
+    <li class="nav-item">
+        <a class="nav-link active" id="ubah-user-tab" data-toggle="tab" href="#ubah_user" role="tab" aria-controls="ubah_user" aria-selected="true">Ubah User</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="access-menu-tab" data-toggle="tab" href="#access_menu" role="tab" aria-controls="access_menu" aria-selected="false"><span style="font-weight:bold;" id="level-title"></span></a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="ubah_user" role="tabpanel" aria-labelledby="ubah-user-tab">
+        <form action="" method="post" class="access-menu">
+            <input type="hidden" name="id" value="" id="id_access">
+            <input type="hidden" class="form-control" value="" name="gambar" id="gambar">
+            <input type="hidden" class="form-control" value="" name="date_created" id="date_created">
             <div class="form-group">
-                <label for="">Username<span class="required text-danger pl-1">*</span></label>
-                <input type="text" class="form-control" value="" name="username" id="username">
-                <div id="validationServer03Feedback" class="invalid-feedback username_error">
+                <label for="">Nama Pegawai<span class="text-danger pl-1">*</span></label>
+                <input type="text" class="form-control" value="" name="nama" id="nama">
+                <div id="validationServer03Feedback" class="invalid-feedback nama_error">
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group password">
-                <label for="">Password<span class="required text-danger pl-1">*</span></label>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" id="options">
+                        <label class="control-label ">Posisi<span class="required text-danger pl-1">*</span></label>
+                        <select class="form-control option" name="posisi" id="posisi">
+                            <option value="" class="text-center">-- Pilih --</option>
+                            <?php foreach ($posisi as $data_posisi) : ?>
+                                <option value="<?= $data_posisi['id']; ?>"><?= $data_posisi['nama_posisi']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <div id="validationServer03Feedback" class="invalid-feedback posisi_error">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" id="options">
+                        <label class="control-label ">Level User<span class="required text-danger pl-1">*</span></label>
+                        <select class="form-control option" name="level" id="level">
+                            <option value="" class="text-center">-- Pilih --</option>
+                            <?php foreach ($level as $data_level) : ?>
+                                <option value="<?= $data_level['id']; ?>"><?= $data_level['level']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <div id="validationServer03Feedback" class="invalid-feedback level_error">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">Username<span class="required text-danger pl-1">*</span></label>
+                        <input type="text" class="form-control" value="" name="username" id="username">
+                        <div id="validationServer03Feedback" class="invalid-feedback username_error">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group password">
+                        <label for="">Password<span class="required text-danger pl-1">*</span></label>
+                        <input type="password" class="form-control" value="" name="password" id="password">
+                        <i class="fa fa-eye-slash hide"></i>
+                        <div id="validationServer03Feedback" class="invalid-feedback password_error">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group konfirmasi_password">
+                        <label for="">Konfirmasi Password<span class="required text-danger pl-1">*</span></label>
+                        <input type="password" class="form-control" value="" name="konfirmasi_password" id="konfirmasi_password">
+                        <i class="fa fa-eye-slash"></i>
+                        <div id="validationServer03Feedback" class="invalid-feedback konfirmasi_password_error">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Aktivasi User</label>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input aktivasi-menu" value="0" name="is_active" id="is_active">
+                            <label class="custom-control-label" for="is_active" id="status">Tidak Aktif</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-sm" id="tambah-user">Tambah</button>
+                <button type="submit" style="display:none;" class="btn btn-primary btn-sm" id="ubah-user">Ubah</button>
+            </div>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="access_menu" role="tabpanel" aria-labelledby="profile-tab">
+        <h6 class="level_title" style="display:none;"></h6>
+        <div class="view-user-access">
 
-                <input type="password" class="form-control" value="" name="password" id="password">
-                <i class="fa fa-eye-slash hide"></i>
-
-                <div id="validationServer03Feedback" class="invalid-feedback password_error">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group konfirmasi_password">
-                <label for="">Konfirmasi Password<span class="required text-danger pl-1">*</span></label>
-                <input type="password" class="form-control" value="" name="konfirmasi_password" id="konfirmasi_password">
-                <i class="fa fa-eye-slash"></i>
-                <div id="validationServer03Feedback" class="invalid-feedback konfirmasi_password_error">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="">Aktivasi User</label>
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input aktivasi-menu" value="0" name="is_active" id="is_active">
-                    <label class="custom-control-label" for="is_active" id="status">Tidak Aktif</label>
-                </div>
-            </div>
         </div>
     </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-sm" id="tambah-user">Tambah</button>
-        <button type="submit" style="display:none;" class="btn btn-primary btn-sm" id="ubah-user">Ubah</button>
-    </div>
-</form>
+</div>
 <script>
     $("#tambah-user").click(function(e) {
         const nama = $("#nama").val();
@@ -232,4 +248,29 @@
             $(this).attr("class", "fa fa-eye-slash");
         }
     })
+
+    $("#access-menu-tab").click(function() {
+        const id = $("#level").val();
+        // user access
+        $.ajax({
+            url: "http://localhost/spareparts-transaction-system/menu/userAccess",
+            type: "get",
+            data : {
+                id : id
+            },
+            success: function(data) {
+                $(".view-user-access").html(data);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            },
+        });
+    });
+
+    $("#access-menu-tab").click(function() {
+        $("#form-title-menu").html("Tambah Access Menu User")
+    });
+    $("#ubah-user-tab").click(function() {
+        $("#form-title-menu").html("Ubah Data User")
+    });
 </script>
