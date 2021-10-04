@@ -663,15 +663,13 @@ class Menu extends CI_Controller
             if ($result->num_rows() < 1) {
                 $this->db->insert('tb_user_access_menu', $data);
                 $msg = [
-                    'response' => 'add',
-                    'message' => 'Access ditambahkan'
+                    'response' => 'add'
                 ];
                 echo json_encode($msg);
             } else {
                 $this->db->delete('tb_user_access_menu', $data);
                 $msg = [
-                    'response' => 'delete',
-                    'message' => 'Access dihapus'
+                    'response' => 'delete'
                 ];
                 echo json_encode($msg);
             }

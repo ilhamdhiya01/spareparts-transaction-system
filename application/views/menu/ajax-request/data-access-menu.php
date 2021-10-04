@@ -6,7 +6,7 @@
             <th scope="col">Posisi</th>
             <th scope="col">Level</th>
             <th scope="col">Status</th>
-            <th scope="col">Aksi</th>
+            <th scope="col" colspan="2">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -27,8 +27,10 @@
                     <?php endif; ?>
                 </td>
                 <td>
-                    <a href="" data-id="<?= $am['id']; ?>" class="badge badge-danger delete-access">Delete</a>
-                    <a href="" data-id="<?= $am['id']; ?>" data-level="<?= $am['level']; ?>" data-levelid="<?= $am['level_id']; ?>" class="badge badge-info get-access-by-id">Update</a>
+                    <a href="" data-id="<?= $am['id']; ?>" class="delete-access"><i class="fa fa-trash"></i></a>
+                </td>
+                <td>
+                    <a href="" data-id="<?= $am['id']; ?>" data-level="<?= $am['level']; ?>" data-levelid="<?= $am['level_id']; ?>" class="get-access-by-id"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>

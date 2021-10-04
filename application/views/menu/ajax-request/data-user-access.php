@@ -16,7 +16,7 @@
                 <td><?= $access['nama_menu']; ?></td>
                 <td>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" data-levelid="<?= $level_user['id']; ?>" data-menu="<?= $access['id']; ?>">
+                        <input class="form-check-input" type="checkbox" <?= change_access($level_user['id'], $access['id']); ?> data-levelid="<?= $level_user['id']; ?>" data-menu="<?= $access['id']; ?>">
                     </div>
                 </td>
             </tr>
@@ -31,25 +31,25 @@
         $.ajax({
             url: "<?= base_url(); ?>menu/change_access",
             type: "post",
-            // dataType : "json",
+            dataType: "json",
             data: {
                 level_id: levelid,
                 menu_id: menuid
             },
             success: function(data) {
                 if (data.response == 'add') {
-                    // iziToast.success({
-                    //     title: 'Success',
-                    //     message: data.message,
-                    //     position: 'topRight'
-                    // });
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Access ditambahkan',
+                        position: 'topRight'
+                    });
                     console.log(data);
                 } else {
-                    // iziToast.success({
-                    //     title: 'Success',
-                    //     message: data.message,
-                    //     position: 'topRight'
-                    // });
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Access dihapus',
+                        position: 'topRight'
+                    });
                     console.log(data);
                 }
             }

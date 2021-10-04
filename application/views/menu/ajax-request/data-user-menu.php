@@ -2,7 +2,7 @@
     <tr>
         <th>No</th>
         <th>Nama Menu</th>
-        <th>Action</th>
+        <th colspan="2">Action</th>
     </tr>
 </thead>
 <tbody>
@@ -11,11 +11,13 @@
     foreach ($user_menu as $menu) :
     ?>
         <tr id="tr-user-menu">
-            <th scope="row" id="no"><?= $no++; ?></th>
+            <th scope="row" id="no" width="10px"><?= $no++; ?></th>
             <td><?= $menu['nama_menu']; ?></td>
-            <td>
-                <a href="" data-id="<?= $menu['id']; ?>" class="badge badge-danger hapus-menu">Delete</a>
-                <a href="" data-id="<?= $menu['id']; ?>" class="badge badge-info update-menu">Update</a>
+            <td width="10px">
+                <a href="" data-id="<?= $menu['id']; ?>" class="hapus-menu"><i class="fa fa-trash"></i></a>
+            </td>
+            <td width="10px">
+                <a href="" data-id="<?= $menu['id']; ?>" class="update-menu"><i class="fa fa-edit"></i></a>
             </td>
         </tr>
     <?php endforeach; ?>

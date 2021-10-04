@@ -5,7 +5,7 @@
             <th scope="col">Sub Menu</th>
             <th scope="col">Nama</th>
             <th scope="col">Url</th>
-            <th scope="col">Aksi</th>
+            <th scope="col" colspan="2">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -18,9 +18,11 @@
                 <td><?= $dropdown['sub_menu']; ?></td>
                 <td><?= $dropdown['dropdown_nama']; ?></td>
                 <td><?= $dropdown['url']; ?></td>
-                <td>
-                    <a href="" data-id="<?= $dropdown['id']; ?>" class="badge badge-danger delete-dropdown-menu">Delete</a>
-                    <a href="" data-id="<?= $dropdown['id']; ?>" class="badge badge-info btn-ubah-dropdown">Update</a>
+                <td width="10px">
+                    <a href="" data-id="<?= $dropdown['id']; ?>" class="delete-dropdown-menu"><i class="fa fa-trash"></i></a>
+                </td>
+                <td width="10px">
+                    <a href="" data-id="<?= $dropdown['id']; ?>" class="btn-ubah-dropdown"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>

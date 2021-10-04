@@ -7,7 +7,7 @@
             <th>Url</th>
             <th>Icon</th>
             <th>Status</th>
-            <th>Aksi</th>
+            <th colspan="2">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -35,9 +35,11 @@
                     }
                     ?>
                 </td>
-                <td class="text-center">
-                    <a href="" data-id="<?= $sub_menu['id']; ?>" class="badge badge-danger delete-sub-menu">Delete</a>
-                    <a href="" data-id="<?= $sub_menu['id']; ?>" data-toggle="modal" data-target="#tambah-sub-menu" class="badge badge-info btn-ubah">Update</a>
+                <td class="text-center" width="10px">
+                    <a href="" data-id="<?= $sub_menu['id']; ?>" class="delete-sub-menu"><i class="fa fa-trash"></i></a>
+                </td>
+                <td class="text-center" width="10px">
+                    <a href="" data-id="<?= $sub_menu['id']; ?>" data-toggle="modal" data-target="#tambah-sub-menu" class="btn-ubah"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
