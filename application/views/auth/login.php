@@ -1,65 +1,167 @@
-<div id="app">
-    <section class="section">
-        <div class="container mt-2">
-            <div class="row">
-                <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6  offset-lg-3 col-xl-4 offset-xl-4">
-                    <div class="login-brand">
-                        <img src="<?= base_url(); ?>assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
+<div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                <form>
+                    <h1>Login Form</h1>
+                    <div>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" />
+                    </div>
+                    <div>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" />
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-sm btn-secondary" id="login">Masuk</button>
+                        <a class="reset_pass" href="#">Lost your password?</a>
                     </div>
 
-                    <div class="card card-primary">
-                        <div class="card-header auth-header">
-                            <h4>Login</h4>
-                        </div>
-                        <?= $this->session->flashdata('message'); ?>
-                        <div class="card-body">
-                            <form method="POST" action="<?= base_url(); ?>auth">
-                                <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input id="username" type="text" class="form-control" name="username" tabindex="1" >
-                                    <?= form_error('username', '<small class="text-danger text-error">', '</small>'); ?>
-                                </div>
+                    <div class="clearfix"></div>
 
-                                <div class="form-group">
-                                    <div class="d-block">
-                                        <label for="password" class="control-label">Password</label>
-                                    </div>
-                                    <div class="form-input">
-                                        <input id="password" type="password" class="form-control" name="password" >
-                                        <i class="fas fa-eye-slash"></i>
-                                    </div>
-                                    <?= form_error('password', '<small class="text-danger text-error">', '</small>'); ?>
-                                </div>
+                    <div class="separator">
+                        <p class="change_link">New to site?
+                            <a href="#signup" class="to_register"> Create Account </a>
+                        </p>
 
-                                <div class="form-group">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                                        <label class="custom-control-label" for="remember-me">Remember Me</label>
-                                    </div>
-                                </div>
+                        <div class="clearfix"></div>
+                        <br />
 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                        Login
-                                    </button>
-                                </div>
-                            </form>
+                        <div>
+                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
                         </div>
                     </div>
-                </div>
-            </div>
+                </form>
+            </section>
         </div>
-    </section>
+
+        <div id="register" class="animate form registration_form">
+            <section class="login_content">
+                <form>
+                    <h1>Create Account</h1>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Username" required="" />
+                    </div>
+                    <div>
+                        <input type="email" class="form-control" placeholder="Email" required="" />
+                    </div>
+                    <div>
+                        <input type="password" class="form-control" placeholder="Password" required="" />
+                    </div>
+                    <div>
+                        <a class="btn btn-default submit" href="index.html">Submit</a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <p class="change_link">Already a member ?
+                            <a href="#signin" class="to_register"> Log in </a>
+                        </p>
+
+                        <div class="clearfix"></div>
+                        <br />
+
+                        <div>
+                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
 </div>
 <script>
-    $('.fa-eye-slash').click(function(){
-        let input = $('#password').attr('type');
-        if(input == 'password'){
-            $('#password').attr('type','text');
-            $('.fa-eye-slash').attr('class','fas fa-eye');
-        } else {
-            $('#password').attr('type','password');
-            $('.fa-eye').attr('class','fas fa-eye-slash');
-        }
-    })
+    $("#login").click(function(e) {
+        const username = $("#username").val();
+        const password = $("#password").val();
+
+        $.ajax({
+            url: "<?= base_url(); ?>auth/login",
+            type: "post",
+            data: {
+                username: username,
+                password: password
+            },
+            dataType: "json",
+            success: function(data) {
+                if (data.error) {
+                    if (data.error.username) {
+                        iziToast.error({
+                            title: 'Login Failed',
+                            message: data.error.username,
+                            position: 'topRight'
+                        });
+                    }
+
+                    if (data.error.password) {
+                        iziToast.error({
+                            title: 'Login Failed',
+                            message: data.error.password,
+                            position: 'topRight'
+                        });
+                    }
+                } else {
+                    if (data.response == 'username_null') {
+                        iziToast.error({
+                            title: 'Login Failed',
+                            message: data.message,
+                            position: 'topRight'
+                        });
+                    } else {
+                        if (data.users.is_active == 1) {
+                            if (data.cek_password) {
+                                if (data.users.level == 'Developer') {
+                                    swal({
+                                        title: "Login berhasil !",
+                                        text: "Selamat datang " + data.users.nama_pegawai,
+                                        icon: "success",
+                                        button: false
+                                    });
+                                    setTimeout(function() {
+                                        window.location.href = "<?= base_url(); ?>menu"
+                                    }, 3000);
+                                } else {
+                                    swal({
+                                        title: "Login berhasil !",
+                                        text: "Selamat datang " + data.users.nama_pegawai,
+                                        icon: "success",
+                                        button: false
+                                    });
+                                    setTimeout(function() {
+                                        window.location.href = "<?= base_url(); ?>menu"
+                                    }, 3000);
+                                }
+                            } else {
+                                iziToast.error({
+                                    title: 'Login Failed',
+                                    message: 'Password yang anda masukan salah',
+                                    position: 'topRight'
+                                });
+                            }
+                        } else {
+                            iziToast.error({
+                                title: 'Login Failed',
+                                message: 'Akun belum teraktivasi',
+                                position: 'topRight'
+                            });
+                        }
+                    }
+                }
+            }
+        });
+        e.preventDefault();
+    });
+    // $('.fa-eye-slash').click(function() {
+    //     let input = $('#password').attr('type');
+    //     if (input == 'password') {
+    //         $('#password').attr('type', 'text');
+    //         $('.fa-eye-slash').attr('class', 'fas fa-eye');
+    //     } else {
+    //         $('#password').attr('type', 'password');
+    //         $('.fa-eye').attr('class', 'fas fa-eye-slash');
+    //     }
+    // })
 </script>

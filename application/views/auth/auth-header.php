@@ -2,28 +2,27 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title><?= $judul; ?></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- General CSS Files -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <title>Gentelella Alela! | </title>
 
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/libraies/bootstrap-daterangepicker/daterangepicker.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/libraies/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/libraies/select2/dist/css/select2.min.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/libraies/selectric/public/selectric.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/libraies/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/libraies/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/libraies/bootstrap-social/bootstrap-social.css">
+    <!-- Bootstrap -->
+    <link href="<?= base_url(); ?>assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="<?= base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="<?= base_url(); ?>assets/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/izitoast/dist/css/iziToast.min.css">
+    <link href="<?= base_url(); ?>assets/vendors/animate.css/animate.min.css" rel="stylesheet">
 
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/custom.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/components.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Custom Theme Style -->
+    <link href="<?= base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
+    <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
 </head>
 
-<body>
+<body class="login">

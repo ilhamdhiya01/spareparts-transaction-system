@@ -65,6 +65,7 @@
                         $this->db->from('tb_user_menu');
                         $this->db->join('tb_user_access_menu', 'tb_user_access_menu.menu_id = tb_user_menu.id');
                         $this->db->where('level_id', $level_id);
+                        $this->db->order_by('id','ASC');
 
                         $query = $this->db->get()->result_array();
                         foreach ($query as $menu) :
