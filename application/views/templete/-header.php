@@ -20,13 +20,14 @@
     <link href="<?= base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/izitoast/dist/css/iziToast.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/sweetalert2/dist/sweetalert2.min.css">
     <link href="<?= base_url(); ?>assets/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
     <!-- my css -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/custom.css">
     <!-- jQuery -->
     <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/libraies/dataTables/jquery.dataTables.min.js"> -->
     <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
-    
+
 </head>
 
 <body class="nav-md">
@@ -65,7 +66,7 @@
                         $this->db->from('tb_user_menu');
                         $this->db->join('tb_user_access_menu', 'tb_user_access_menu.menu_id = tb_user_menu.id');
                         $this->db->where('level_id', $level_id);
-                        $this->db->order_by('id','ASC');
+                        $this->db->order_by('id', 'ASC');
 
                         $query = $this->db->get()->result_array();
                         foreach ($query as $menu) :
@@ -123,7 +124,7 @@
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
                             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?= base_url(); ?>auth/logout">
+                        <a data-toggle="tooltip" data-placement="top" id="log_out" title="Logout" href="">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -222,6 +223,39 @@
                     </nav>
                 </div>
             </div>
+            <script>
+                $("#log_out").click(function(e) {
+                    $.ajax({
+                        url: "<?= base_url(); ?>auth/logout",
+                        type: "post",
+                        dataType: "json",
+                        success: function(data) {
+                            if (data.response == 'success') {
+                                Swal.fire({
+                                    title: 'Yakin ingin keluar ?',
+                                    text: "Anda akan keluar dari sistem!",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Logout'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        Swal.fire(
+                                            data.message,
+                                            'Anda keluar dari sistem',
+                                            'success'
+                                        ).then(() => {
+                                            window.location.href = "<?= base_url(); ?>auth";
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    })
+                    e.preventDefault();
+                });
+            </script>
             <!-- /top navigation -->
             <!-- page content -->
 

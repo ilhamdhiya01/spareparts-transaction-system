@@ -86,6 +86,14 @@
                 password: password
             },
             dataType: "json",
+            beforeSend : function(){
+                $("#login").attr("disable","disabled");
+                $("#login").html("<i class='fa fa-spin fa-spinner'></i>");
+            },
+            complete : function(){
+                $("#login").removeAttr("disable");
+                $("#login").html("Masuk");
+            },
             success: function(data) {
                 if (data.error) {
                     if (data.error.username) {
@@ -105,47 +113,48 @@
                     }
                 } else {
                     if (data.response == 'username_null') {
-                        iziToast.error({
-                            title: 'Login Failed',
-                            message: data.message,
-                            position: 'topRight'
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Login failed !',
+                            text: data.message
+                        }).then(() => {
+                            $("#username").val("");
+                            $("#password").val("");
                         });
                     } else {
                         if (data.users.is_active == 1) {
                             if (data.cek_password) {
                                 if (data.users.level == 'Developer') {
-                                    swal({
-                                        title: "Login berhasil !",
-                                        text: "Selamat datang " + data.users.nama_pegawai,
-                                        icon: "success",
-                                        button: false
-                                    });
-                                    setTimeout(function() {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Login success',
+                                        text: 'Selamat datang ' + data.users.nama_pegawai
+                                    }).then(() => {
                                         window.location.href = "<?= base_url(); ?>menu"
-                                    }, 3000);
+                                    });
                                 } else {
-                                    swal({
-                                        title: "Login berhasil !",
-                                        text: "Selamat datang " + data.users.nama_pegawai,
-                                        icon: "success",
-                                        button: false
-                                    });
-                                    setTimeout(function() {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Login success',
+                                        text: 'Selamat datang ' + data.users.nama_pegawai
+                                    }).then(() => {
                                         window.location.href = "<?= base_url(); ?>menu"
-                                    }, 3000);
+                                    });
                                 }
                             } else {
-                                iziToast.error({
-                                    title: 'Login Failed',
-                                    message: 'Password yang anda masukan salah',
-                                    position: 'topRight'
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Login failed !',
+                                    text: 'Password yang anda masukan salah'
+                                }).then(()=> {
+                                    $("#password").val("");
                                 });
                             }
                         } else {
-                            iziToast.error({
-                                title: 'Login Failed',
-                                message: 'Akun belum teraktivasi',
-                                position: 'topRight'
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Login failed !',
+                                text: 'Akun belum teraktivasi'
                             });
                         }
                     }

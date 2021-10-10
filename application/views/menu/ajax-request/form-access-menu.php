@@ -5,6 +5,9 @@
     <li class="nav-item">
         <a class="nav-link" id="access-menu-tab" data-toggle="tab" href="#access_menu" role="tab" aria-controls="access_menu" aria-selected="false"><span style="font-weight:bold;" id="level-title"></span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ubah-password-tab" data-toggle="tab" href="#ubah_password" role="tab" aria-controls="ubah_password" aria-selected="false">Ubah Password</a>
+    </li>
 </ul>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="ubah_user" role="tabpanel" aria-labelledby="ubah-user-tab">
@@ -53,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 hide-password">
                     <div class="form-group password">
                         <label for="">Password<span class="required text-danger pl-1">*</span></label>
                         <input type="password" class="form-control" value="" name="password" id="password">
@@ -62,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 hide-konfirmasi-password">
                     <div class="form-group konfirmasi_password">
                         <label for="">Konfirmasi Password<span class="required text-danger pl-1">*</span></label>
                         <input type="password" class="form-control" value="" name="konfirmasi_password" id="konfirmasi_password">
@@ -93,6 +96,11 @@
 
         </div>
     </div>
+    <div class="tab-pane fade" id="ubah_password" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="view_ubah_password">
+
+        </div>
+    </div>
 </div>
 <script>
     $("#tambah-user").click(function(e) {
@@ -103,7 +111,6 @@
         const konfirmasi_password = $("#konfirmasi_password").val();
         const level = $("#level").val();
         let is_active = $("#is_active").val();
-        console.log(nama);
         $.ajax({
             url: "<?= base_url('menu/add_user'); ?>",
             type: "post",
@@ -177,7 +184,7 @@
                         $(".konfirmasi_password_error").html('');
                     }
 
-                } else if (data.response == 'success') {
+                } else {
                     iziToast.success({
                         title: 'Success',
                         message: data.message,
@@ -216,7 +223,10 @@
                         $("#status").html("Tidak Aktif");
                     }
                 }
-            }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            },
         });
         e.preventDefault();
     });
@@ -255,8 +265,8 @@
         $.ajax({
             url: "http://localhost/spareparts-transaction-system/menu/userAccess",
             type: "get",
-            data : {
-                id : id
+            data: {
+                id: id
             },
             success: function(data) {
                 $(".view-user-access").html(data);
@@ -265,6 +275,19 @@
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
             },
         });
+    });
+    $("#ubah-password-tab").click(function(e) {
+        $.ajax({
+            url: "<?= base_url(); ?>menu/load_form_change_password",
+            type: "get",
+            success: function(data) {
+                $(".view_ubah_password").html(data)
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            },
+        });
+        e.preventDefault();
     });
 
     $("#access-menu-tab").click(function() {

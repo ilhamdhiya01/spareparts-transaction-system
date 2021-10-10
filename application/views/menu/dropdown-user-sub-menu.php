@@ -17,7 +17,6 @@
                         <div class="btn-sub-menu">
                             <ul>
                                 <li><a href="" data-toggle="modal" data-target="#tambah-sub-menu" class="btn btn-primary btn-sm" id="modal-tambah-sub-menu"><i class="fa fa-plus-square"></i> Tambah Sub Menu</a></li>
-                                <li><a href="" class="btn btn-info btn-sm"><i class="fa fa-plus-square"></i> Tambah Dropdown Menu</a></li>
                                 <li><a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus Semua</a></li>
                                 <li><a href="<?= base_url(); ?>menu/dropdown_subMenu" class="btn btn-light btn-sm"><i class="fa fa-refresh"></i></a></li>
                             </ul>

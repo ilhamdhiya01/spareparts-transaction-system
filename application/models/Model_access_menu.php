@@ -11,6 +11,7 @@ class Model_access_menu extends CI_Model
         $this->db->from('users');
         $this->db->join('tb_posisi', 'users.id_posisi = tb_posisi.id');
         $this->db->join('level_user', 'users.level_id = level_user.id');
+        $this->db->order_by('id','ASC');
         $result = $this->db->get()->result_array();
         return $result;
     }

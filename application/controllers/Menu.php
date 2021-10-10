@@ -675,4 +675,42 @@ class Menu extends CI_Controller
             }
         }
     }
+
+    public function load_form_change_password()
+    {
+        if ($this->input->is_ajax_request()) {
+            echo json_encode($this->load->view('menu/ajax-request/change-password-user'));
+        } else {
+            echo json_encode('Request failed');
+        }
+    }
+
+    public function change_password()
+    {
+        $passwordSaatIni = $_POST['change_password_saat_ini'];
+        $konfirmasiPassword = $_POST['change_konfirmasi_password'];
+        $passwordBaru = $_POST['change_password_baru'];
+        $data = [
+            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
+        ];
+        $msg = [
+            'required' => [
+                'password_saat_ini' => 'Password saat ini tidak boleh kosong',
+                'konfirmasi_password' => 'Konfirmasi password tidak boleh kosong',
+                'password_baru' => 'Password baru tidak boleh kosong'
+            ],
+            'matches' => [
+                'password_saat_ini' => 'Password dan konfirmasi password harus sama',
+                'konfirmasi_password' => 'Konfirasi password dan password harus sama',
+                'password_verify' => password_verify($passwordSaatIni, $data['users']['password'])
+            ],
+            'min_length' => [
+                'password_saat_ini' => 'Password saat ini minimal 8 karakter',
+                'konfirmasi_password' => 'Konfirmasi password minimal 8 karakter',
+                'password_baru' => 'Password baru minimal 8 karakter'
+            ]
+
+        ];
+        echo json_encode($msg);
+    }
 }

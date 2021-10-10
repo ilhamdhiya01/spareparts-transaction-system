@@ -44,7 +44,9 @@
         $("#form-title-menu").html("Ubah Data User");
         $("#tambah-user").css("display", "none");
         $("#password").attr("readonly", "readonly");
+        $(".hide-password").css("display", "none");
         $("#konfirmasi_password").attr("readonly", "readonly");
+        $(".hide-konfirmasi-password").css("display", "none");
         const id = $(this).data("id");
         const level = $(this).data("level");
 
@@ -145,46 +147,60 @@
         e.preventDefault();
     });
 
+    $("#ubah-password").click(function(e) {
+        $("#tab-user-access").css("display","none");
+        $.ajax({
+            url: "<?= base_url(); ?>menu/load_form_change_password",
+            type: "get",
+            success: function(data) {
+                $("#ubah_user").html(data)
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            },
+        });
+        e.preventDefault();
+    });
+
     $(".delete-access").click(function(e) {
         $(this).closest('#tr-access-menu').addClass('hapus-access-menu');
         const id = $(this).data('id');
-        swal({
-                title: 'Hapus data ini ?',
-                text: 'Data yang terhapus tidak akan kembali !',
-                icon: 'warning',
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        url: '<?= base_url(); ?>menu/delete_access_menu',
-                        method: 'post',
-                        dataType: 'json',
-                        data: {
-                            id: id
-                        },
-                        success: function(data) {
-                            if (data.response == 'success') {
-                                iziToast.success({
-                                    title: 'Success',
-                                    message: data.message,
-                                    position: 'topRight'
-                                });
-                                $('.hapus-access-menu').fadeOut(1500);
-                            } else {
-                                iziToast.warning({
-                                    title: 'Failed',
-                                    message: data.message,
-                                    position: 'topRight'
-                                });
-                            }
+        Swal.fire({
+            title: 'Hapus data ini ?',
+            text: 'Data yang terhapus tidak akan kembali !',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '<?= base_url(); ?>menu/delete_access_menu',
+                    method: 'post',
+                    dataType: 'json',
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        if (data.response == 'success') {
+                            iziToast.success({
+                                title: 'Success',
+                                message: data.message,
+                                position: 'topRight'
+                            });
+                            $('.hapus-access-menu').fadeOut(1500);
+                        } else {
+                            iziToast.warning({
+                                title: 'Failed',
+                                message: data.message,
+                                position: 'topRight'
+                            });
                         }
-                    })
-                } else {
-                    swal('Membatalkan penghapusan data');
-                }
-            });
+                    }
+                })
+            }
+        })
         e.preventDefault();
     });
 </script>

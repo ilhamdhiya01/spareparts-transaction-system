@@ -26,43 +26,42 @@
     $('.hapus-menu').click(function(e) {
         $(this).closest('#tr-user-menu').addClass('hapus-user-menu');
         let id = $(this).data("id");
-        swal({
-                title: 'Hapus data ini ?',
-                text: 'Data yang terhapus tidak akan kembali !',
-                icon: 'warning',
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        url: "<?= base_url(); ?>menu/delete_userMenu",
-                        type: "post",
-                        dataType: "json",
-                        data: {
-                            id: id
-                        },
-                        success: function(data) {
-                            if (data.response == 'success') {
-                                iziToast.success({
-                                    title: 'Success',
-                                    message: data.message,
-                                    position: 'topRight'
-                                });
-                                $('.hapus-user-menu').fadeOut(1500);
-                            } else {
-                                iziToast.error({
-                                    title: 'Success',
-                                    message: data.message,
-                                    position: 'topRight'
-                                });
-                            }
+        Swal.fire({
+            title: 'Hapus data ini ?',
+            text: 'Data yang terhapus tidak akan kembali !',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "<?= base_url(); ?>menu/delete_userMenu",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        if (data.response == 'success') {
+                            iziToast.success({
+                                title: 'Success',
+                                message: data.message,
+                                position: 'topRight'
+                            });
+                            $('.hapus-user-menu').fadeOut(1500);
+                        } else {
+                            iziToast.error({
+                                title: 'Success',
+                                message: data.message,
+                                position: 'topRight'
+                            });
                         }
-                    })
-                } else {
-                    swal('Membatalkan penghapusan data');
-                }
-            });
+                    }
+                })
+            }
+        })
         e.preventDefault();
     });
 </script>

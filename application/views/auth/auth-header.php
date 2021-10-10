@@ -19,6 +19,7 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/izitoast/dist/css/iziToast.min.css">
     <link href="<?= base_url(); ?>assets/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/sweetalert2/dist/sweetalert2.min.css">
 
     <!-- Custom Theme Style -->
     <link href="<?= base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">

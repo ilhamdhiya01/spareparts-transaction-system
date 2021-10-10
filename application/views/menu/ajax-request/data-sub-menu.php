@@ -165,46 +165,45 @@
     $('.delete-sub-menu').click(function(e) {
         $(this).closest('#tr-sub-menu').addClass('hapus-sub-menu');
         let id = $(this).data('id');
-        swal({
-                title: 'Hapus data ini ?',
-                text: 'Data yang terhapus tidak akan kembali !',
-                icon: 'warning',
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        url: '<?= base_url(); ?>menu/delete_subMenu',
-                        method: 'post',
-                        dataType: 'json',
-                        data: {
-                            id: id
-                        },
-                        success: function(data) {
-                            if (data.response == 'success') {
-                                iziToast.success({
-                                    title: 'Success',
-                                    message: data.message,
-                                    position: 'topRight'
-                                });
-                                $('.hapus-sub-menu').fadeOut(1500);
-                                // setTimeout(() => {
-                                //     document.location.href = '<?= base_url(); ?>menu/dropdown_subMenu';
-                                // }, 2000)
-                            } else {
-                                iziToast.warning({
-                                    title: 'Failed',
-                                    message: data.message,
-                                    position: 'topRight'
-                                });
-                            }
+        Swal.fire({
+            title: 'Hapus data ini ?',
+            text: 'Data yang terhapus tidak akan kembali !',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '<?= base_url(); ?>menu/delete_subMenu',
+                    method: 'post',
+                    dataType: 'json',
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        if (data.response == 'success') {
+                            iziToast.success({
+                                title: 'Success',
+                                message: data.message,
+                                position: 'topRight'
+                            });
+                            $('.hapus-sub-menu').fadeOut(1500);
+                            // setTimeout(() => {
+                            //     document.location.href = '<?= base_url(); ?>menu/dropdown_subMenu';
+                            // }, 2000)
+                        } else {
+                            iziToast.warning({
+                                title: 'Failed',
+                                message: data.message,
+                                position: 'topRight'
+                            });
                         }
-                    })
-                } else {
-                    swal('Membatalkan penghapusan data');
-                }
-            });
+                    }
+                })
+            }
+        })
         e.preventDefault();
     });
 </script>
