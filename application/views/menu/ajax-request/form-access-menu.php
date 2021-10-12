@@ -103,6 +103,15 @@
     </div>
 </div>
 <script>
+    $(document).ready(function() {
+        if (jQuery.browser.mobile) {
+            $("#access-menu-tab").html("<i class='fa fa-check-square-o'></i>");
+            $("#ubah-user-tab").html("<i class='fa fa-edit'></i>");
+            $("#ubah-password-tab").html("<i class='fa fa-lock'></i>");
+        } else {
+            console.log('Desktop');
+        }
+    });
     $("#tambah-user").click(function(e) {
         const nama = $("#nama").val();
         const posisi = $("#posisi").val();
@@ -277,9 +286,13 @@
         });
     });
     $("#ubah-password-tab").click(function(e) {
+        const id = $("#id_access").val();
         $.ajax({
             url: "<?= base_url(); ?>menu/load_form_change_password",
             type: "get",
+            data: {
+                id: id
+            },
             success: function(data) {
                 $(".view_ubah_password").html(data)
             },
@@ -295,5 +308,8 @@
     });
     $("#ubah-user-tab").click(function() {
         $("#form-title-menu").html("Ubah Data User")
+    });
+    $("#ubah-password-tab").click(function() {
+        $("#form-title-menu").html("Ubah Password")
     });
 </script>

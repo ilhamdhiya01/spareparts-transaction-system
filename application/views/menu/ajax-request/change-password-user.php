@@ -1,4 +1,5 @@
-<form method="post" class="access-menu">
+<form method="post" id="submit_change">
+    <input type="hidden" value="<?= $id_users; ?>" id="id_change">
     <div class="form-row align-items-center">
         <div class="col-sm-6 my-1">
             <label class="" for="inlineFormInputGroupUsername">Password Saat Ini</label>
@@ -39,8 +40,14 @@
     </div>
 </form>
 <script>
+    // $("#submit_change").submit(function(e){
+    //     const data = $(this).serialize();
+    //     console.log(data);
+    //     e.preventDefault();
+    // });
     $("#change-password").click(function(e) {
         e.preventDefault();
+        const id_users = $("#id_change").val();
         const change_password_saat_ini = $("#change_password_saat_ini").val();
         const change_konfirmasi_password = $("#change_konfirmasi_password").val();
         const password_baru = $("#password_baru").val();
@@ -49,91 +56,69 @@
             type: "post",
             dataType: "json",
             data: {
+                id: id_users,
                 change_password_saat_ini: change_password_saat_ini,
                 change_konfirmasi_password: change_konfirmasi_password,
                 change_password_baru: password_baru
             },
             success: function(data) {
-                if (change_password_saat_ini.length <= 0) {
-                    $("#change_password_saat_ini").addClass("is-invalid");
-                    $(".change_password_error").html(data.required.password_saat_ini);
-                } else if (change_password_saat_ini != change_konfirmasi_password) {
-                    $("#change_password_saat_ini").addClass("is-invalid");
-                    $(".change_password_error").html(data.matches.password_saat_ini);
-                } else if (data.matches.password_verify == false) {
-                    $("#change_password_saat_ini").addClass("is-invalid");
-                    $(".change_password_error").html("Password yang anda masukan salah");
+                if (data.error) {
+                    if (data.error.password1) {
+                        $("#change_password_saat_ini").addClass("is-invalid");
+                        $(".change_password_error").html(data.error.password1);
+                    }
+
+                    if (data.error.password2) {
+                        $("#change_konfirmasi_password").addClass("is-invalid");
+                        $(".change_konfirmasi_password_error").html(data.error.password2);
+                    }
+
+                    if (password_baru.length == 0) {
+                        $("#password_baru").addClass("is-invalid");
+                        $(".change_password_baru_error").html("Password baru wajib di isi");
+                    } else {
+
+                    }
                 } else {
                     $("#change_password_saat_ini").removeClass("is-invalid");
                     $(".change_password_error").html("");
-                }
-
-
-                if (change_konfirmasi_password.length == 0) {
-                    $("#change_konfirmasi_password").addClass("is-invalid");
-                    $(".change_konfirmasi_password_error").html(data.required.konfirmasi_password);
-                } else if (change_konfirmasi_password != change_password_saat_ini) {
-                    $("#change_konfirmasi_password").addClass("is-invalid");
-                    $(".change_konfirmasi_password_error").html(data.matches.konfirmasi_password);
-                } else {
                     $("#change_konfirmasi_password").removeClass("is-invalid");
                     $(".change_konfirmasi_password_error").html("");
+                    if (data.response == "password_not_verify") {
+                        $("#change_password_saat_ini").addClass("is-invalid");
+                        $(".change_password_error").html(data.message);
+                    } else {
+                        if (data.response == "password_matches") {
+                            $("#password_baru").addClass("is-invalid");
+                            $(".change_password_baru_error").html(data.message);
+                        } else {
+                            if (data.response == "min_length") {
+                                $("#password_baru").addClass("is-invalid");
+                                $(".change_password_baru_error").html(data.message);
+                            } else {
+                                if (data.response == "success") {
+                                    iziToast.success({
+                                        title: 'Success',
+                                        message: data.message,
+                                        position: 'topRight'
+                                    });
+                                    $("#password_baru").removeClass("is-invalid");
+                                    $(".change_password_baru_error").html("");
+                                } else {
+                                    iziToast.error({
+                                        title: 'Error',
+                                        message: 'Ubah password gagal',
+                                        position: 'topRight'
+                                    });
+                                }
+                            }
+                        }
+                    }
                 }
-
-                if (password_baru.length == 0) {
-                    $("#password_baru").addClass("is-invalid");
-                    $(".change_password_baru_error").html(data.required.password_baru);
-                } else if (password_baru == change_password_saat_ini) {
-                    $("#password_baru").addClass("is-invalid");
-                    $(".change_password_baru_error").html("Password baru tidak boleh sama dengan password lama");
-                } else {
-                    $("#password_baru").removeClass("is-invalid");
-                    $(".change_password_baru_error").html("");
-                }
-
-
-                // if (change_password_saat_ini != change_konfirmasi_password) {
-                //     $("#change_password_saat_ini").addClass("is-invalid");
-                //     $(".change_password_error").html(data.matches.password_saat_ini);
-                // } else {
-                //     $("#change_password_saat_ini").removeClass("is-invalid");
-                //     $(".change_password_error").html("");
-                // }
-                // if (data.matches) {
-                //     if (change_password_saat_ini != change_konfirmasi_password) {
-                // $("#change_password_saat_ini").addClass("is-invalid");
-                // $(".change_password_error").html(data.matches.password_saat_ini);
-                //     } else {
-                // $("#change_password_saat_ini").removeClass("is-invalid");
-                // $(".change_password_error").html("");
-                //     }
-                // }
-                // if (data.error) {
-                // if (data.error.password_saat_ini.length == 0) {
-                // $("#change_password_saat_ini").addClass("is-invalid");
-                // $(".change_password_error").html('Password saat ini tidak boleh kosong');
-                // } else {
-                // $("#change_password_saat_ini").removeClass("is-invalid");
-                // $(".change_password_error").html("");
-                // }
-
-                //     if (data.error.konfirmasi_password.length == 0) {
-                // $("#change_konfirmasi_password").addClass("is-invalid");
-                // $(".change_konfirmasi_password_error").html('Konfirmasi password tidak boleh kosong');
-                //     } else {
-                // $("#change_konfirmasi_password").removeClass("is-invalid");
-                // $(".change_konfirmasi_password_error").html("");
-                //     }
-
-                //     if (data.error.password_baru.length == 0) {
-                // $("#password_baru").addClass("is-invalid");
-                // $(".change_password_baru_error").html('Password baru tidak boleh kosong');
-                //     } else {
-                // $("#password_baru").removeClass("is-invalid");
-                // $(".change_password_baru_error").html("");
-                //     }
-                // }
-            }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            },
         });
     });
 </script>

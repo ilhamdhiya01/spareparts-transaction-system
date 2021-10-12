@@ -678,8 +678,11 @@ class Menu extends CI_Controller
 
     public function load_form_change_password()
     {
+        $data = [
+            'id_users' => $_GET['id']
+        ];
         if ($this->input->is_ajax_request()) {
-            echo json_encode($this->load->view('menu/ajax-request/change-password-user'));
+            echo json_encode($this->load->view('menu/ajax-request/change-password-user', $data));
         } else {
             echo json_encode('Request failed');
         }
@@ -687,30 +690,109 @@ class Menu extends CI_Controller
 
     public function change_password()
     {
+        $id = $_POST['id'];
         $passwordSaatIni = $_POST['change_password_saat_ini'];
         $konfirmasiPassword = $_POST['change_konfirmasi_password'];
         $passwordBaru = $_POST['change_password_baru'];
         $data = [
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
+            'users' => $this->db->get_where('users', ['id' => $id])->row_array()
         ];
-        $msg = [
-            'required' => [
-                'password_saat_ini' => 'Password saat ini tidak boleh kosong',
-                'konfirmasi_password' => 'Konfirmasi password tidak boleh kosong',
-                'password_baru' => 'Password baru tidak boleh kosong'
-            ],
-            'matches' => [
-                'password_saat_ini' => 'Password dan konfirmasi password harus sama',
-                'konfirmasi_password' => 'Konfirasi password dan password harus sama',
-                'password_verify' => password_verify($passwordSaatIni, $data['users']['password'])
-            ],
-            'min_length' => [
-                'password_saat_ini' => 'Password saat ini minimal 8 karakter',
-                'konfirmasi_password' => 'Konfirmasi password minimal 8 karakter',
-                'password_baru' => 'Password baru minimal 8 karakter'
-            ]
 
+        // $msg = [
+        //     'required' => [
+        //         'password_saat_ini' => 'Password saat ini tidak boleh kosong',
+        //         'konfirmasi_password' => 'Konfirmasi password tidak boleh kosong',
+        //         'password_baru' => 'Password baru tidak boleh kosong'
+        //     ],
+        //     'matches' => [
+        //         'password_saat_ini' => 'Password dan konfirmasi password harus sama',
+        //         'konfirmasi_password' => 'Konfirasi password dan password harus sama',
+        //         'password_verify' => password_verify($passwordSaatIni, $data['users']['password'])
+        //     ],
+        //     'min_length' => [
+        //         'password_saat_ini' => 'Password saat ini minimal 8 karakter',
+        //         'konfirmasi_password' => 'Konfirmasi password minimal 8 karakter',
+        //         'password_baru' => 'Password baru minimal 8 karakter'
+        //     ]
+
+        // ];
+        // echo json_encode($msg);
+        $rules = [
+            [
+                'field' => 'change_password_saat_ini',
+                'label' => 'Password saat ini',
+                'rules' => 'required|min_length[8]|matches[change_konfirmasi_password]',
+                'errors' => [
+                    'required' => '{field} wajib di isi',
+                    'min_length' => '{field} minimal 8 karakter',
+                    'matches' => 'Password dan konfirmasi password harus sama'
+                ]
+            ],
+            [
+                'field' => 'change_konfirmasi_password',
+                'label' => 'Konfirmasi password',
+                'rules' => 'required|min_length[8]|matches[change_password_saat_ini]',
+                'errors' => [
+                    'required' => '{field} wajib di isi',
+                    'min_length' => '{field} minimal 8 karakter',
+                    'matches' => 'Password dan konfirmasi password harus sama'
+                ]
+            ]
         ];
-        echo json_encode($msg);
+        $this->form_validation->set_rules($rules);
+        if ($this->form_validation->run() == false) {
+            $msg = [
+                'error' => [
+                    'password1' => form_error('change_password_saat_ini'),
+                    'password2' => form_error('change_konfirmasi_password')
+                ]
+            ];
+            echo json_encode($msg);
+            
+        } else {
+            $msg = [
+                'password_verify' => password_verify($passwordSaatIni, $data['users']['password'])
+            ];
+            if($msg['password_verify'] == false){
+                $msg = [
+                    'response' => 'password_not_verify',
+                    'message' => 'Password yang anda masukan salah'
+                ];
+                echo json_encode($msg);
+            } else {
+                if($passwordBaru == $passwordSaatIni){
+                    $msg = [
+                        'response' => 'password_matches',
+                        'message' => 'Password baru tidak boleh sama dengan password lama'
+                    ];
+                    echo json_encode($msg);
+                } else {
+                    if(strlen($passwordBaru) < 8){
+                        $msg = [
+                            'response' => 'min_length',
+                            'message' => 'Password baru minimal 8 karakter'
+                        ];
+                        echo json_encode($msg);
+                    } else {
+                        $this->db->set('password',password_hash($passwordBaru,PASSWORD_DEFAULT));
+                        $this->db->where('id',$id);
+                        $this->db->update('users');
+                        $msg = [
+                            'response' => 'success',
+                            'message' => 'Password berhasil diubah'
+                        ];
+                        echo json_encode($msg);
+                    }
+                }
+            }
+            // $this->db->set('password',password_hash($passwordBaru,PASSWORD_DEFAULT));
+            // $this->db->where('id',$id);
+            // $this->db->update('users');
+            // $msg = [
+            //     'response' => 'success',
+            //     'message' => 'password berhasil di ubah'
+            // ];
+            // echo json_encode($msg);
+        }
     }
 }

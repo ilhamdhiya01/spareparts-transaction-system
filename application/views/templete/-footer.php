@@ -9,6 +9,7 @@
 <!-- Bootstrap -->
 <script src="<?= base_url(); ?>assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <!-- JS Libraies -->
+<script src="<?= base_url(); ?>assets/js/detectmobilebrowser.js"></script>
 <!-- Switchery -->
 <script src="<?= base_url(); ?>assets/vendors/switchery/dist/switchery.min.js"></script>
 <script src="<?= base_url(); ?>assets/vendors/izitoast/dist/js/iziToast.min.js"></script>

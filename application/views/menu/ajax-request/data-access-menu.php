@@ -148,7 +148,7 @@
     });
 
     $("#ubah-password").click(function(e) {
-        $("#tab-user-access").css("display","none");
+        $("#tab-user-access").css("display", "none");
         $.ajax({
             url: "<?= base_url(); ?>menu/load_form_change_password",
             type: "get",
