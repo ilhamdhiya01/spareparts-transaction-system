@@ -36,19 +36,23 @@
                     ?>
                 </td>
                 <td class="text-center" width="10px">
-                    <a href="" data-id="<?= $sub_menu['id']; ?>" class="delete-sub-menu"><i class="fa fa-trash"></i></a>
+                    <a href="" data-id="<?= $sub_menu['id']; ?>" class="delete-sub-menu" data-toggle="delete-sub" data-placement="top" title="Hapus"><i class="fa fa-trash"></i></a>
                 </td>
                 <td class="text-center" width="10px">
-                    <a href="" data-id="<?= $sub_menu['id']; ?>" data-toggle="modal" data-target="#tambah-sub-menu" class="btn-ubah"><i class="fa fa-edit"></i></a>
+                    <a href="" data-id="<?= $sub_menu['id']; ?>" data-toggle="modal"  data-placement="top" title="Ubah" data-target="#tambah-sub-menu" class="btn-ubah"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 <script>
+    $(function() {
+        $('[data-toggle="delete-sub"]').tooltip()
+        $('[data-toggle="modal"]').tooltip()
+    });
     //  get edit
     $('.btn-ubah').click(function(e) {
-        $('#modal-sub-menu-title').html('Ubah Sub Menu');
+        $('#modal-sub-menu-title').html('<i class="far fa-edit"></i> Ubah Sub Menu');
         $('.tambah-sub-menu').css('display', 'none')
         $('.ubah-sub-menu').css('display', '');
         $('#sub_menu').removeClass('is-invalid');

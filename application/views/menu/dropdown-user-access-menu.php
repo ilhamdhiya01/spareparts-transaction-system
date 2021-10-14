@@ -5,11 +5,11 @@
                 <div class="col-md-5 col-sm-5  ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2 id="form-title-menu">Tambah User</h2>
+                            <h2 id="form-title-menu"><i class="far fa-edit"></i> Tambah User</h2>
                             <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                                 </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                <li><a class="close-link"><i class="fas fa-times"></i></a>
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
@@ -21,11 +21,11 @@
                 <div class="col-md-7 col-sm-7  ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Tabel Users</h2>
+                            <h2><i class="fas fa-table"></i> Tabel Users</h2>
                             <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                <li><a class="collapse-link"><i class="fas fa-chevron-up"></i></a>
                                 </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                <li><a class="close-link"><i class="fas fa-times"></i></a>
                                 </li>
                             </ul>
                             <div class="clearfix"></div>

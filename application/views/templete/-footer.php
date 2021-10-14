@@ -10,6 +10,11 @@
 <script src="<?= base_url(); ?>assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <!-- JS Libraies -->
 <script src="<?= base_url(); ?>assets/js/detectmobilebrowser.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/pnotify/dist/pnotify.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/pnotify/dist/pnotify.buttons.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+<!-- font awesome -->
+<script src="<?= base_url(); ?>assets/vendors/fontawesome/js/all.min.js"></script>
 <!-- Switchery -->
 <script src="<?= base_url(); ?>assets/vendors/switchery/dist/switchery.min.js"></script>
 <script src="<?= base_url(); ?>assets/vendors/izitoast/dist/js/iziToast.min.js"></script>
@@ -22,7 +27,7 @@
 <script src="<?= base_url(); ?>assets/build/js/custom.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/ajax-request.js"></script>
 <script>
-    
+
 </script>
 </body>
 

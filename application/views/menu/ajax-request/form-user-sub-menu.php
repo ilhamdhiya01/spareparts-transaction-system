@@ -196,7 +196,7 @@
     $('#modal-tambah-sub-menu').click(function() {
         $('.ubah-sub-menu').css('display', 'none');
         $('.tambah-sub-menu').css('display', '');
-        $('#modal-sub-menu-title').html('Tambah Sub Menu');
+        $('#modal-sub-menu-title').html('<i class="far fa-edit"></i> Tambah Sub Menu');
         $("#myTab").css("display", "none");
         $('#sub_menu').val('');
         $('#url').val('');
@@ -224,14 +224,14 @@
     });
 
     $("#tab-tambah-dropdown").click(function() {
-        $('#modal-sub-menu-title').html('Tambah Dropdown Menu');
+        $('#modal-sub-menu-title').html('<i class="far fa-edit"></i> Tambah Dropdown Menu');
     });
     $("#tab-ubah-sub-menu").click(function() {
-        $('#modal-sub-menu-title').html('Ubah Sub Menu');
+        $('#modal-sub-menu-title').html('<i class="far fa-edit"></i> Ubah Sub Menu');
     });
     // tambah sub menu
     $('.tambah-sub-menu').click(function(e) {
-        $('.modal-title').html('Tambah Sub Menu');
+        $('.modal-title').html('<i class="far fa-edit"></i> Tambah Sub Menu');
         $.ajax({
             url: '<?= base_url(); ?>menu/tambah_subMenu',
             method: 'post',

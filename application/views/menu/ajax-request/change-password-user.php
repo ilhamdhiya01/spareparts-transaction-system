@@ -5,7 +5,7 @@
             <label class="" for="inlineFormInputGroupUsername">Password Saat Ini</label>
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-eye-slash"></i></div>
+                    <div class="input-group-text password1"><i class="fas fa-eye-slash"></i></div>
                 </div>
                 <input type="password" value="" class="form-control" name="change_password_saat_ini" id="change_password_saat_ini">
                 <div id="validationServer03Feedback" class="invalid-feedback change_password_error">
@@ -16,7 +16,7 @@
             <label class="" for="inlineFormInputGroupUsername">Konfirmasi Password</label>
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-eye-slash"></i></div>
+                    <div class="input-group-text password2"><i class="fas fa-eye-slash"></i></div>
                 </div>
                 <input type="password" value="" class="form-control" name="change_konfirmasi_password" id="change_konfirmasi_password">
                 <div id="validationServer03Feedback" class="invalid-feedback change_konfirmasi_password_error">
@@ -27,7 +27,7 @@
             <label class="" for="inlineFormInputGroupUsername">Password Baru</label>
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-eye-slash"></i></div>
+                    <div class="input-group-text password3"><i class="fas fa-eye-slash"></i></div>
                 </div>
                 <input type="password" value="" class="form-control" name="password_baru" id="password_baru">
                 <div id="validationServer03Feedback" class="invalid-feedback change_password_baru_error">
@@ -61,6 +61,14 @@
                 change_konfirmasi_password: change_konfirmasi_password,
                 change_password_baru: password_baru
             },
+            beforeSend: function() {
+                $("#change-password").attr('disable', 'disabled');
+                $("#change-password").html('<i class="fa fa-spin fa-spinner"></i>');
+            },
+            complete: function() {
+                $("#change-password").removeAttr('disable');
+                $("#change-password").html('Ubah Password');
+            },
             success: function(data) {
                 if (data.error) {
                     if (data.error.password1) {
@@ -81,8 +89,10 @@
                     }
                 } else {
                     $("#change_password_saat_ini").removeClass("is-invalid");
+                    $("#change_password_saat_ini").addClass("is-valid");
                     $(".change_password_error").html("");
                     $("#change_konfirmasi_password").removeClass("is-invalid");
+                    $("#change_konfirmasi_password").addClass("is-valid");
                     $(".change_konfirmasi_password_error").html("");
                     if (data.response == "password_not_verify") {
                         $("#change_password_saat_ini").addClass("is-invalid");
@@ -103,6 +113,7 @@
                                         position: 'topRight'
                                     });
                                     $("#password_baru").removeClass("is-invalid");
+                                    $("#password_baru").addClass("is-valid");
                                     $(".change_password_baru_error").html("");
                                 } else {
                                     iziToast.error({
@@ -120,5 +131,38 @@
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
             },
         });
+    });
+
+    $(".password1").css("cursor", "pointer");
+    $(".password1").click(function() {
+        if ($("#change_password_saat_ini").attr("type") == "password") {
+            $("#change_password_saat_ini").attr("type", "text");
+            $(this).html("<i class='fas fa-eye'></i>");
+        } else {
+            $("#change_password_saat_ini").attr("type", "password");
+            $(this).html("<i class='fas fa-eye-slash'></i>");
+        }
+    });
+
+    $(".password2").css("cursor", "pointer");
+    $(".password2").click(function() {
+        if ($("#change_konfirmasi_password").attr("type") == "password") {
+            $("#change_konfirmasi_password").attr("type", "text");
+            $(this).html("<i class='fas fa-eye'></i>");
+        } else {
+            $("#change_konfirmasi_password").attr("type", "password");
+            $(this).html("<i class='fas fa-eye-slash'></i>");
+        }
+    });
+
+    $(".password3").css("cursor", "pointer");
+    $(".password3").click(function() {
+        if ($("#password_baru").attr("type") == "password") {
+            $("#password_baru").attr("type", "text");
+            $(this).html("<i class='fas fa-eye'></i>");
+        } else {
+            $("#password_baru").attr("type", "password");
+            $(this).html("<i class='fas fa-eye-slash'></i>");
+        }
     });
 </script>

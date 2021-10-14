@@ -1,12 +1,15 @@
 <ul class="nav nav-tabs bar_tabs" id="tab-user-access" role="tablist" style="display:none;">
-    <li class="nav-item">
-        <a class="nav-link active" id="ubah-user-tab" data-toggle="tab" href="#ubah_user" role="tab" aria-controls="ubah_user" aria-selected="true">Ubah User</a>
+    <li class="nav-item" data-toggle="edit-user" data-placement="top" title="Edit User">
+        <a class="nav-link active" id="ubah-user-tab" data-toggle="tab" data-placement="top" href="#ubah_user" role="tab" aria-controls="ubah_user" aria-selected="true"><i class='fas fa-user-edit'></i></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" id="access-menu-tab" data-toggle="tab" href="#access_menu" role="tab" aria-controls="access_menu" aria-selected="false"><span style="font-weight:bold;" id="level-title"></span></a>
+    <li class="nav-item" data-toggle="add-access" data-placement="top" title="Add Access">
+        <a class="nav-link" id="access-menu-tab" data-toggle="tab" href="#access_menu" role="tab" aria-controls="access_menu" aria-selected="false"><i class='fas fa-user-check'></i></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" id="ubah-password-tab" data-toggle="tab" href="#ubah_password" role="tab" aria-controls="ubah_password" aria-selected="false">Ubah Password</a>
+    <li class="nav-item" data-toggle="change-password" data-placement="top" title="Change Password">
+        <a class="nav-link" id="ubah-password-tab" data-toggle="tab" href="#ubah_password" role="tab" aria-controls="ubah_password" aria-selected="false"><i class='fa fa-lock'></i></a>
+    </li>
+    <li class="nav-item" data-toggle="add-user" data-placement="top" title="Add User">
+        <a class="nav-link" id="add-user-tab" data-toggle="tab" href="#add_user" role="tab" aria-controls="add_user" aria-selected="false"><i class="fas fa-user-plus"></i></a>
     </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -56,20 +59,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 hide-password">
-                    <div class="form-group password">
-                        <label for="">Password<span class="required text-danger pl-1">*</span></label>
-                        <input type="password" class="form-control" value="" name="password" id="password">
-                        <i class="fa fa-eye-slash hide"></i>
+                <div class="col-sm-6 my-1 hide_password">
+                    <label class="" for="inlineFormInputGroupUsername">Password<span class="required text-danger pl-1">*</span></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text hide-password"><i class="fas fa-eye-slash"></i></div>
+                        </div>
+                        <input type="password" value="" class="form-control" name="password" id="password">
                         <div id="validationServer03Feedback" class="invalid-feedback password_error">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 hide-konfirmasi-password">
-                    <div class="form-group konfirmasi_password">
-                        <label for="">Konfirmasi Password<span class="required text-danger pl-1">*</span></label>
-                        <input type="password" class="form-control" value="" name="konfirmasi_password" id="konfirmasi_password">
-                        <i class="fa fa-eye-slash"></i>
+                <div class="col-sm-6 my-1 hide_konfirmasi_password">
+                    <label class="" for="inlineFormInputGroupUsername">Konfirmasi Password<span class="required text-danger pl-1">*</span></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text hide-konfirmasi-password"><i class="fas fa-eye-slash"></i></div>
+                        </div>
+                        <input type="password" value="" class="form-control" name="konfirmasi_password" id="konfirmasi_password">
                         <div id="validationServer03Feedback" class="invalid-feedback konfirmasi_password_error">
                         </div>
                     </div>
@@ -103,15 +110,21 @@
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-        if (jQuery.browser.mobile) {
-            $("#access-menu-tab").html("<i class='fa fa-check-square-o'></i>");
-            $("#ubah-user-tab").html("<i class='fa fa-edit'></i>");
-            $("#ubah-password-tab").html("<i class='fa fa-lock'></i>");
-        } else {
-            console.log('Desktop');
-        }
-    });
+    $(function() {
+        $('[data-toggle="edit-user"]').tooltip()
+        $('[data-toggle="add-access"]').tooltip()
+        $('[data-toggle="change-password"]').tooltip()
+        $('[data-toggle="add-user"]').tooltip()
+    })
+    // $(document).ready(function() {
+    //     if (jQuery.browser.mobile) {
+    //         $("#access-menu-tab").html("<i class='fas fa-user-check'></i>");
+    //         $("#ubah-user-tab").html("<i class='fas fa-user-edit'></i>");
+    //         $("#ubah-password-tab").html("<i class='fa fa-lock'></i>");
+    //     } else {
+    //         console.log('Desktop');
+    //     }
+    // });
     $("#tambah-user").click(function(e) {
         const nama = $("#nama").val();
         const posisi = $("#posisi").val();
@@ -250,24 +263,32 @@
         }
     });
 
-    $(".fa-eye-slash").click(function() {
+    // start hide password
+    $(".hide-password").css("cursor", "pointer");
+    $(".hide-password").click(function() {
         if ($("#password").attr("type") == "password") {
             $("#password").attr("type", "text");
-            $(this).attr("class", "fa fa-eye");
+            $(this).html("<i class='fas fa-eye'></i>");
         } else {
             $("#password").attr("type", "password");
-            $(this).attr("class", "fa fa-eye-slash");
+            $(this).html("<i class='fas fa-eye-slash'></i>");
         }
+    });
 
+    $(".hide-konfirmasi-password").css("cursor", "pointer");
+    $(".hide-konfirmasi-password").click(function() {
         if ($("#konfirmasi_password").attr("type") == "password") {
             $("#konfirmasi_password").attr("type", "text");
-            $(this).attr("class", "fa fa-eye");
+            $(this).html("<i class='fas fa-eye'></i>");
         } else {
             $("#konfirmasi_password").attr("type", "password");
-            $(this).attr("class", "fa fa-eye-slash");
+            $(this).html("<i class='fas fa-eye-slash'></i>");
         }
-    })
+    });
+    // end hide password
 
+
+    // menampilkan user access
     $("#access-menu-tab").click(function() {
         const id = $("#level").val();
         // user access
@@ -285,6 +306,9 @@
             },
         });
     });
+    // end
+
+
     $("#ubah-password-tab").click(function(e) {
         const id = $("#id_access").val();
         $.ajax({
@@ -304,12 +328,33 @@
     });
 
     $("#access-menu-tab").click(function() {
-        $("#form-title-menu").html("Tambah Access Menu User")
+        $("#form-title-menu").html("<i class='far fa-edit'></i> Tambah Access Menu User");
     });
     $("#ubah-user-tab").click(function() {
-        $("#form-title-menu").html("Ubah Data User")
+        $("#form-title-menu").html("<i class='far fa-edit'></i> Ubah Data User");
     });
     $("#ubah-password-tab").click(function() {
-        $("#form-title-menu").html("Ubah Password")
+        $("#form-title-menu").html("<i class='far fa-edit'></i> Ubah Password");
+    });
+    $("#add-user-tab").click(function() {
+        $("#form-title-menu").html("<i class='far fa-edit'></i> Tambah User");
+        $("#ubah_user").attr("id", "add_user");
+        $("#ubah-user").css("display", "none");
+        $("#tambah-user").css("display", "");
+        $(".hide_password").css("display", "");
+        $(".hide_konfirmasi_password").css("display", "");
+        $("#tab-user-access").css("display", "none");
+
+        $("#id_access").val("");
+        $("#nama").val("");
+        $("#posisi").val("");
+        $("#gambar").val("");
+        $("#username").val("");
+        $("#password").val("");
+        $("#level").val("");
+        $("#is_active").val(0)
+        $("#date_created").val("")
+        $("#konfirmasi_password").val("");
+        // $("#tambah-user")
     });
 </script>

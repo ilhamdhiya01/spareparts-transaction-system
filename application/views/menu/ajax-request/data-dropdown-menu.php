@@ -19,10 +19,10 @@
                 <td><?= $dropdown['dropdown_nama']; ?></td>
                 <td><?= $dropdown['url']; ?></td>
                 <td width="10px">
-                    <a href="" data-id="<?= $dropdown['id']; ?>" class="delete-dropdown-menu"><i class="fa fa-trash"></i></a>
+                    <a href="" data-id="<?= $dropdown['id']; ?>" class="delete-dropdown-menu" data-toggle="delete-dropdown" data-placement="top" title="Hapus"><i class="fa fa-trash"></i></a>
                 </td>
                 <td width="10px">
-                    <a href="" data-id="<?= $dropdown['id']; ?>" class="btn-ubah-dropdown"><i class="fa fa-edit"></i></a>
+                    <a href="" data-id="<?= $dropdown['id']; ?>" class="btn-ubah-dropdown" data-toggle="update-dropdown" data-placement="top" title="Ubah"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -30,6 +30,10 @@
 </table>
 
 <script>
+    $(function() {
+        $('[data-toggle="delete-dropdown"]').tooltip()
+        $('[data-toggle="update-dropdown"]').tooltip()
+    });
     $(".btn-ubah-dropdown").click(function(e) {
         $("#nama_dropdown").removeClass("is-invalid");
         $(".nama_dropdown_error").html('');

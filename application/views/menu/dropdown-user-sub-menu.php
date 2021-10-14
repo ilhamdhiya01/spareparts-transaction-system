@@ -5,11 +5,11 @@
                 <div class="col-md-12 col-sm-12  ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2 id="form-title">Tabel Sub Menu</h2>
+                            <h2 id="form-title"><i class="fas fa-table"></i> Tabel Sub Menu</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                <li><a class="close-link"><i class="fas fa-times"></i></a>
                                 </li>
                             </ul>
                             <div class="clearfix"></div>

@@ -27,26 +27,28 @@
                     <?php endif; ?>
                 </td>
                 <td>
-                    <a href="" data-id="<?= $am['id']; ?>" class="delete-access"><i class="fa fa-trash"></i></a>
+                    <a href="" data-id="<?= $am['id']; ?>" class="delete-access" data-toggle="delete-access" data-placement="top" title="Hapus"><i class="fa fa-trash"></i></a>
                 </td>
                 <td>
-                    <a href="" data-id="<?= $am['id']; ?>" data-level="<?= $am['level']; ?>" data-levelid="<?= $am['level_id']; ?>" class="get-access-by-id"><i class="fa fa-edit"></i></a>
+                    <a href="" data-id="<?= $am['id']; ?>" data-level="<?= $am['level']; ?>" data-levelid="<?= $am['level_id']; ?>" class="get-access-by-id" data-toggle="update-access" data-placement="top" title="Ubah"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 <script>
+    $(function() {
+        $('[data-toggle="delete-access"]').tooltip()
+        $('[data-toggle="update-access"]').tooltip()
+    });
     $(".get-access-by-id").click(function(e) {
         // Ubah tampilan form
-        console.log($(this).data("levelid"));
         $("#ubah-user").removeAttr("style");
         $("#form-title-menu").html("Ubah Data User");
         $("#tambah-user").css("display", "none");
-        $("#password").attr("readonly", "readonly");
-        $(".hide-password").css("display", "none");
-        $("#konfirmasi_password").attr("readonly", "readonly");
-        $(".hide-konfirmasi-password").css("display", "none");
+        $(".hide_password").css("display", "none");
+        $(".hide_konfirmasi_password").css("display", "none");
+        $("#form-title-menu").html("<i class='far fa-edit'></i> Ubah Data User")
         const id = $(this).data("id");
         const level = $(this).data("level");
 
@@ -66,7 +68,7 @@
 
         // tampilkan tab
         $("#tab-user-access").removeAttr("style");
-        $("#level-title").html(level);
+        $("#level-title").attr("title", level);
 
         // get ubah
         $.ajax({

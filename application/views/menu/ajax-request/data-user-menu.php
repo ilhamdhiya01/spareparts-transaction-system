@@ -14,15 +14,20 @@
             <th scope="row" id="no" width="10px"><?= $no++; ?></th>
             <td><?= $menu['nama_menu']; ?></td>
             <td width="10px">
-                <a href="" data-id="<?= $menu['id']; ?>" class="hapus-menu"><i class="fa fa-trash"></i></a>
+                <a href="" data-id="<?= $menu['id']; ?>" class="hapus-menu" data-toggle="delete-menu" data-placement="top" title="Hapus"><i class="fa fa-trash"></i></a>
             </td>
             <td width="10px">
-                <a href="" data-id="<?= $menu['id']; ?>" class="update-menu"><i class="fa fa-edit"></i></a>
+                <a href="" data-id="<?= $menu['id']; ?>" class="update-menu" data-toggle="update-menu" data-placement="top" title="Ubah"><i class="fa fa-edit"></i></a>
             </td>
         </tr>
     <?php endforeach; ?>
 </tbody>
 <script>
+    $(function() {
+        $('[data-toggle="delete-menu"]').tooltip()
+        $('[data-toggle="update-menu"]').tooltip()
+    });
+
     $('.hapus-menu').click(function(e) {
         $(this).closest('#tr-user-menu').addClass('hapus-user-menu');
         let id = $(this).data("id");
