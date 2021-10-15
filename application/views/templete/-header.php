@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color:#F7F7F7;">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,7 +47,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="<?= base_url(); ?>assets/img/avatar/avatar-1.png" alt="" class="img-circle profile_img">
+                            <img src="<?= base_url(); ?>assets/img/avatar/default.png" alt="" class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -145,7 +145,7 @@
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?= base_url(); ?>assets/img/avatar/avatar-1.png" alt=""><?= $users['nama_pegawai']; ?>
+                                    <img src="<?= base_url(); ?>assets/img/avatar/default.png" alt=""><?= $users['nama_pegawai']; ?>
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="javascript:;"> Profile</a>
@@ -261,5 +261,9 @@
             </script>
             <!-- /top navigation -->
             <!-- page content -->
-
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">
+                        
+                
             <!-- /page content -->

@@ -1,5 +1,8 @@
 
 /* auth */
+.back {
+    background-color: #F7F7F7;
+}
 .card-primary {
     position: relative;
 }

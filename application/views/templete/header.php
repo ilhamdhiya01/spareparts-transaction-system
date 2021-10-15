@@ -2,241 +2,266 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Blank Page &mdash; Stisla</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- General CSS Files -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <title>Gentelella Alela! | </title>
 
+    <!-- Bootstrap -->
+    <link href="<?= base_url(); ?>assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="<?= base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>assets/vendors/fontawesome/css/all.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="<?= base_url(); ?>assets/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- CSS Libraries -->
-
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/components.css">
+    <!-- <link href="<?= base_url(); ?>assets/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>assets/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>assets/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/izitoast/dist/css/iziToast.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/sweetalert2/dist/sweetalert2.min.css">
+    <!-- <link href="<?= base_url(); ?>assets/vendors/switchery/dist/switchery.min.css" rel="stylesheet"> -->
+    <!-- jQuery custom content scroller -->
+    <link href="<?= base_url(); ?>assets/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+    <!-- Custom Theme Style -->
+    <link href="<?= base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
+    <!-- my css -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/custom.css">
+    <!-- jQuery -->
+    <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
 </head>
 
-<body>
-    <div id="app">
-        <div class="main-wrapper">
-            <div class="navbar-bg"></div>
-            <nav class="navbar navbar-expand-lg main-navbar">
-                <form class="form-inline mr-auto">
-                    <ul class="navbar-nav mr-3">
-                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-                        <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
-                    </ul>
-                </form>
-                <ul class="navbar-nav navbar-right">
-                    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
-                        <div class="dropdown-menu dropdown-list dropdown-menu-right">
-                            <div class="dropdown-header">Messages
-                                <div class="float-right">
-                                    <a href="#">Mark All As Read</a>
-                                </div>
-                            </div>
-                            <div class="dropdown-list-content dropdown-list-message">
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="<?= base_url(); ?>assets/img/avatar/avatar-1.png" class="rounded-circle">
-                                        <div class="is-online"></div>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Kusnaedi</b>
-                                        <p>Hello, Bro!</p>
-                                        <div class="time">10 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="<?= base_url(); ?>assets/img/avatar/avatar-2.png" class="rounded-circle">
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Dedik Sugiharto</b>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                                        <div class="time">12 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="<?= base_url(); ?>assets/img/avatar/avatar-3.png" class="rounded-circle">
-                                        <div class="is-online"></div>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Agung Ardiansyah</b>
-                                        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <div class="time">12 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="<?= base_url(); ?>assets/img/avatar/avatar-4.png" class="rounded-circle">
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Ardian Rahardiansyah</b>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit ess</p>
-                                        <div class="time">16 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="<?= base_url(); ?>assets/img/avatar/avatar-5.png" class="rounded-circle">
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Alfa Zulkarnain</b>
-                                        <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
-                                        <div class="time">Yesterday</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="dropdown-footer text-center">
-                                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
-                        <div class="dropdown-menu dropdown-list dropdown-menu-right">
-                            <div class="dropdown-header">Notifications
-                                <div class="float-right">
-                                    <a href="#">Mark All As Read</a>
-                                </div>
-                            </div>
-                            <div class="dropdown-list-content dropdown-list-icons">
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-icon bg-primary text-white">
-                                        <i class="fas fa-code"></i>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        Template update is available now!
-                                        <div class="time text-primary">2 Min Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-icon bg-info text-white">
-                                        <i class="far fa-user"></i>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>You</b> and <b>Dedik Sugiharto</b> are now friends
-                                        <div class="time">10 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-icon bg-success text-white">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
-                                        <div class="time">12 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-icon bg-danger text-white">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        Low disk space. Let's clean it!
-                                        <div class="time">17 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-icon bg-info text-white">
-                                        <i class="fas fa-bell"></i>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        Welcome to Stisla template!
-                                        <div class="time">Yesterday</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="dropdown-footer text-center">
-                                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="<?= base_url(); ?>assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block"><?= $users['nama_pegawai']; ?></div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-title">Logged in 5 min ago</div>
-                            <a href="features-profile.html" class="dropdown-item has-icon">
-                                <i class="far fa-user"></i> Profile
-                            </a>
-                            <a href="features-activities.html" class="dropdown-item has-icon">
-                                <i class="fas fa-bolt"></i> Activities
-                            </a>
-                            <a href="features-settings.html" class="dropdown-item has-icon">
-                                <i class="fas fa-cog"></i> Settings
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="<?= base_url(); ?>auth/logout" class="dropdown-item has-icon text-danger">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-            <div class="main-sidebar">
-                <aside id="sidebar-wrapper">
-                    <div class="sidebar-brand">
-                        <a href="index.html">Stisla</a>
+<body class="nav-md footer_fixed">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
                     </div>
-                    <?php
-                    ini_set('display_errors', 1);
-                    ini_set('display_startup_errors', 1);
-                    error_reporting(E_ALL);
-                    $level_id = $this->session->userdata('level_id');
-                    $this->db->select('tb_user_menu.id,nama_menu');
-                    $this->db->from('tb_user_menu');
-                    $this->db->join('tb_user_access_menu', 'tb_user_access_menu.menu_id = tb_user_menu.id');
-                    $this->db->where('level_id', $level_id);
 
-                    $query = $this->db->get()->result_array();
-                    ?>
-                    <!-- <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="index.html">St</a>
-                    </div> -->
-                    <ul class="sidebar-menu">
-                        <?php foreach ($query as $menu) : ?>
-                            <li class="menu-header"><?= $menu['nama_menu']; ?></li>
-                            <?php
-                            $menu_id = $menu['id'];
-                            $this->db->select('tb_user_sub_menu.*');
-                            $this->db->from('tb_user_sub_menu');
-                            $this->db->join('tb_user_menu', 'tb_user_sub_menu.menu_id = tb_user_menu.id');
-                            $this->db->where('menu_id', $menu_id);
-                            $this->db->where('is_active', 1);
-                            $query_subMenu = $this->db->get()->result_array();
-                            foreach ($query_subMenu as $sub_menu) :
-                                if ($sub_menu['dropdown'] == 1) :
-                            ?>
-                                    <li class="nav-item dropdown">
-                                        <a href="#" class="nav-link has-dropdown"><i class="<?= $sub_menu['icon']; ?>"></i><span><?= $sub_menu['sub_menu']; ?></span></a>
-                                        <?php
-                                        $sub_menu_id = $sub_menu['id'];
-                                        $this->db->select('dropdown_menu.*');
-                                        $this->db->from('dropdown_menu');
-                                        $this->db->join('tb_user_sub_menu', 'dropdown_menu.sub_menu_id = tb_user_sub_menu.id');
-                                        $this->db->where('sub_menu_id', $sub_menu_id);
-                                        $query_dropdown = $this->db->get()->result_array();
-                                        ?>
-                                        <ul class="dropdown-menu">
-                                            <?php foreach ($query_dropdown as $dropdown) : ?>
-                                                <li><a class="nav-link" href="<?= base_url($dropdown['url']); ?>"><?= $dropdown['dropdown_nama']; ?></a></li>
-                                            <?php endforeach; ?>
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="<?= base_url(); ?>assets/img/avatar/default.png" alt="" class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome</span>
+                            <h2><?= $users['nama_pegawai']; ?></h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <?php
+                        ini_set('display_errors', 1);
+                        ini_set('display_startup_errors', 1);
+                        error_reporting(E_ALL);
+                        $level_id = $this->session->userdata('level_id');
+                        $this->db->select('tb_user_menu.*');
+                        $this->db->from('tb_user_menu');
+                        $this->db->join('tb_user_access_menu', 'tb_user_access_menu.menu_id = tb_user_menu.id');
+                        $this->db->where('level_id', $level_id);
+                        $this->db->order_by('id', 'ASC');
+
+                        $query = $this->db->get()->result_array();
+                        foreach ($query as $menu) :
+                        ?>
+                            <div class="menu_section">
+                                <h3><?= $menu['nama_menu']; ?></h3>
+                                <?php
+                                $menu_id = $menu['id'];
+                                $this->db->select('tb_user_sub_menu.*');
+                                $this->db->from('tb_user_sub_menu');
+                                $this->db->join('tb_user_menu', 'tb_user_sub_menu.menu_id = tb_user_menu.id');
+                                $this->db->where('menu_id', $menu_id);
+                                $this->db->where('is_active', 1);
+                                $query_subMenu = $this->db->get()->result_array();
+                                foreach ($query_subMenu as $sub_menu) :
+                                    if ($sub_menu['dropdown'] == 1) :
+                                ?>
+                                        <ul class="nav side-menu">
+                                            <li>
+                                                <a href="#"><i class="<?= $sub_menu['icon']; ?>"></i> <?= $sub_menu['sub_menu']; ?> <span class="fa fa-chevron-down"></span></a>
+                                                <?php
+                                                $sub_menu_id = $sub_menu['id'];
+                                                $this->db->select('dropdown_menu.*');
+                                                $this->db->from('dropdown_menu');
+                                                $this->db->join('tb_user_sub_menu', 'dropdown_menu.sub_menu_id = tb_user_sub_menu.id');
+                                                $this->db->where('sub_menu_id', $sub_menu_id);
+                                                $query_dropdown = $this->db->get()->result_array();
+                                                ?>
+                                                <ul class="nav child_menu">
+                                                    <?php foreach ($query_dropdown as $dropdown) : ?>
+                                                        <li><a href="<?= base_url($dropdown['url']); ?>"><?= $dropdown['dropdown_nama']; ?></a></li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            </li>
                                         </ul>
-                                    </li>
-                                <?php else : ?>
-                                    <li class="nav-item">
-                                        <a href="<?= base_url($sub_menu['url']); ?>" class="nav-link"><i class="<?= $sub_menu['icon']; ?>"></i><span><?= $sub_menu['sub_menu']; ?></span></a>
-                                        <!-- <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Forms</span></a> -->
-                                    </li>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                                    <?php else : ?>
+                                        <ul class="nav side-menu">
+                                            <li><a href="<?= base_url($sub_menu['url']) ?>"><i class="<?= $sub_menu['icon'] ?>"></i> <?= $sub_menu['sub_menu']; ?></a></li>
+                                        </ul>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </div>
                         <?php endforeach; ?>
-                    </ul>
-                </aside>
+                    </div>
+                    <!-- /sidebar menu -->
+
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" id="log_out">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
             </div>
-            <div class="main-content">
-                <section class="section">
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class=" navbar-right">
+                            <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="<?= base_url(); ?>assets/img/avatar/default.png" alt=""><?= $users['nama_pegawai']; ?>
+                                </a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <span class="badge bg-red pull-right">50%</span>
+                                        <span>Settings</span>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:;">Help</a>
+                                    <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                </div>
+                            </li>
+
+                            <li role="presentation" class="nav-item dropdown open">
+                                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span><?= $users['nama_pegawai']; ?></span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="text-center">
+                                            <a class="dropdown-item">
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <script>
+                $("#log_out").click(function(e) {
+                    $.ajax({
+                        url: "<?= base_url(); ?>auth/logout",
+                        type: "post",
+                        dataType: "json",
+                        success: function(data) {
+                            if (data.response == 'success') {
+                                Swal.fire({
+                                    title: 'Yakin ingin keluar ?',
+                                    text: "Anda akan keluar dari sistem!",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Logout'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        Swal.fire(
+                                            data.message,
+                                            'Anda keluar dari sistem',
+                                            'success'
+                                        ).then(() => {
+                                            window.location.href = "<?= base_url(); ?>auth";
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    })
+                    e.preventDefault();
+                });
+            </script>
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">

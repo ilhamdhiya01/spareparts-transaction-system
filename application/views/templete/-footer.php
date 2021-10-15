@@ -1,6 +1,9 @@
+</div>
+</div>
+</div>
 <!-- footer content -->
 <footer>
-    <div class="clearfix"></div>
+    <!-- <div class="clearfix"></div> -->
 </footer>
 <!-- /footer content -->
 </div>
