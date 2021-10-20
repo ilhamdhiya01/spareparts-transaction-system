@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/izitoast/dist/css/iziToast.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/sweetalert2/dist/sweetalert2.min.css">
     <link href="<?= base_url(); ?>assets/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+	<link href="<?= base_url(); ?>assets/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- my css -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/custom.css">
     <!-- jQuery -->
@@ -264,6 +267,6 @@
             <div class="right_col" role="main">
                 <div class="">
                     <div class="page-title">
-                        
-                
-            <!-- /page content -->
+
+
+                        <!-- /page content -->

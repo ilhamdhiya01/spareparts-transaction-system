@@ -26,9 +26,15 @@
 <!-- jQuery custom content scroller -->
 <script src="<?= base_url(); ?>assets/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="<?= base_url(); ?>assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+<!-- Select2 -->
+<script src="<?= base_url(); ?>assets/vendors/select2/dist/js/select2.full.min.js"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="<?= base_url(); ?>assets/vendors/moment/min/moment.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- Custom Theme Scripts -->
 <script src="<?= base_url(); ?>assets/build/js/custom.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/ajax-request.js"></script>
+<script src="<?= base_url(); ?>assets/js/form-validation.js"></script>
 <script>
 
 </script>

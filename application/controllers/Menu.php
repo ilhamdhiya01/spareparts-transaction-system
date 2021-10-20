@@ -25,19 +25,6 @@ class Menu extends CI_Controller
         $this->load->view('templete/-footer');
     }
 
-
-    // service
-    public function dropdown_tambahService()
-    {
-        $data =  [
-            'judul' => 'dashboard',
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
-        ];
-        $this->load->view('templete/-header', $data);
-        $this->load->view('menu/tambah-service');
-        $this->load->view('templete/-footer');
-    }
-
     // setting menu
     public function dropdown_userMenu()
     {
@@ -748,34 +735,33 @@ class Menu extends CI_Controller
                 ]
             ];
             echo json_encode($msg);
-            
         } else {
             $msg = [
                 'password_verify' => password_verify($passwordSaatIni, $data['users']['password'])
             ];
-            if($msg['password_verify'] == false){
+            if ($msg['password_verify'] == false) {
                 $msg = [
                     'response' => 'password_not_verify',
                     'message' => 'Password yang anda masukan salah'
                 ];
                 echo json_encode($msg);
             } else {
-                if($passwordBaru == $passwordSaatIni){
+                if ($passwordBaru == $passwordSaatIni) {
                     $msg = [
                         'response' => 'password_matches',
                         'message' => 'Password baru tidak boleh sama dengan password lama'
                     ];
                     echo json_encode($msg);
                 } else {
-                    if(strlen($passwordBaru) < 8){
+                    if (strlen($passwordBaru) < 8) {
                         $msg = [
                             'response' => 'min_length',
                             'message' => 'Password baru minimal 8 karakter'
                         ];
                         echo json_encode($msg);
                     } else {
-                        $this->db->set('password',password_hash($passwordBaru,PASSWORD_DEFAULT));
-                        $this->db->where('id',$id);
+                        $this->db->set('password', password_hash($passwordBaru, PASSWORD_DEFAULT));
+                        $this->db->where('id', $id);
                         $this->db->update('users');
                         $msg = [
                             'response' => 'success',
