@@ -52,20 +52,64 @@ class Service extends CI_Controller
         echo json_encode($msg);
     }
 
-    public function get_nik()
+    public function add_data_mobil()
     {
-        $nik = $_POST['nik'];
-        if ($nik == '' || empty($nik)) {
-            $quwry = "SELECT nik FROM tb_pelanggan WHERE nik = '0'";
+        $this->form_validation->set_rules('jenis_mobil', 'Jenis mobil', 'trim|required', [
+            'required' => '{field} wajib di isi'
+        ]);
+        $this->form_validation->set_rules('tipe_mobil', 'Tipe mobil', 'trim|required', [
+            'required' => '{field} wajib di isi'
+        ]);
+        $this->form_validation->set_rules('merek_mobil', 'Merek mobil', 'trim|required', [
+            'required' => '{field} wajib di isi'
+        ]);
+        $this->form_validation->set_rules('nomor_rangka', 'Nomor rangka', 'trim|required|is_unique[tb_data_mobil.nomor_rangka]', [
+            'required' => '{field} wajib di isi',
+            'is_unique' => '{field} sudah ada'
+        ]);
+        $this->form_validation->set_rules('nomor_mesin', 'Nomor mesin', 'trim|required|is_unique[tb_data_mobil.nomor_mesin]', [
+            'required' => '{field} wajib di isi',
+            'is_unique' => '{field} sudah ada'
+        ]);
+        $this->form_validation->set_rules('nomor_polisi', 'Nomor polisi', 'trim|required|is_unique[tb_data_mobil.nomor_polisi]', [
+            'required' => '{field} wajib di isi',
+            'is_unique' => '{field} sudah ada'
+        ]);
+        $this->form_validation->set_rules('warna_mobil', 'Warna mobil', 'trim|required', [
+            'required' => '{field} wajib di isi'
+        ]);
+        $this->form_validation->set_rules('tahun_mobil', 'Tahun mobil', 'trim|required', [
+            'required' => '{field} wajib di isi'
+        ]);
+
+        if ($this->form_validation->run() == false) {
             $msg = [
-                'status' => 'null',
-                'nik' => $this->db->query($quwry)->row_array()['nik']
+                'error' => [
+                    'jenis_mobil' => form_error('jenis_mobil'),
+                    'tipe_mobil' => form_error('tipe_mobil'),
+                    'merek_mobil' => form_error('merek_mobil'),
+                    'nomor_rangka' => form_error('nomor_rangka'),
+                    'nomor_mesin' => form_error('nomor_mesin'),
+                    'nomor_polisi' => form_error('nomor_polisi'),
+                    'warna_mobil' => form_error('warna_mobil'),
+                    'tahun_mobil' => form_error('tahun_mobil')
+                ]
             ];
         } else {
-            $quwry = "SELECT nik FROM tb_pelanggan WHERE nik = '$nik'";
+            $data = [
+                'jenis_mobil' => $_POST['jenis_mobil'],
+                'tipe_mobil' => $_POST['tipe_mobil'],
+                'merek_mobil' => $_POST['merek_mobil'],
+                'nomor_rangka' => $_POST['nomor_rangka'],
+                'nomor_mesin' => $_POST['nomor_mesin'],
+                'nomor_polisi' => $_POST['nomor_polisi'],
+                'warna_mobil' => $_POST['warna_mobil'],
+                'tahun_mobil' => $_POST['tahun_mobil']
+            ];
+            $this->db->insert('tb_data_mobil', $data);
             $msg = [
-                'status' => 'success',
-                'nik' => $this->db->query($quwry)->row_array()['nik']
+                'status' => 201,
+                'message' => 'Data berhasil di tambahkan'
             ];
         }
         echo json_encode($msg);

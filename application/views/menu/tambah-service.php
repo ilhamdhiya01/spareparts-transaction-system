@@ -17,33 +17,25 @@
                         <li>
                             <a href="#step-1">
                                 <span class="step_no"><i class="far fa-address-card"></i></span>
-                                <span class="step_descr">
-                                    Step 1<br />
-                                </span>
+
                             </a>
                         </li>
                         <li>
                             <a href="#step-2">
                                 <span class="step_no"><i class="fas fa-car-side"></i></span>
-                                <span class="step_descr">
-                                    Step 2<br />
-                                </span>
+
                             </a>
                         </li>
                         <li>
                             <a href="#step-3">
                                 <span class="step_no"><i class="fas fa-tools"></i></span>
-                                <span class="step_descr">
-                                    Step 3<br />
-                                </span>
+
                             </a>
                         </li>
                         <li>
                             <a href="#step-4">
                                 <span class="step_no"><i class="fas fa-file-alt"></i></span>
-                                <span class="step_descr">
-                                    Step 4<br />
-                                </span>
+
                             </a>
                         </li>
                     </ul>
@@ -163,72 +155,99 @@
                             <div class="col-12">
                                 <div class="row justify-content-center">
                                     <div class="col-md-9">
-                                        <form>
+                                        <form id="form_data_mobil">
                                             <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputEmail4">Jenis Mobil<span class="required text-danger pl-1">*</span></label>
-                                                    <select class="select2_single form-control" tabindex="-1">
-                                                        <option value="IL">Illinois</option>
-                                                        <option value="IA">Iowa</option>
-                                                        <option value="KS">Kansas</option>
-                                                        <option value="KY">Kentucky</option>
-                                                        <option value="LA">Louisiana</option>
-                                                        <option value="MN">Minnesota</option>
-                                                        <option value="MS">Mississippi</option>
-                                                        <option value="MO">Missouri</option>
-                                                        <option value="OK">Oklahoma</option>
-                                                        <option value="SD">South Dakota</option>
-                                                        <option value="TX">Texas</option>
-                                                        <option value="AK">Alaska</option>
-                                                    </select>
+                                                <div class="col-sm-6">
+                                                    <label class="" for="inlineFormInputGroupUsername">Jenis Mobil<span class="required text-danger pl-1">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text password1"><i class="fas fa-car"></i></div>
+                                                        </div>
+                                                        <input type="password" value="" class="form-control" id="jenis_mobil" name="jenis_mobil">
+                                                        <div id="validationServer03Feedback" class="invalid-feedback jenis_mobil_error">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputPassword4">Tipe Mobil<span class="required text-danger pl-1">*</span></label>
-                                                    <select class="select2_single form-control" tabindex="-1">
-                                                        <option value="IL">Illinois</option>
-                                                        <option value="IA">Iowa</option>
-                                                        <option value="KS">Kansas</option>
-                                                        <option value="KY">Kentucky</option>
-                                                        <option value="LA">Louisiana</option>
-                                                        <option value="MN">Minnesota</option>
-                                                        <option value="MS">Mississippi</option>
-                                                        <option value="MO">Missouri</option>
-                                                        <option value="OK">Oklahoma</option>
-                                                        <option value="SD">South Dakota</option>
-                                                        <option value="TX">Texas</option>
-                                                    </select>
+                                                <div class="col-sm-6">
+                                                    <label class="" for="inlineFormInputGroupUsername">Tipe Mobil<span class="required text-danger pl-1">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text password1"><i class="fas fa-car"></i></div>
+                                                        </div>
+                                                        <input type="password" value="" class="form-control" id="tipe_mobil" name="tipe_mobil">
+                                                        <div id="validationServer03Feedback" class="invalid-feedback tipe_mobil_error">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputEmail4">Merek Mobil<span class="required text-danger pl-1">*</span></label>
-                                                    <input type="text" class="form-control" id="inputAddress">
+                                                <div class="col-sm-6">
+                                                    <label class="" for="inlineFormInputGroupUsername">Merek Mobil<span class="required text-danger pl-1">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text password1"><i class="fas fa-car"></i></div>
+                                                        </div>
+                                                        <input type="password" value="" class="form-control" id="merek_mobil" name="merek_mobil">
+                                                        <div id="validationServer03Feedback" class="invalid-feedback merek_mobil_error">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputEmail4">Nomor Rangka<span class="required text-danger pl-1">*</span></label>
-                                                    <input type="text" class="form-control" id="inputAddress">
+                                                <div class="col-sm-6">
+                                                    <label class="" for="inlineFormInputGroupUsername">Nomor Rangka<span class="required text-danger pl-1">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text password1"><i class="fas fa-sort-numeric-up"></i></div>
+                                                        </div>
+                                                        <input type="password" value="" class="form-control" id="nomor_rangka" name="nomor_rangka">
+                                                        <div id="validationServer03Feedback" class="invalid-feedback nomor_rangka_error">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputPassword4">Nomor Mesin<span class="required text-danger pl-1">*</span></label>
-                                                    <input type="text" class="form-control" id="inputAddress">
+                                                <div class="col-sm-6">
+                                                    <label class="" for="inlineFormInputGroupUsername">Nomor Mesin<span class="required text-danger pl-1">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text password1"><i class="fas fa-sort-numeric-up"></i></div>
+                                                        </div>
+                                                        <input type="password" value="" class="form-control" id="nomor_mesin" name="nomor_mesin">
+                                                        <div id="validationServer03Feedback" class="invalid-feedback nomor_mesin_error">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputPassword4">Nomor Mesin<span class="required text-danger pl-1">*</span></label>
-                                                    <input type="text" class="form-control" id="inputAddress">
+                                                <div class="col-sm-6">
+                                                    <label class="" for="inlineFormInputGroupUsername">Nomor Polisi<span class="required text-danger pl-1">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text password1"><i class="fas fa-sort-numeric-up"></i></div>
+                                                        </div>
+                                                        <input type="password" value="" class="form-control" id="nomor_polisi" name="nomor_polisi">
+                                                        <div id="validationServer03Feedback" class="invalid-feedback nomor_polisi_error">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputPassword4">Nomor Mesin<span class="required text-danger pl-1">*</span></label>
-                                                    <input type="text" class="form-control" id="inputAddress">
+                                                <div class="col-sm-6">
+                                                    <label class="" for="inlineFormInputGroupUsername">Warna Mobil<span class="required text-danger pl-1">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text password1"><i class="fas fa-palette"></i></div>
+                                                        </div>
+                                                        <input type="password" value="" class="form-control" id="warna_mobil" name="warna_mobil">
+                                                        <div id="validationServer03Feedback" class="invalid-feedback warna_mobil_error">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputPassword4">Warna Mobil<span class="required text-danger pl-1">*</span></label>
-                                                    <input type="text" class="form-control" id="inputAddress">
+                                                <div class="col-sm-6">
+                                                    <label class="" for="inlineFormInputGroupUsername">Tahun Mobil<span class="required text-danger pl-1">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text password1"><i class="far fa-calendar-alt"></i></div>
+                                                        </div>
+                                                        <input type="password" value="" class="form-control" id="tahun_mobil" name="tahun_mobil">
+                                                        <div id="validationServer03Feedback" class="invalid-feedback tahun_mobil_error">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="inputPassword4">Tahun Mobil<span class="required text-danger pl-1">*</span></label>
-                                                    <input type="text" class="form-control" id="inputAddress">
-                                                </div>
-                                                <div class="form-group col-md-6">
+                                                <!-- <div class="form-group col-md-6">
                                                     <label for="inputPassword4">Tanggal Service<span class="required text-danger pl-1">*</span></label>
-                                                    <input id="birthday" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                                                    <input id="tanggal_service" name="tanggal_service" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
                                                     <script>
                                                         function timeFunctionLong(input) {
                                                             setTimeout(function() {
@@ -236,19 +255,132 @@
                                                             }, 60000);
                                                         }
                                                     </script>
-                                                </div>
+                                                </div> -->
                                             </div>
-                                            <!-- <div class="item form-group">
-                                                <label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span class="required">*</span>
-                                                </label>
-
-                                            </div> -->
-                                            <!-- <div class="form-group">
-                                                <label for="inputAddress">Nomor Rangka</label>
-                                                <input type="text" class="form-control" id="inputAddress">
-                                            </div> -->
-                                            <button type="submit" class="btn btn-primary">Sign in</button>
+                                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                                         </form>
+                                        <script>
+                                            $("#form_data_mobil").submit(function(e) {
+                                                const data = $(this).serialize();
+                                                $.ajax({
+                                                    url: "<?= base_url(); ?>service/add_data_mobil",
+                                                    type: "post",
+                                                    data: data,
+                                                    dataType: "json",
+                                                    success: function(data) {
+                                                        if (data.error) {
+                                                            if (data.error.jenis_mobil) {
+                                                                $("#jenis_mobil").addClass("is-invalid");
+                                                                $(".jenis_mobil_error").html(data.error.jenis_mobil);
+                                                            } else {
+                                                                $("#jenis_mobil").removeClass("is-invalid");
+                                                                $(".jenis_mobil_error").html("");
+                                                            }
+
+                                                            if (data.error.tipe_mobil) {
+                                                                $("#tipe_mobil").addClass("is-invalid");
+                                                                $(".tipe_mobil_error").html(data.error.tipe_mobil);
+                                                            } else {
+                                                                $("#tipe_mobil").removeClass("is-invalid");
+                                                                $(".tipe_mobil_error").html("");
+                                                            }
+
+                                                            if (data.error.merek_mobil) {
+                                                                $("#merek_mobil").addClass("is-invalid");
+                                                                $(".merek_mobil_error").html(data.error.merek_mobil);
+                                                            } else {
+                                                                $("#merek_mobil").removeClass("is-invalid");
+                                                                $(".merek_mobil_error").html("");
+                                                            }
+
+                                                            if (data.error.nomor_rangka) {
+                                                                $("#nomor_rangka").addClass("is-invalid");
+                                                                $(".nomor_rangka_error").html(data.error.nomor_rangka);
+                                                            } else {
+                                                                $("#nomor_rangka").removeClass("is-invalid");
+                                                                $(".nomor_rangka_error").html("");
+                                                            }
+
+                                                            if (data.error.nomor_mesin) {
+                                                                $("#nomor_mesin").addClass("is-invalid");
+                                                                $(".nomor_mesin_error").html(data.error.nomor_mesin);
+                                                            } else {
+                                                                $("#nomor_mesin").removeClass("is-invalid");
+                                                                $(".nomor_mesin_error").html("");
+                                                            }
+
+                                                            if (data.error.nomor_polisi) {
+                                                                $("#nomor_polisi").addClass("is-invalid");
+                                                                $(".nomor_polisi_error").html(data.error.nomor_polisi);
+                                                            } else {
+                                                                $("#nomor_polisi").removeClass("is-invalid");
+                                                                $(".nomor_polisi_error").html("");
+                                                            }
+
+                                                            if (data.error.warna_mobil) {
+                                                                $("#warna_mobil").addClass("is-invalid");
+                                                                $(".warna_mobil_error").html(data.error.warna_mobil);
+                                                            } else {
+                                                                $("#warna_mobil").removeClass("is-invalid");
+                                                                $(".warna_mobil_error").html("");
+                                                            }
+
+                                                            if (data.error.tahun_mobil) {
+                                                                $("#tahun_mobil").addClass("is-invalid");
+                                                                $(".tahun_mobil_error").html(data.error.tahun_mobil);
+                                                            } else {
+                                                                $("#tahun_mobil").removeClass("is-invalid");
+                                                                $(".tahun_mobil_error").html("");
+                                                            }
+                                                        } else {
+                                                            // kosongkan value
+                                                            $("#jenis_mobil").val("");
+                                                            $("#tipe_mobil").val("");
+                                                            $("#nomor_rangka").val("");
+                                                            $("#nomor_mesin").val("");
+                                                            $("#nomor_polisi").val("");
+                                                            $("#merek_mobil").val("");
+                                                            $("#warna_mobil").val("");
+                                                            $("#tahun_mobil").val("");
+
+                                                            // hilangkan error
+                                                            $("#jenis_mobil").removeClass("is-invalid");
+                                                            $(".jenis_mobil_error").html("");
+                                                            $("#tipe_mobil").removeClass("is-invalid");
+                                                            $(".tipe_mobil_error").html("");
+                                                            $("#merek_mobil").removeClass("is-invalid");
+                                                            $(".merek_mobil_error").html("");
+                                                            $("#nomor_rangka").removeClass("is-invalid");
+                                                            $(".nomor_rangka_error").html("");
+                                                            $("#nomor_mesin").removeClass("is-invalid");
+                                                            $(".nomor_mesin_error").html("");
+                                                            $("#nomor_polisi").removeClass("is-invalid");
+                                                            $(".nomor_polisi_error").html("");
+                                                            $("#warna_mobil").removeClass("is-invalid");
+                                                            $(".warna_mobil_error").html("");
+                                                            $("#tahun_mobil").removeClass("is-invalid");
+                                                            $(".tahun_mobil_error").html("");
+
+                                                            // proses tambah
+                                                            if (data.status == 201) {
+                                                                iziToast.success({
+                                                                    title: 'Success',
+                                                                    message: data.message,
+                                                                    position: 'topRight'
+                                                                });
+                                                            } else {
+                                                                iziToast.error({
+                                                                    title: 'Error',
+                                                                    message: 'Data gagal di tambahakan',
+                                                                    position: 'topRight'
+                                                                });
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                                e.preventDefault();
+                                            });
+                                        </script>
                                     </div>
                                 </div>
                             </div>

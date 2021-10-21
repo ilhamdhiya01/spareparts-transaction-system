@@ -1,5 +1,5 @@
 <div class="row" style="display: block;">
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-6 col-sm-6">
         <div class="x_panel">
             <div class="x_title">
                 <h2 id="form-title-menu"><i class="far fa-edit"></i> Tambah User</h2>
@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-7 col-sm-7  ">
+    <div class="col-md-6 col-sm-6">
         <div class="x_panel">
             <div class="x_title">
                 <h2><i class="fas fa-table"></i> Tabel Users</h2>
