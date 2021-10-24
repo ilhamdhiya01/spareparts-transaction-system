@@ -1,48 +1,91 @@
-<!-- Main Content -->
-<!-- <div class="section-header">
-    <h1>Dashboard</h1>
-</div> -->
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0"><?= $judul; ?></h1>
+            </div>
+        </div>
+    </div>
+</section>
 
-<!-- / -->
-<!-- page content -->
-<div class="right_col" role="main">
-    <div class="">
-        <!-- top tiles -->
-        <div class="row" style="display: inline-block;">
-            <div class="tile_count">
-                <div class="col-md-2 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-                    <div class="count">2500</div>
-                    <span class="count_bottom"><i class="green">4% </i> From last Week</span>
-                </div>
-                <div class="col-md-2 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
-                    <div class="count">123.50</div>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
-                </div>
-                <div class="col-md-2 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
-                    <div class="count green">2,500</div>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                </div>
-                <div class="col-md-2 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
-                    <div class="count">4,567</div>
-                    <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
-                </div>
-                <div class="col-md-2 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
-                    <div class="count">2,315</div>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                </div>
-                <div class="col-md-2 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-                    <div class="count">7,325</div>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <section class="content">
+                    <div class="container-fluid">
+                        <!-- Info boxes -->
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">CPU Traffic</span>
+                                        <span class="info-box-number">
+                                            10
+                                            <small>%</small>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box mb-3">
+                                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Likes</span>
+                                        <span class="info-box-number">41,410</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix hidden-md-up"></div>
+                            <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box mb-3">
+                                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Sales</span>
+                                        <span class="info-box-number">760</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-3">
+                                <div class="info-box mb-3">
+                                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">New Members</span>
+                                        <span class="info-box-number">2,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Default box -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Title</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                Start creating your amazing application!
+                            </div>
+                            <div class="card-footer">
+                                Footer
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- /top tiles -->
     </div>
-</div>
-<!-- /page content -->
+</section>

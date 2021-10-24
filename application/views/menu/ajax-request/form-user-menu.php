@@ -54,7 +54,7 @@
 
     // ubah user menu
     $('.update-menu').click(function(e) {
-        $("#form-title-menu").html("Ubah Menu");
+        $("#form-title-menu").html("<i class='fas fa-edit'></i> Ubah Menu");
         $(".btn-user-menu-ubah").css("display", "");
         $(".btn-refresh").css("display", "");
         $(".btn-user-menu-tambah").css("display", "none");

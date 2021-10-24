@@ -13,11 +13,21 @@ class Service extends CI_Controller
     public function index()
     {
         $data = [
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
+            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
+            'judul' => 'Data Service'
         ];
-        $this->load->view('templete/-header', $data);
+        $this->load->view('templete/header', $data);
         $this->load->view('menu/tambah-service');
-        $this->load->view('templete/-footer');
+        $this->load->view('templete/footer');
+    }
+
+    public function loadFormAddCustomer()
+    {
+        if ($this->input->is_ajax_request()) {
+            echo json_encode($this->load->view('menu/ajax-request/form-add-customer'));
+        } else {
+            echo json_encode('Request failed');
+        }
     }
 
     public function add_service()
@@ -50,6 +60,15 @@ class Service extends CI_Controller
             ];
         }
         echo json_encode($msg);
+    }
+
+    public function loadFormDataMobil()
+    {
+        if ($this->input->is_ajax_request()) {
+            echo json_encode($this->load->view('menu/ajax-request/form-add-data-mobil'));
+        } else {
+            echo json_encode('Request failed');
+        }
     }
 
     public function add_data_mobil()
@@ -113,5 +132,51 @@ class Service extends CI_Controller
             ];
         }
         echo json_encode($msg);
+    }
+
+    public function loadBtnJenisService()
+    {
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                "jenis_service" => $this->db->get("tb_jenis_service")->result_array()
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/jenis-service', $data));
+        } else {
+            echo json_encode("Request failed");
+        }
+    }
+
+    public function loadSubService()
+    {
+        if ($this->input->is_ajax_request()) {
+            $this->db->select('tb_sub_jenis_service.*,tb_jenis_service.nama_service');
+            $this->db->from('tb_sub_jenis_service');
+            $this->db->join('tb_jenis_service', 'tb_sub_jenis_service.id_jenis_service = tb_jenis_service.id');
+            $data = [
+                "sub_jenis_service" => $this->db->get()->result_array()
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/sub-jenis-service', $data));
+        } else {
+            echo json_encode("Request failed");
+        }
+    }
+
+    public function loadFormDataService()
+    {
+        $this->db->select_max("kd_service", "kode");
+        $data = $this->db->get("tb_data_service")->row_array();
+        $kd_service = $data["kode"];
+        $urutan = (int) substr($kd_service, 3, 3);
+        $urutan++;
+        $kode = "SRV" . sprintf("%05s", $urutan);
+        // $hasil = $data++;
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'kd_service' => $kode
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/form-add-service', $data));
+        } else {
+            echo json_encode("Request failed");
+        }
     }
 }

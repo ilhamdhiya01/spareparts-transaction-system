@@ -16,13 +16,13 @@ class Menu extends CI_Controller
     public function index()
     {
         $data =  [
-            'judul' => 'dashboard',
+            'judul' => 'Dashboard',
             'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
         ];
 
-        $this->load->view('templete/-header', $data);
-        $this->load->view('dashboard/index');
-        $this->load->view('templete/-footer');
+        $this->load->view('templete/header', $data);
+        $this->load->view('dashboard/index', $data);
+        $this->load->view('templete/footer');
     }
 
     // setting menu
@@ -32,9 +32,9 @@ class Menu extends CI_Controller
             'judul' => 'User Menu',
             'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
         ];
-        $this->load->view('templete/-header', $data);
+        $this->load->view('templete/header', $data);
         $this->load->view('menu/dropdown-user-menu');
-        $this->load->view('templete/-footer');
+        $this->load->view('templete/footer');
     }
     public function ambilDataUserMenu()
     {
@@ -140,11 +140,12 @@ class Menu extends CI_Controller
     public function dropdown_subMenu()
     {
         $data = [
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
+            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
+            'judul' => 'Data Sub Menu'
         ];
-        $this->load->view('templete/-header', $data);
+        $this->load->view('templete/header', $data);
         $this->load->view('menu/dropdown-user-sub-menu', $data);
-        $this->load->view('templete/-footer');
+        $this->load->view('templete/footer');
     }
     // ambil data sub menu
     public function ambilDataSubMenu()
@@ -301,11 +302,12 @@ class Menu extends CI_Controller
     public function dropdown_access_menu()
     {
         $data = [
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
+            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
+            'judul' => 'Access Menu'
         ];
-        $this->load->view('templete/-header', $data);
+        $this->load->view('templete/header', $data);
         $this->load->view('menu/dropdown-user-access-menu', $data);
-        $this->load->view('templete/-footer');
+        $this->load->view('templete/footer');
     }
 
     public function ambilDataAccessMenu()

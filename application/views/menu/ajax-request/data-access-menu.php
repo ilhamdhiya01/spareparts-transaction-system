@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<table class="table table-bordered table-sm">
     <thead>
         <tr class="text-center">
             <th scope="col">No</th>
