@@ -1,9 +1,10 @@
-<?php 
-function rupiah($angka){
-    $hasil = "Rp " . number_format($angka,2,',','.');
+<?php
+function rupiah($angka)
+{
+    $hasil = "Rp " . number_format($angka, 2, ',', '.');
     return $hasil;
 }
-foreach ($sub_jenis_service as $sub_service) : 
+foreach ($sub_jenis_service as $sub_service) :
 ?>
     <div class="info-box  sub-service" data-idsub="<?php $sub_service['id']; ?>" data-idservice="<?= $sub_service['id_jenis_service']; ?>" data-namaservice="<?= $sub_service['nama_service']; ?>" data-namasub="<?= $sub_service['nama_sub_service']; ?>">
         <span class="info-box-icon bg-warning"><i class="fas fa-tools"></i></span>
@@ -24,6 +25,18 @@ foreach ($sub_jenis_service as $sub_service) :
         $(this).removeClass("shadow");
     });
     $(".sub-service").click(function() {
-        alert($(this).data("namaservice") + " " + $(this).data("namasub"));
+        const nama_service = $(this).data("namaservice");
+        const nama_sub_service = $(this).data("namasub");
+        $.ajax({
+            url: "<?= base_url(); ?>service/loadFormDataSubService",
+            type: "get",
+            data : {
+                nama_service : nama_service,
+                nama_sub_service : nama_sub_service
+            },
+            success: function(data) {
+                $(".view-jenis-service").html(data);
+            }
+        });
     });
 </script>

@@ -19,8 +19,9 @@
     });
     $(".btn-service").click(function(e) {
         const nama_service = $(this).data("nama");
+        const nama_sub_service = $(".sub-service").data("namaservice");
         switch (nama_service) {
-            case "Berkala":
+            case "Service Berkala":
                 $.ajax({
                     url: "<?= base_url(); ?>service/loadSubService",
                     type: "get",
@@ -30,20 +31,20 @@
                     }
                 });
                 break;
-            case "Tune Up":
+            case "Service Tune Up":
+            case "Service Lain-lain":
                 $.ajax({
                     url: "<?= base_url(); ?>service/loadFormDataService",
                     type: "get",
+                    data: {
+                        nama_service: nama_service,
+                    },
                     success: function(data) {
                         $(".view-jenis-service").html(data);
                         console.log(data);
                     }
                 });
-                break;
-            case "Lain-lain":
-                $.ajax({
-
-                });
+                // alert("Tune up dan Lainlain")
                 break;
             default:
                 break;

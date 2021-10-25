@@ -1,4 +1,9 @@
 <form id="form_data_mobil">
+    <?php if (is_null($id_pelanggan['id'])) : ?>
+        <input type="hidden" value="" name="id_pelanggan" id="id_pelanggan">
+    <?php else : ?>
+        <input type="hidden" value="<?= $id_pelanggan['id']; ?>" name="id_pelanggan" id="id_pelanggan">
+    <?php endif; ?>
     <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label text-sm">Jenis Mobil<span class="required text-danger pl-1 text-sm">*</span></label>
         <div class="col-sm-10">
@@ -10,7 +15,7 @@
     <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label text-sm">Tipe Mobil<span class="required text-danger pl-1 text-sm">*</span></label>
         <div class="col-sm-10">
-            <input type="password" value="" class="form-control" id="tipe_mobil" name="tipe_mobil">
+            <input type="text" value="" class="form-control" id="tipe_mobil" name="tipe_mobil">
             <div id="validationServer03Feedback" class="invalid-feedback tipe_mobil_error">
             </div>
         </div>
@@ -18,7 +23,7 @@
     <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label text-sm">Merek Mobil<span class="required text-danger pl-1 text-sm">*</span></label>
         <div class="col-sm-10">
-            <input type="password" value="" class="form-control" id="merek_mobil" name="merek_mobil">
+            <input type="text" value="" class="form-control" id="merek_mobil" name="merek_mobil">
             <div id="validationServer03Feedback" class="invalid-feedback merek_mobil_error">
             </div>
         </div>
@@ -26,7 +31,7 @@
     <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label text-sm">Nomor Rangka<span class="required text-danger pl-1 text-sm">*</span></label>
         <div class="col-sm-10">
-            <input type="password" value="" class="form-control" id="nomor_rangka" name="nomor_rangka">
+            <input type="text" value="" class="form-control" id="nomor_rangka" name="nomor_rangka">
             <div id="validationServer03Feedback" class="invalid-feedback nomor_rangka_error">
             </div>
         </div>
@@ -34,7 +39,7 @@
     <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label text-sm">Nomor Mesin<span class="required text-danger pl-1 text-sm">*</span></label>
         <div class="col-sm-10">
-            <input type="password" value="" class="form-control" id="nomor_mesin" name="nomor_mesin">
+            <input type="text" value="" class="form-control" id="nomor_mesin" name="nomor_mesin">
             <div id="validationServer03Feedback" class="invalid-feedback nomor_mesin_error">
             </div>
         </div>
@@ -42,7 +47,7 @@
     <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label text-sm">Nomor Polisi<span class="required text-danger pl-1 text-sm">*</span></label>
         <div class="col-sm-10">
-            <input type="password" value="" class="form-control" id="nomor_polisi" name="nomor_polisi">
+            <input type="text" value="" class="form-control" id="nomor_polisi" name="nomor_polisi">
             <div id="validationServer03Feedback" class="invalid-feedback nomor_polisi_error">
             </div>
         </div>
@@ -50,7 +55,7 @@
     <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label text-sm">Warna Mobil<span class="required text-danger pl-1 text-sm">*</span></label>
         <div class="col-sm-10">
-            <input type="password" value="" class="form-control" id="warna_mobil" name="warna_mobil">
+            <input type="text" value="" class="form-control" id="warna_mobil" name="warna_mobil">
             <div id="validationServer03Feedback" class="invalid-feedback warna_mobil_error">
             </div>
         </div>
@@ -58,7 +63,7 @@
     <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label text-sm">Tahun Mobil<span class="required text-danger pl-1 text-sm">*</span></label>
         <div class="col-sm-10">
-            <input type="password" value="" class="form-control" id="tahun_mobil" name="tahun_mobil">
+            <input type="text" value="" class="form-control" id="tahun_mobil" name="tahun_mobil">
             <div id="validationServer03Feedback" class="invalid-feedback tahun_mobil_error">
             </div>
         </div>

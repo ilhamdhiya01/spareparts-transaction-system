@@ -28,6 +28,7 @@
 <script src="<?= base_url(); ?>assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
 <!-- Select2 -->
 <script src="<?= base_url(); ?>assets/vendors/select2/dist/js/select2.full.min.js"></script>
+
 <!-- bootstrap-daterangepicker -->
 <script src="<?= base_url(); ?>assets/vendors/moment/min/moment.min.js"></script>
 <script src="<?= base_url(); ?>assets/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>

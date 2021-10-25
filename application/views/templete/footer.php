@@ -27,6 +27,8 @@
 <script src="<?= base_url(); ?>assets/AdminLTE/plugins/select2/js/select2.full.min.js"></script>
 <!-- smartWizard -->
 <script src="<?= base_url(); ?>assets/AdminLTE/plugins/jquery-smartwizard-master/dist/js/jquery.smartWizard.min.js"></script>
+<!-- date-range-picker -->
+<script src="<?= base_url(); ?>assets/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= base_url(); ?>assets/AdminLTE/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Bootstrap 4 -->

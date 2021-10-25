@@ -65,7 +65,18 @@ class Service extends CI_Controller
     public function loadFormDataMobil()
     {
         if ($this->input->is_ajax_request()) {
-            echo json_encode($this->load->view('menu/ajax-request/form-add-data-mobil'));
+            $this->db->select('tb_pelanggan.id');
+            $this->db->from('tb_pelanggan');
+            $this->db->order_by('id', 'DESC');
+            $this->db->limit(1);
+            $data = [
+                'id_pelanggan' => $this->db->get()->row_array()
+            ];
+            if (is_null($data['id_pelanggan'])) {
+                echo json_encode($this->load->view('menu/ajax-request/error-page'));
+            } else {
+                echo json_encode($this->load->view('menu/ajax-request/form-add-data-mobil', $data));
+            }
         } else {
             echo json_encode('Request failed');
         }
@@ -116,6 +127,7 @@ class Service extends CI_Controller
             ];
         } else {
             $data = [
+                'id_pelanggan' => $_POST['id_pelanggan'],
                 'jenis_mobil' => $_POST['jenis_mobil'],
                 'tipe_mobil' => $_POST['tipe_mobil'],
                 'merek_mobil' => $_POST['merek_mobil'],
@@ -171,10 +183,52 @@ class Service extends CI_Controller
         $kode = "SRV" . sprintf("%05s", $urutan);
         // $hasil = $data++;
         if ($this->input->is_ajax_request()) {
+            $this->db->select('tb_pelanggan.id');
+            $this->db->from('tb_pelanggan');
+            $this->db->order_by('id', 'DESC');
+            $this->db->limit(1);
             $data = [
-                'kd_service' => $kode
+                'kd_service' => $kode,
+                'nama_service' => $_GET['nama_service'],
+                'id_pelanggan' => $this->db->get()->row_array()
             ];
-            echo json_encode($this->load->view('menu/ajax-request/form-add-service', $data));
+            if (is_null($data['id_pelanggan'])) {
+                echo json_encode($this->load->view('menu/ajax-request/error-page'));
+            } else {
+                echo json_encode($this->load->view('menu/ajax-request/form-add-service', $data));
+            }
+        } else {
+            echo json_encode("Request failed");
+        }
+    }
+
+    public function loadFormDataSubService()
+    {
+        $this->db->select_max("kd_service", "kode");
+        $data = $this->db->get("tb_data_service")->row_array();
+        $kd_service = $data["kode"];
+        $urutan = (int) substr($kd_service, 3, 3);
+        $urutan++;
+        $kode = "SRV" . sprintf("%05s", $urutan);
+        // $hasil = $data++;
+        if ($this->input->is_ajax_request()) {
+            $this->db->select('tb_pelanggan.id');
+            $this->db->from('tb_pelanggan');
+            $this->db->order_by('id', 'DESC');
+            $this->db->limit(1);
+            $data = [
+                'kd_service' => $kode,
+                'nama_service' => $_GET['nama_service'],
+                'nama_sub_service' => $_GET['nama_sub_service'],
+                'id_pelanggan' => $this->db->get()->row_array()
+            ];
+            if (is_null($data['id_pelanggan'])) {
+                echo json_encode($this->load->view('menu/ajax-request/error-page'));
+            } else if ($data['id_pelanggan'] == "") {
+                echo json_encode("id_kosong");
+            } else {
+                echo json_encode($this->load->view('menu/ajax-request/form-add-service', $data));
+            }
         } else {
             echo json_encode("Request failed");
         }
