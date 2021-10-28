@@ -8,6 +8,7 @@ class Service extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Kode_otomatis_model');
     }
 
     public function index()
@@ -66,14 +67,16 @@ class Service extends CI_Controller
     {
         if ($this->input->is_ajax_request()) {
             $this->db->select('tb_pelanggan.id');
-            $this->db->from('tb_pelanggan');
             $this->db->order_by('id', 'DESC');
             $this->db->limit(1);
             $data = [
-                'id_pelanggan' => $this->db->get()->row_array()
+                'id_pelanggan' => $this->db->get('tb_pelanggan')->row_array()
             ];
             if (is_null($data['id_pelanggan'])) {
-                echo json_encode($this->load->view('menu/ajax-request/error-page'));
+                $data = [
+                    'message' => 'Data pelanggan masih kosong, silahkan tambahkan pelanggan terlebih dahulu'
+                ];
+                echo json_encode($this->load->view('menu/ajax-request/error-page', $data));
             } else {
                 echo json_encode($this->load->view('menu/ajax-request/form-add-data-mobil', $data));
             }
@@ -84,6 +87,9 @@ class Service extends CI_Controller
 
     public function add_data_mobil()
     {
+        $this->form_validation->set_rules('id_pelanggan', 'Id_pelanggan', 'is_unique[tb_data_mobil.id_pelanggan]', [
+            'is_unique' => 'Tambahkan data pelanggan baru'
+        ]);
         $this->form_validation->set_rules('jenis_mobil', 'Jenis mobil', 'trim|required', [
             'required' => '{field} wajib di isi'
         ]);
@@ -115,6 +121,7 @@ class Service extends CI_Controller
         if ($this->form_validation->run() == false) {
             $msg = [
                 'error' => [
+                    'id_pelanggan' => form_error('id_pelanggan'),
                     'jenis_mobil' => form_error('jenis_mobil'),
                     'tipe_mobil' => form_error('tipe_mobil'),
                     'merek_mobil' => form_error('merek_mobil'),
@@ -175,12 +182,6 @@ class Service extends CI_Controller
 
     public function loadFormDataService()
     {
-        $this->db->select_max("kd_service", "kode");
-        $data = $this->db->get("tb_data_service")->row_array();
-        $kd_service = $data["kode"];
-        $urutan = (int) substr($kd_service, 3, 3);
-        $urutan++;
-        $kode = "SRV" . sprintf("%05s", $urutan);
         // $hasil = $data++;
         if ($this->input->is_ajax_request()) {
             $this->db->select('tb_pelanggan.id');
@@ -188,8 +189,10 @@ class Service extends CI_Controller
             $this->db->order_by('id', 'DESC');
             $this->db->limit(1);
             $data = [
-                'kd_service' => $kode,
+                'kd_service' => $this->Kode_otomatis_model->getKode(),
                 'nama_service' => $_GET['nama_service'],
+                'harga_jasa' => $_GET['harga_jasa'],
+                'nama_sub_service' => @$_GET['nama_sub_service'],
                 'id_pelanggan' => $this->db->get()->row_array()
             ];
             if (is_null($data['id_pelanggan'])) {
@@ -202,35 +205,33 @@ class Service extends CI_Controller
         }
     }
 
-    public function loadFormDataSubService()
+    public function loadPageError()
     {
-        $this->db->select_max("kd_service", "kode");
-        $data = $this->db->get("tb_data_service")->row_array();
-        $kd_service = $data["kode"];
-        $urutan = (int) substr($kd_service, 3, 3);
-        $urutan++;
-        $kode = "SRV" . sprintf("%05s", $urutan);
-        // $hasil = $data++;
         if ($this->input->is_ajax_request()) {
-            $this->db->select('tb_pelanggan.id');
-            $this->db->from('tb_pelanggan');
-            $this->db->order_by('id', 'DESC');
-            $this->db->limit(1);
             $data = [
-                'kd_service' => $kode,
-                'nama_service' => $_GET['nama_service'],
-                'nama_sub_service' => $_GET['nama_sub_service'],
-                'id_pelanggan' => $this->db->get()->row_array()
+                "message" => "Tambahkan pelanggan baru, agar dapat mengakses halaman ini"
             ];
-            if (is_null($data['id_pelanggan'])) {
-                echo json_encode($this->load->view('menu/ajax-request/error-page'));
-            } else if ($data['id_pelanggan'] == "") {
-                echo json_encode("id_kosong");
-            } else {
-                echo json_encode($this->load->view('menu/ajax-request/form-add-service', $data));
-            }
-        } else {
-            echo json_encode("Request failed");
+            echo json_encode($this->load->view('menu/ajax-request/error-page', $data));
         }
+    }
+
+    public function addTuneUpService()
+    {
+        $data = [
+            'id_pelanggan' => $_POST['id_pelanggan'],
+            'kd_service' => $_POST['kode_service'],
+            'jenis_service' => $_POST['jenis_service'],
+            'harga' => reset_rupiah($_POST['harga']),
+            'sub_service' => $_POST['sub_service'],
+            'service_lain' => $_POST['service_lain'],
+            'tgl_service' => $_POST['tgl_service'],
+            'info_lain' => $_POST['info_lain']
+        ];
+        $this->db->insert('tb_data_service', $data);
+        $msg = [
+            'status' => 201,
+            'message' => 'Data berhasil ditambahkan'
+        ];
+        echo json_encode($msg);
     }
 }

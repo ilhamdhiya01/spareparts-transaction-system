@@ -1,4 +1,5 @@
 <form id="form_data_mobil">
+    <input type="hidden" value="<?= $id_pelanggan['id'] - 1 ?>" name="id_sebelum" id="id_sebelum">
     <?php if (is_null($id_pelanggan['id'])) : ?>
         <input type="hidden" value="" name="id_pelanggan" id="id_pelanggan">
     <?php else : ?>
@@ -71,6 +72,19 @@
     <button type="submit" class="btn btn-primary btn-sm float-right">Simpan</button>
 </form>
 <script>
+    // $("#id_pelanggan").val("");
+    $(document).ready(function() {
+        if ($("#id_sebelum").val() == <?= $id_pelanggan['id']; ?>) {
+            $.ajax({
+                url: "<?= base_url(); ?>service/loadPageError",
+                type: "get",
+                success: function(data) {
+                    $(".view-form-add-mobil").html(data);
+                }
+            });
+        }
+    });
+
     $("#form_data_mobil").submit(function(e) {
         const data = $(this).serialize();
         $.ajax({
@@ -142,6 +156,16 @@
                     } else {
                         $("#tahun_mobil").removeClass("is-invalid");
                         $(".tahun_mobil_error").html("");
+                    }
+
+                    if (data.error.id_pelanggan) {
+                        $.ajax({
+                            url: "<?= base_url(); ?>service/loadPageError",
+                            type: "get",
+                            success: function(data) {
+                                $(".view-form-add-mobil").html(data);
+                            }
+                        });
                     }
                 } else {
                     // kosongkan value
