@@ -193,10 +193,11 @@ class Service extends CI_Controller
                 'nama_service' => $_GET['nama_service'],
                 'harga_jasa' => $_GET['harga_jasa'],
                 'nama_sub_service' => @$_GET['nama_sub_service'],
+                'message' => 'Data pelanggan masih kosong, silahkan tambahkan pelanggan terlebih dahulu',
                 'id_pelanggan' => $this->db->get()->row_array()
             ];
             if (is_null($data['id_pelanggan'])) {
-                echo json_encode($this->load->view('menu/ajax-request/error-page'));
+                echo json_encode($this->load->view('menu/ajax-request/error-page', $data));
             } else {
                 echo json_encode($this->load->view('menu/ajax-request/form-add-service', $data));
             }
@@ -217,21 +218,88 @@ class Service extends CI_Controller
 
     public function addTuneUpService()
     {
-        $data = [
-            'id_pelanggan' => $_POST['id_pelanggan'],
-            'kd_service' => $_POST['kode_service'],
-            'jenis_service' => $_POST['jenis_service'],
-            'harga' => reset_rupiah($_POST['harga']),
-            'sub_service' => $_POST['sub_service'],
-            'service_lain' => $_POST['service_lain'],
-            'tgl_service' => $_POST['tgl_service'],
-            'info_lain' => $_POST['info_lain']
-        ];
-        $this->db->insert('tb_data_service', $data);
-        $msg = [
-            'status' => 201,
-            'message' => 'Data berhasil ditambahkan'
-        ];
+        $this->form_validation->set_rules('id_pelanggan', 'id_pelanggan', 'is_unique[tb_data_service.id_pelanggan]');
+        if ($this->form_validation->run() == false) {
+            $msg = [
+                'error' => [
+                    'id_pelanggan' => form_error('id_pelanggan')
+                ]
+            ];
+        } else {
+            $data = [
+                'id_pelanggan' => $_POST['id_pelanggan'],
+                'kd_service' => $_POST['kode_service'],
+                'jenis_service' => $_POST['jenis_service'],
+                'harga' => reset_rupiah($_POST['harga']),
+                'sub_service' => $_POST['sub_service'],
+                'service_lain' => $_POST['service_lain'],
+                'tgl_service' => $_POST['tgl_service'],
+                'info_lain' => $_POST['info_lain']
+            ];
+            $this->db->insert('tb_data_service', $data);
+            $msg = [
+                'status' => 201,
+                'message' => 'Data berhasil ditambahkan'
+            ];
+        }
+        echo json_encode($msg);
+    }
+
+    public function addServiceLain()
+    {
+        $this->form_validation->set_rules('id_pelanggan', 'id_pelanggan', 'is_unique[tb_data_service.id_pelanggan]');
+        if ($this->form_validation->run() == false) {
+            $msg = [
+                'error' => [
+                    'id_pelanggan' => form_error('id_pelanggan')
+                ]
+            ];
+        } else {
+            $data = [
+                'id_pelanggan' => $_POST['id_pelanggan'],
+                'kd_service' => $_POST['kode_service'],
+                'jenis_service' => $_POST['jenis_service'],
+                'harga' => reset_rupiah($_POST['harga']),
+                'sub_service' => $_POST['sub_service'],
+                'service_lain' => $_POST['service_lain'],
+                'tgl_service' => $_POST['tgl_service'],
+                'info_lain' => $_POST['info_lain']
+            ];
+            $this->db->insert('tb_data_service', $data);
+            $msg = [
+                'status' => 201,
+                'message' => 'Data berhasil ditambahkan'
+            ];
+        }
+        echo json_encode($msg);
+    }
+
+    public function addServiceBerkala()
+    {
+        $this->form_validation->set_rules('id_pelanggan', 'id_pelanggan', 'is_unique[tb_data_service.id_pelanggan]');
+        if ($this->form_validation->run() == false) {
+            $msg = [
+                'error' => [
+                    'id_pelanggan' => form_error('id_pelanggan')
+                ]
+            ];
+        } else {
+            $data = [
+                'id_pelanggan' => $_POST['id_pelanggan'],
+                'kd_service' => $_POST['kode_service'],
+                'jenis_service' => $_POST['jenis_service'],
+                'harga' => reset_rupiah($_POST['harga']),
+                'sub_service' => $_POST['sub_service'],
+                'service_lain' => $_POST['service_lain'],
+                'tgl_service' => $_POST['tgl_service'],
+                'info_lain' => $_POST['info_lain']
+            ];
+            $this->db->insert('tb_data_service', $data);
+            $msg = [
+                'status' => 201,
+                'message' => 'Data berhasil ditambahkan'
+            ];
+        }
         echo json_encode($msg);
     }
 }

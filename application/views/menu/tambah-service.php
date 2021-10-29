@@ -67,15 +67,24 @@
                                         $.ajax({
                                             url: "<?= base_url(); ?>service/loadFormAddCustomer",
                                             type: "get",
+                                            beforeSend: function() {
+                                                $(".view-form-add-customer").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+                                            },
                                             success: function(data) {
-                                                $(".view-form-add-customer").html(data);
+                                                setTimeout(function() {
+                                                    $(".view-form-add-customer").html(data);
+                                                }, 1000);
                                             }
                                         });
                                     });
                                 </script>
                             </div>
                             <div class="tab-pane fade" id="vert-tabs-profile" role="tabpanel" aria-labelledby="vert-tabs-profile-tab">
-                                <div class="view-form-add-mobil">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-10">
+                                        <div class="view-form-add-mobil">
+                                        </div>
+                                    </div>
                                 </div>
                                 <script>
                                     $("#vert-tabs-tambah-data-mobil").click(function() {
@@ -83,15 +92,24 @@
                                         $.ajax({
                                             url: "<?= base_url(); ?>service/loadFormDataMobil",
                                             type: "get",
+                                            beforeSend: function() {
+                                                $(".view-form-add-mobil").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+                                            },
                                             success: function(data) {
-                                                $(".view-form-add-mobil").html(data);
+                                                setTimeout(function() {
+                                                    $(".view-form-add-mobil").html(data);
+                                                }, 1000);
                                             }
                                         });
                                     });
                                 </script>
                             </div>
                             <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel" aria-labelledby="vert-tabs-messages-tab">
-                                <div class="view-jenis-service">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-10">
+                                        <div class="view-jenis-service">
+                                        </div>
+                                    </div>
                                 </div>
                                 <script>
                                     $("#vert-tabs-pilih-service").click(function() {
@@ -99,8 +117,13 @@
                                         $.ajax({
                                             url: "<?= base_url(); ?>service/loadBtnJenisService",
                                             type: "get",
+                                            beforeSend: function() {
+                                                $(".view-jenis-service").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+                                            },
                                             success: function(data) {
-                                                $(".view-jenis-service").html(data);
+                                                setTimeout(function() {
+                                                    $(".view-jenis-service").html(data);
+                                                }, 1000);
                                             }
                                         });
                                     });

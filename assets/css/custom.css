@@ -1,4 +1,9 @@
-
+.load {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    
+}
 /* auth */
 .back {
     background-color: #F7F7F7;
