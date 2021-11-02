@@ -1,4 +1,4 @@
-<table id="table-sub-menu" class="table table-striped table-bordered view-data" style="width:100%">
+<table id="table-sub-menu" class="table table-striped table-bordered table-hover view-data" style="width:100%">
     <thead>
         <tr class="text-center">
             <th>No</th>
@@ -39,7 +39,7 @@
                     <a href="" data-id="<?= $sub_menu['id']; ?>" class="delete-sub-menu" data-toggle="delete-sub" data-placement="top" title="Hapus"><i class="fa fa-trash"></i></a>
                 </td>
                 <td class="text-center" width="10px">
-                    <a href="" data-id="<?= $sub_menu['id']; ?>" data-toggle="modal"  data-placement="top" title="Ubah" data-target="#tambah-sub-menu" class="btn-ubah"><i class="fa fa-edit"></i></a>
+                    <a href="" data-id="<?= $sub_menu['id']; ?>" data-toggle="modal" data-placement="top" title="Ubah" data-target="#tambah-sub-menu" class="btn-ubah"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -71,7 +71,7 @@
         const id = $(this).data('id');
 
         $.ajax({
-            url: "http://localhost/spareparts-transaction-system/menu/ambilDataDropdownMenu",
+            url: "<?= base_url(); ?>/menu/ambilDataDropdownMenu",
             type: "get",
             data: {
                 id_sub: id,

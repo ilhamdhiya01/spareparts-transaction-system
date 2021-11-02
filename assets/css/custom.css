@@ -1,8 +1,10 @@
-.load {
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    
+.auto {
+    display: block;
+    /* padding: 5px;
+    margin-top: 20px; */
+    width: 100%;
+    height: 400px;
+    overflow: auto;
 }
 /* auth */
 .back {

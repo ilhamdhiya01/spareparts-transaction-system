@@ -302,4 +302,8 @@ class Service extends CI_Controller
         }
         echo json_encode($msg);
     }
+
+    public function cetakSPK(){
+        
+    }
 }

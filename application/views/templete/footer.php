@@ -35,6 +35,8 @@
 <script src="<?= base_url(); ?>assets/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="<?= base_url(); ?>assets/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- dataTables -->
+<script src="<?= base_url(); ?>assets/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url(); ?>assets/AdminLTE/dist/js/adminlte.js"></script>
 <!-- my js -->

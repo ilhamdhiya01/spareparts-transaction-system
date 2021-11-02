@@ -7,7 +7,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url(); ?>menu">Home</a></li>
                     <li class="breadcrumb-item active"><?= $judul; ?></li>
                 </ol>
             </div>
@@ -106,7 +106,7 @@
                             </div>
                             <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel" aria-labelledby="vert-tabs-messages-tab">
                                 <div class="row justify-content-center">
-                                    <div class="col-md-10">
+                                    <div class="col-md-12">
                                         <div class="view-jenis-service">
                                         </div>
                                     </div>
@@ -130,7 +130,22 @@
                                 </script>
                             </div>
                             <div class="tab-pane fade" id="vert-tabs-settings" role="tabpanel" aria-labelledby="vert-tabs-settings-tab">
-                                Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                                <!-- <div class="view-table-cetak-spk"> -->
+                                    
+                                <!-- </div> -->
+                                <script>
+                                    $(document).ready(function(){
+                                        $('#data1').DataTable({
+                                            "paging": false,
+                                            "ordering": false,
+                                            "info": false
+                                        });
+                                    });
+
+                                    $("#vert-tabs-cetak-spk").click(function() {
+
+                                    });
+                                </script>
                             </div>
                         </div>
                     </div>

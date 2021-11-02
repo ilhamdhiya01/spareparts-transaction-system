@@ -83,7 +83,7 @@
 
                                 function readDropdownMenu() {
                                     $.ajax({
-                                        url: "http://localhost/spareparts-transaction-system/menu/ambilDataDropdownMenu",
+                                        url: "<?= base_url(); ?>/menu/ambilDataDropdownMenu",
                                         type: "get",
                                         data: {
                                             id_sub: $("#id-sub-menu").val(),
