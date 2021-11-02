@@ -1,6 +1,6 @@
-<?php 
-$no=1;
-foreach ($jenis_service as $js) : 
+<?php
+$no = 1;
+foreach ($jenis_service as $js) :
 ?>
     <div class="info-box btn-service" data-id="<?= $js['id']; ?>" data-nama="<?= $js['nama_service']; ?>" data-harga="<?= $js['harga']; ?>">
         <span class="info-box-icon bg-primary"><i class="fas fa-tools"></i></span>
@@ -31,8 +31,13 @@ foreach ($jenis_service as $js) :
                 $.ajax({
                     url: "<?= base_url(); ?>service/loadSubService",
                     type: "get",
+                    beforeSend: function() {
+                        $(".view-jenis-service").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+                    },
                     success: function(data) {
-                        $(".view-jenis-service").html(data);
+                        setTimeout(function(){
+                            $(".view-jenis-service").html(data);
+                        },500);
                         // console.log(data);
                     }
                 });
@@ -44,10 +49,15 @@ foreach ($jenis_service as $js) :
                     type: "get",
                     data: {
                         nama_service: nama_service,
-                        harga_jasa : harga_jasa
+                        harga_jasa: harga_jasa
+                    },
+                    beforeSend: function() {
+                        $(".view-jenis-service").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
                     },
                     success: function(data) {
-                        $(".view-jenis-service").html(data);
+                        setTimeout(function(){
+                            $(".view-jenis-service").html(data);
+                        },500);
                         // console.log(data);
                     }
                 });

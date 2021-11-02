@@ -15,7 +15,7 @@ $(document).ready(function () {
 // Tampilkan tabel user menu
 function readUserMenu() {
 	$.ajax({
-		url: "http://localhost/spareparts-transaction-system/menu/ambilDataUserMenu",
+		url: "http://localhost:8080/spareparts-transaction-system/menu/ambilDataUserMenu",
 		type: "get",
 		success: function (data) {
 			$(".view-user-menu").html(data);
@@ -25,7 +25,7 @@ function readUserMenu() {
 // tampilkan form user menu
 function readFormUserMenu() {
 	$.ajax({
-		url: "http://localhost/spareparts-transaction-system/menu/formUserMenu",
+		url: "http://localhost:8080/spareparts-transaction-system/menu/formUserMenu",
 		type: "get",
 		success: function (data) {
 			$(".view-form-user-menu").html(data);
@@ -36,7 +36,7 @@ function readFormUserMenu() {
 // Ajax request Sub menu
 function readSubMenu() {
 	$.ajax({
-		url: "http://localhost/spareparts-transaction-system/menu/ambilDataSubMenu",
+		url: "http://localhost:8080/spareparts-transaction-system/menu/ambilDataSubMenu",
 		type: "get",
 		success: function (data) {
 			$("#view-sub-menu").html(data);
@@ -49,7 +49,7 @@ function readSubMenu() {
 
 function readFormSubMenu() {
 	$.ajax({
-		url: "http://localhost/spareparts-transaction-system/menu/formSubMenu",
+		url: "http://localhost:8080/spareparts-transaction-system/menu/formSubMenu",
 		type: "get",
 		success: function (data) {
 			$(".view-form-sub-menu").html(data);
@@ -63,7 +63,7 @@ function readFormSubMenu() {
 // ajax request access menu
 function readAccessMenu() {
 	$.ajax({
-		url: "http://localhost/spareparts-transaction-system/menu/ambilDataAccessMenu",
+		url: "http://localhost:8080/spareparts-transaction-system/menu/ambilDataAccessMenu",
 		type: "get",
 		success: function (data) {
 			$(".view-access-menu").html(data);
@@ -77,7 +77,7 @@ function readAccessMenu() {
 // load form user access menu
 function readFormAccessMenu() {
 	$.ajax({
-		url: "http://localhost/spareparts-transaction-system/menu/formAccessMenu",
+		url: "http://localhost:8080/spareparts-transaction-system/menu/formAccessMenu",
 		type: "get",
 		success: function (data) {
 			$(".view-form-access-menu").html(data);

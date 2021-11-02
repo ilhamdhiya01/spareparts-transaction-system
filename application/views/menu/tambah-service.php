@@ -73,7 +73,7 @@
                                             success: function(data) {
                                                 setTimeout(function() {
                                                     $(".view-form-add-customer").html(data);
-                                                }, 1000);
+                                                }, 500);
                                             }
                                         });
                                     });
@@ -98,7 +98,7 @@
                                             success: function(data) {
                                                 setTimeout(function() {
                                                     $(".view-form-add-mobil").html(data);
-                                                }, 1000);
+                                                }, 500);
                                             }
                                         });
                                     });
@@ -123,7 +123,7 @@
                                             success: function(data) {
                                                 setTimeout(function() {
                                                     $(".view-jenis-service").html(data);
-                                                }, 1000);
+                                                }, 500);
                                             }
                                         });
                                     });

@@ -1,6 +1,6 @@
-<?php 
+<?php
 $no = 1;
-foreach ($sub_jenis_service as $sub_service) : 
+foreach ($sub_jenis_service as $sub_service) :
 ?>
     <div class="info-box  sub-service" data-idsub="<?php $sub_service['id']; ?>" data-harga="<?= $sub_service['harga']; ?>" data-idservice="<?= $sub_service['id_jenis_service']; ?>" data-namaservice="<?= $sub_service['nama_service']; ?>" data-namasub="<?= $sub_service['nama_sub_service']; ?>">
         <span class="info-box-icon bg-warning"><i class="fas fa-tools"></i></span>
@@ -30,10 +30,15 @@ foreach ($sub_jenis_service as $sub_service) :
             data: {
                 nama_service: nama_service,
                 nama_sub_service: nama_sub_service,
-                harga_jasa : harga_jasa
+                harga_jasa: harga_jasa
+            },
+            beforeSend: function() {
+                $(".view-jenis-service").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
             },
             success: function(data) {
-                $(".view-jenis-service").html(data);
+                setTimeout(function() {
+                    $(".view-jenis-service").html(data);
+                }, 500);
             }
         });
     });
