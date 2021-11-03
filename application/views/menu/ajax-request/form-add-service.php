@@ -77,99 +77,72 @@
                 </h3>
             </div>
             <div class="card-body auto">
-                <div class="card card-info card-outline">
-                    <div class="card-header">
-                        <h5 class="card-title">Create Labels</h5>
-                        <div class="card-tools">
-                            <a href="#" class="btn btn-tool btn-link">#3</a>
-                            <a href="#" class="btn btn-tool">
-                                <i class="fas fa-pen"></i>
-                            </a>
+                <?php foreach ($spareparts as $spr) : ?>
+                    <div class="card card-info card-outline">
+                        <div class="card-header">
+                            <h5 class="card-title"><?= $spr['nama_spareparts']; ?></h5>
+                            <div class="card-tools">
+                                <a href="#" class="btn btn-tool btn-link"><?= $spr['kd_spareparts']; ?></a>
+                                <a href="#" class="btn btn-tool">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body auto_sub">
+                            <?php
+                            $this->db->select('tb_spareparts.kd_spareparts, tb_sub_spareparts.*');
+                            $this->db->from('tb_sub_spareparts');
+                            $this->db->join('tb_spareparts', 'tb_sub_spareparts.id_spareparts = tb_spareparts.id');
+                            $this->db->where('id_spareparts', $spr['id']);
+                            $result = $this->db->get()->result_array();
+                            foreach ($result as $sub_spr) :
+                            ?>
+                                <div class="form-check">
+                                    <input class="form-check-input pilih-spareparts" type="checkbox" value="" data-spareparts="<?= $spr['id']; ?>" data-subspareparts="<?= $sub_spr['id']; ?>" data-idpelanggan="<?= $id_pelanggan['id']; ?>" id="">
+                                    <label class="form-check-label text-sm" for="defaultCheck1">
+                                        <?= $sub_spr['nama_spareparts']; ?>
+                                    </label>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="customCheckbox1" disabled>
-                            <label for="customCheckbox1" class="custom-control-label">Bug</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="customCheckbox2" disabled>
-                            <label for="customCheckbox2" class="custom-control-label">Feature</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="customCheckbox3" disabled>
-                            <label for="customCheckbox3" class="custom-control-label">Enhancement</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="customCheckbox4" disabled>
-                            <label for="customCheckbox4" class="custom-control-label">Documentation</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="customCheckbox5" disabled>
-                            <label for="customCheckbox5" class="custom-control-label">Examples</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h5 class="card-title">Create Issue template</h5>
-                        <div class="card-tools">
-                            <a href="#" class="btn btn-tool btn-link">#4</a>
-                            <a href="#" class="btn btn-tool">
-                                <i class="fas fa-pen"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="customCheckbox1_1" disabled>
-                            <label for="customCheckbox1_1" class="custom-control-label">Bug Report</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="customCheckbox1_2" disabled>
-                            <label for="customCheckbox1_2" class="custom-control-label">Feature Request</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h5 class="card-title">Create PR template</h5>
-                        <div class="card-tools">
-                            <a href="#" class="btn btn-tool btn-link">#6</a>
-                            <a href="#" class="btn btn-tool">
-                                <i class="fas fa-pen"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card card-light card-outline">
-                    <div class="card-header">
-                        <h5 class="card-title">Create Actions</h5>
-                        <div class="card-tools">
-                            <a href="#" class="btn btn-tool btn-link">#7</a>
-                            <a href="#" class="btn btn-tool">
-                                <i class="fas fa-pen"></i>
-                            </a>
-                        </div>
-
-                    </div>
-                    <div class="card-body">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            Aenean commodo ligula eget dolor. Aenean massa.
-                            Cum sociis natoque penatibus et magnis dis parturient montes,
-                            nascetur ridiculus mus.
-                        </p>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
 </div>
 <script>
-    $('[data-spy="scroll"]').each(function() {
-        var $spy = $(this).scrollspy('refresh')
-    })
+    $(".pilih-spareparts").click(function() {
+        const id_spareparts = $(this).data("spareparts");
+        const id_sub_spareparts = $(this).data("subspareparts");
+        const id_pelanggan = $(this).data("idpelanggan");
+        $.ajax({
+            url: "<?= base_url(); ?>service/change_spareparts",
+            type: "post",
+            dataType: "json",
+            data: {
+                id_spareparts: id_spareparts,
+                id_sub_spareparts: id_sub_spareparts,
+                id_pelanggan: id_pelanggan
+            },
+            success: function(data) {
+                console.log(data);
+                if (data.status == 201) {
+                    iziToast.success({
+                        title: 'Success',
+                        message: data.message,
+                        position: 'topRight'
+                    });
+                } else {
+                    iziToast.success({
+                        title: 'Success',
+                        message: data.message,
+                        position: 'topRight'
+                    });
+                }
+            }
+        });
+    });
     $(document).ready(function() {
         const nama_service = $("#jenis_service").val();
         switch (nama_service) {

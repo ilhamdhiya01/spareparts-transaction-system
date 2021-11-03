@@ -131,17 +131,9 @@
                             </div>
                             <div class="tab-pane fade" id="vert-tabs-settings" role="tabpanel" aria-labelledby="vert-tabs-settings-tab">
                                 <!-- <div class="view-table-cetak-spk"> -->
-                                    
+
                                 <!-- </div> -->
                                 <script>
-                                    $(document).ready(function(){
-                                        $('#data1').DataTable({
-                                            "paging": false,
-                                            "ordering": false,
-                                            "info": false
-                                        });
-                                    });
-
                                     $("#vert-tabs-cetak-spk").click(function() {
 
                                     });

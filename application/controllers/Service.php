@@ -9,6 +9,7 @@ class Service extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Kode_otomatis_model');
+        $this->load->model('Spareparts_model');
     }
 
     public function index()
@@ -194,7 +195,9 @@ class Service extends CI_Controller
                 'harga_jasa' => $_GET['harga_jasa'],
                 'nama_sub_service' => @$_GET['nama_sub_service'],
                 'message' => 'Data pelanggan masih kosong, silahkan tambahkan pelanggan terlebih dahulu',
-                'id_pelanggan' => $this->db->get()->row_array()
+                'id_pelanggan' => $this->db->get()->row_array(),
+                'spareparts' => $this->db->get('tb_spareparts')->result_array(),
+                // 'sub_spareparts' => $this->Spareparts_model->getSubSpareparts()
             ];
             if (is_null($data['id_pelanggan'])) {
                 echo json_encode($this->load->view('menu/ajax-request/error-page', $data));
@@ -303,7 +306,29 @@ class Service extends CI_Controller
         echo json_encode($msg);
     }
 
-    public function cetakSPK(){
-        
+    public function change_spareparts()
+    {
+        $data = [
+            'id_spareparts' => $_POST['id_spareparts'],
+            'id_sub_spareparts' => $_POST['id_sub_spareparts'],
+            'id_pelanggan' => $_POST['id_pelanggan']
+        ];
+        $result = $this->db->get_where('tb_spareparts_service', $data);
+        if ($this->input->is_ajax_request()) {
+            if ($result->num_rows() < 1) {
+                $this->db->insert('tb_spareparts_service', $data);
+                $msg = [
+                    'response' => 201,
+                    'message' => 'Spareparts berhasil ditambahkan'
+                ];
+                echo json_encode($msg);
+            } else {
+                $this->db->delete('tb_spareparts_service', $data);
+                $msg = [
+                    'message' => 'Spareparts tidak ditambahkan'
+                ];
+                echo json_encode($msg);
+            }
+        }
     }
 }
