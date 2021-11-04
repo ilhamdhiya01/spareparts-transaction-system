@@ -131,35 +131,23 @@
                             </div>
                             <div class="tab-pane fade" id="vert-tabs-settings" role="tabpanel" aria-labelledby="vert-tabs-settings-tab">
                                 <div class="view-table-cetak-spk table-responsive">
-                                    <table class="table table-striped table-bordered" id="tab1">
-                                        <thead>
-                                            <tr class="text-sm text-center">
-                                                <th scope="col">No</th>
-                                                <th scope="col">Kd Service</th>
-                                                <th scope="col">Tipe Mobil</th>
-                                                <th scope="col">Nama Pelanggan</th>
-                                                <th scope="col">Status Service</th>
-                                                <th scope="col">Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+
                                 </div>
                                 <script>
-                                    $(document).ready(function() {
-                                        $('#tab1').DataTable();
-                                    });
                                     $("#vert-tabs-cetak-spk").click(function() {
-
+                                        $("#card-title-add-service").html("<i class='fas fa-edit'></i> Cetak SPK");
+                                        $.ajax({
+                                            url: "<?= base_url(); ?>service/loadTableDataSpk",
+                                            type: "get",
+                                            beforeSend: function() {
+                                                $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+                                            },
+                                            success: function(data) {
+                                                setTimeout(function() {
+                                                    $(".view-table-cetak-spk").html(data);
+                                                }, 500);
+                                            }
+                                        });
                                     });
                                 </script>
                             </div>

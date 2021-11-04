@@ -10,6 +10,7 @@ class Service extends CI_Controller
         parent::__construct();
         $this->load->model('Kode_otomatis_model');
         $this->load->model('Spareparts_model');
+        $this->load->model('Data_service_model');
     }
 
     public function index()
@@ -312,7 +313,7 @@ class Service extends CI_Controller
                 'spareparts' => $this->db->get('tb_spareparts')->result_array(),
                 'id_pelanggan' => $_GET['id_pelanggan']
             ];
-            echo json_encode($this->load->view('menu/ajax-request/data-spareparts',$data));
+            echo json_encode($this->load->view('menu/ajax-request/data-spareparts', $data));
         } else {
             echo json_encode('Request failed');
         }
@@ -325,7 +326,8 @@ class Service extends CI_Controller
             'id_sub_spareparts' => $_POST['id_sub_spareparts'],
             'id_pelanggan' => $_POST['id_pelanggan'],
             'id_mobil' => $_POST['id_mobil'],
-            'id_service' => $_POST['id_service']
+            'id_service' => $_POST['id_service'],
+            'status' => 0
         ];
         // echo json_encode($data);
         $result = $this->db->get_where('tb_spareparts_service', $data);
@@ -344,6 +346,18 @@ class Service extends CI_Controller
                 ];
                 echo json_encode($msg);
             }
+        }
+    }
+
+    public function loadTableDataSpk()
+    {
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'data_service' => $this->Data_service_model->getAllDataService()
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/data-spk',$data));
+        } else {
+            echo json_encode("Request failed");
         }
     }
 }
