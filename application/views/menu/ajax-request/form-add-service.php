@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-7">
         <form id="form_add_service">
             <input type="hidden" value="<?= $id_pelanggan['id']; ?>" name="id_sebelum" id="id_sebelum">
@@ -69,80 +69,27 @@
             <button type="submit" id="btn_add_service" class="btn btn-sm btn-primary">Simpan</button>
         </form>
     </div>
-    <div class="col-md-5">
-        <div class="card card-row card-primary">
-            <div class="card-header">
-                <h3 class="card-title">
-                    Spareparts
-                </h3>
-            </div>
-            <div class="card-body auto">
-                <?php foreach ($spareparts as $spr) : ?>
-                    <div class="card card-info card-outline">
-                        <div class="card-header">
-                            <h5 class="card-title"><?= $spr['nama_spareparts']; ?></h5>
-                            <div class="card-tools">
-                                <a href="#" class="btn btn-tool btn-link"><?= $spr['kd_spareparts']; ?></a>
-                                <a href="#" class="btn btn-tool">
-                                    <i class="fas fa-pen"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="card-body auto_sub">
-                            <?php
-                            $this->db->select('tb_spareparts.kd_spareparts, tb_sub_spareparts.*');
-                            $this->db->from('tb_sub_spareparts');
-                            $this->db->join('tb_spareparts', 'tb_sub_spareparts.id_spareparts = tb_spareparts.id');
-                            $this->db->where('id_spareparts', $spr['id']);
-                            $result = $this->db->get()->result_array();
-                            foreach ($result as $sub_spr) :
-                            ?>
-                                <div class="form-check">
-                                    <input class="form-check-input pilih-spareparts" type="checkbox" value="" data-spareparts="<?= $spr['id']; ?>" data-subspareparts="<?= $sub_spr['id']; ?>" data-idpelanggan="<?= $id_pelanggan['id']; ?>" id="">
-                                    <label class="form-check-label text-sm" for="defaultCheck1">
-                                        <?= $sub_spr['nama_spareparts']; ?>
-                                    </label>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+    <div class="col-md-5" id="pilih-spareparts" style="display: none;">
+        <div class="data-spareparts">
+
         </div>
     </div>
+    <script>
+        function loadDataSpareparts() {
+            $.ajax({
+                url: "<?= base_url(); ?>service/loadPilihSpareparts",
+                type: "get",
+                data: {
+                    'id_pelanggan': '<?= $id_pelanggan["id"]; ?>'
+                },
+                success: function(data) {
+                    $(".data-spareparts").html(data);
+                }
+            });
+        }
+    </script>
 </div>
 <script>
-    $(".pilih-spareparts").click(function() {
-        const id_spareparts = $(this).data("spareparts");
-        const id_sub_spareparts = $(this).data("subspareparts");
-        const id_pelanggan = $(this).data("idpelanggan");
-        $.ajax({
-            url: "<?= base_url(); ?>service/change_spareparts",
-            type: "post",
-            dataType: "json",
-            data: {
-                id_spareparts: id_spareparts,
-                id_sub_spareparts: id_sub_spareparts,
-                id_pelanggan: id_pelanggan
-            },
-            success: function(data) {
-                console.log(data);
-                if (data.status == 201) {
-                    iziToast.success({
-                        title: 'Success',
-                        message: data.message,
-                        position: 'topRight'
-                    });
-                } else {
-                    iziToast.success({
-                        title: 'Success',
-                        message: data.message,
-                        position: 'topRight'
-                    });
-                }
-            }
-        });
-    });
     $(document).ready(function() {
         const nama_service = $("#jenis_service").val();
         switch (nama_service) {
@@ -210,6 +157,8 @@
                                         message: data.message,
                                         position: 'topRight'
                                     });
+                                    $("#pilih-spareparts").removeAttr("style");
+                                    loadDataSpareparts();
                                 } else {
                                     iziToast.error({
                                         title: 'Error',
@@ -266,6 +215,8 @@
                                         message: data.message,
                                         position: 'topRight'
                                     });
+                                    $("#pilih-spareparts").removeAttr("style");
+                                    loadDataSpareparts();
                                 } else {
                                     iziToast.error({
                                         title: 'Error',
@@ -318,6 +269,8 @@
                                         message: data.message,
                                         position: 'topRight'
                                     });
+                                    $("#pilih-spareparts").removeAttr("style");
+                                    loadDataSpareparts();
                                 } else {
                                     iziToast.error({
                                         title: 'Error',

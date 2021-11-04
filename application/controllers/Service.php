@@ -186,20 +186,19 @@ class Service extends CI_Controller
         // $hasil = $data++;
         if ($this->input->is_ajax_request()) {
             $this->db->select('tb_pelanggan.id');
-            $this->db->from('tb_pelanggan');
             $this->db->order_by('id', 'DESC');
             $this->db->limit(1);
+
             $data = [
                 'kd_service' => $this->Kode_otomatis_model->getKode(),
                 'nama_service' => $_GET['nama_service'],
                 'harga_jasa' => $_GET['harga_jasa'],
                 'nama_sub_service' => @$_GET['nama_sub_service'],
                 'message' => 'Data pelanggan masih kosong, silahkan tambahkan pelanggan terlebih dahulu',
-                'id_pelanggan' => $this->db->get()->row_array(),
-                'spareparts' => $this->db->get('tb_spareparts')->result_array(),
-                // 'sub_spareparts' => $this->Spareparts_model->getSubSpareparts()
+                'id_pelanggan' => $this->db->get('tb_pelanggan')->row_array()
             ];
             if (is_null($data['id_pelanggan'])) {
+                // echo json_encode($this->load->view('menu/ajax-request/form-add-service', $data));
                 echo json_encode($this->load->view('menu/ajax-request/error-page', $data));
             } else {
                 echo json_encode($this->load->view('menu/ajax-request/form-add-service', $data));
@@ -306,13 +305,29 @@ class Service extends CI_Controller
         echo json_encode($msg);
     }
 
+    public function loadPilihSpareparts()
+    {
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'spareparts' => $this->db->get('tb_spareparts')->result_array(),
+                'id_pelanggan' => $_GET['id_pelanggan']
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/data-spareparts',$data));
+        } else {
+            echo json_encode('Request failed');
+        }
+    }
+
     public function change_spareparts()
     {
         $data = [
             'id_spareparts' => $_POST['id_spareparts'],
             'id_sub_spareparts' => $_POST['id_sub_spareparts'],
-            'id_pelanggan' => $_POST['id_pelanggan']
+            'id_pelanggan' => $_POST['id_pelanggan'],
+            'id_mobil' => $_POST['id_mobil'],
+            'id_service' => $_POST['id_service']
         ];
+        // echo json_encode($data);
         $result = $this->db->get_where('tb_spareparts_service', $data);
         if ($this->input->is_ajax_request()) {
             if ($result->num_rows() < 1) {

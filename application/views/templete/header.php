@@ -22,6 +22,9 @@
     <link href="<?= base_url(); ?>assets/AdminLTE/plugins/select2/css/select2.min.css" rel="stylesheet">
     <!-- smartWizard -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/AdminLTE/plugins/jquery-smartwizard-master/dist/css/smart_wizard_all.min.css">
+    <!-- dataTables -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/AdminLTE/plugins/datatables-autofill/css/autoFill.bootstrap4.min.css">
     <!-- my css -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/custom.css">
     <!-- jQuery -->
