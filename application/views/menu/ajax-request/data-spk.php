@@ -37,10 +37,10 @@
                     ?>
                 </td>
                 <td>
-                    <a href=""><i class="fas fa-info-circle"></i></a>
-                    <a href=""><i class="fas fa-trash"></i></a>
-                    <a href=""><i class="fas fa-edit"></i></a>
-                    <a href=""><i class="fas fa-print"></i></a>
+                    <a href="" class="detail-service" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>"><i class="fas fa-info-circle"></i></a>
+                    <a href="" class=""><i class="fas fa-trash"></i></a>
+                    <a href="" class=""><i class="fas fa-edit"></i></a>
+                    <a href="" class=""><i class="fas fa-print"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -49,5 +49,23 @@
 <script>
     $(document).ready(function() {
         $('#tab1').DataTable();
+    });
+
+    $(".detail-service").click(function(e) {
+        const id_service = $(this).data("idservice");
+        const id_pelanggan = $(this).data("idpelanggan");
+
+        $.ajax({
+            url: "<?= base_url(); ?>service/detail_service",
+            type: "get",
+            data: {
+                id_service: id_service,
+                id_pelanggan: id_pelanggan
+            },
+            success: function(data) {
+                $(".view-table-cetak-spk").html(data);
+            }
+        });
+        e.preventDefault();
     });
 </script>
