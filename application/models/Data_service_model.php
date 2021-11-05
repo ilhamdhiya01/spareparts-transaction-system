@@ -7,7 +7,7 @@ class Data_service_model extends CI_Model
 {
     public function getAllDataService()
     {
-        $this->db->select('tb_data_service.kd_service, tb_data_service.id as id_service,  tb_data_mobil.tipe_mobil, tb_pelanggan.nama_pelanggan, tb_pelanggan.id as id_pelanggan, tb_spareparts_service.status, tb_spareparts_service.id');
+        $this->db->select('tb_data_service.kd_service, tb_data_service.id as id_service,  tb_data_mobil.tipe_mobil, tb_data_mobil.id as id_mobil, tb_pelanggan.nama_pelanggan, tb_pelanggan.id as id_pelanggan, tb_spareparts_service.status, tb_spareparts_service.id');
         $this->db->from('tb_spareparts_service');
         $this->db->join('tb_data_service', 'tb_spareparts_service.id_service = tb_data_service.id');
         $this->db->join('tb_data_mobil', 'tb_spareparts_service.id_mobil = tb_data_mobil.id');

@@ -368,13 +368,30 @@ class Service extends CI_Controller
             $id_pelanggan = $_GET['id_pelanggan'];
 
             $data = [
-                "detail_data_service" => $this->Data_service_model->detail_data_service($id_service,$id_pelanggan),
-                "data_spareparts" => $this->Data_service_model->get_sub_spareparts_by_id($id_service,$id_pelanggan)
+                "detail_data_service" => $this->Data_service_model->detail_data_service($id_service, $id_pelanggan),
+                "data_spareparts" => $this->Data_service_model->get_sub_spareparts_by_id($id_service, $id_pelanggan)
             ];
 
             echo json_encode($this->load->view('menu/ajax-request/detail-service', $data));
         } else {
             echo json_encode("Request failed");
         }
+    }
+
+    public function delete_data_spk()
+    {
+        $id_service = $_POST['id_service'];
+        $id_pelanggan = $_POST['id_pelanggan'];
+        $id_mobil = $_POST['id_mobil'];
+
+        $this->db->delete('tb_data_mobil', ['id' => $id_mobil]);
+        $this->db->delete('tb_data_service', ['id' => $id_service]);
+        $this->db->delete('tb_spareparts_service', ['id_service' => $id_service]);
+
+        $msg = [
+            'status' => 200,
+            'message' => 'Data berhasil di hapus'
+        ];
+        echo json_encode($msg);
     }
 }
