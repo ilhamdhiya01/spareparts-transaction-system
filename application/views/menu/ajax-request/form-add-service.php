@@ -69,7 +69,7 @@
             <button type="submit" id="btn_add_service" class="btn btn-sm btn-primary">Simpan</button>
         </form>
     </div>
-    <div class="col-md-5" id="pilih-spareparts" style="display: none;">
+    <div class="col-md-5" id="pilih-spareparts" style="display:none;">
         <div class="data-spareparts">
 
         </div>

@@ -1,6 +1,6 @@
 <table class="table table-striped table-bordered" id="tab1">
     <thead>
-        <tr class="text-sm text-center">
+        <tr class="text-sm">
             <th scope="col">No</th>
             <th scope="col">Kd Service</th>
             <th scope="col">Tipe Mobil</th>
@@ -37,10 +37,10 @@
                     ?>
                 </td>
                 <td>
-                    <a href="" class="detail-service" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>"><i class="fas fa-info-circle"></i></a>
-                    <a href="" class="delete-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>" data-idmobil="<?= $ds['id_mobil']; ?>"><i class="fas fa-trash"></i></a>
-                    <a href="" class=""><i class="fas fa-edit"></i></a>
-                    <a href="" class=""><i class="fas fa-print"></i></a>
+                    <a href="" data-toggle="detail-spk" data-placement="top" title="Detail" class="detail-service" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>"><i class="fas fa-info-circle"></i></a>
+                    <a href="" data-toggle="delete-spk" data-placement="top" title="Hapus" class="delete-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>" data-idmobil="<?= $ds['id_mobil']; ?>"><i class="fas fa-trash"></i></a>
+                    <a href="" data-toggle="edit-spk" data-placement="top" title="Edit" class="update-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>"><i class="fas fa-edit"></i></a>
+                    <a href="" data-toggle="cetak-spk" data-placement="top" title="Cetak" class=""><i class="fas fa-print"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -49,6 +49,14 @@
 <script>
     $(document).ready(function() {
         $('#tab1').DataTable();
+
+        $(function() {
+            // $('[data-toggle="detail-spk"]').tooltip();
+            // $('[data-toggle="delete-spk"]').tooltip();
+            // $('[data-toggle="edit-spk"]').tooltip();
+            // $('[data-toggle="cetak-spk"]').tooltip();
+        })
+        // tooltip
     });
 
     $(".detail-service").click(function(e) {
@@ -62,8 +70,13 @@
                 id_service: id_service,
                 id_pelanggan: id_pelanggan
             },
+            beforeSend: function() {
+                $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+            },
             success: function(data) {
-                $(".view-table-cetak-spk").html(data);
+                setTimeout(function() {
+                    $(".view-table-cetak-spk").html(data);
+                }, 500);
             }
         });
         e.preventDefault();
@@ -112,6 +125,29 @@
                 });
             }
         })
+        e.preventDefault();
+    });
+
+    $(".update-spk").click(function(e) {
+        const id_service = $(this).data("idservice");
+        const id_pelanggan = $(this).data("idpelanggan");
+        // console.log(id_service + " " + id_pelanggan);
+        $.ajax({
+            url: "<?= base_url(); ?>service/update_data_spk",
+            type: "get",
+            data: {
+                id_service: id_service,
+                id_pelanggan: id_pelanggan
+            },
+            beforeSend: function() {
+                $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+            },
+            success: function(data) {
+                setTimeout(function() {
+                    $(".view-table-cetak-spk").html(data);
+                }, 500);
+            }
+        });
         e.preventDefault();
     });
 </script>

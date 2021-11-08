@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<?= base_url(); ?>assets/AdminLTE/plugins/izitoast/dist/css/iziToast.min.css">
     <!-- select2 -->
     <link href="<?= base_url(); ?>assets/AdminLTE/plugins/select2/css/select2.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/AdminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"> -->
     <!-- smartWizard -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/AdminLTE/plugins/jquery-smartwizard-master/dist/css/smart_wizard_all.min.css">
     <!-- dataTables -->

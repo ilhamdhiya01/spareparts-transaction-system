@@ -194,9 +194,6 @@
                                 position: 'topRight'
                             });
                             $('.hapus-sub-menu').fadeOut(1500);
-                            // setTimeout(() => {
-                            //     document.location.href = '<?= base_url(); ?>menu/dropdown_subMenu';
-                            // }, 2000)
                         } else {
                             iziToast.warning({
                                 title: 'Failed',

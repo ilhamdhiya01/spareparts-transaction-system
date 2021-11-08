@@ -25,3 +25,15 @@ function reset_rupiah($rupiah)
     $format = preg_replace("/[Rp.]/", "", $rupiah);
     return $format;
 }
+
+function change_spareparts_checked($id_pelanggan, $id_sub_spareparts)
+{
+    $ci = get_instance();
+    $ci->db->where('id_pelanggan', $id_pelanggan);
+    $ci->db->where('id_sub_spareparts', $id_sub_spareparts);
+    $result = $ci->db->get('tb_spareparts_service');
+
+    if ($result->num_rows() > 0) {
+        return "checked='checked'";
+    }
+}

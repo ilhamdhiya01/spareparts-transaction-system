@@ -37,7 +37,7 @@
                             $this->db->where('id_pelanggan',$id_pelanggan);
                             $id_service = $this->db->get()->row_array();
                             ?>
-                            <input class="form-check-input pilih-spareparts" type="checkbox" data-idservice="<?= $id_service['id']; ?>" data-idmobil="<?= $id_mobil['id']; ?>" data-spareparts="<?= $spr['id']; ?>" data-subspareparts="<?= $sub_spr['id']; ?>" data-idpelanggan="<?= $id_pelanggan; ?>" value="" id="">
+                            <input class="form-check-input pilih-spareparts" type="checkbox" <?= change_spareparts_checked($id_pelanggan,$sub_spr['id']); ?> data-idservice="<?= $id_service['id']; ?>" data-idmobil="<?= $id_mobil['id']; ?>" data-spareparts="<?= $spr['id']; ?>" data-subspareparts="<?= $sub_spr['id']; ?>" data-idpelanggan="<?= $id_pelanggan; ?>" value="" id="">
                             <label class="form-check-label text-sm" for="defaultCheck1">
                                 <?= $sub_spr['nama_spareparts']; ?>
                             </label>
