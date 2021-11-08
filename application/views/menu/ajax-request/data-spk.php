@@ -22,16 +22,59 @@
                 <td>
                     <?php
                     switch ($ds['status']) {
-                        case 0:
-                            echo '<span class="badge badge-danger">Belum service</span>';
-                            break;
-                        case 1:
-                            echo '<span class="badge badge-success">Sudah service</span>';
-                            break;
-                        case 2:
-                            echo '<span class="badge badge-warning">Pending</span>';
-                            break;
+                        case 0: ?>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger btn-sm btn-status">Belum Service</button>
+                                <button type="button" class="btn btn-danger btn-sm dropdown-toggle dropdown-icon btn-color" data-toggle="dropdown">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="0" class="dropdown-item belum-service" href="#">Belum Service</a>
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="1" class="dropdown-item sudah-service" href="#">Sudah Service</a>
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="2" class="dropdown-item pending" href="#">Pending</a>
+                                </div>
+                            </div>
+                        <?php break;
+                        case 1: ?>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success btn-sm btn-status">Sudah Service</button>
+                                <button type="button" class="btn btn-success btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="0" class="dropdown-item belum-service" href="#">Belum Service</a>
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="1" class="dropdown-item sudah-service" href="#">Sudah Service</a>
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="2" class="dropdown-item pending" href="#">Pending</a>
+                                </div>
+                            </div>
+                        <?php break;
+                        case 2: ?>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-warning btn-sm btn-status">Pending</button>
+                                <button type="button" class="btn btn-warning btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="0" class="dropdown-item belum-service" href="#">Belum Service</a>
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="1" class="dropdown-item sudah-service" href="#">Sudah Service</a>
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="2" class="dropdown-item pending" href="#">Pending</a>
+                                </div>
+                            </div>
+                        <?php break;
                         default:
+                        ?>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm">Status</button>
+                                <button type="button" class="btn btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="0" class="dropdown-item belum-service" href="#">Belum Service</a>
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="1" class="dropdown-item sudah-service" href="#">Sudah Service</a>
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="2" class="dropdown-item pending" href="#">Pending</a>
+                                </div>
+                            </div>
+                    <?php
                             break;
                     }
                     ?>
@@ -49,14 +92,47 @@
 <script>
     $(document).ready(function() {
         $('#tab1').DataTable();
+    });
 
-        $(function() {
-            // $('[data-toggle="detail-spk"]').tooltip();
-            // $('[data-toggle="delete-spk"]').tooltip();
-            // $('[data-toggle="edit-spk"]').tooltip();
-            // $('[data-toggle="cetak-spk"]').tooltip();
-        })
-        // tooltip
+
+
+    // ubah status service
+    $(".belum-service").click(function() {
+        $(".btn-status").removeClass("btn-warning").addClass("btn-danger").html('Belum Service');
+        $(".dropdown-icon").removeClass("btn-warning").addClass("btn-danger");
+        const id_service = $(this).data("idservice");
+        const status = $(this).data("status");
+        console.log(status);
+        $.ajax({
+            url: "<?= base_url(); ?>service/status_belum_service",
+            type: "post",
+            dataType: "json",
+            data: {
+                id_service: id_service,
+                status: status
+            },
+            success: function(data) {
+                // window.location.reload(true);
+                console.log(data.message);
+            }
+        });
+    });
+
+    $(".sudah-service").click(function() {
+        const id_service = $(this).data("idservice");
+        const status = $(this).data("status");
+        console.log(status);
+        // $.ajax({
+        //     url : "<?= base_url(); ?>service/ubah_status_service",
+        //     type : "post",
+        //     dataType : "json",
+        //     data : {
+        //         id_service : id_service
+        //     },
+        //     success : function(data){
+
+        //     }
+        // });
     });
 
     $(".detail-service").click(function(e) {
