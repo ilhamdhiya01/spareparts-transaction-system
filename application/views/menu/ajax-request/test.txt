@@ -1,0 +1,13 @@
+
+
+                    <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm btn-status-2">Status</button>
+                            <button type="button" class="btn btn-default btn-sm dropdown-toggle dropdown-icon btn-color" data-toggle="dropdown">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                                <?php foreach ($status_service as $status) : ?>
+                                    <a data-idservice="<?= $ds['id_service']; ?>" data-status="<?= $ds['kd_status']; ?>" class="dropdown-item" href="#"><?= $status['status_service']; ?></a>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>

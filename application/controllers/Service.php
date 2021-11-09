@@ -327,7 +327,7 @@ class Service extends CI_Controller
             'id_pelanggan' => $_POST['id_pelanggan'],
             'id_mobil' => $_POST['id_mobil'],
             'id_service' => $_POST['id_service'],
-            'status' => 0
+            'id_status' => 1
         ];
         // echo json_encode($data);
         $result = $this->db->get_where('tb_spareparts_service', $data);
@@ -353,7 +353,8 @@ class Service extends CI_Controller
     {
         if ($this->input->is_ajax_request()) {
             $data = [
-                'data_service' => $this->Data_service_model->getAllDataService()
+                'data_service' => $this->Data_service_model->getAllDataService(),
+                'status_service' => $this->db->get('tb_status_service')->result_array()
             ];
             echo json_encode($this->load->view('menu/ajax-request/data-spk', $data));
         } else {
@@ -470,11 +471,11 @@ class Service extends CI_Controller
         }
     }
 
-    public function status_belum_service()
+    public function status_service()
     {
         $id_service = $_POST['id_service'];
         $status = $_POST['status'];
-        $this->db->set('status', $status);
+        $this->db->set('id_status', $status);
         $this->db->where('id_service', $id_service);
         $this->db->update('tb_spareparts_service');
         $msg = [
@@ -484,16 +485,15 @@ class Service extends CI_Controller
         echo json_encode($msg);
     }
 
-    public function load_status_service()
-    {
-        if ($this->input->is_ajax_request()) {
-            $data = [
-                'id_service' => $_GET['id_service'],
-                'id_pelanggan' => $_GET['id_pelanggan']
-            ];
-            echo json_encode($this->load->view('menu/ajax-request/status-service',$data));
-        } else {
-            echo json_encode("Request failed");
-        }
-    }
+    // public function load_status_service()
+    // {
+    //     if ($this->input->is_ajax_request()) {
+    //         $data = [
+    //             'id_status' => $_GET['id_status']
+    //         ];
+    //         echo json_encode($this->load->view('menu/ajax-request/status-service',$data));
+    //     } else {
+    //         echo json_encode("Request failed");
+    //     }
+    // }
 }
