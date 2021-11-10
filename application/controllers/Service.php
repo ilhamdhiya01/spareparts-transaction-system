@@ -485,15 +485,18 @@ class Service extends CI_Controller
         echo json_encode($msg);
     }
 
-    // public function load_status_service()
-    // {
-    //     if ($this->input->is_ajax_request()) {
-    //         $data = [
-    //             'id_status' => $_GET['id_status']
-    //         ];
-    //         echo json_encode($this->load->view('menu/ajax-request/status-service',$data));
-    //     } else {
-    //         echo json_encode("Request failed");
-    //     }
-    // }
+    public function cetak_spk()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id_service = $_GET['id_service'];
+            $id_pelanggan = $_GET['id_pelanggan'];
+            $data = [
+                "detail_data_service" => $this->Data_service_model->detail_data_service($id_service, $id_pelanggan),
+                "data_spareparts" => $this->Data_service_model->get_sub_spareparts_by_id($id_service, $id_pelanggan)
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/cetak-spk', $data));
+        } else {
+            echo json_encode("Request failed");
+        }
+    }
 }

@@ -67,7 +67,7 @@
                     <a href="" data-toggle="detail-spk" data-placement="top" title="Detail" class="detail-service" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>"><i class="fas fa-info-circle"></i></a>
                     <a href="" data-toggle="delete-spk" data-placement="top" title="Hapus" class="delete-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>" data-idmobil="<?= $ds['id_mobil']; ?>"><i class="fas fa-trash"></i></a>
                     <a href="" data-toggle="edit-spk" data-placement="top" title="Edit" class="update-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>"><i class="fas fa-edit"></i></a>
-                    <a href="" data-toggle="cetak-spk" data-placement="top" title="Cetak" class=""><i class="fas fa-print"></i></a>
+                    <a href="" data-toggle="cetak-spk" data-placement="top" title="Cetak" class="cetak-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>"><i class="fas fa-print"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -209,6 +209,26 @@
             data: {
                 id_service: id_service,
                 id_pelanggan: id_pelanggan
+            },
+            beforeSend: function() {
+                $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+            },
+            success: function(data) {
+                setTimeout(function() {
+                    $(".view-table-cetak-spk").html(data);
+                }, 500);
+            }
+        });
+        e.preventDefault();
+    });
+
+    $(".cetak-spk").click(function(e) {
+        $.ajax({
+            url: "<?= base_url(); ?>service/cetak_spk",
+            type: "get",
+            data : {
+                id_service : $(this).data("idservice"),
+                id_pelanggan : $(this).data("idpelanggan")
             },
             beforeSend: function() {
                 $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');

@@ -5,12 +5,6 @@
             <form id="form_edit_service">
                 <input type="hidden" value="<?= $detail_data_service['id_service']; ?>" name="id_service" id="id_service">
                 <input type="hidden" value="<?= $detail_data_service['id_pelanggan']; ?>" name="id_pelanggan" id="id_pelanggan">
-                <!-- <div class="form-group row">
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                        <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-                    </div>
-                </div> -->
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <label for="" class="text-sm">Kode Service<span class="required text-danger pl-1">*</span></label>
@@ -113,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" id="btn_ubah_service" class="btn btn-sm btn-primary">Simpan</button>
+                <button type="submit" id="btn_ubah_service" class="btn btn-sm btn-primary">Update</button>
             </form>
         </div>
         <div class="col-md-5" id="pilih-spareparts">
