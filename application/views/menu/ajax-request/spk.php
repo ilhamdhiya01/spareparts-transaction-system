@@ -80,7 +80,7 @@
 
                     </div>
                     <div class="col-11">
-                        <table class="table-form" border="0" width="100%" cellpadding="0" cellspacing="0">
+                        <table class="table-form" border="0" width="80%" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td width="20%">Nama</td>
                                 <td width="2%">:</td>
@@ -186,23 +186,9 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary float-right proses-cetak-spk" data-idservice="<?= $detail_data_service['id_service']; ?>" data-idpelanggan="<?= $detail_data_service['id_pelanggan']; ?>"><i class="fas fa-print"></i> Cetak</button>
     </div>
     <script>
-        $(".proses-cetak-spk").click(function(e) {
-            $.ajax({
-                url: "<?= base_url(); ?>service/proses_cetak_spk",
-                type: "get",
-                data: {
-                    id_service: $(this).data("idservice"),
-                    id_pelanggan: $(this).data("idpelanggan")
-                },
-                success: function(data) {
-                    $(".layout-fixed").html(data);
-                }
-            });
-            e.preventDefault();
-        })
+        print();
     </script>
 </body>
 
