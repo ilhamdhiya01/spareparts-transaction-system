@@ -179,7 +179,7 @@
                                             <i class="nav-icon <?= $sub_menu['icon']; ?>"></i>
                                             <p>
                                                 <?= $sub_menu['sub_menu']; ?>
-                                                <span class="badge badge-info right">2</span>
+                                                <!-- <span class="badge badge-info right">2</span> -->
                                             </p>
                                         </a>
                                     </li>

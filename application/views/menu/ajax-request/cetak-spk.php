@@ -18,6 +18,7 @@
         .garis {
             position: relative;
             top: -20px;
+            /* background-color:; */
         }
 
         h4 {
@@ -29,7 +30,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container p-4" style="border:1px solid #DFDFDF;">
         <div class="kop-surat">
             <div class="row justify-content-center">
                 <div class="col-1">
@@ -186,8 +187,8 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary float-right proses-cetak-spk" data-idservice="<?= $detail_data_service['id_service']; ?>" data-idpelanggan="<?= $detail_data_service['id_pelanggan']; ?>"><i class="fas fa-print"></i> Cetak</button>
     </div>
+    <button class="btn btn-primary float-right mt-3 proses-cetak-spk" data-idservice="<?= $detail_data_service['id_service']; ?>" data-idpelanggan="<?= $detail_data_service['id_pelanggan']; ?>"><i class="fas fa-print"></i> Cetak</button>
     <script>
         $(".proses-cetak-spk").click(function(e) {
             $.ajax({

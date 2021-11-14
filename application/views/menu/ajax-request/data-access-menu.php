@@ -30,18 +30,18 @@
                     <a href="" data-id="<?= $am['id']; ?>" class="delete-access" data-toggle="delete-access" data-placement="top" title="Hapus"><i class="fa fa-trash"></i></a>
                 </td>
                 <td>
-                    <a href="" data-id="<?= $am['id']; ?>" data-level="<?= $am['level']; ?>" data-levelid="<?= $am['level_id']; ?>" class="get-access-by-id" data-toggle="update-access" data-placement="top" title="Ubah"><i class="fa fa-edit"></i></a>
+                    <a href="" data-id="<?= $am['id']; ?>" data-level="<?= $am['level']; ?>" data-levelid="<?= $am['level_id']; ?>" class="update-user" data-toggle="update-access" data-placement="top" title="Ubah"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 <script>
-    $(function() {
-        $('[data-toggle="delete-access"]').tooltip()
-        $('[data-toggle="update-access"]').tooltip()
-    });
-    $(".get-access-by-id").click(function(e) {
+    // $(function() {
+    //     $('[data-toggle="delete-access"]').tooltip()
+    //     $('[data-toggle="update-access"]').tooltip()
+    // });
+    $(".update-user").click(function(e) {
         // Ubah tampilan form
         $("#ubah-user").removeAttr("style");
         $("#form-title-menu").html("Ubah Data User");

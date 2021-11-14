@@ -514,4 +514,34 @@ class Service extends CI_Controller
             echo json_encode("Request failed");
         }
     }
+
+    public function cetak_invoice()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id_service = $_GET["id_service"];
+            $id_pelanggan = $_GET["id_pelanggan"];
+            $data = [
+                "detail_invoice" => $this->Data_service_model->detail_data_service($id_service, $id_pelanggan),
+                "kd_invoice" => $this->Kode_otomatis_model->getKodeInvoice($id_pelanggan),
+                "data_spareparts" => $this->Data_service_model->get_sub_spareparts_by_id($id_service, $id_pelanggan),
+                // "total_biaya" => $this->Data_service_model->get_total_biaya($id_service)
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/invoice',$data));
+        } else {
+            echo json_encode("Request failed");
+        }
+    }
+
+    public function data_mobil()
+    {
+        $data = [
+            'judul' => 'Data Mobil',
+            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
+            'data_mobil' => $this->db->get('tb_data_mobil')->result_array()
+        ];
+
+        $this->load->view('templete/header', $data);
+        $this->load->view('menu/menu-data-mobil', $data);
+        $this->load->view('templete/footer');
+    }
 }

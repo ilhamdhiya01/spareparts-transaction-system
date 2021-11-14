@@ -27,7 +27,7 @@
                     if ($result['kd_status'] == 0) :
                     ?>
                         <div class="form-group">
-                            <select class="form-control bg-danger status-service" data-id="<?= $ds['id_service']; ?>" style="width:141px;" id="exampleFormControlSelect1">
+                            <select class="form-control bg-danger status-service" data-id="<?= $ds['id_service']; ?>" id="exampleFormControlSelect1">
                                 <?php foreach ($status_service as $status) : ?>
                                     <?php if ($ds['id_status'] == $status['id']) : ?>
                                         <option value="<?= $status['id'] ?>" selected><?= $status['status_service']; ?></option>
@@ -39,7 +39,7 @@
                         </div>
                     <?php elseif ($result['kd_status'] == 1) : ?>
                         <div class="form-group">
-                            <select class="form-control bg-success status-service" style="width:141px;" data-id="<?= $ds['id_service']; ?>" id="exampleFormControlSelect1">
+                            <select class="form-control bg-success status-service" data-id="<?= $ds['id_service']; ?>" id="exampleFormControlSelect1">
                                 <?php foreach ($status_service as $status) : ?>
                                     <?php if ($ds['id_status'] == $status['id']) : ?>
                                         <option value="<?= $status['id'] ?>" selected><?= $status['status_service']; ?></option>
@@ -51,7 +51,7 @@
                         </div>
                     <?php else : ?>
                         <div class="form-group">
-                            <select class="form-control bg-warning status-service" data-id="<?= $ds['id_service']; ?>" style="width:141px;" id="exampleFormControlSelect1">
+                            <select class="form-control bg-warning status-service" data-id="<?= $ds['id_service']; ?>" id="exampleFormControlSelect1">
                                 <?php foreach ($status_service as $status) : ?>
                                     <?php if ($ds['id_status'] == $status['id']) : ?>
                                         <option value="<?= $status['id'] ?>" selected><?= $status['status_service']; ?></option>
@@ -64,10 +64,22 @@
                     <?php endif; ?>
                 </td>
                 <td>
-                    <a href="" data-toggle="detail-spk" data-placement="top" title="Detail" class="detail-service" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>"><i class="fas fa-info-circle"></i></a>
-                    <a href="" data-toggle="delete-spk" data-placement="top" title="Hapus" class="delete-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>" data-idmobil="<?= $ds['id_mobil']; ?>"><i class="fas fa-trash"></i></a>
-                    <a href="" data-toggle="edit-spk" data-placement="top" title="Edit" class="update-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>"><i class="fas fa-edit"></i></a>
-                    <a href="" data-toggle="cetak-spk" data-placement="top" title="Cetak" class="cetak-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>"><i class="fas fa-print"></i></a>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default">Action</button>
+                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item detail-service" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>" href="#"><i class="fas fa-info-circle"></i> Detail Service</a>
+                            <a class="dropdown-item delete-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>" data-idmobil="<?= $ds['id_mobil']; ?>" href="#"><i class="fas fa-trash"></i> Hapus Service</a>
+                            <a class="dropdown-item update-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>" href="#"><i class="fas fa-edit"></i> Edit Service</a>
+                            <a class="dropdown-item cetak-spk" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>" href="#"><i class="fas fa-print"></i> Cetak SPK</a>
+                            <?php if ($ds['id_status'] == 2) : ?>
+                                <a class="dropdown-item cetak-invoice" data-idservice="<?= $ds['id_service']; ?>" data-idpelanggan="<?= $ds['id_pelanggan']; ?>" data-status="<?= $ds["id_status"]; ?>" href="#"><i class="fas fa-print"></i> Cetak Invoice</a>
+                            <?php else : ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -82,10 +94,10 @@
 
     // ubah status service
     $(".status-service").change(function() {
-        console.log();
         switch ($(this).val()) {
             case "1":
-                $(this).removeClass("bg-warning").removeClass("bg-success").addClass("bg-danger");
+                // $(".cetak-invoice").css("display", "none");
+                // $(this).removeClass("bg-warning").removeClass("bg-success").addClass("bg-danger");
                 $.ajax({
                     url: "<?= base_url(); ?>service/status_service",
                     type: "post",
@@ -93,11 +105,24 @@
                         id_service: $(this).data("id"),
                         status: $(this).val()
                     },
-                    success: function(data) {}
+                    success: function(data) {
+                        $.ajax({
+                            url: "<?= base_url(); ?>service/loadTableDataSpk",
+                            type: "get",
+                            beforeSend: function() {
+                                $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+                            },
+                            success: function(data) {
+                                setTimeout(function() {
+                                    $(".view-table-cetak-spk").html(data);
+                                }, 500);
+                            }
+                        });
+                    }
                 });
                 break;
             case "2":
-                $(this).removeClass("bg-warning").removeClass("bg-danger").addClass("bg-success");
+                // $(this).removeClass("bg-warning").removeClass("bg-danger").addClass("bg-success");
                 $.ajax({
                     url: "<?= base_url(); ?>service/status_service",
                     type: "post",
@@ -105,11 +130,25 @@
                         id_service: $(this).data("id"),
                         status: $(this).val()
                     },
-                    success: function(data) {}
+                    success: function(data) {
+                        $.ajax({
+                            url: "<?= base_url(); ?>service/loadTableDataSpk",
+                            type: "get",
+                            beforeSend: function() {
+                                $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+                            },
+                            success: function(data) {
+                                setTimeout(function() {
+                                    $(".view-table-cetak-spk").html(data);
+                                }, 500);
+                            }
+                        });
+                    }
                 });
                 break;
             case "3":
-                $(this).removeClass("bg-danger").removeClass("bg-success").addClass("bg-warning");
+                // $(".cetak-invoice").css("display", "none");
+                // $(this).removeClass("bg-danger").removeClass("bg-success").addClass("bg-warning");
                 $.ajax({
                     url: "<?= base_url(); ?>service/status_service",
                     type: "post",
@@ -117,7 +156,20 @@
                         id_service: $(this).data("id"),
                         status: $(this).val()
                     },
-                    success: function(data) {}
+                    success: function(data) {
+                        $.ajax({
+                            url: "<?= base_url(); ?>service/loadTableDataSpk",
+                            type: "get",
+                            beforeSend: function() {
+                                $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+                            },
+                            success: function(data) {
+                                setTimeout(function() {
+                                    $(".view-table-cetak-spk").html(data);
+                                }, 500);
+                            }
+                        });
+                    }
                 });
                 break;
             default:
@@ -125,15 +177,10 @@
         }
     });
 
-    $(".pending").click(function() {
-        $(".btn-status").removeClass("btn-success").addClass("btn-warning").html('Pending');
-        $(".dropdown-icon").removeClass("btn-success").addClass("btn-warning");
-    });
 
     $(".detail-service").click(function(e) {
         const id_service = $(this).data("idservice");
         const id_pelanggan = $(this).data("idpelanggan");
-
         $.ajax({
             url: "<?= base_url(); ?>service/detail_service",
             type: "get",
@@ -225,6 +272,26 @@
     $(".cetak-spk").click(function(e) {
         $.ajax({
             url: "<?= base_url(); ?>service/cetak_spk",
+            type: "get",
+            data: {
+                id_service: $(this).data("idservice"),
+                id_pelanggan: $(this).data("idpelanggan")
+            },
+            beforeSend: function() {
+                $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+            },
+            success: function(data) {
+                setTimeout(function() {
+                    $(".view-table-cetak-spk").html(data);
+                }, 500);
+            }
+        });
+        e.preventDefault();
+    });
+
+    $(".cetak-invoice").click(function(e) {
+        $.ajax({
+            url: "<?= base_url(); ?>service/cetak_invoice",
             type: "get",
             data : {
                 id_service : $(this).data("idservice"),

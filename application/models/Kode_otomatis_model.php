@@ -12,8 +12,20 @@ class Kode_otomatis_model extends CI_Model
         $data = $this->db->query($query)->row_array();
         $max_kode = $data["kode_service"];
         $max_kode2 = (int)substr($max_kode, 3, 3);
-        $urutan = $max_kode2+1;
+        $urutan = $max_kode2 + 1;
         $kode = $str . sprintf("%03s", $urutan);
+
+        return $kode;
+    }
+
+    public function getKodeInvoice($id_pelanggan)
+    {
+        $str = "INV";
+        $date = date('dmY');
+        $this->db->select('id as kd_invoice');
+        $this->db->where('id',$id_pelanggan);
+        $data = $this->db->get('tb_pelanggan')->row_array();
+        $kode = $str . $date . $data['kd_invoice'];
 
         return $kode;
     }

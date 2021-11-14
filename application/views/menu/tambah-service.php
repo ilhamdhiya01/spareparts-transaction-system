@@ -32,7 +32,7 @@
                             <a class="nav-link active" id="vert-tambah-data-pelanggan" data-toggle="pill" href="#tambah-data-pelanggan" role="tab" aria-controls="vert-tabs-home" aria-selected="true"></a>
                             <a class="nav-link" id="vert-tabs-tambah-data-mobil" data-toggle="pill" href="#vert-tabs-profile" role="tab" aria-controls="vert-tabs-profile" aria-selected="false"></a>
                             <a class="nav-link" id="vert-tabs-pilih-service" data-toggle="pill" href="#vert-tabs-messages" role="tab" aria-controls="vert-tabs-messages" aria-selected="false"></a>
-                            <a class="nav-link" id="vert-tabs-cetak-spk" data-toggle="pill" href="#vert-tabs-settings" role="tab" aria-controls="vert-tabs-settings" aria-selected="false"><i class="fas fa-print"></i> Cetak SPK</a>
+                            <a class="nav-link" id="vert-tabs-cetak-spk" data-toggle="pill" href="#vert-tabs-settings" role="tab" aria-controls="vert-tabs-settings" aria-selected="false"></a>
                         </div>
                         <script>
                             // cek user membuka lewat hp atau desktop
@@ -46,7 +46,7 @@
                                     $("#vert-tambah-data-pelanggan").html("<i class='fas fa-user-plus'></i> Tambah Data Pelanggan");
                                     $("#vert-tabs-tambah-data-mobil").html("<i class='fas fa-server'></i> Tambah Data Mobil");
                                     $("#vert-tabs-pilih-service").html("<i class='fas fa-tools'></i> Pilih Jenis Service");
-                                    $("#vert-tabs-cetak-spk").html("<i class='fas fa-print'></i> Cetak SPK");
+                                    $("#vert-tabs-cetak-spk").html("<i class='fas fa-print'></i> Cetak SPK / Invoice");
                                 }
                             });
                         </script>

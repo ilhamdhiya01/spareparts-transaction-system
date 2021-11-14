@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="row justify-content-center">
-        <div class="col-md-7">
+        <div class="col-md-6">
             <form id="form_edit_service">
                 <input type="hidden" value="<?= $detail_data_service['id_service']; ?>" name="id_service" id="id_service">
                 <input type="hidden" value="<?= $detail_data_service['id_pelanggan']; ?>" name="id_pelanggan" id="id_pelanggan">
@@ -110,7 +110,7 @@
                 <button type="submit" id="btn_ubah_service" class="btn btn-sm btn-primary">Update</button>
             </form>
         </div>
-        <div class="col-md-5" id="pilih-spareparts">
+        <div class="col-md-6" id="pilih-spareparts">
             <div class="data-spareparts">
 
             </div>
