@@ -57,18 +57,32 @@
         const id_pelanggan = $(this).data("idpelanggan");
         const id_status = "<?= $id_status; ?>";
         $.ajax({
-            url : "<?= base_url(); ?>service/change_edit_spareparts",
-            type : "post",
-            data : {
-                id_service : id_service,
-                id_mobil : id_mobil,
-                id_spareparts : id_spareparts,
-                id_sub_spareparts : id_sub_spareparts,
-                id_pelanggan : id_pelanggan,
-                id_status : id_status
+            url: "<?= base_url(); ?>service/change_edit_spareparts",
+            type: "post",
+            data: {
+                id_service: id_service,
+                id_mobil: id_mobil,
+                id_spareparts: id_spareparts,
+                id_sub_spareparts: id_sub_spareparts,
+                id_pelanggan: id_pelanggan,
+                id_status: id_status
             },
-            success : function(data){
+            dataType : "json",
+            success: function(data) {
                 console.log(data);
+                if (data.response == 201) {
+                    iziToast.success({
+                        title: 'Success',
+                        message: data.message,
+                        position: 'topRight'
+                    });
+                } else {
+                    iziToast.success({
+                        title: 'Success',
+                        message: data.message,
+                        position: 'topRight'
+                    });
+                }
             }
         });
     });
