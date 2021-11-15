@@ -112,7 +112,6 @@
         </div>
         <div class="col-md-6" id="pilih-spareparts">
             <div class="data-spareparts">
-
             </div>
         </div>
         <script>
@@ -161,9 +160,10 @@
             });
             // function loadDataSpareparts() {
             $.ajax({
-                url: "<?= base_url(); ?>service/loadPilihSpareparts",
+                url: "<?= base_url(); ?>service/editDataSpareparts",
                 type: "get",
                 data: {
+                    'id_status' : '<?= $detail_data_service["id_status"]; ?>',
                     'id_pelanggan': '<?= $detail_data_service["id_pelanggan"]; ?>'
                 },
                 success: function(data) {

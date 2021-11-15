@@ -137,18 +137,5 @@
     </div><!-- /.container-fluid -->
 </section>
 <script>
-    $(".proses-cetak-invoice").click(function(e) {
-        $.ajax({
-            url: "<?= base_url(); ?>service/proses_cetak_invoice",
-            type: "get",
-            data: {
-                id_service: "<?= $detail_invoice['id_service']; ?>",
-                id_pelanggan: "<?= $detail_invoice['id_pelanggan']; ?>"
-            },
-            success: function(data) {
-                $(".layout-fixed").html(data);
-            }
-        });
-        e.preventDefault();
-    });
+    print();
 </script>

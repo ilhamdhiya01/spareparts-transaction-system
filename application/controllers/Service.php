@@ -319,6 +319,20 @@ class Service extends CI_Controller
         }
     }
 
+    public function editDataSpareparts()
+    {
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'spareparts' => $this->db->get('tb_spareparts')->result_array(),
+                'id_pelanggan' => $_GET['id_pelanggan'],
+                'id_status' => $_GET['id_status']
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/edit-spareparts', $data));
+        } else {
+            echo json_encode('Request failed');
+        }
+    }
+
     public function change_spareparts()
     {
         $data = [
@@ -347,6 +361,38 @@ class Service extends CI_Controller
                 echo json_encode($msg);
             }
         }
+    }
+
+    public function change_edit_spareparts()
+    {
+        $data = [
+            'id_service' => $_POST['id_service'],
+            'id_mobil' => $_POST['id_mobil'],
+            'id_spareparts' => $_POST['id_spareparts'],
+            'id_sub_spareparts' => $_POST['id_sub_spareparts'],
+            'id_pelanggan' => $_POST['id_pelanggan'],
+            'id_status' => $_POST['id_status']
+        ];
+
+        $result = $this->db->get_where('tb_spareparts_service', $data);
+        if ($this->input->is_ajax_request()) {
+            if ($result->num_rows() < 1) {
+                $this->db->insert('tb_spareparts_service', $data);
+                $msg = [
+                    'response' => 201,
+                    'message' => 'Spareparts berhasil di tambahkan'
+                ];
+                echo json_encode($msg);
+            } else {
+                $this->db->delete('tb_spareparts_service', $data);
+                // $this->db->update('tb_spareparts_service', $data);
+                $msg = [
+                    'message' => 'Spareparts berhasil di ubah'
+                ];
+                echo json_encode($msg);
+            }
+        }
+        // echo json_encode($data);
     }
 
     public function loadTableDataSpk()
@@ -526,7 +572,24 @@ class Service extends CI_Controller
                 "data_spareparts" => $this->Data_service_model->get_sub_spareparts_by_id($id_service, $id_pelanggan),
                 // "total_biaya" => $this->Data_service_model->get_total_biaya($id_service)
             ];
-            echo json_encode($this->load->view('menu/ajax-request/invoice',$data));
+            echo json_encode($this->load->view('menu/ajax-request/invoice', $data));
+        } else {
+            echo json_encode("Request failed");
+        }
+    }
+
+    public function proses_cetak_invoice()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id_service = $_GET["id_service"];
+            $id_pelanggan = $_GET["id_pelanggan"];
+            $data = [
+                "detail_invoice" => $this->Data_service_model->detail_data_service($id_service, $id_pelanggan),
+                "kd_invoice" => $this->Kode_otomatis_model->getKodeInvoice($id_pelanggan),
+                "data_spareparts" => $this->Data_service_model->get_sub_spareparts_by_id($id_service, $id_pelanggan),
+                // "total_biaya" => $this->Data_service_model->get_total_biaya($id_service)
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/proses_cetak_invoice', $data));
         } else {
             echo json_encode("Request failed");
         }
