@@ -36,11 +36,30 @@ class Data_service_model extends CI_Model
     public function get_sub_spareparts_by_id($id_service, $id_pelanggan)
     {
         $this->db->select('tb_sub_spareparts.nama_spareparts, tb_sub_spareparts.harga as harga_spareparts, kd_spareparts, tb_spareparts.nama_spareparts as spareparts');
-        $this->db->join('tb_spareparts','tb_spareparts_service.id_spareparts = tb_spareparts.id');
+        $this->db->join('tb_spareparts', 'tb_spareparts_service.id_spareparts = tb_spareparts.id');
         $this->db->join('tb_sub_spareparts', 'tb_spareparts_service.id_sub_spareparts = tb_sub_spareparts.id');
         $this->db->where('tb_spareparts_service.id_service', $id_service);
         $this->db->where('tb_spareparts_service.id_pelanggan', $id_pelanggan);
         $result = $this->db->get('tb_spareparts_service')->result_array();
+
+        return $result;
+    }
+
+    public function semua_data_pelanggan()
+    {
+        $this->db->select('tb_data_mobil.*, tb_data_mobil.id as id_mobil, tb_pelanggan.*');
+        $this->db->join('tb_pelanggan', 'tb_data_mobil.id_pelanggan = tb_pelanggan.id');
+        $result = $this->db->get('tb_data_mobil')->result_array();
+
+        return $result;
+    }
+
+    public function get_data_pelanggan_by_id($id_pelanggan)
+    {
+        $this->db->select('tb_pelanggan.*, tb_pelanggan.id as id_pelanggan, tb_data_mobil.*, tb_data_mobil.id as id_mobil');
+        $this->db->join('tb_pelanggan', 'tb_data_mobil.id_pelanggan = tb_pelanggan.id');
+        $this->db->where('id_pelanggan', $id_pelanggan);
+        $result = $this->db->get('tb_data_mobil')->row_array();
 
         return $result;
     }

@@ -75,87 +75,9 @@ class Auth extends CI_Controller
                 ];
                 echo json_encode($data);
                 $this->session->set_userdata($user_data);
-                // if (password_verify($password, $data['users']['password'])) {
-                //     $user_data = [
-                //         'id' => $data['users']['id'],
-                //         'username' => $data['users']['username'],
-                //         'level_id' => $data['users']['level_id']
-                //     ];
-                //     $this->session->set_userdata($user_data);
-                //     $msg = [
-                //         'users' => $data['users'],
-                //         'response' => 'password_correct'
-                //     ];
-                //     echo json_encode($msg);
-                // } else {
-                //     $msg = [
-                //         'response' => 'password_incorrect'
-                //     ];
-                //     echo json_encode($msg);
-                // }
             }
         }
     }
-    // public function index()
-    // {
-    //     $data =  [
-    //         'judul' => 'login-page'
-    //     ];
-
-    //     $this->form_validation->set_rules('username', 'username', 'required|trim');
-    //     $this->form_validation->set_rules('password', 'password', 'required|min_length[5]');
-
-    //     if ($this->form_validation->run() == false) {
-    //         $this->load->view('auth/auth-header', $data);
-    //         $this->load->view('auth/login');
-    //         $this->load->view('auth/auth-footer');
-    //     } else {
-    //         $username = $this->input->post('username');
-    //         $password = $this->input->post('password');
-    //         $users = $this->db->get_where('users', ['username' => $username])->row_array();
-    //         if (is_null($users)) {
-    //             $this->session->set_flashdata('message', '<div class="alert alert-danger auth-alert alert-dismissible fade show" role="alert">
-    //             Username belum terdaftar !
-    //             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    //             <span aria-hidden="true">&times;</span>
-    //             </button>
-    //             </div>');
-    //             redirect('auth');
-    //         } else {
-    //             if ($users['is_active'] == 1) {
-    //                 if (password_verify($password, $users['password'])) {
-    //                     $data = [
-    //                         'id' => $users['id'],
-    //                         'username' => $users['username'],
-    //                         'level_id' => $users['level_id']
-    //                     ];
-    //                     $this->session->set_userdata($data);
-    //                     if ($users['level_id'] == 1) {
-    //                         redirect('menu');
-    //                     } else {
-    //                         redirect('menu');
-    //                     }
-    //                 } else {
-    //                     $this->session->set_flashdata('message', '<div class="alert alert-danger auth-alert alert-dismissible fade show" role="alert">
-    //                     Password yang anda masukan salah !
-    //                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    //                     <span aria-hidden="true">&times;</span>
-    //                     </button>
-    //                     </div>');
-    //                     redirect('auth');
-    //                 }
-    //             } else {
-    //                 $this->session->set_flashdata('message', '<div class="alert alert-danger auth-alert alert-dismissible fade show" role="alert">
-    //                 Akun belum teraktivasi !
-    //                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    //                 <span aria-hidden="true">&times;</span>
-    //                 </button>
-    //                 </div>');
-    //                 redirect('auth');
-    //             }
-    //         }
-    //     }
-    // }
 
     public function logout()
     {

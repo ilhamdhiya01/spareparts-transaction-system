@@ -10,6 +10,7 @@ $(document).ready(function () {
 	readFormAccessMenu();
 	// dropdown menu
 	// readDropdownMenu();
+	load_table_pelanggan();
 });
 // Ajax User Menu
 // Tampilkan tabel user menu
@@ -88,3 +89,16 @@ function readFormAccessMenu() {
 	});
 }
 
+// load table pelanggan
+function load_table_pelanggan() {
+	$.ajax({
+		url: "http://localhost/spareparts-transaction-system/service/load_table_pelanggan",
+		type: "get",
+		success: function (data) {
+			$(".view-data-pelanggan").html(data);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+		},
+	});
+}
