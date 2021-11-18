@@ -878,6 +878,37 @@ class Service extends CI_Controller
         }
     }
 
+    public function cek_id_pelanggan()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id_pelanggan = $_POST['id_pelanggan'];
+            $result = $this->db->get_where('tb_spareparts_service', ['id_pelanggan' => $id_pelanggan]);
+            if ($result->num_rows() < 1) {
+                $msg = [
+                    'status' => 200
+                ];
+            } else {
+                $msg = [
+                    'status' => 403,
+                    'message' => 'Data service pelanggan sudah ada'
+                ];
+            }
+            echo json_encode($msg);
+        }
+    }
+
+    public function page_error_data_service_sudah_ada()
+    {
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'message' => 'Data service pelanggan sudah ada'
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/error-page',$data));
+        } else {
+            echo json_encode("Request failed");
+        }
+    }
+
     public function proses_tambah_pelanggan()
     {
         if ($this->input->is_ajax_request()) {
