@@ -124,13 +124,13 @@
                     } else {
                         if (data.users.is_active == 1) {
                             if (data.cek_password) {
-                                if (data.users.level == 'Developer') {
+                                if (data.users.level_id == 1) {
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Login success',
                                         text: 'Selamat datang ' + data.users.nama_pegawai
                                     }).then(() => {
-                                        window.location.href = "<?= base_url(); ?>menu"
+                                        document.location.href = "<?= base_url(); ?>menu"
                                     });
                                 } else {
                                     Swal.fire({
@@ -138,7 +138,7 @@
                                         title: 'Login success',
                                         text: 'Selamat datang ' + data.users.nama_pegawai
                                     }).then(() => {
-                                        window.location.href = "<?= base_url(); ?>menu"
+                                        document.location.href = "<?= base_url(); ?>menu"
                                     });
                                 }
                             } else {

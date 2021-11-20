@@ -3,6 +3,21 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+function cek_access_user()
+{
+    $ci = get_instance();
+    if (!$ci->session->userdata('username')) {
+        redirect('auth');
+    } 
+}
+function cek_sudah_login()
+{
+    $ci = get_instance();
+    if ($ci->session->userdata('username')) {
+        redirect('menu');
+    } 
+}
+
 function change_access($level_id, $menu_id)
 {
     $ci = get_instance();

@@ -8,13 +8,17 @@ class Menu extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Model_menu');
+        cek_access_user();
     }
 
     public function queryMenu()
     {
+        $this->db->select('users.*, tb_posisi.nama_posisi');
+        $this->db->join('tb_posisi', 'users.id_posisi = tb_posisi.id');
+        $this->db->where('username', $this->session->userdata('username'));
         $data =  [
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
-            // 'menu' => $this->Model_menu->getAllMenu()
+            'judul' => 'Dashboard',
+            'users' => $this->db->get('users')->row_array()
         ];
 
         $this->load->view('templete/header', $data);

@@ -11,7 +11,43 @@
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
-    <p>Hello</p>
+    <a href="#" class="nav-link sign-out" style="border-bottom:1px solid #494E54;">
+        <i class="nav-icon fas fa-sign-out-alt"></i> Sign out
+    </a>
+    <script>
+        $(".sign-out").click(function() {
+            Swal.fire({
+                title: 'Keluar dari sistem ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sign out'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "<?= base_url(); ?>auth/sign_out",
+                        type: "post",
+                        dataType: "json",
+                        success: function(data) {
+                            if(data.response == 'success'){
+                                Swal.fire({
+                                    title: data.message,
+                                    icon: data.response,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Ok!'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        document.location.href = "<?= base_url(); ?>"
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+            })
+        });
+    </script>
 </aside>
 <!-- /.control-sidebar -->
 </div>

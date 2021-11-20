@@ -13,6 +13,9 @@ class Auth extends CI_Controller
 
     public function index()
     {
+        if ($this->session->userdata('username')) {
+            redirect('menu');
+        }
         $data =  [
             'judul' => 'login-page'
         ];
@@ -71,7 +74,8 @@ class Auth extends CI_Controller
                 $user_data = [
                     'id' => $data['users']['id'],
                     'username' => $data['users']['username'],
-                    'level_id' => $data['users']['level_id']
+                    'level_id' => $data['users']['level_id'],
+                    'level' => $data['users']['level']
                 ];
                 echo json_encode($data);
                 $this->session->set_userdata($user_data);
@@ -79,7 +83,7 @@ class Auth extends CI_Controller
         }
     }
 
-    public function logout()
+    public function sign_out()
     {
         $this->session->unset_userdata('id');
         $this->session->unset_userdata('username');

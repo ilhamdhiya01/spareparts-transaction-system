@@ -11,13 +11,17 @@ class Menu extends CI_Controller
         // Sub menu model
         $this->load->model('SubMenu_model');
         $this->load->model('Model_access_menu');
+        cek_access_user();
     }
 
     public function index()
     {
+        $this->db->select('users.*, tb_posisi.nama_posisi');
+        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
+        $this->db->where('username',$this->session->userdata('username'));
         $data =  [
             'judul' => 'Dashboard',
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
+            'users' => $this->db->get('users')->row_array()
         ];
 
         $this->load->view('templete/header', $data);
@@ -28,9 +32,12 @@ class Menu extends CI_Controller
     // setting menu
     public function dropdown_userMenu()
     {
+        $this->db->select('users.*, tb_posisi.nama_posisi');
+        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
+        $this->db->where('username',$this->session->userdata('username'));
         $data =  [
             'judul' => 'User Menu',
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
+            'users' => $this->db->get('users')->row_array()
         ];
         $this->load->view('templete/header', $data);
         $this->load->view('menu/dropdown-user-menu');
@@ -139,9 +146,12 @@ class Menu extends CI_Controller
     // setting dropdown_submenu
     public function dropdown_subMenu()
     {
-        $data = [
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
-            'judul' => 'Data Sub Menu'
+        $this->db->select('users.*, tb_posisi.nama_posisi');
+        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
+        $this->db->where('username',$this->session->userdata('username'));
+        $data =  [
+            'judul' => 'Data Sub Menu',
+            'users' => $this->db->get('users')->row_array()
         ];
         $this->load->view('templete/header', $data);
         $this->load->view('menu/dropdown-user-sub-menu', $data);
@@ -301,9 +311,12 @@ class Menu extends CI_Controller
     // dropdown user access menu
     public function dropdown_access_menu()
     {
-        $data = [
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
-            'judul' => 'Access Menu'
+        $this->db->select('users.*, tb_posisi.nama_posisi');
+        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
+        $this->db->where('username',$this->session->userdata('username'));
+        $data =  [
+            'judul' => 'Access Menu',
+            'users' => $this->db->get('users')->row_array()
         ];
         $this->load->view('templete/header', $data);
         $this->load->view('menu/dropdown-user-access-menu', $data);

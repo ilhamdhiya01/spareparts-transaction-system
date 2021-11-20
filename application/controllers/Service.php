@@ -11,13 +11,17 @@ class Service extends CI_Controller
         $this->load->model('Kode_otomatis_model');
         $this->load->model('Spareparts_model');
         $this->load->model('Data_service_model');
+        cek_access_user();
     }
 
     public function index()
     {
-        $data = [
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array(),
-            'judul' => 'Data Service'
+        $this->db->select('users.*, tb_posisi.nama_posisi');
+        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
+        $this->db->where('username',$this->session->userdata('username'));
+        $data =  [
+            'judul' => 'Data Service',
+            'users' => $this->db->get('users')->row_array()
         ];
         $this->load->view('templete/header', $data);
         $this->load->view('menu/tambah-service');
@@ -597,9 +601,12 @@ class Service extends CI_Controller
 
     public function data_pelanggan()
     {
-        $data = [
+        $this->db->select('users.*, tb_posisi.nama_posisi');
+        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
+        $this->db->where('username',$this->session->userdata('username'));
+        $data =  [
             'judul' => 'Data Pelanggan',
-            'users' => $this->db->get_where('users', ['username' => $this->session->userdata('username')])->row_array()
+            'users' => $this->db->get('users')->row_array()
         ];
 
         $this->load->view('templete/header', $data);

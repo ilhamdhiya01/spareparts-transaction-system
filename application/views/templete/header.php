@@ -102,6 +102,7 @@
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"><?= $users['nama_pegawai']; ?></a>
+                        <a href="#" class="d-block text-sm mt-2"><i class="fas fa-circle text-success text-sm"></i> <?= $users['nama_posisi']; ?></a>
                     </div>
                 </div>
 
@@ -134,7 +135,7 @@
                         $query = $this->db->get()->result_array();
                         foreach ($query as $menu) :
                         ?>
-                            <li class="nav-header"><?= $menu['nama_menu']; ?></li>
+                            <li class="nav-header text-uppercase"><?= $menu['nama_menu']; ?></li>
                             <?php
                             $menu_id = $menu['id'];
                             $this->db->select('tb_user_sub_menu.*');
