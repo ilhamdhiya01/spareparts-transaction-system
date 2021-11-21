@@ -23,9 +23,22 @@ class Kode_otomatis_model extends CI_Model
         $str = "INV";
         $date = date('dmY');
         $this->db->select('id as kd_invoice');
-        $this->db->where('id',$id_pelanggan);
+        $this->db->where('id', $id_pelanggan);
         $data = $this->db->get('tb_pelanggan')->row_array();
         $kode = $str . $date . $data['kd_invoice'];
+
+        return $kode;
+    }
+
+    public function getKodeSpareparts()
+    {
+        $str = 'SPR';
+        $this->db->select_max('tb_spareparts.kd_spareparts');
+        $data = $this->db->get('tb_spareparts')->row_array();
+        $max_kode = $data['kd_spareparts'];
+        $max_kode2 = (int)substr($max_kode, 4, 4);
+        $urutan = $max_kode2 + 1;
+        $kode = $str . sprintf('%04s', $urutan);
 
         return $kode;
     }

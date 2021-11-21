@@ -20,41 +20,54 @@
                         <div class="row">
                             <div class="col-12 col-sm-6 col-md-3">
                                 <div class="info-box">
-                                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cogs"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">CPU Traffic</span>
-                                        <span class="info-box-number">
-                                            10
-                                            <small>%</small>
-                                        </span>
+                                        <span class="info-box-text">Total Service</span>
+                                        <?php
+                                        $total_service = $this->db->get('tb_data_service')->result_array();
+                                        $result = count($total_service);
+                                        ?>
+                                        <span class="info-box-number"><?= $result; ?></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-md-3">
                                 <div class="info-box mb-3">
-                                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users-cog"></i></span>
+                                    <?php
+                                    $pengguna_sistem = $this->db->get('users')->result_array();
+                                    $result = count($pengguna_sistem);
+                                    ?>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Likes</span>
-                                        <span class="info-box-number">41,410</span>
+                                        <span class="info-box-text">Pengguna Sistem</span>
+                                        <span class="info-box-number"><?= $result; ?></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="clearfix hidden-md-up"></div>
                             <div class="col-12 col-sm-6 col-md-3">
                                 <div class="info-box mb-3">
-                                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-tools"></i></span>
+                                    <?php
+                                    $service_hari_ini = $this->db->get_where('tb_data_service', ['tgl_service' => date('Y-m-d')])->result_array();
+                                    $result = count($service_hari_ini);
+                                    ?>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Sales</span>
-                                        <span class="info-box-number">760</span>
+                                        <span class="info-box-text">Service Hari Ini</span>
+                                        <span class="info-box-number"><?= $result; ?></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-md-3">
                                 <div class="info-box mb-3">
                                     <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                                    <?php
+                                    $total_pelanggan = $this->db->get('tb_pelanggan')->result_array();
+                                    $result = count($total_pelanggan);
+                                    ?>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">New Members</span>
-                                        <span class="info-box-number">2,000</span>
+                                        <span class="info-box-text">Pelanggan</span>
+                                        <span class="info-box-number"><?= $result; ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                
+
                             </div>
                             <div class="card-footer">
                                 Footer

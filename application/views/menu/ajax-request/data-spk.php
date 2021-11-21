@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered" id="tab1">
+<table class="table table-striped" id="tab1">
     <thead>
         <tr class="text-sm">
             <th scope="col">No</th>
@@ -15,7 +15,11 @@
         foreach ($data_service as $ds) :
         ?>
             <tr class="text-center" id="tr-data-spk">
-                <th><?= $no++; ?></th>
+                <?php if ($ds['tgl_service'] == date('Y-m-d')) : ?>
+                    <th style="position:absolute;"><?= $no++; ?> <small class="badge badge-danger" style="font-size:8px; position:relative; top:-8px;">NEW</small></th>
+                <?php else : ?>
+                    <th style="position:absolute;"><?= $no++; ?></th>
+                <?php endif; ?>
                 <td><?= $ds['kd_service']; ?></td>
                 <td><?= $ds['tipe_mobil']; ?></td>
                 <td><?= $ds['nama_pelanggan']; ?></td>
@@ -293,9 +297,9 @@
         $.ajax({
             url: "<?= base_url(); ?>service/cetak_invoice",
             type: "get",
-            data : {
-                id_service : $(this).data("idservice"),
-                id_pelanggan : $(this).data("idpelanggan")
+            data: {
+                id_service: $(this).data("idservice"),
+                id_pelanggan: $(this).data("idpelanggan")
             },
             beforeSend: function() {
                 $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');

@@ -1,9 +1,9 @@
-<table class="table table-striped table-bordered" id="table-data-pelanggan">
+<table class="table table-striped table-sm" id="table-data-pelanggan">
     <thead>
         <tr class="text-center">
             <th>
-                <div class="form-check mb-4">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <div class="form-check mb-4 ml-3">
+                    <input class="form-check-input" type="checkbox" value="" id="select_all">
                 </div>
             </th>
             <th scope="col">No</th>
@@ -20,12 +20,12 @@
         foreach ($data_pelanggan as $pelanggan) :
         ?>
             <tr id="tr-data-pelanggan">
-                <th>
+                <th class="text-center">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <input class="form-check-input check" type="checkbox" data-idpelanggan="<?= $pelanggan['id_pelanggan']; ?>" id-mobil="<?= $pelanggan['id_mobil']; ?>" value="" id="defaultCheck1">
                     </div>
                 </th>
-                <th scope="row"><?= $no++; ?></th>
+                <th><?= $no++; ?></th>
                 <td><?= $pelanggan['nama_pelanggan']; ?></td>
                 <td><?= $pelanggan['no_tlp']; ?></td>
                 <td><?= substr($pelanggan['nik'], 0, -7) . 'XXXXX'; ?></td>
@@ -51,6 +51,78 @@
 <script>
     $(document).ready(function() {
         $("#table-data-pelanggan").DataTable();
+    });
+
+    // delete banyak
+    $("#select_all").click(function() {
+        if (this.checked) {
+            $(".check").each(function() {
+                this.checked = true;
+                if ($(this).is(":checked")) {
+                    $(this).closest("#tr-data-pelanggan").addClass("hapus-data");
+                } else {
+                    $(this).closest("#tr-data-pelanggan").removeClass("hapus-data");
+                }
+            })
+        } else {
+            $(".check").each(function() {
+                this.checked = false;
+                if ($(this).is(":checked")) {
+                    $(this).closest("#tr-data-pelanggan").addClass("hapus-data");
+                } else {
+                    $(this).closest("#tr-data-pelanggan").removeClass("hapus-data");
+                }
+            })
+        }
+    });
+
+    $(".check").click(function() {
+        if ($(this).is(":checked")) {
+            $(this).closest("#tr-data-pelanggan").addClass("hapus-data");
+        } else {
+            $(this).closest("#tr-data-pelanggan").removeClass("hapus-data");
+        }
+    });
+
+    // hapus semua
+    $(".delete-all").click(function() {
+        let checkbox = $('.check:checked');
+        if (checkbox.length > 0) {
+            $(checkbox).each(function() {
+                let checkbox_value = [];
+                checkbox_value.push($(this).data("idpelanggan"));
+                $.ajax({
+                    url: "<?= base_url(); ?>service/hapus_semua_data_pelanggan",
+                    type: "post",
+                    data: {
+                        id_pelanggan: checkbox_value
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        if (data.status == 200) {
+                            iziToast.success({
+                                title: 'Success',
+                                message: data.message,
+                                position: 'topRight'
+                            });
+                            $(".hapus-data").fadeOut(1500);
+                        } else {
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'Data gagal di hapus',
+                                position: 'topRight'
+                            });
+                        }
+                    }
+                });
+            });
+        } else {
+            iziToast.warning({
+                title: 'Warning',
+                message: 'Tidak ada data yang di pilih',
+                position: 'topRight'
+            });
+        }
     });
 
     // hapus pelanggan

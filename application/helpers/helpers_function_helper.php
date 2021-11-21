@@ -7,16 +7,11 @@ function cek_access_user()
 {
     $ci = get_instance();
     if (!$ci->session->userdata('username')) {
+        $ci->session->set_flashdata('flash','Login terlebih dulu !');
         redirect('auth');
-    } 
+    }
 }
-function cek_sudah_login()
-{
-    $ci = get_instance();
-    if ($ci->session->userdata('username')) {
-        redirect('menu');
-    } 
-}
+
 
 function change_access($level_id, $menu_id)
 {

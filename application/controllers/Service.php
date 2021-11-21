@@ -17,8 +17,8 @@ class Service extends CI_Controller
     public function index()
     {
         $this->db->select('users.*, tb_posisi.nama_posisi');
-        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
-        $this->db->where('username',$this->session->userdata('username'));
+        $this->db->join('tb_posisi', 'users.id_posisi = tb_posisi.id');
+        $this->db->where('username', $this->session->userdata('username'));
         $data =  [
             'judul' => 'Data Service',
             'users' => $this->db->get('users')->row_array()
@@ -435,7 +435,6 @@ class Service extends CI_Controller
         $id_pelanggan = $_POST['id_pelanggan'];
         $id_mobil = $_POST['id_mobil'];
 
-        $this->db->delete('tb_data_mobil', ['id' => $id_mobil]);
         $this->db->delete('tb_data_service', ['id' => $id_service]);
         $this->db->delete('tb_spareparts_service', ['id_service' => $id_service]);
 
@@ -602,8 +601,8 @@ class Service extends CI_Controller
     public function data_pelanggan()
     {
         $this->db->select('users.*, tb_posisi.nama_posisi');
-        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
-        $this->db->where('username',$this->session->userdata('username'));
+        $this->db->join('tb_posisi', 'users.id_posisi = tb_posisi.id');
+        $this->db->where('username', $this->session->userdata('username'));
         $data =  [
             'judul' => 'Data Pelanggan',
             'users' => $this->db->get('users')->row_array()
@@ -910,7 +909,7 @@ class Service extends CI_Controller
             $data = [
                 'message' => 'Data service pelanggan sudah ada'
             ];
-            echo json_encode($this->load->view('menu/ajax-request/error-page',$data));
+            echo json_encode($this->load->view('menu/ajax-request/error-page', $data));
         } else {
             echo json_encode("Request failed");
         }
@@ -1030,6 +1029,25 @@ class Service extends CI_Controller
             echo json_encode($msg);
         } else {
             echo json_encode("Request failed");
+        }
+    }
+
+    public function hapus_semua_data_pelanggan()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id_pelanggan = $_POST['id_pelanggan'];
+            for ($i = 0; $i < count($id_pelanggan); $i++) {
+                $this->db->delete('tb_pelanggan', ['id' => $id_pelanggan[$i]]);
+                $this->db->delete('tb_data_mobil', ['id_pelanggan' => $id_pelanggan[$i]]);
+                $this->db->delete('tb_data_service', ['id_pelanggan' => $id_pelanggan[$i]]);
+                $this->db->delete('tb_spareparts_service', ['id_pelanggan' => $id_pelanggan[$i]]);
+            }
+            $msg = [
+                'status' => 200,
+                'message' => 'Data berhasil di hapus'
+            ];
+
+            echo json_encode($msg);
         }
     }
 }

@@ -36,7 +36,7 @@
     <div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__wobble" src="<?= base_url(); ?>assets/AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+            <img class="animation__wobble" src="<?= base_url(); ?>assets/img/suzuki-invoice.png" alt="AdminLTELogo" height="60" width="60">
         </div>
 
         <!-- Navbar -->
@@ -88,9 +88,9 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="<?= base_url(); ?>assets/AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">SUZUKI</span>
+            <a href="" class="brand-link">
+                <img src="<?= base_url(); ?>assets/img/suzuki-invoice.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+                <span class="brand-text  text-bold">SUZUKI</span>
             </a>
 
             <!-- Sidebar -->
@@ -135,7 +135,7 @@
                         $query = $this->db->get()->result_array();
                         foreach ($query as $menu) :
                         ?>
-                            <li class="nav-header text-uppercase"><?= $menu['nama_menu']; ?></li>
+                            <li class="nav-header text-uppercase text-bold"><?= $menu['nama_menu']; ?></li>
                             <?php
                             $menu_id = $menu['id'];
                             $this->db->select('tb_user_sub_menu.*');
@@ -148,8 +148,8 @@
                                 if ($sub_menu['dropdown'] == 1) :
                             ?>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="nav-icon <?= $sub_menu['icon']; ?>"></i>
+                                        <a href="#" class="nav-link text-sm">
+                                            <i class="nav-icon text-sm <?= $sub_menu['icon']; ?>"></i>
                                             <p>
                                                 <?= $sub_menu['sub_menu']; ?>
                                                 <i class="fas fa-angle-left right"></i>
@@ -166,8 +166,8 @@
                                         <ul class="nav nav-treeview">
                                             <?php foreach ($query_dropdown as $dropdown) : ?>
                                                 <li class="nav-item">
-                                                    <a href="<?= base_url($dropdown['url']); ?>" class="nav-link">
-                                                        <i class="far fa-circle nav-icon"></i>
+                                                    <a href="<?= base_url($dropdown['url']); ?>" class="nav-link text-sm">
+                                                        <i class="far fa-circle nav-icon text-sm"></i>
                                                         <p><?= $dropdown['dropdown_nama']; ?></p>
                                                     </a>
                                                 </li>
@@ -176,8 +176,8 @@
                                     </li>
                                 <?php else : ?>
                                     <li class="nav-item">
-                                        <a href="<?= base_url($sub_menu['url']) ?>" class="nav-link">
-                                            <i class="nav-icon <?= $sub_menu['icon']; ?>"></i>
+                                        <a href="<?= base_url($sub_menu['url']) ?>" class="nav-link text-sm">
+                                            <i class="nav-icon text-sm <?= $sub_menu['icon']; ?>"></i>
                                             <p>
                                                 <?= $sub_menu['sub_menu']; ?>
                                                 <!-- <span class="badge badge-info right">2</span> -->

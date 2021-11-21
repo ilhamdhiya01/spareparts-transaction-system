@@ -269,7 +269,7 @@
                             position: 'topRight'
                         });
                         $(".close").click();
-                        $(".add-mobil").removeAttr("style");
+                        $(".add-mobil").attr("style", "display:none");
                         load_table_pelanggan();
                     } else {
                         iziToast.error({

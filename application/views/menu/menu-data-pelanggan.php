@@ -38,6 +38,7 @@
             <div class="card-body">
                 <button class="btn btn-primary mb-3 add-pelanggan" data-toggle="modal" data-target="#modal-pelanggan"><i class="fas fa-plus"></i> Tambah Pelanggan</button>
                 <button class="btn btn-primary mb-3 ml-1 add-mobil" data-toggle="modal" data-target="#modal-pelanggan"><i class="fas fa-plus"></i> Tambah Mobil</button>
+                <button class="btn btn-danger mb-3 ml-1 delete-all"><i class="fas fa-trash"></i> Hapus Semua</button>
                 <div class="table-responsive view-data-pelanggan">
 
                 </div>
@@ -75,7 +76,6 @@
             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
         },
     });
-
     $(".add-mobil").attr("style", "display:none");
     $(".add-pelanggan").click(function() {
         $.ajax({

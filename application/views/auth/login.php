@@ -74,6 +74,7 @@
     </div>
 </div>
 <script>
+
     $("#login").click(function(e) {
         const username = $("#username").val();
         const password = $("#password").val();
@@ -86,11 +87,11 @@
                 password: password
             },
             dataType: "json",
-            beforeSend : function(){
-                $("#login").attr("disable","disabled");
+            beforeSend: function() {
+                $("#login").attr("disable", "disabled");
                 $("#login").html("<i class='fa fa-spin fa-spinner'></i>");
             },
-            complete : function(){
+            complete: function() {
                 $("#login").removeAttr("disable");
                 $("#login").html("Masuk");
             },
@@ -146,7 +147,7 @@
                                     icon: 'error',
                                     title: 'Login failed !',
                                     text: 'Password yang anda masukan salah'
-                                }).then(()=> {
+                                }).then(() => {
                                     $("#password").val("");
                                 });
                             }
