@@ -10,11 +10,12 @@
                 <div class="card-header">
                     <h5 class="card-title"><?= $spareparts['nama_spareparts']; ?></h5>
                     <div class="card-tools">
-                        <a href="#" class="btn btn-tool tambah-sub-spareparts" data-idjenis="<?= $spareparts['id']; ?>" data-toggle="modal" data-target="#modal-form-sub">
+                        <a href="#" class="btn btn-tool tambah-sub-spareparts" title="Tambah Spareparts" data-idjenis="<?= $spareparts['id']; ?>" data-toggle="modal" data-target="#modal-form-sub">
                             <i class="fas fa-plus"></i>
                         </a>
                         <script>
                             $(".tambah-sub-spareparts").click(function() {
+                                $("#sub-title").html("<i class='fas fa-plus'></i> Tambah Sub Spareparts");
                                 $.ajax({
                                     url: "<?= base_url(); ?>spareparts/load_sub_spareparts",
                                     type: "get",
@@ -114,6 +115,7 @@
     });
 
     $(".ubah-sub-spareparts").click(function() {
+        $("#sub-title").html("<i class='fas fa-edit'></i> Ubah Sub Spareparts");
         const id_sub_spareparts = $(this).data("idsub");
         const id_jenis_spareparts = $(this).data("idjenis");
         console.log(id_sub_spareparts);

@@ -50,7 +50,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="<?= base_url(); ?>assets/img/avatar/default.png" alt="" class="img-circle profile_img">
+                            <img src="<?= base_url(); ?>assets/img/avatar/avatar-2.png" alt="" class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>

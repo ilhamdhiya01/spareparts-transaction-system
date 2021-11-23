@@ -75,10 +75,10 @@ class Auth extends CI_Controller
                     'id' => $data['users']['id'],
                     'username' => $data['users']['username'],
                     'level_id' => $data['users']['level_id'],
-                    'level' => $data['users']['level']
+                    'posisi' => $data['users']['nama_posisi']
                 ];
-                echo json_encode($data);
                 $this->session->set_userdata($user_data);
+                echo json_encode($data);
             }
         }
     }

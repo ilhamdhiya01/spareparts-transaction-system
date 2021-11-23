@@ -125,7 +125,7 @@
                     } else {
                         if (data.users.is_active == 1) {
                             if (data.cek_password) {
-                                if (data.users.level_id == 1) {
+                                if (data.users.posisi == "Sparepart Service") {
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Login success',

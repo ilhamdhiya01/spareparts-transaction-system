@@ -28,7 +28,7 @@
     <div class="container-fluid">
         <div class="card card-primary card-outline">
             <div class="card-header">
-                <h3 class="card-title" id="card-title-spareparts">
+                <h3 class="card-title" id="title-spareparts">
                     <i class="fas fa-edit"></i>
                     Tambah Data Spareparts
                 </h3>
@@ -120,11 +120,11 @@
         </div>
 </section>
 
-<div class="modal fade" id="modal-form-sub" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-form-sub" tabindex="-1" aria-labelledby="sub-title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus"></i> Tambah Sub Spareparts</h5>
+                <h5 class="modal-title" id="sub-title"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

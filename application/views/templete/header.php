@@ -98,7 +98,13 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="<?= base_url(); ?>assets/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <?php if ($this->session->userdata('posisi') == 'Developer') : ?>
+                            <img src="<?= base_url(); ?>assets/AdminLTE/dist/img/avatar4.png" class="img-circle elevation-2" alt="User Image">
+                        <?php elseif ($this->session->userdata('posisi') == 'Service Adficer') : ?>
+                            <img src="<?= base_url(); ?>assets/AdminLTE/dist/img/avatar3.png" class="img-circle elevation-2" alt="User Image">
+                        <?php else : ?>
+                            <img src="<?= base_url(); ?>assets/AdminLTE/dist/img/avatar2.png" class="img-circle elevation-2" alt="User Image">
+                        <?php endif; ?>
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"><?= $users['nama_pegawai']; ?></a>
