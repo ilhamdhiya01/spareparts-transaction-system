@@ -4,7 +4,7 @@
         <input type="text" class="form-control" value="<?= $kd_spareparts; ?>" id="kd_spareparts" name="kd_spareparts" readonly>
     </div>
     <div class="form-group">
-        <label for="exampleFormControlInput1">Nama Spareparts</label>
+        <label for="exampleFormControlInput1">Nama Spareparts <span class="required text-danger pl-1 text-sm">*</span></label>
         <input type="text" class="form-control" value="" id="nama_spareparts" name="nama_spareparts">
         <div id="validationServer03Feedback" class="invalid-feedback nama_spareparts_error">
         </div>
@@ -21,6 +21,14 @@
             type: "post",
             data: $(this).serialize(),
             dataType: "json",
+            beforeSend: function() {
+                $(".proses-tambah-spareparts").attr('disable', 'disabled');
+                $(".proses-tambah-spareparts").html('<i class="fa fa-spin fa-spinner"></i>');
+            },
+            complete: function() {
+                $(".proses-tambah-spareparts").removeAttr('disable');
+                $(".proses-tambah-spareparts").html('Tambah');
+            },
             success: function(data) {
                 if (data.error) {
                     if (data.error.nama_spareparts) {

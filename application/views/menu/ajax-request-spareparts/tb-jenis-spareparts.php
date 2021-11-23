@@ -109,7 +109,15 @@
                             kd_spareparts: $("[name='kd_spareparts']").val(),
                             nama_spareparts: $("[name='nama_spareparts']").val()
                         },
-                        dataType: "json",
+                        dataType: "json", 
+                        beforeSend: function() {
+                            $(".proses-ubah-spareparts").attr('disable', 'disabled');
+                            $(".proses-ubah-spareparts").html('<i class="fa fa-spin fa-spinner"></i>');
+                        },
+                        complete: function() {
+                            $(".proses-ubah-spareparts").removeAttr('disable');
+                            $(".proses-ubah-spareparts").html('Ubah');
+                        },
                         success: function(data) {
                             if (data.status == 200) {
                                 iziToast.success({

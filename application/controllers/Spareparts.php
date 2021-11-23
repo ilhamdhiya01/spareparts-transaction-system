@@ -123,4 +123,128 @@ class Spareparts extends CI_Controller
             echo json_encode('Request failed');
         }
     }
+
+    public function load_sub_spareparts()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id_jenis_spareparts = $_GET['id_jenis_spareparts'];
+            $this->db->select('kd_spareparts,tb_spareparts.id as id_spareparts, tb_spareparts.nama_spareparts as jenis_spareparts');
+            $this->db->join('tb_spareparts', 'tb_sub_spareparts.id_spareparts = tb_spareparts.id');
+            $this->db->where('id_spareparts', $id_jenis_spareparts);
+            $data = [
+                'jenis_spareparts' => $this->db->get('tb_sub_spareparts')->row_array()
+            ];
+            echo json_encode($this->load->view('menu/ajax-request-spareparts/form-data-sub-spareparts', $data));
+        } else {
+            echo json_encode('Request failed');
+        }
+    }
+
+    public function load_tb_sub_spareparts()
+    {
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'jenis_spareparts' => $this->db->get('tb_spareparts')->result_array()
+            ];
+            echo json_encode($this->load->view('menu/ajax-request-spareparts/tb-sub-spareparts', $data));
+        } else {
+            echo json_encode('Request failed');
+        }
+    }
+
+    public function hapus_sub()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id_sub = $_POST['id_sub'];
+            $this->db->delete('tb_sub_spareparts', ['id' => $id_sub]);
+            $msg = [
+                'status' => 200,
+                'message' => 'Data berhasil di hapus'
+            ];
+            echo json_encode($msg);
+        } else {
+            echo json_encode('Request failed');
+        }
+    }
+
+    public function proses_tambah_sub_spareparts()
+    {
+        if ($this->input->is_ajax_request()) {
+            $this->form_validation->set_rules('nama_spareparts', 'Nama spareparts', 'required');
+            $this->form_validation->set_rules('harga', 'Harga spareparts', 'required|numeric');
+
+            if ($this->form_validation->run() == false) {
+                $msg = [
+                    'error' => [
+                        'nama_spareparts' => form_error('nama_spareparts'),
+                        'harga' => form_error('harga')
+                    ]
+                ];
+            } else {
+                $data = [
+                    'id_spareparts' => $_POST['id_spareparts'],
+                    'nama_spareparts' => $_POST['nama_spareparts'],
+                    'harga' => $_POST['harga']
+                ];
+                $this->db->insert('tb_sub_spareparts', $data);
+                $msg = [
+                    'status' => 201,
+                    'message' => 'Data berhasil di tambahkan'
+                ];
+            }
+            echo json_encode($msg);
+        } else {
+            echo json_encode('Request failed');
+        }
+    }
+
+    public function load_ubah_sub_spareparts()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id_jenis_spareparts = $_GET['id_jenis_spareparts'];
+            $id_sub_spareparts = $_GET['id_sub_spareparts'];
+            $this->db->select('kd_spareparts,tb_spareparts.id as id_spareparts, tb_spareparts.nama_spareparts as jenis_spareparts');
+            $this->db->join('tb_spareparts', 'tb_sub_spareparts.id_spareparts = tb_spareparts.id');
+            $this->db->where('id_spareparts', $id_jenis_spareparts);
+            $data = [
+                'jenis_spareparts' => $this->db->get('tb_sub_spareparts')->row_array(),
+                'sub_spareparts' => $this->db->get_where('tb_sub_spareparts', ['id' => $id_sub_spareparts])->row_array()
+            ];
+            echo json_encode($this->load->view('menu/ajax-request-spareparts/form-ubah-sub-spareparts', $data));
+        } else {
+            echo json_encode('Request failed');
+        }
+    }
+
+    public function proses_ubah_sub_spareparts()
+    {
+        if ($this->input->is_ajax_request()) {
+            $this->form_validation->set_rules('nama_spareparts', 'Nama spareparts', 'required');
+            $this->form_validation->set_rules('harga', 'Harga spareparts', 'required|numeric');
+            $id_sub = $_POST['id'];
+            if ($this->form_validation->run() == false) {
+                $msg = [
+                    'error' => [
+                        'nama_spareparts' => form_error('nama_spareparts'),
+                        'harga' => form_error('harga')
+                    ]
+                ];
+            } else {
+                $data = [
+                    'id' => $_POST['id'],
+                    'id_spareparts' => $_POST['id_spareparts'],
+                    'nama_spareparts' => $_POST['nama_spareparts'],
+                    'harga' => $_POST['harga']
+                ];
+                $this->db->update('tb_sub_spareparts', $data, ['id' =>  $id_sub]);
+                $msg = [
+                    'status' => 201,
+                    'message' => 'Data berhasil di ubah'
+                ];
+            }
+            echo json_encode($msg);
+        } else {
+            echo json_encode('Request failed');
+        }
+    }
 }
