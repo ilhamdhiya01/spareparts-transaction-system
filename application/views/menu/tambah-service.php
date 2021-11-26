@@ -55,7 +55,7 @@
                         <div class="tab-content" id="vert-tabs-tabContent">
                             <div class="tab-pane text-left fade show active" id="tambah-data-pelanggan" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
                                 <div class="row justify-content-center">
-                                    <div class="col-md-9">
+                                    <div class="col-md-7">
                                         <div class="view-form-add-customer"></div>
                                     </div>
                                 </div>

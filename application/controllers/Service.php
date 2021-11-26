@@ -40,14 +40,14 @@ class Service extends CI_Controller
     public function add_service()
     {
 
-        $this->form_validation->set_rules('nama_customer', 'Nama customer', 'trim|required');
+        $this->form_validation->set_rules('nama_pelanggan', 'Nama pelanggan', 'trim|required');
         $this->form_validation->set_rules('no_tlp', 'No HP/WA', 'trim|required');
         $this->form_validation->set_rules('nik', 'NIK', 'trim|required|min_length[16]|max_length[16]|is_unique[tb_pelanggan.nik]');
         $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
         if ($this->form_validation->run() == false) {
             $msg = [
                 'error' => [
-                    'nama_customer' => form_error('nama_customer'),
+                    'nama_pelanggan' => form_error('nama_pelanggan'),
                     'no_tlp' => form_error('no_tlp'),
                     'nik' => form_error('nik'),
                     'alamat' => form_error('alamat')
@@ -55,7 +55,7 @@ class Service extends CI_Controller
             ];
         } else {
             $data = [
-                'nama_pelanggan' => $_POST['nama_customer'],
+                'nama_pelanggan' => $_POST['nama_pelanggan'],
                 'no_tlp' => $_POST['no_tlp'],
                 'nik' => $_POST['nik'],
                 'alamat' => $_POST['alamat']
@@ -455,9 +455,6 @@ class Service extends CI_Controller
                 'jenis_service' => $this->db->get('tb_jenis_service')->result_array(),
                 'sub_service' => $this->db->get('tb_sub_jenis_service')->result_array(),
                 "detail_data_service" => $this->Data_service_model->detail_data_service($id_service, $id_pelanggan),
-                // 'id_service' => $_GET["id_service"],
-                // 'id_pelanggan' => $_GET["id_pelanggan"]
-                // 'get_service_by_id' => $this->Data_service_model->get_spareparts_service_by_id($id_service, $id_pelanggan)
             ];
             echo json_encode($this->load->view('menu/ajax-request/edit-data-spk', $data));
             // echo json_encode($data);

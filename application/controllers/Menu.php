@@ -699,26 +699,6 @@ class Menu extends CI_Controller
         $data = [
             'users' => $this->db->get_where('users', ['id' => $id])->row_array()
         ];
-
-        // $msg = [
-        //     'required' => [
-        //         'password_saat_ini' => 'Password saat ini tidak boleh kosong',
-        //         'konfirmasi_password' => 'Konfirmasi password tidak boleh kosong',
-        //         'password_baru' => 'Password baru tidak boleh kosong'
-        //     ],
-        //     'matches' => [
-        //         'password_saat_ini' => 'Password dan konfirmasi password harus sama',
-        //         'konfirmasi_password' => 'Konfirasi password dan password harus sama',
-        //         'password_verify' => password_verify($passwordSaatIni, $data['users']['password'])
-        //     ],
-        //     'min_length' => [
-        //         'password_saat_ini' => 'Password saat ini minimal 8 karakter',
-        //         'konfirmasi_password' => 'Konfirmasi password minimal 8 karakter',
-        //         'password_baru' => 'Password baru minimal 8 karakter'
-        //     ]
-
-        // ];
-        // echo json_encode($msg);
         $rules = [
             [
                 'field' => 'change_password_saat_ini',
