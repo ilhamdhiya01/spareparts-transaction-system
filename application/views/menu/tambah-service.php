@@ -71,20 +71,14 @@
                                                 $(".view-form-add-customer").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
                                             },
                                             success: function(data) {
-                                                setTimeout(function() {
-                                                    $(".view-form-add-customer").html(data);
-                                                }, 500);
+                                                $(".view-form-add-customer").html(data);
                                             }
                                         });
                                     });
                                 </script>
                             </div>
                             <div class="tab-pane fade" id="vert-tabs-profile" role="tabpanel" aria-labelledby="vert-tabs-profile-tab">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-10">
-                                        <div class="view-form-add-mobil">
-                                        </div>
-                                    </div>
+                                <div class="view-form-add-mobil">
                                 </div>
                                 <script>
                                     $("#vert-tabs-tambah-data-mobil").click(function() {
@@ -96,20 +90,14 @@
                                                 $(".view-form-add-mobil").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
                                             },
                                             success: function(data) {
-                                                setTimeout(function() {
-                                                    $(".view-form-add-mobil").html(data);
-                                                }, 500);
+                                                $(".view-form-add-mobil").html(data);
                                             }
                                         });
                                     });
                                 </script>
                             </div>
                             <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel" aria-labelledby="vert-tabs-messages-tab">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-12">
-                                        <div class="view-jenis-service">
-                                        </div>
-                                    </div>
+                                <div class="view-jenis-service">
                                 </div>
                                 <script>
                                     $("#vert-tabs-pilih-service").click(function() {
@@ -121,9 +109,7 @@
                                                 $(".view-jenis-service").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
                                             },
                                             success: function(data) {
-                                                setTimeout(function() {
-                                                    $(".view-jenis-service").html(data);
-                                                }, 500);
+                                                $(".view-jenis-service").html(data);
                                             }
                                         });
                                     });
@@ -143,9 +129,7 @@
                                                 $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
                                             },
                                             success: function(data) {
-                                                setTimeout(function() {
-                                                    $(".view-table-cetak-spk").html(data);
-                                                }, 500);
+                                                $(".view-table-cetak-spk").html(data);
                                             }
                                         });
                                     });

@@ -1,24 +1,24 @@
 <form id="form-tambah-pelanggan">
     <div class="form-group">
-        <label for="exampleInputEmail1">Nama Pelanggan</label>
+        <label for="exampleInputEmail1" class="text-sm">Nama Pelanggan</label>
         <input type="text" class="form-control" name="nama_pelanggan" id="nama_pelanggan">
         <div class="invalid-feedback nama_pelanggan_error">
         </div>
     </div>
     <div class="form-group">
-        <label for="exampleInputEmail1">No Tlp / Wa</label>
+        <label for="exampleInputEmail1" class="text-sm">No Tlp / Wa</label>
         <input type="text" class="form-control" name="no_tlp" id="no_tlp">
         <div class="invalid-feedback no_tlp_error">
         </div>
     </div>
     <div class="form-group">
-        <label for="exampleInputEmail1">NIK</label>
+        <label for="exampleInputEmail1" class="text-sm">NIK</label>
         <input type="text" class="form-control" name="nik" id="nik">
         <div class="invalid-feedback nik_error">
         </div>
     </div>
     <div class="mb-3">
-        <label for="validationTextarea">Alamat</label>
+        <label for="validationTextarea" class="text-sm">Alamat</label>
         <textarea class="form-control" name="alamat" id="alamat"></textarea>
         <div class="invalid-feedback alamat_error">
         </div>
@@ -100,7 +100,8 @@
                         iziToast.error({
                             title: 'Error',
                             message: 'Data gagal di tambahkan',
-                            position: 'topRight'
+                            position: 'topRight',
+                            timeout: 3000
                         });
                     }
                 }

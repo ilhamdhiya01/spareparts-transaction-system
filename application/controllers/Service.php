@@ -72,13 +72,13 @@ class Service extends CI_Controller
     public function loadFormDataMobil()
     {
         if ($this->input->is_ajax_request()) {
-            $this->db->select('tb_pelanggan.id');
+            $this->db->select('tb_pelanggan.*');
             $this->db->order_by('id', 'DESC');
             $this->db->limit(1);
             $data = [
-                'id_pelanggan' => $this->db->get('tb_pelanggan')->row_array()
+                'pelanggan' => $this->db->get('tb_pelanggan')->row_array()
             ];
-            if (is_null($data['id_pelanggan'])) {
+            if (is_null($data['pelanggan'])) {
                 $data = [
                     'message' => 'Data pelanggan masih kosong, silahkan tambahkan pelanggan terlebih dahulu'
                 ];
@@ -93,36 +93,15 @@ class Service extends CI_Controller
 
     public function add_data_mobil()
     {
-        $this->form_validation->set_rules('id_pelanggan', 'Id_pelanggan', 'is_unique[tb_data_mobil.id_pelanggan]', [
-            'is_unique' => 'Tambahkan data pelanggan baru'
-        ]);
-        $this->form_validation->set_rules('jenis_mobil', 'Jenis mobil', 'trim|required', [
-            'required' => '{field} wajib di isi'
-        ]);
-        $this->form_validation->set_rules('tipe_mobil', 'Tipe mobil', 'trim|required', [
-            'required' => '{field} wajib di isi'
-        ]);
-        $this->form_validation->set_rules('merek_mobil', 'Merek mobil', 'trim|required', [
-            'required' => '{field} wajib di isi'
-        ]);
-        $this->form_validation->set_rules('nomor_rangka', 'Nomor rangka', 'trim|required|is_unique[tb_data_mobil.nomor_rangka]', [
-            'required' => '{field} wajib di isi',
-            'is_unique' => '{field} sudah ada'
-        ]);
-        $this->form_validation->set_rules('nomor_mesin', 'Nomor mesin', 'trim|required|is_unique[tb_data_mobil.nomor_mesin]', [
-            'required' => '{field} wajib di isi',
-            'is_unique' => '{field} sudah ada'
-        ]);
-        $this->form_validation->set_rules('nomor_polisi', 'Nomor polisi', 'trim|required|is_unique[tb_data_mobil.nomor_polisi]', [
-            'required' => '{field} wajib di isi',
-            'is_unique' => '{field} sudah ada'
-        ]);
-        $this->form_validation->set_rules('warna_mobil', 'Warna mobil', 'trim|required', [
-            'required' => '{field} wajib di isi'
-        ]);
-        $this->form_validation->set_rules('tahun_mobil', 'Tahun mobil', 'trim|required', [
-            'required' => '{field} wajib di isi'
-        ]);
+        $this->form_validation->set_rules('id_pelanggan', 'Id_pelanggan', 'is_unique[tb_data_mobil.id_pelanggan]');
+        $this->form_validation->set_rules('jenis_mobil', 'Jenis mobil', 'trim|required');
+        $this->form_validation->set_rules('tipe_mobil', 'Tipe mobil', 'trim|required');
+        $this->form_validation->set_rules('merek_mobil', 'Merek mobil', 'trim|required');
+        $this->form_validation->set_rules('nomor_rangka', 'Nomor rangka', 'trim|required|is_unique[tb_data_mobil.nomor_rangka]');
+        $this->form_validation->set_rules('nomor_mesin', 'Nomor mesin', 'trim|required|is_unique[tb_data_mobil.nomor_mesin]');
+        $this->form_validation->set_rules('nomor_polisi', 'Nomor polisi', 'trim|required|is_unique[tb_data_mobil.nomor_polisi]');
+        $this->form_validation->set_rules('warna_mobil', 'Warna mobil', 'trim|required');
+        $this->form_validation->set_rules('tahun_mobil', 'Tahun mobil', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $msg = [
@@ -226,16 +205,18 @@ class Service extends CI_Controller
     public function addTuneUpService()
     {
         $this->form_validation->set_rules('id_pelanggan', 'id_pelanggan', 'is_unique[tb_data_service.id_pelanggan]');
+        $this->form_validation->set_rules('tgl_service', 'Tgl service', 'required');
         if ($this->form_validation->run() == false) {
             $msg = [
                 'error' => [
-                    'id_pelanggan' => form_error('id_pelanggan')
+                    'id_pelanggan' => form_error('id_pelanggan'),
+                    'tgl_service' => form_error('tgl_service')
                 ]
             ];
         } else {
             $data = [
                 'id_pelanggan' => $_POST['id_pelanggan'],
-                'kd_service' => $_POST['kode_service'],
+                'kd_service' => $_POST['kd_service'],
                 'jenis_service' => $_POST['jenis_service'],
                 'harga' => reset_rupiah($_POST['harga']),
                 'sub_service' => $_POST['sub_service'],
@@ -255,16 +236,20 @@ class Service extends CI_Controller
     public function addServiceLain()
     {
         $this->form_validation->set_rules('id_pelanggan', 'id_pelanggan', 'is_unique[tb_data_service.id_pelanggan]');
+        $this->form_validation->set_rules('service_lain', 'Service lain', 'required');
+        $this->form_validation->set_rules('tgl_service', 'Tgl service', 'required');
         if ($this->form_validation->run() == false) {
             $msg = [
                 'error' => [
-                    'id_pelanggan' => form_error('id_pelanggan')
+                    'id_pelanggan' => form_error('id_pelanggan'),
+                    'service_lain' => form_error('service_lain'),
+                    'tgl_service' => form_error('tgl_service')
                 ]
             ];
         } else {
             $data = [
                 'id_pelanggan' => $_POST['id_pelanggan'],
-                'kd_service' => $_POST['kode_service'],
+                'kd_service' => $_POST['kd_service'],
                 'jenis_service' => $_POST['jenis_service'],
                 'harga' => reset_rupiah($_POST['harga']),
                 'sub_service' => $_POST['sub_service'],
@@ -284,16 +269,18 @@ class Service extends CI_Controller
     public function addServiceBerkala()
     {
         $this->form_validation->set_rules('id_pelanggan', 'id_pelanggan', 'is_unique[tb_data_service.id_pelanggan]');
+        $this->form_validation->set_rules('tgl_service', 'Tgl service', 'required');
         if ($this->form_validation->run() == false) {
             $msg = [
                 'error' => [
-                    'id_pelanggan' => form_error('id_pelanggan')
+                    'id_pelanggan' => form_error('id_pelanggan'),
+                    'tgl_service' => form_error('tgl_service')
                 ]
             ];
         } else {
             $data = [
                 'id_pelanggan' => $_POST['id_pelanggan'],
-                'kd_service' => $_POST['kode_service'],
+                'kd_service' => $_POST['kd_service'],
                 'jenis_service' => $_POST['jenis_service'],
                 'harga' => reset_rupiah($_POST['harga']),
                 'sub_service' => $_POST['sub_service'],
@@ -313,9 +300,12 @@ class Service extends CI_Controller
     public function loadPilihSpareparts()
     {
         if ($this->input->is_ajax_request()) {
+            $id_pelanggan = $_GET['id_pelanggan'];
             $data = [
                 'spareparts' => $this->db->get('tb_spareparts')->result_array(),
-                'id_pelanggan' => $_GET['id_pelanggan']
+                'id_pelanggan' => $id_pelanggan,
+                'id_service' => $this->db->get_where('tb_data_service', ['id_pelanggan' => $id_pelanggan])->row_array(),
+                'id_mobil' => $this->db->get_where('tb_data_mobil', ['id_pelanggan' => $id_pelanggan])->row_array()
             ];
             echo json_encode($this->load->view('menu/ajax-request/data-spareparts', $data));
         } else {
@@ -402,14 +392,19 @@ class Service extends CI_Controller
     public function loadTableDataSpk()
     {
         if ($this->input->is_ajax_request()) {
-            $data = [
-                'data_service' => $this->Data_service_model->getAllDataService(),
-                'status_service' => $this->db->get('tb_status_service')->result_array()
-            ];
-            echo json_encode($this->load->view('menu/ajax-request/data-spk', $data));
+            echo json_encode($this->load->view('menu/ajax-request/data-spk'));
         } else {
             echo json_encode("Request failed");
         }
+    }
+
+    public function data_spk()
+    {
+        $data = [
+            'data_service' => $this->Data_service_model->getAllDataService(),
+            'status_service' => $this->db->get('tb_status_service')->result_array()
+        ];
+        echo json_encode($data);
     }
 
     public function detail_service()
