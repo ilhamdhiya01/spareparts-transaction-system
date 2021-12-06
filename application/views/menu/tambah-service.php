@@ -27,7 +27,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-5 col-sm-3">
+                    <div class="col-4 col-sm-3">
                         <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
                             <a class="nav-link active" id="vert-tambah-data-pelanggan" data-toggle="pill" href="#tambah-data-pelanggan" role="tab" aria-controls="vert-tabs-home" aria-selected="true"></a>
                             <a class="nav-link" id="vert-tabs-tambah-data-mobil" data-toggle="pill" href="#vert-tabs-profile" role="tab" aria-controls="vert-tabs-profile" aria-selected="false"></a>
@@ -51,7 +51,7 @@
                             });
                         </script>
                     </div>
-                    <div class="col-7 col-sm-9">
+                    <div class="col-8 col-sm-9">
                         <div class="tab-content" id="vert-tabs-tabContent">
                             <div class="tab-pane text-left fade show active" id="tambah-data-pelanggan" role="tabpanel" aria-labelledby="vert-tabs-home-tab">
                                 <div class="row justify-content-center">

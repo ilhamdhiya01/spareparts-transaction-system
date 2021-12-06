@@ -392,19 +392,14 @@ class Service extends CI_Controller
     public function loadTableDataSpk()
     {
         if ($this->input->is_ajax_request()) {
-            echo json_encode($this->load->view('menu/ajax-request/data-spk'));
+            $data = [
+                'data_service' => $this->Data_service_model->getAllDataService(),
+                'status_service' => $this->db->get('tb_status_service')->result_array()
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/data-spk', $data));
         } else {
             echo json_encode("Request failed");
         }
-    }
-
-    public function data_spk()
-    {
-        $data = [
-            'data_service' => $this->Data_service_model->getAllDataService(),
-            'status_service' => $this->db->get('tb_status_service')->result_array()
-        ];
-        echo json_encode($data);
     }
 
     public function detail_service()
@@ -515,8 +510,8 @@ class Service extends CI_Controller
     public function status_service()
     {
         $id_service = $_POST['id_service'];
-        $status = $_POST['status'];
-        $this->db->set('id_status', $status);
+        $id_status = $_POST['id_status'];
+        $this->db->set('id_status', $id_status);
         $this->db->where('id_service', $id_service);
         $this->db->update('tb_spareparts_service');
         $msg = [
