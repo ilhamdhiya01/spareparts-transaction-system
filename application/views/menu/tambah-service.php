@@ -117,7 +117,6 @@
                             </div>
                             <div class="tab-pane fade" id="vert-tabs-settings" role="tabpanel" aria-labelledby="vert-tabs-settings-tab">
                                 <div class="view-table-cetak-spk table-responsive">
-
                                 </div>
                                 <script>
                                     $("#vert-tabs-cetak-spk").click(function() {

@@ -427,6 +427,8 @@ class Service extends CI_Controller
 
         $this->db->delete('tb_data_service', ['id' => $id_service]);
         $this->db->delete('tb_spareparts_service', ['id_service' => $id_service]);
+        $this->db->delete('tb_pelanggan', ['id' => $id_pelanggan]);
+        $this->db->delete('tb_data_mobil', ['id' => $id_mobil]);
 
         $msg = [
             'status' => 200,
@@ -441,7 +443,7 @@ class Service extends CI_Controller
             $id_service = $_GET['id_service'];
             $id_pelanggan = $_GET['id_pelanggan'];
             $data = [
-                'id_pelanggan' => $this->db->get('tb_pelanggan')->row_array(),
+                'id_pelanggan' => $this->db->get_where('tb_pelanggan', ['id' => $id_pelanggan])->row_array(),
                 'jenis_service' => $this->db->get('tb_jenis_service')->result_array(),
                 'sub_service' => $this->db->get('tb_sub_jenis_service')->result_array(),
                 "detail_data_service" => $this->Data_service_model->detail_data_service($id_service, $id_pelanggan),
@@ -466,8 +468,10 @@ class Service extends CI_Controller
     public function getHargaService()
     {
         $jenis_service = $_POST['jenis_service'];
+        $this->db->select('harga');
+        $this->db->where('nama_service', $jenis_service);
         $data = [
-            'harga_jasa' => $this->db->get_where('tb_jenis_service', ['nama_service' => $jenis_service])->row_array()
+            'harga_jasa' => $this->db->get('tb_jenis_service')->row_array()
         ];
 
         echo json_encode($data);
@@ -476,20 +480,23 @@ class Service extends CI_Controller
     public function getHargaSubService()
     {
         $sub_service = $_POST['sub_service'];
+        $this->db->select('harga');
+        $this->db->where('nama_sub_service', $sub_service);
         $data = [
-            'harga_jasa' => $this->db->get_where('tb_sub_jenis_service', ['nama_sub_service' => $sub_service])->row_array()
+            'harga_jasa' => $this->db->get('tb_sub_jenis_service')->row_array()
         ];
         echo json_encode($data);
     }
 
-    public function prosess_ubah_data_service()
+
+    public function proses_ubah_data_service()
     {
         $id_service = $_POST['id_service'];
         $data = [
             'id_pelanggan' => $_POST['id_pelanggan'],
             'kd_service' => $_POST['kd_service'],
             'jenis_service' => $_POST['jenis_service'],
-            'harga' => $_POST['harga_jasa'],
+            'harga' => reset_rupiah($_POST['harga']),
             'sub_service' => $_POST['sub_service'],
             'service_lain' => $_POST['service_lain'],
             'tgl_service' => $_POST['tgl_service'],
