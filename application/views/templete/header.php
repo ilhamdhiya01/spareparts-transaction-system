@@ -154,6 +154,7 @@
                                 if ($sub_menu['dropdown'] == 1) :
                             ?>
                                     <li class="nav-item">
+
                                         <a href="#" class="nav-link text-sm">
                                             <i class="nav-icon text-sm <?= $sub_menu['icon']; ?>"></i>
                                             <p>

@@ -537,7 +537,7 @@ class Service extends CI_Controller
                 "detail_data_service" => $this->Data_service_model->detail_data_service($id_service, $id_pelanggan),
                 "data_spareparts" => $this->Data_service_model->get_sub_spareparts_by_id($id_service, $id_pelanggan)
             ];
-            echo json_encode($this->load->view('menu/ajax-request/cetak-spk', $data));
+            echo json_encode($this->load->view('menu/ajax-request/spk', $data));
         } else {
             echo json_encode("Request failed");
         }
@@ -552,7 +552,7 @@ class Service extends CI_Controller
                 "detail_data_service" => $this->Data_service_model->detail_data_service($id_service, $id_pelanggan),
                 "data_spareparts" => $this->Data_service_model->get_sub_spareparts_by_id($id_service, $id_pelanggan)
             ];
-            echo json_encode($this->load->view('menu/ajax-request/spk', $data));
+            echo json_encode($this->load->view('menu/ajax-request/cetak-spk', $data));
         } else {
             echo json_encode("Request failed");
         }

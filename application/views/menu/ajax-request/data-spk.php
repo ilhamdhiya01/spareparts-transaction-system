@@ -72,7 +72,7 @@
                             <a class="dropdown-item hapus-data-service" data-idmobil="<?= $service['id_mobil']; ?>" data-idpelanggan="<?= $service['id_pelanggan'] ?>" data-idservice="<?= $service["id_service"]; ?>" href="#"><i class="fas fa-trash"></i> Hapus Data Service</a>
                             <a class="dropdown-item detail-service" href="#" data-idpelanggan="<?= $service['id_pelanggan'] ?>" data-idservice="<?= $service["id_service"]; ?>"><i class="fas fa-info-circle"></i> Detail Data Service</a>
                             <a class="dropdown-item ubah-data-service" href="#" data-idpelanggan="<?= $service['id_pelanggan'] ?>" data-idservice="<?= $service["id_service"]; ?>"><i class="fas fa-edit"></i> Ubah Data Service</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-print"></i> Cetak SPK</a>
+                            <a class="dropdown-item cetak-spk" href="#" data-idpelanggan="<?= $service['id_pelanggan'] ?>" data-idservice="<?= $service["id_service"]; ?>"><i class="fas fa-print"></i> Cetak SPK</a>
                             <?php if ($service['id_status'] == 2) : ?>
                                 <a class="dropdown-item" href="#"><i class="fas fa-print"></i> Cetak Invoice</a>
                             <?php endif; ?>
@@ -269,5 +269,23 @@
             default:
                 break;
         }
+    });
+
+    $(".cetak-spk").click(function(e) {
+        $.ajax({
+            url: "<?= base_url(); ?>service/cetak_spk",
+            type: "get",
+            data: {
+                id_service: $(this).data("idservice"),
+                id_pelanggan: $(this).data("idpelanggan")
+            },
+            beforeSend: function() {
+                $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
+            },
+            success: function(data) {
+                $(".view-table-cetak-spk").html(data);
+            }
+        });
+        e.preventDefault();
     });
 </script>

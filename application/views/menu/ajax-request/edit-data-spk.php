@@ -81,6 +81,7 @@
 </div>
 
 <script>
+    // load spareparts
     $.ajax({
         url: "<?= base_url(); ?>service/loadPilihSpareparts",
         type: "get",
@@ -92,6 +93,7 @@
         }
     });
 
+    // tentukan jenis service
     $("[name='jenis_service']").change(function() {
         switch ($(this).val()) {
             case 'Service Berkala':
@@ -149,6 +151,8 @@
                 break;
         }
     });
+
+    // ambil harga sub service
     $("[name='sub_service']").change(function() {
         $.ajax({
             url: "<?= base_url(); ?>service/getHargaSubService",
@@ -163,6 +167,8 @@
         });
     });
 
+
+    // proses ubah service
     $("#form-ubah-service").submit(function(e) {
         $.ajax({
             url: "<?= base_url(); ?>service/proses_ubah_data_service",
