@@ -567,7 +567,6 @@ class Service extends CI_Controller
                 "detail_invoice" => $this->Data_service_model->detail_data_service($id_service, $id_pelanggan),
                 "kd_invoice" => $this->Kode_otomatis_model->getKodeInvoice($id_pelanggan),
                 "data_spareparts" => $this->Data_service_model->get_sub_spareparts_by_id($id_service, $id_pelanggan),
-                // "total_biaya" => $this->Data_service_model->get_total_biaya($id_service)
             ];
             echo json_encode($this->load->view('menu/ajax-request/invoice', $data));
         } else {

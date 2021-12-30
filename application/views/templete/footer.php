@@ -57,12 +57,8 @@
 <script src="<?= base_url(); ?>assets/AdminLTE/plugins/izitoast/dist/js/iziToast.min.js"></script>
 <!-- sweetalert2 -->
 <script src="<?= base_url(); ?>assets/AdminLTE/plugins/sweetalert2/sweetalert2.min.js"></script>
-<!-- smartWizard -->
-<script src="<?= base_url(); ?>assets/AdminLTE/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
 <!-- select2 -->
 <script src="<?= base_url(); ?>assets/AdminLTE/plugins/select2/js/select2.full.min.js"></script>
-<!-- smartWizard -->
-<script src="<?= base_url(); ?>assets/AdminLTE/plugins/jquery-smartwizard-master/dist/js/jquery.smartWizard.min.js"></script>
 <!-- date-range-picker -->
 <script src="<?= base_url(); ?>assets/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- jQuery UI 1.11.4 -->

@@ -35,7 +35,7 @@ class Data_service_model extends CI_Model
 
     public function get_sub_spareparts_by_id($id_service, $id_pelanggan)
     {
-        $this->db->select('tb_sub_spareparts.nama_spareparts, tb_sub_spareparts.harga as harga_spareparts, kd_spareparts, tb_spareparts.nama_spareparts as spareparts');
+        $this->db->select('tb_sub_spareparts.nama_spareparts, tb_sub_spareparts.harga as harga_spareparts, kd_spareparts, tb_spareparts.nama_spareparts as spareparts, id_sub_spareparts');
         $this->db->join('tb_spareparts', 'tb_spareparts_service.id_spareparts = tb_spareparts.id');
         $this->db->join('tb_sub_spareparts', 'tb_spareparts_service.id_sub_spareparts = tb_sub_spareparts.id');
         $this->db->where('tb_spareparts_service.id_service', $id_service);
