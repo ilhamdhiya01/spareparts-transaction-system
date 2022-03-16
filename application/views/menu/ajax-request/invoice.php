@@ -35,7 +35,7 @@
         <div class="col-sm-4 invoice-col">
             <b>Invoice #<?= $kd_invoice; ?></b><br>
             <br>
-            <b>Order ID:</b> <?= $detail_invoice['id_pelanggan']; ?><?= $detail_invoice['id_service']; ?><br>
+            <b>Order ID:</b> <?= $detail_invoice['id_pelanggan']; ?><?= $detail_invoice['id_pelanggan']; ?><br>
             <b>Payment Due:</b> <?= date('d/m/y'); ?><br>
         </div>
         <!-- /.col -->
@@ -112,8 +112,23 @@
     <br>
     <!-- /.row -->
     <center>
-        <button id="cetak-spk"  class="btn btn-default"><i class="fas fa-print"></i> Cetak</button>
+        <button id="cetak-invoice" data-idservice="<?= $detail_invoice['id_service']; ?>" data-idpelanggan="<?= $detail_invoice['id_pelanggan']; ?>"  class="btn btn-default"><i class="fas fa-print"></i> Cetak</button>
     </center>
 
     <!-- this row will not appear when printing -->
 </div>
+<script>
+     $("#cetak-invoice").click(function() {
+        $.ajax({
+            url: "<?= base_url(); ?>service/proses_cetak_invoice",
+            type: "get",
+            data: {
+                id_service: $(this).data("idservice"),
+                id_pelanggan: $(this).data("idpelanggan")
+            },
+            success: function(data) {
+                window.open($(".layout-fixed").html(data));
+            }
+        });
+    });
+</script>

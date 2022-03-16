@@ -37,7 +37,7 @@
             </div>
             <div class="card-body">
                 <button class="btn btn-primary mb-3 add-pelanggan" data-toggle="modal" data-target="#modal-pelanggan"><i class="fas fa-plus"></i> Tambah Pelanggan</button>
-                <button class="btn btn-primary mb-3 ml-1 add-mobil" data-toggle="modal" data-target="#modal-pelanggan"><i class="fas fa-plus"></i> Tambah Mobil</button>
+                <button class="btn btn-primary mb-3 ml-1 add-mobil" style="display: none;" data-toggle="modal" data-target="#modal-pelanggan"><i class="fas fa-plus"></i> Tambah Mobil</button>
                 <button class="btn btn-danger mb-3 ml-1 delete-all"><i class="fas fa-trash"></i> Hapus Semua</button>
                 <div class="table-responsive view-data-pelanggan">
 
@@ -76,7 +76,7 @@
             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
         },
     });
-    $(".add-mobil").attr("style", "display:none");
+   
     $(".add-pelanggan").click(function() {
         $.ajax({
             url: "http://localhost/spareparts-transaction-system/service/load_form_data_pelanggan",
@@ -143,6 +143,7 @@
                 $(".proses-ubah-pelanggan").attr("style", "display:none;");
                 $(".proses-tambah-pelanggan").attr("style", "display:none;");
                 $(".proses-tambah-mobil").removeAttr("style");
+                $(".form-add-mobil").removeAttr("style");
 
                 // ubah titel
                 $("#modal-title-pelanggan").html("<i class='fas fa-car'></i> Tambah Data Mobil")

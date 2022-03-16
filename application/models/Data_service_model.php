@@ -47,12 +47,15 @@ class Data_service_model extends CI_Model
 
     public function semua_data_pelanggan()
     {
-        $this->db->select('tb_data_mobil.*, tb_data_mobil.id as id_mobil, tb_pelanggan.*');
-        $this->db->join('tb_pelanggan', 'tb_data_mobil.id_pelanggan = tb_pelanggan.id');
-        // $this->db->join('tb_data_service','tb_data_mobil.id_pelanggan = tb_data_service.id_pelanggan');
-        $this->db->order_by('id_pelanggan','DESC');
-        $result = $this->db->get('tb_data_mobil')->result_array();
-
+        $this->db->select('tb_data_mobil.*, tb_data_mobil.id as id_mobil,tb_pelanggan.id as id_pelanggan, tb_pelanggan.*, tb_status_service.*');
+        $this->db->from('tb_spareparts_service');
+        $this->db->join('tb_data_service', 'tb_spareparts_service.id_service = tb_data_service.id');
+        $this->db->join('tb_data_mobil', 'tb_spareparts_service.id_mobil = tb_data_mobil.id');
+        $this->db->join('tb_pelanggan', 'tb_spareparts_service.id_pelanggan = tb_pelanggan.id');
+        $this->db->join('tb_status_service', 'tb_spareparts_service.id_status = tb_status_service.id');
+        $this->db->group_by('tb_spareparts_service.id_pelanggan');
+        $this->db->order_by('tb_spareparts_service.id', 'DESC');
+        $result = $this->db->get()->result_array();
         return $result;
     }
 
