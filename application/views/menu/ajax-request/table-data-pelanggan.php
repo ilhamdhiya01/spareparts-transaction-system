@@ -15,14 +15,13 @@
             <th scope="col">Tipe Mobil</th>
             <th scope="col">Merek Mobil</th>
             <th scope="col">Nomor Polisi</th>
-            <th scope="col">Status</th>
             <th scope="col">Aksi</th>
         </tr>
     </thead>
     <tbody id="tr-spk" class="text-center">
-        <?php 
+        <?php
         $no = 1;
-        foreach($data_pelanggan as $pelanggan): 
+        foreach ($data_pelanggan as $pelanggan) :
         ?>
             <tr class="text-sm" id=tr-hapus-spk>
                 <td><?= $no++; ?></td>
@@ -33,22 +32,14 @@
                 <td><?= $pelanggan['merek_mobil']; ?></td>
                 <td><?= $pelanggan['nomor_polisi']; ?></td>
                 <td>
-                    <?php if($pelanggan['kd_status'] == 1):?>
-                        <span class="badge badge-success">Sudah service</span>
-                    <?php elseif($pelanggan['kd_status'] == 0): ?>
-                        <span class="badge badge-danger">Belum service</span>
-                    <?php else: ?>
-                        <span class="badge badge-warning">Sedang proses</span>
-                    <?php endif; ?>
-                </td>
-                <td>
                     <div class="dropdown">
                         <button type="button" class="btn btn-outline-primary dropdown-toggle" kd="dropdownMenuOffset" data-toggle="dropdown" aria-expanded="false" data-offset="10,20">
                             Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                             <a class="dropdown-item hapus-data-pelanggan" data-idmobil="<?= $pelanggan['id_mobil']; ?>" data-idpelanggan="<?= $pelanggan['id_pelanggan'] ?>" href="#"><i class="fas fa-trash"></i> Hapus Data Service</a>
-                            <a class="dropdown-item ubah-data-service" href="#" data-idpelanggan="<?= $pelanggan['id_pelanggan'] ?>" ><i class="fas fa-edit"></i> Ubah Data Service</a>
+                            <a class="dropdown-item ubah-data-pelanggan" href="#" data-idpelanggan="<?= $pelanggan['id_pelanggan'] ?>" data-toggle="modal" data-target="#modal-data-pelanggan"><i class="fas fa-edit"></i> Ubah Data Pelanggan</a>
+                            <a class="dropdown-item riwayat-service-pelanggan" href="#" data-idpelanggan="<?= $pelanggan['id_pelanggan'] ?>" data-idmobil="<?= $pelanggan['id_mobil']; ?>" data-idservice="<?= $pelanggan['id_service']; ?>" data-toggle="modal" data-target="#modal-data-pelanggan"><i class="fas fa-edit"></i> Data Service</a>
                         </div>
                     </div>
                 </td>
@@ -56,10 +47,40 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-data-pelanggan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form id="form-data-pelanggan">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-service-body">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
         $('#spk').DataTable();
     });
+
+    // $.ajax({
+    //     url: "<?= base_url(); ?>service/loadPilihSpareparts",
+    //     type: "get",
+    //     data: {
+    //         id_pelanggan: $(".ubah-data-pelanggan").data("idpelanggan")
+    //     },
+    //     success: function(data) {
+    //         $(".view-data-spareparts").html(data);
+    //     }
+    // });
 
     // delete service
     $(".hapus-data-pelanggan").click(function(e) {
@@ -104,142 +125,32 @@
         e.preventDefault();
     });
 
-    // detail service
-    $(".detail-service").click(function(e) {
+    $(".ubah-data-pelanggan").click(function() {
         $.ajax({
-            url: "<?= base_url(); ?>service/detail_service",
+            url: "<?= base_url(); ?>service/form_data_pelanggan",
             type: "get",
             data: {
-                id_service: $(this).data("idservice"),
-                id_pelanggan: $(this).data("idpelanggan")
+                id_pelanggan: $(this).data("idpelanggan"),
             },
-            success: function(data) {
-                $(".view-table-cetak-spk").html(data);
+            success: (data) => {
+                $(".modal-service-body").html(data);
             }
-
-        });
-        e.preventDefault();
+        })
     });
 
-    // ubah data service
-    $(".ubah-data-service").click(function(e) {
+
+    $(".riwayat-service-pelanggan").click(function() {
         $.ajax({
-            url: "<?= base_url(); ?>service/update_data_spk",
+            url: "<?= base_url(); ?>service/riwayat_service",
             type: "get",
             data: {
-                id_service: $(this).data("idservice"),
-                id_pelanggan: $(this).data("idpelanggan")
+                id_pelanggan: $(this).data("idpelanggan"),
+                id_mobil: $(this).data("idmobil"),
+                id_service: $(this).data("idservice")
             },
-            beforeSend: function() {
-                $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
-            },
-            success: function(data) {
-                $(".view-table-cetak-spk").html(data);
+            success: (data) => {
+                $(".modal-service-body").html(data);
             }
-        });
-        e.preventDefault();
-    });
-
-    $(".change-status").change(function() {
-        switch ($(this).val()) {
-            case '1':
-                $(this).removeAttr("style").attr("style", "outline:2px solid #C83934;");
-                $.ajax({
-                    url: "<?= base_url(); ?>service/status_service",
-                    type: "post",
-                    data: {
-                        id_service: $(this).data("idservice"),
-                        id_status: $(this).val()
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        if (data.response == 200) {
-                            iziToast.success({
-                                title: 'Success',
-                                message: data.message,
-                                position: 'topRight',
-                                timeout: 3000
-                            });
-                            $.ajax({
-                                url: "<?= base_url(); ?>service/loadTableDataSpk",
-                                type: "get",
-                                beforeSend: function() {
-                                    $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
-                                },
-                                success: function(data) {
-                                    $(".view-table-cetak-spk").html(data);
-                                }
-                            });
-                        }
-                    }
-                });
-                break;
-            case '2':
-                $(this).removeAttr("style").attr("style", "outline:2px solid #3F8839;");
-                $.ajax({
-                    url: "<?= base_url(); ?>service/status_service",
-                    type: "post",
-                    data: {
-                        id_service: $(this).data("idservice"),
-                        id_status: $(this).val()
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        if (data.response == 200) {
-                            iziToast.success({
-                                title: 'Success',
-                                message: data.message,
-                                position: 'topRight',
-                                timeout: 3000
-                            });
-                            $.ajax({
-                                url: "<?= base_url(); ?>service/loadTableDataSpk",
-                                type: "get",
-                                beforeSend: function() {
-                                    $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
-                                },
-                                success: function(data) {
-                                    $(".view-table-cetak-spk").html(data);
-                                }
-                            });
-                        }
-                    }
-                });
-                break;
-            case '3':
-                $(this).removeAttr("style").attr("style", "outline:2px solid #DFA92C;");
-                $.ajax({
-                    url: "<?= base_url(); ?>service/status_service",
-                    type: "post",
-                    data: {
-                        id_service: $(this).data("idservice"),
-                        id_status: $(this).val()
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        if (data.response == 200) {
-                            iziToast.success({
-                                title: 'Success',
-                                message: data.message,
-                                position: 'topRight',
-                                timeout: 3000
-                            });
-                            $.ajax({
-                                url: "<?= base_url(); ?>service/loadTableDataSpk",
-                                type: "get",
-                                beforeSend: function() {
-                                    $(".view-table-cetak-spk").html('<center><img style="margin-top:50px" src="<?= base_url(); ?>assets/img/loading-icon.gif"></center>');
-                                },
-                                success: function(data) {
-                                    $(".view-table-cetak-spk").html(data);
-                                }
-                            });
-                        }
-                    }
-                });
-                break;
-            default:
-                break;
-        }
+        })
     });
 </script>

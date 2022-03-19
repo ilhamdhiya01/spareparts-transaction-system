@@ -23,7 +23,12 @@
         foreach ($data_service as $service) :
         ?>
             <tr class="text-sm" id=tr-hapus-spk>
-                <td><?= $no++; ?></td>
+
+                <?php if ($service['tgl_service'] == date('Y-m-d')) : ?>
+                    <td><?= $no++; ?> <small class="badge badge-danger">new</small></td>
+                <?php else : ?>
+                    <td><?= $no++; ?></td>
+                <?php endif; ?>
                 <td><?= $service['kd_service']; ?></td>
                 <td><?= $service['nama_pelanggan']; ?></td>
                 <td><?= $service['tipe_mobil']; ?></td>

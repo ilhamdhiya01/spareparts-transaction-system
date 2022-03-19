@@ -1,102 +1,113 @@
-<div class="row justify-content-center">
+<div class="row">
     <div class="col-md-6">
-        <form id="form-tambah-pelanggan">
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-sm">Nama Pelanggan</label>
-                <input type="text" class="form-control" name="nama_pelanggan" id="nama_pelanggan">
-                <div class="invalid-feedback nama_pelanggan_error">
-                </div>
+        <input type="hidden" name="id_pelanggan" value="<?= $id_pelanggan ?>">
+        <div class="form-group">
+            <label for="nama_pelanggan">Nama pelanggan</label>
+            <input type="text" class="form-control" value="<?= $data_pelanggan_by_id['nama_pelanggan'] ?>" name="nama_pelanggan" id="nama_pelanggan">
+            <div class="invalid-feedback nama_pelanggan_error">
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-sm">No Tlp / Wa</label>
-                <input type="text" class="form-control" name="no_tlp" id="no_tlp">
-                <div class="invalid-feedback no_tlp_error">
-                </div>
+        </div>
+        <div class="form-group">
+            <label for="no_tlp">No tlp</label>
+            <input type="text" class="form-control" value="<?= $data_pelanggan_by_id['no_tlp'] ?>" name="no_tlp" id="no_tlp">
+            <div class="invalid-feedback no_tlp_error">
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-sm">NIK</label>
-                <input type="text" class="form-control" name="nik" id="nik">
-                <div class="invalid-feedback nik_error">
-                </div>
+        </div>
+        <div class="form-group">
+            <label for="nik">NIK</label>
+            <input type="text" class="form-control" value="<?= $data_pelanggan_by_id['nik'] ?>" name="nik" id="nik">
+            <div class="invalid-feedback nik_error">
             </div>
-            <div class="mb-3">
-                <label for="validationTextarea" class="text-sm">Alamat</label>
-                <textarea class="form-control" name="alamat" id="alamat"></textarea>
-                <div class="invalid-feedback alamat_error">
-                </div>
+        </div>
+        <div class="mb-3">
+            <label for="validationTextarea" class="text-sm">Alamat</label>
+            <textarea class="form-control" name="alamat" value="<?= $data_pelanggan_by_id['alamat'] ?>" id="alamat"><?= $data_pelanggan_by_id['alamat'] ?></textarea>
+            <div class="invalid-feedback alamat_error">
             </div>
-            <a href="#" class="proses-tambah-pelanggan">
-                <button class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-user-plus"></i> Tambah Pelanggan</button>
-            </a>
-        </form>
+        </div>
     </div>
-    <div class="col-md-6 form-add-mobil" style="display: none;">
-        <form action="">
-            <input type="hidden" value="" name="id_mobil" id="id_mobil">
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-sm">Jenis Mobil</label>
-                <input type="text" class="form-control" value="" name="jenis_mobil" id="jenis_mobil">
+    <div class="col-md-6">
+        <input type="hidden" value="<?= $data_pelanggan_by_id['id_mobil'] ?>" name="id_mobil">
+        <div class="form-group">
+            <label for="jenis_mobil" class="text-sm">Jenis Mobil</label>
+            <input type="text" class="form-control" value="<?= $data_pelanggan_by_id['jenis_mobil'] ?>" name="jenis_mobil" id="jenis_mobil">
+            <div class="invalid-feedback jenis_mobil_error">
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-sm">Tipe Mobil</label>
-                <input type="text" class="form-control" value="" name="tipe_mobil" id="tipe_mobil">
+        </div>
+        <div class="form-group">
+            <label for="tipe_mobil" class="text-sm">Tipe Mobil</label>
+            <input type="text" class="form-control" value="<?= $data_pelanggan_by_id['tipe_mobil'] ?>" name="tipe_mobil" id="tipe_mobil">
+            <div class="invalid-feedback tipe_mobil_error">
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-sm">Merek Mobil</label>
-                <input type="text" class="form-control" value="" name="merek_mobil" id="kd_service">
+        </div>
+        <div class="form-group">
+            <label for="merek_mobil" class="text-sm">Merek Mobil</label>
+            <input type="text" class="form-control" value="<?= $data_pelanggan_by_id['merek_mobil'] ?>" name="merek_mobil" id="merek_mobil">
+            <div class="invalid-feedback merek_mobil_error">
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-sm">Nomor Rangka</label>
-                <input type="text" class="form-control" value="" name="nomor_rangka" id="nomor_rangka">
+        </div>
+        <div class="form-group">
+            <label for="nomor_rangka" class="text-sm">Nomor Rangka</label>
+            <input type="text" class="form-control" value="<?= $data_pelanggan_by_id['nomor_rangka'] ?>" name="nomor_rangka" id="nomor_rangka">
+            <div class="invalid-feedback nomor_rangka_error">
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-sm">Nomor Mesin</label>
-                <input type="text" class="form-control" value="" name="nomor_mesin" id="nomor_mesin">
+        </div>
+        <div class="form-group">
+            <label for="nomor_mesin" class="text-sm">Nomor Mesin</label>
+            <input type="text" class="form-control" value="<?= $data_pelanggan_by_id['nomor_mesin'] ?>" name="nomor_mesin" id="nomor_mesin">
+            <div class="invalid-feedback nomor_mesin_error">
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-sm">Nomor Polisi</label>
-                <input type="text" class="form-control" value="" name="nomor_polisi" id="nomor_polisi">
+        </div>
+        <div class="form-group">
+            <label for="nomor_polisi" class="text-sm">Nomor Polisi</label>
+            <input type="text" class="form-control" value="<?= $data_pelanggan_by_id['nomor_polisi'] ?>" name="nomor_polisi" id="nomor_polisi">
+            <div class="invalid-feedback nomor_polisi_error">
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-sm">Warna Mobil</label>
-                <input type="text" class="form-control" value="" name="warna_mobil" id="warna_mobil">
+        </div>
+        <div class="form-group">
+            <label for="warna_mobil" class="text-sm">Warna Mobil</label>
+            <input type="text" class="form-control" value="<?= $data_pelanggan_by_id['warna_mobil'] ?>" name="warna_mobil" id="warna_mobil">
+            <div class="invalid-feedback warna_mobil_error">
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="text-sm">Tahun Mobil</label>
-                <input type="text" class="form-control" value="" name="tahun_mobil" id="tahun_mobil">
-            </div>    
-        </form>
+        </div>
+        <div class="form-group">
+            <label for="tahun_mobil" class="text-sm">Tahun Mobil</label>
+            <input type="text" class="form-control" value="<?= $data_pelanggan_by_id['tahun_mobil'] ?>" name="tahun_mobil" id="tahun_mobil">
+            <div class="invalid-feedback tahun_mobil_error">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 view-data-spareparts">
+
     </div>
 </div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary proses-ubah-data-pelanggan">Ubah Data Pelanggan</button>
+</div>
+
 
 <script>
-    function load_data_spareparts() {
-        $(".view-data-spareparts").removeAttr("style");
+    $(".proses-ubah-data-pelanggan").click(function(e) {
         $.ajax({
-            url: "<?= base_url(); ?>service/loadPilihSpareparts",
-            type: "get",
-            data: {
-                id_pelanggan: $("[name='id_pelanggan']").val()
-            },
-            success: function(data) {
-                $(".view-data-spareparts").html(data);
-            }
-        });
-    }
-
-    $("#form-tambah-pelanggan").submit(function(e) {
-        $.ajax({
-            url: "<?= base_url(); ?>service/add_service",
+            url: "<?= base_url(); ?>service/proses_ubah_data_pelanggan",
             type: "post",
-            data: $(this).serialize(),
             dataType: "json",
-            beforeSend: function() {
-                $(".btn-proses-tambah-pelanggan").attr('disable', 'disabled');
-                $(".btn-proses-tambah-pelanggan").html('<button class="btn btn-block btn-sm btn-outline-primary"><i class="fa fa-spin fa-spinner"></i></button>');
-            },
-            complete: function() {
-                $(".btn-proses-tambah-pelanggan").removeAttr('disable');
-                $(".btn-proses-tambah-pelanggan").html(' <button class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-user-plus"></i> Tambah Pelanggan</button>');
+            data: {
+                id_pelanggan: $("[name='id_pelanggan']").val(),
+                nama_pelanggan: $("[name='nama_pelanggan']").val(),
+                no_tlp: $("[name='no_tlp']").val(),
+                nik: $("[name='nik']").val(),
+                alamat: $("[name='alamat']").val(),
+                id_mobil: $("[name='id_mobil']").val(),
+                jenis_mobil: $("[name='jenis_mobil']").val(),
+                tipe_mobil: $("[name='tipe_mobil']").val(),
+                merek_mobil: $("[name='merek_mobil']").val(),
+                nomor_rangka: $("[name='nomor_rangka']").val(),
+                nomor_mesin: $("[name='nomor_mesin']").val(),
+                nomor_polisi: $("[name='nomor_polisi']").val(),
+                warna_mobil: $("[name='warna_mobil']").val(),
+                tahun_mobil: $("[name='tahun_mobil']").val(),
             },
             success: function(data) {
                 if (data.error) {
@@ -131,6 +142,69 @@
                         $("[name='alamat']").removeClass("is-invalid");
                         $(".alamat_error").html("");
                     }
+                    if (data.error.jenis_mobil) {
+                        $("[name='jenis_mobil']").addClass("is-invalid");
+                        $(".jenis_mobil_error").html(data.error.jenis_mobil);
+                    } else {
+                        $("[name='jenis_mobil']").removeClass("is-invalid");
+                        $(".jenis_mobil_error").html("");
+                    }
+
+                    if (data.error.tipe_mobil) {
+                        $("[name='tipe_mobil']").addClass("is-invalid");
+                        $(".tipe_mobil_error").html(data.error.tipe_mobil);
+                    } else {
+                        $("[name='tipe_mobil']").removeClass("is-invalid");
+                        $(".tipe_mobil_error").html("");
+                    }
+
+                    if (data.error.merek_mobil) {
+                        $("[name='merek_mobil']").addClass("is-invalid");
+                        $(".merek_mobil_error").html(data.error.merek_mobil);
+                    } else {
+                        $("[name='merek_mobil']").removeClass("is-invalid");
+                        $(".merek_mobil_error").html("");
+                    }
+
+                    if (data.error.nomor_rangka) {
+                        $("[name='nomor_rangka']").addClass("is-invalid");
+                        $(".nomor_rangka_error").html(data.error.nomor_rangka);
+                    } else {
+                        $("[name='nomor_rangka']").removeClass("is-invalid");
+                        $(".nomor_rangka_error").html("");
+                    }
+
+                    if (data.error.nomor_mesin) {
+                        $("[name='nomor_mesin']").addClass("is-invalid");
+                        $(".nomor_mesin_error").html(data.error.nomor_mesin);
+                    } else {
+                        $("[name='nomor_mesin']").removeClass("is-invalid");
+                        $(".nomor_mesin_error").html("");
+                    }
+
+                    if (data.error.nomor_polisi) {
+                        $("[name='nomor_polisi']").addClass("is-invalid");
+                        $(".nomor_polisi_error").html(data.error.nomor_polisi);
+                    } else {
+                        $("[name='nomor_polisi']").removeClass("is-invalid");
+                        $(".nomor_polisi_error").html("");
+                    }
+
+                    if (data.error.warna_mobil) {
+                        $("[name='warna_mobil']").addClass("is-invalid");
+                        $(".warna_mobil_error").html(data.error.warna_mobil);
+                    } else {
+                        $("[name='warna_mobil']").removeClass("is-invalid");
+                        $(".warna_mobil_error").html("");
+                    }
+
+                    if (data.error.tahun_mobil) {
+                        $("[name='tahun_mobil']").addClass("is-invalid");
+                        $(".tahun_mobil_error").html(data.error.tahun_mobil);
+                    } else {
+                        $("[name='tahun_mobil']").removeClass("is-invalid");
+                        $(".tahun_mobil_error").html("");
+                    }
                 } else {
                     $("[name='nama_pelanggan']").removeClass("is-invalid");
                     $(".nama_pelanggan_error").html("");
@@ -140,24 +214,35 @@
                     $(".nik_error").html("");
                     $("[name='alamat']").removeClass("is-invalid");
                     $(".alamat_error").html("");
-                    $(".add-mobil").removeAttr("style");
-                    $("#modal-pelanggan").modal("hide");
+                    $("[name='jenis_mobil']").removeClass("is-invalid");
+                    $(".jenis_mobil_error").html("");
+                    $("[name='tipe_mobil']").removeClass("is-invalid");
+                    $(".tipe_mobil_error").html("");
+                    $("[name='merek_mobil']").removeClass("is-invalid");
+                    $(".merek_mobil_error").html("");
+                    $("[name='nomor_rangka']").removeClass("is-invalid");
+                    $(".nomor_rangka_error").html("");
+                    $("[name='nomor_mesin']").removeClass("is-invalid");
+                    $(".nomor_mesin_error").html("");
+                    $("[name='nomor_polisi']").removeClass("is-invalid");
+                    $(".nomor_polisi_error").html("");
+                    $("[name='warna_mobil']").removeClass("is-invalid");
+                    $(".warna_mobil_error").html("");
+                    $("[name='tahun_mobil']").removeClass("is-invalid");
+                    $(".tahun_mobil_error").html("");
 
-                    if (data.response == 201) {
+                    if (data.status == 200) {
                         iziToast.success({
                             title: 'Success',
                             message: data.message,
                             position: 'topRight',
                             timeout: 3000
                         });
-                        $("[name='nama_pelanggan']").val("");
-                        $("[name='no_tlp']").val("");
-                        $("[name='nik']").val("");
-                        $("[name='alamat']").val("");
+                        $("#modal-data-pelanggan").modal('hide');
                     } else {
                         iziToast.error({
                             title: 'Error',
-                            message: 'Data gagal di tambahkan',
+                            message: 'Data gagal di ubah',
                             position: 'topRight',
                             timeout: 3000
                         });
@@ -165,193 +250,6 @@
                 }
             }
         });
-        e.preventDefault();
-    });
-
-    $("#form-tambah-service").submit(function(e) {
-        const jenis_service = $("[name='jenis_service']").val();
-        switch (jenis_service) {
-            case "Service Berkala":
-                $.ajax({
-                    url: "<?= base_url(); ?>service/addServiceBerkala",
-                    type: "post",
-                    data: $(this).serialize(),
-                    dataType: "json",
-                    beforeSend: function() {
-                        $(".btn-proses-tambah-service").attr('disable', 'disabled');
-                        $(".btn-proses-tambah-service").html('<button class="btn btn-block btn-sm btn-outline-primary"><i class="fa fa-spin fa-spinner"></i></button>');
-                    },
-                    complete: function() {
-                        $(".btn-proses-tambah-service").removeAttr('disable');
-                        $(".btn-proses-tambah-service").html('<button type="submit" class="btn btn-block btn-outline-primary btn-sm"><i class="fas fa-plus"> Tambah Service</i></button>');
-                    },
-                    success: function(data) {
-                        if (data.error) {
-                            if (data.error.id_pelanggan) {
-                                $.ajax({
-                                    url: "<?= base_url(); ?>service/loadPageError",
-                                    type: "get",
-                                    success: function(data) {
-                                        $(".view-jenis-service").html(data);
-                                    }
-                                });
-                            }
-
-                            if (data.error.tgl_service) {
-                                $("[name='tgl_service']").addClass("is-invalid");
-                                $(".tgl_service_error").html(data.error.tgl_service);
-                            } else {
-                                $("[name='tgl_service']").removeClass("is-invalid");
-                                $(".tgl_service_error").html("");
-                            }
-                        } else {
-                            $("[name='tgl_service']").removeClass("is-invalid");
-                            $(".tgl_service_error").html("");
-                            if (data.status == 201) {
-                                iziToast.success({
-                                    title: 'Success',
-                                    message: data.message,
-                                    position: 'topRight',
-                                    timeout: 3000
-                                });
-                                load_data_spareparts();
-                            } else {
-                                iziToast.error({
-                                    title: 'Error',
-                                    message: 'Data gagal di tambahkan',
-                                    position: 'topRight',
-                                    timeout: 3000
-                                });
-                            }
-                        }
-                    }
-                });
-                break;
-            case "Service Tune Up":
-                $.ajax({
-                    url: "<?= base_url(); ?>service/addTuneUpService",
-                    type: "post",
-                    data: $(this).serialize(),
-                    dataType: "json",
-                    beforeSend: function() {
-                        $(".btn-proses-tambah-service").attr('disable', 'disabled');
-                        $(".btn-proses-tambah-service").html('<button class="btn btn-block btn-sm btn-outline-primary"><i class="fa fa-spin fa-spinner"></i></button>');
-                    },
-                    complete: function() {
-                        $(".btn-proses-tambah-service").removeAttr('disable');
-                        $(".btn-proses-tambah-service").html('<button type="submit" class="btn btn-block btn-outline-primary btn-sm"><i class="fas fa-plus"> Tambah Service</i></button>');
-                    },
-                    success: function(data) {
-                        if (data.error) {
-                            if (data.error.id_pelanggan) {
-                                $.ajax({
-                                    url: "<?= base_url(); ?>service/loadPageError",
-                                    type: "get",
-                                    success: function(data) {
-                                        $(".view-jenis-service").html(data);
-                                    }
-                                });
-                            }
-
-                            if (data.error.tgl_service) {
-                                $("[name='tgl_service']").addClass("is-invalid");
-                                $(".tgl_service_error").html(data.error.tgl_service);
-                            } else {
-                                $("[name='tgl_service']").removeClass("is-invalid");
-                                $(".tgl_service_error").html("");
-                            }
-                        } else {
-                            $("[name='tgl_service']").removeClass("is-invalid");
-                            $(".tgl_service_error").html("");
-                            if (data.status == 201) {
-                                iziToast.success({
-                                    title: 'Success',
-                                    message: data.message,
-                                    position: 'topRight',
-                                    timeout: 3000
-                                });
-                                load_data_spareparts();
-                            } else {
-                                iziToast.error({
-                                    title: 'Error',
-                                    message: 'Data gagal di tambahkan',
-                                    position: 'topRight',
-                                    timeout: 3000
-                                });
-                            }
-                        }
-                    }
-                });
-                break;
-            case "Service Lain-lain":
-                $.ajax({
-                    url: "<?= base_url(); ?>service/addServiceLain",
-                    type: "post",
-                    data: $(this).serialize(),
-                    dataType: "json",
-                    beforeSend: function() {
-                        $(".btn-proses-tambah-service").attr('disable', 'disabled');
-                        $(".btn-proses-tambah-service").html('<button class="btn btn-block btn-sm btn-outline-primary"><i class="fa fa-spin fa-spinner"></i></button>');
-                    },
-                    complete: function() {
-                        $(".btn-proses-tambah-service").removeAttr('disable');
-                        $(".btn-proses-tambah-service").html('<button type="submit" class="btn btn-block btn-outline-primary btn-sm"><i class="fas fa-plus"> Tambah Service</i></button>');
-                    },
-                    success: function(data) {
-                        if (data.error) {
-                            if (data.error.id_pelanggan) {
-                                $.ajax({
-                                    url: "<?= base_url(); ?>service/loadPageError",
-                                    type: "get",
-                                    success: function(data) {
-                                        $(".view-jenis-service").html(data);
-                                    }
-                                });
-                            }
-
-                            if (data.error.service_lain) {
-                                $("[name='service_lain']").addClass("is-invalid");
-                                $(".service_lain_error").html(data.error.service_lain);
-                            } else {
-                                $("[name='service_lain']").removeClass("is-invalid");
-                                $(".service_lain_error").html("");
-                            }
-
-                            if (data.error.tgl_service) {
-                                $("[name='tgl_service']").addClass("is-invalid");
-                                $(".tgl_service_error").html(data.error.tgl_service);
-                            } else {
-                                $("[name='tgl_service']").removeClass("is-invalid");
-                                $(".tgl_service_error").html("");
-                            }
-                        } else {
-                            $("[name='service_lain']").removeClass("is-invalid");
-                            $(".service_lain_error").html("");
-                            $("[name='tgl_service']").removeClass("is-invalid");
-                            $(".tgl_service_error").html("");
-                            if (data.status == 201) {
-                                iziToast.success({
-                                    title: 'Success',
-                                    message: data.message,
-                                    position: 'topRight',
-                                    timeout: 3000
-                                });
-                                load_data_spareparts();
-                            } else {
-                                iziToast.error({
-                                    title: 'Error',
-                                    message: 'Data gagal di tambahkan',
-                                    position: 'topRight',
-                                    timeout: 3000
-                                });
-                            }
-                        }
-                    }
-                });
-                break;
-            default:
-                break;
-        }
         e.preventDefault();
     });
 </script>

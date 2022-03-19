@@ -13,7 +13,7 @@ class Data_service_model extends CI_Model
         $this->db->join('tb_data_mobil', 'tb_spareparts_service.id_mobil = tb_data_mobil.id');
         $this->db->join('tb_pelanggan', 'tb_spareparts_service.id_pelanggan = tb_pelanggan.id');
         $this->db->join('tb_status_service', 'tb_spareparts_service.id_status = tb_status_service.id');
-        $this->db->group_by('tb_spareparts_service.id_pelanggan');
+        $this->db->group_by('tb_spareparts_service.id_service');
         $this->db->order_by('tb_spareparts_service.id', 'DESC');
         $result = $this->db->get()->result_array();
 
@@ -47,7 +47,7 @@ class Data_service_model extends CI_Model
 
     public function semua_data_pelanggan()
     {
-        $this->db->select('tb_data_mobil.*, tb_data_mobil.id as id_mobil,tb_pelanggan.id as id_pelanggan, tb_pelanggan.*, tb_status_service.*');
+        $this->db->select('tb_data_mobil.*, tb_data_mobil.id as id_mobil,tb_pelanggan.id as id_pelanggan, tb_pelanggan.*, tb_status_service.*, tb_data_service.id as id_service');
         $this->db->from('tb_spareparts_service');
         $this->db->join('tb_data_service', 'tb_spareparts_service.id_service = tb_data_service.id');
         $this->db->join('tb_data_mobil', 'tb_spareparts_service.id_mobil = tb_data_mobil.id');
@@ -59,12 +59,22 @@ class Data_service_model extends CI_Model
         return $result;
     }
 
+    // public function get_data_pelanggan_by_id($id_pelanggan)
+    // {
+    //     $this->db->select('tb_pelanggan.*, tb_pelanggan.id as id_pelanggan, tb_data_mobil.*, tb_data_mobil.id as id_mobil');
+    //     $this->db->join('tb_pelanggan', 'tb_data_mobil.id_pelanggan = tb_pelanggan.id');
+    //     $this->db->where('id_pelanggan', $id_pelanggan);
+    //     $result = $this->db->get('tb_data_mobil')->row_array();
+
+    //     return $result;
+    // }
     public function get_data_pelanggan_by_id($id_pelanggan)
     {
         $this->db->select('tb_pelanggan.*, tb_pelanggan.id as id_pelanggan, tb_data_mobil.*, tb_data_mobil.id as id_mobil');
-        $this->db->join('tb_pelanggan', 'tb_data_mobil.id_pelanggan = tb_pelanggan.id');
-        $this->db->where('id_pelanggan', $id_pelanggan);
-        $result = $this->db->get('tb_data_mobil')->row_array();
+        $this->db->join('tb_pelanggan', 'tb_spareparts_service.id_pelanggan = tb_pelanggan.id');
+        $this->db->join('tb_data_mobil', 'tb_spareparts_service.id_mobil = tb_data_mobil.id');
+        $this->db->where('tb_spareparts_service.id_pelanggan', $id_pelanggan);
+        $result = $this->db->get('tb_spareparts_service')->row_array();
 
         return $result;
     }

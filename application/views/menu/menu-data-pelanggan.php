@@ -36,9 +36,6 @@
                 </div>
             </div>
             <div class="card-body">
-                <button class="btn btn-primary mb-3 add-pelanggan" data-toggle="modal" data-target="#modal-pelanggan"><i class="fas fa-plus"></i> Tambah Pelanggan</button>
-                <button class="btn btn-primary mb-3 ml-1 add-mobil" style="display: none;" data-toggle="modal" data-target="#modal-pelanggan"><i class="fas fa-plus"></i> Tambah Mobil</button>
-                <button class="btn btn-danger mb-3 ml-1 delete-all"><i class="fas fa-trash"></i> Hapus Semua</button>
                 <div class="table-responsive view-data-pelanggan">
 
                 </div>
@@ -66,125 +63,125 @@
 </div>
 
 <script>
-    $.ajax({
-        url: "http://localhost/spareparts-transaction-system/service/load_form_data_pelanggan",
-        type: "get",
-        success: function(data) {
-            $(".modal-pelanggan").html(data);
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-        },
-    });
+    // $.ajax({
+    //     url: "http://localhost/spareparts-transaction-system/service/load_form_data_pelanggan",
+    //     type: "get",
+    //     success: function(data) {
+    //         $(".modal-pelanggan").html(data);
+    //     },
+    //     error: function(xhr, ajaxOptions, thrownError) {
+    //         alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+    //     },
+    // });
    
-    $(".add-pelanggan").click(function() {
-        $.ajax({
-            url: "http://localhost/spareparts-transaction-system/service/load_form_data_pelanggan",
-            type: "get",
-            success: function(data) {
-                $(".modal-pelanggan").html(data);
-                // readonly input mobil
-                $("[name='jenis_mobil']").attr("readonly", "readonly");
-                $("[name='tipe_mobil']").attr("readonly", "readonly");
-                $("[name='merek_mobil']").attr("readonly", "readonly");
-                $("[name='nomor_rangka']").attr("readonly", "readonly");
-                $("[name='nomor_mesin']").attr("readonly", "readonly");
-                $("[name='nomor_polisi']").attr("readonly", "readonly");
-                $("[name='warna_mobil']").attr("readonly", "readonly");
-                $("[name='tahun_mobil']").attr("readonly", "readonly");
+    // $(".add-pelanggan").click(function() {
+    //     $.ajax({
+    //         url: "http://localhost/spareparts-transaction-system/service/load_form_data_pelanggan",
+    //         type: "get",
+    //         success: function(data) {
+    //             $(".modal-pelanggan").html(data);
+    //             // readonly input mobil
+    //             $("[name='jenis_mobil']").attr("readonly", "readonly");
+    //             $("[name='tipe_mobil']").attr("readonly", "readonly");
+    //             $("[name='merek_mobil']").attr("readonly", "readonly");
+    //             $("[name='nomor_rangka']").attr("readonly", "readonly");
+    //             $("[name='nomor_mesin']").attr("readonly", "readonly");
+    //             $("[name='nomor_polisi']").attr("readonly", "readonly");
+    //             $("[name='warna_mobil']").attr("readonly", "readonly");
+    //             $("[name='tahun_mobil']").attr("readonly", "readonly");
 
-                // tampilkan tombol tambah
-                $(".proses-ubah-pelanggan").attr("style", "display:none;");
-                $(".proses-tambah-mobil").attr("style", "display:none;");
-                $(".proses-tambah-pelanggan").removeAttr("style");
+    //             // tampilkan tombol tambah
+    //             $(".proses-ubah-pelanggan").attr("style", "display:none;");
+    //             $(".proses-tambah-mobil").attr("style", "display:none;");
+    //             $(".proses-tambah-pelanggan").removeAttr("style");
 
-                // ubah titel
-                $("#modal-title-pelanggan").html("<i class='fas fa-user-plus'></i> Tambah Data Pelanggan")
+    //             // ubah titel
+    //             $("#modal-title-pelanggan").html("<i class='fas fa-user-plus'></i> Tambah Data Pelanggan")
 
-                // hilangkan readonly
-                $("#nik").removeAttr("readonly");
+    //             // hilangkan readonly
+    //             $("#nik").removeAttr("readonly");
 
-                // kosongkan form
-                $("[name='id_pelanggan']").val("");
-                $("[name='nama_pelanggan']").val("");
-                $("[name='no_tlp']").val("");
-                $("[name='nik']").val("");
-                $("[name='alamat']").val("");
-                $("[name='id_mobil']").val("");
-                $("[name='jenis_mobil']").val("");
-                $("[name='tipe_mobil']").val("");
-                $("[name='merek_mobil']").val("");
-                $("[name='nomor_rangka']").val("");
-                $("[name='nomor_mesin']").val("");
-                $("[name='nomor_polisi']").val("");
-                $("[name='warna_mobil']").val("");
-                $("[name='tahun_mobil']").val("");
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-            },
-        });
-    });
+    //             // kosongkan form
+    //             $("[name='id_pelanggan']").val("");
+    //             $("[name='nama_pelanggan']").val("");
+    //             $("[name='no_tlp']").val("");
+    //             $("[name='nik']").val("");
+    //             $("[name='alamat']").val("");
+    //             $("[name='id_mobil']").val("");
+    //             $("[name='jenis_mobil']").val("");
+    //             $("[name='tipe_mobil']").val("");
+    //             $("[name='merek_mobil']").val("");
+    //             $("[name='nomor_rangka']").val("");
+    //             $("[name='nomor_mesin']").val("");
+    //             $("[name='nomor_polisi']").val("");
+    //             $("[name='warna_mobil']").val("");
+    //             $("[name='tahun_mobil']").val("");
+    //         },
+    //         error: function(xhr, ajaxOptions, thrownError) {
+    //             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+    //         },
+    //     });
+    // });
 
-    $(".add-mobil").click(function() {
-        $.ajax({
-            url: "http://localhost/spareparts-transaction-system/service/load_form_data_pelanggan",
-            type: "get",
-            success: function(data) {
-                $(".modal-pelanggan").html(data);
+    // $(".add-mobil").click(function() {
+    //     $.ajax({
+    //         url: "http://localhost/spareparts-transaction-system/service/load_form_data_pelanggan",
+    //         type: "get",
+    //         success: function(data) {
+    //             $(".modal-pelanggan").html(data);
 
-                // readonly input mobil
-                $("[name='nama_pelanggan']").attr("readonly", "readonly");
-                $("[name='no_tlp']").attr("readonly", "readonly");
-                $("[name='nik']").attr("readonly", "readonly");
-                $("[name='alamat']").attr("readonly", "readonly");
+    //             // readonly input mobil
+    //             $("[name='nama_pelanggan']").attr("readonly", "readonly");
+    //             $("[name='no_tlp']").attr("readonly", "readonly");
+    //             $("[name='nik']").attr("readonly", "readonly");
+    //             $("[name='alamat']").attr("readonly", "readonly");
 
-                // tampilkan tombol tambah
-                $(".proses-ubah-pelanggan").attr("style", "display:none;");
-                $(".proses-tambah-pelanggan").attr("style", "display:none;");
-                $(".proses-tambah-mobil").removeAttr("style");
-                $(".form-add-mobil").removeAttr("style");
+    //             // tampilkan tombol tambah
+    //             $(".proses-ubah-pelanggan").attr("style", "display:none;");
+    //             $(".proses-tambah-pelanggan").attr("style", "display:none;");
+    //             $(".proses-tambah-mobil").removeAttr("style");
+    //             $(".form-add-mobil").removeAttr("style");
 
-                // ubah titel
-                $("#modal-title-pelanggan").html("<i class='fas fa-car'></i> Tambah Data Mobil")
+    //             // ubah titel
+    //             $("#modal-title-pelanggan").html("<i class='fas fa-car'></i> Tambah Data Mobil")
 
-                // hilangkan readonly
-                $("#jenis_mobil").removeAttr("readonly");
-                $("#tipe_mobil").removeAttr("readonly");
-                $("#merek_mobil").removeAttr("readonly");
-                $("#nomor_rangka").removeAttr("readonly");
-                $("#nomor_mesin").removeAttr("readonly");
-                $("#nomor_polisi").removeAttr("readonly");
-                $("#warna_mobil").removeAttr("readonly");
-                $("#tahun_mobil").removeAttr("readonly");
+    //             // hilangkan readonly
+    //             $("#jenis_mobil").removeAttr("readonly");
+    //             $("#tipe_mobil").removeAttr("readonly");
+    //             $("#merek_mobil").removeAttr("readonly");
+    //             $("#nomor_rangka").removeAttr("readonly");
+    //             $("#nomor_mesin").removeAttr("readonly");
+    //             $("#nomor_polisi").removeAttr("readonly");
+    //             $("#warna_mobil").removeAttr("readonly");
+    //             $("#tahun_mobil").removeAttr("readonly");
 
-                // ambil data pelanggan terakhir di tambahkan
-                $.ajax({
-                    url: "<?= base_url(); ?>service/get_pelanggan_last_input",
-                    type: "post",
-                    dataType: "json",
-                    success: function(data) {
-                        $("#id_pelanggan_mobil").val(data.id);
-                        $.ajax({
-                            url: "<?= base_url(); ?>service/get_data_pelanggan_last_input",
-                            type: "post",
-                            data: {
-                                id_pelanggan: $("#id_pelanggan_mobil").val()
-                            },
-                            dataType: "json",
-                            success: function(data) {
-                                $("[name='nama_pelanggan']").val(data.nama_pelanggan);
-                                $("[name='no_tlp']").val(data.no_tlp);
-                                $("[name='nik']").val(data.nik);
-                                $("[name='alamat']").val(data.alamat);
-                            }
-                        });
-                    }
-                });
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-            },
-        });
-    });
+    //             // ambil data pelanggan terakhir di tambahkan
+    //             $.ajax({
+    //                 url: "<?= base_url(); ?>service/get_pelanggan_last_input",
+    //                 type: "post",
+    //                 dataType: "json",
+    //                 success: function(data) {
+    //                     $("#id_pelanggan_mobil").val(data.id);
+    //                     $.ajax({
+    //                         url: "<?= base_url(); ?>service/get_data_pelanggan_last_input",
+    //                         type: "post",
+    //                         data: {
+    //                             id_pelanggan: $("#id_pelanggan_mobil").val()
+    //                         },
+    //                         dataType: "json",
+    //                         success: function(data) {
+    //                             $("[name='nama_pelanggan']").val(data.nama_pelanggan);
+    //                             $("[name='no_tlp']").val(data.no_tlp);
+    //                             $("[name='nik']").val(data.nik);
+    //                             $("[name='alamat']").val(data.alamat);
+    //                         }
+    //                     });
+    //                 }
+    //             });
+    //         },
+    //         error: function(xhr, ajaxOptions, thrownError) {
+    //             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+    //         },
+    //     });
+    // });
 </script>

@@ -455,6 +455,24 @@ class Service extends CI_Controller
         }
     }
 
+    public function update_data_service()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id_service = $_GET['id_service'];
+            $id_pelanggan = $_GET['id_pelanggan'];
+            $data = [
+                'id_pelanggan' => $this->db->get_where('tb_pelanggan', ['id' => $id_pelanggan])->row_array(),
+                'jenis_service' => $this->db->get('tb_jenis_service')->result_array(),
+                'sub_service' => $this->db->get('tb_sub_jenis_service')->result_array(),
+                "detail_data_service" => $this->Data_service_model->detail_data_service($id_service, $id_pelanggan),
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/riwayat-service-pelanggan', $data));
+            // echo json_encode($data);
+        } else {
+            echo json_encode('Request failed');
+        }
+    }
+
     public function get_service_spareparts_by_id()
     {
         $data = [
@@ -640,7 +658,7 @@ class Service extends CI_Controller
 
     public function ubah_data_pelanggan()
     {
-        $id_pelanggan = $_POST['id_pelanggan'];
+        $id_pelanggan = $_GET['id_pelanggan'];
         if ($this->input->is_ajax_request()) {
             $data = [
                 'data_pelanggan_by_id' => $this->Data_service_model->get_data_pelanggan_by_id($id_pelanggan)
@@ -651,7 +669,7 @@ class Service extends CI_Controller
         }
     }
 
-    public function proses_ubah_pelanggan()
+    public function proses_ubah_data_pelanggan()
     {
         $id_pelanggan = $_POST['id_pelanggan'];
         $id_mobil = $_POST['id_mobil'];
@@ -676,10 +694,14 @@ class Service extends CI_Controller
         if ($this->input->is_ajax_request()) {
             $this->form_validation->set_rules('nama_pelanggan', 'Nama pelanggan', 'required');
             $this->form_validation->set_rules('no_tlp', 'No tlp', 'required');
+            $this->form_validation->set_rules('nik', 'NIK', 'required');
             $this->form_validation->set_rules('alamat', 'Alamat', 'required');
             $this->form_validation->set_rules('jenis_mobil', 'Jenis mobil', 'required');
             $this->form_validation->set_rules('tipe_mobil', 'Tipe mobil', 'required');
             $this->form_validation->set_rules('merek_mobil', 'Merek mobil', 'required');
+            $this->form_validation->set_rules('nomor_rangka', 'Nomor rangka', 'trim|required');
+            $this->form_validation->set_rules('nomor_mesin', 'Nomor mesin', 'trim|required');
+            $this->form_validation->set_rules('nomor_polisi', 'Nomor polisi', 'trim|required');
             $this->form_validation->set_rules('warna_mobil', 'Warna mobil', 'required');
             $this->form_validation->set_rules('tahun_mobil', 'Tahun mobil', 'required');
 
@@ -688,10 +710,14 @@ class Service extends CI_Controller
                     'error' => [
                         'nama_pelanggan' => form_error('nama_pelanggan'),
                         'no_tlp' => form_error('no_tlp'),
+                        'nik' => form_error('nik'),
                         'alamat' => form_error('alamat'),
                         'jenis_mobil' => form_error('jenis_mobil'),
                         'tipe_mobil' => form_error('tipe_mobil'),
                         'merek_mobil' => form_error('merek_mobil'),
+                        'nomor_rangka' => form_error('nomor_rangka'),
+                        'nomor_mesin' => form_error('nomor_mesin'),
+                        'nomor_polisi' => form_error('nomor_polisi'),
                         'warna_mobil' => form_error('warna_mobil'),
                         'tahun_mobil' => form_error('tahun_mobil')
                     ]
@@ -712,10 +738,54 @@ class Service extends CI_Controller
         }
     }
 
-    public function load_form_data_pelanggan()
+    public function riwayat_service()
     {
         if ($this->input->is_ajax_request()) {
-            echo json_encode($this->load->view('menu/ajax-request/form-data-pelanggan'));
+            $id_pelanggan = $_GET['id_pelanggan'];
+            $id_mobil = $_GET['id_mobil'];
+            $id_service = $_GET['id_service'];
+            $this->db->select('tb_data_service.*');
+            $this->db->where('id_pelanggan', $id_pelanggan);
+            $this->db->order_by('tgl_service', 'DESC');
+            $data = [
+                'riwayat_service' => $this->db->get('tb_data_service')->result_array(),
+                'id_pelanggan' => $id_pelanggan,
+                'id_mobil' => $id_mobil,
+                'id_service' => $id_service,
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/riwayat-service-pelanggan', $data));
+        } else {
+            echo json_encode("Request failed");
+        }
+    }
+
+    public function detail_latest_service()
+    {
+        $this->db->select('tb_sub_spareparts.nama_spareparts, tb_spareparts.kd_spareparts, tb_data_service.*');
+        $this->db->join('tb_sub_spareparts', 'tb_spareparts_service.id_sub_spareparts = tb_sub_spareparts.id');
+        $this->db->join('tb_spareparts', 'tb_spareparts_service.id_spareparts = tb_spareparts.id');
+        $this->db->join('tb_data_service', 'tb_spareparts_service.id_service = tb_data_service.id');
+        $this->db->where('id_service', $_GET['id_service']);
+        $data = [
+            'latest_service' => $this->db->get('tb_spareparts_service')->result_array(),
+            'jenis_service' => $this->db->get_where('tb_data_service', ['id_pelanggan' => $_GET['id_pelanggan']])->row_array(),
+        ];
+        if ($this->input->is_ajax_request()) {
+            echo json_encode($this->load->view('menu/ajax-request/table-riwayat-service', $data));
+        } else {
+            echo json_encode("Request failed");
+        }
+    }
+
+    public function form_data_pelanggan()
+    {
+        $id_pelanggan = $_GET['id_pelanggan'];
+        $data = [
+            'data_pelanggan_by_id' => $this->Data_service_model->get_data_pelanggan_by_id($id_pelanggan),
+            'id_pelanggan' => $id_pelanggan
+        ];
+        if ($this->input->is_ajax_request()) {
+            echo json_encode($this->load->view('menu/ajax-request/form-data-pelanggan', $data));
         } else {
             echo json_encode("Request failed");
         }
@@ -726,10 +796,12 @@ class Service extends CI_Controller
         if ($this->input->is_ajax_request()) {
             $id_pelanggan = $_GET['id_pelanggan'];
             $id_mobil = $_GET['id_mobil'];
+            $id_service = $_GET['id_service'];
             $data = [
                 "jenis_service" => $this->db->get("tb_jenis_service")->result_array(),
                 'id_pelanggan' => $id_pelanggan,
-                'id_mobil' => $id_mobil
+                'id_mobil' => $id_mobil,
+                'id_service' => $id_service,
             ];
             echo json_encode($this->load->view('menu/ajax-request/jenis-service-pelanggan', $data));
         } else {
@@ -740,13 +812,14 @@ class Service extends CI_Controller
     public function loadSubServicePelanggan()
     {
         if ($this->input->is_ajax_request()) {
-            $id_pelanggan = $_GET['id_pelanggan'];
             $this->db->select('tb_sub_jenis_service.*,tb_jenis_service.nama_service');
             $this->db->from('tb_sub_jenis_service');
             $this->db->join('tb_jenis_service', 'tb_sub_jenis_service.id_jenis_service = tb_jenis_service.id');
             $data = [
                 "sub_jenis_service" => $this->db->get()->result_array(),
-                'id_pelanggan' => $id_pelanggan
+                "id_pelanggan" => $_GET['id_pelanggan'],
+                "id_service" => $_GET['id_service'],
+                "id_mobil" => $_GET['id_mobil'],
             ];
             echo json_encode($this->load->view('menu/ajax-request/sub-jenis-service-pelanggan', $data));
         } else {
@@ -757,16 +830,16 @@ class Service extends CI_Controller
     public function loadFormDataServicePelanggan()
     {
         if ($this->input->is_ajax_request()) {
-            $id_pelanggan = $_GET['id_pelanggan'];
-            $this->db->select('tb_data_mobil.id_pelanggan');
-            $this->db->where('id_pelanggan', $id_pelanggan);
+           
             $data = [
                 'kd_service' => $this->Kode_otomatis_model->getKode(),
                 'nama_service' => $_GET['nama_service'],
                 'harga_jasa' => $_GET['harga_jasa'],
                 'nama_sub_service' => @$_GET['nama_sub_service'],
+                'id_pelanggan' => $_GET['id_pelanggan'],
+                'id_service' => $_GET['id_service'],
+                'id_mobil' => $_GET['id_mobil'],
                 'message' => 'Data pelanggan masih kosong, silahkan tambahkan pelanggan terlebih dahulu',
-                'id_pelanggan' => $this->db->get('tb_data_mobil')->row_array()
             ];
             echo json_encode($this->load->view('menu/ajax-request/form-add-service-pelanggan', $data));
         } else {
@@ -786,12 +859,12 @@ class Service extends CI_Controller
             'tgl_service' => $_POST['tgl_service'],
             'info_lain' => $_POST['info_lain']
         ];
-        $this->db->insert('tb_data_service', $data);
-        $msg = [
-            'status' => 201,
-            'message' => 'Data berhasil ditambahkan'
-        ];
-        echo json_encode($msg);
+        // $this->db->insert('tb_data_service', $data);
+        // $msg = [
+        //     'status' => 201,
+        //     'message' => 'Data berhasil ditambahkan'
+        // ];
+        echo json_encode($data);
     }
 
     public function addServiceLainPelanggan()
@@ -818,7 +891,7 @@ class Service extends CI_Controller
     {
         $data = [
             'id_pelanggan' => $_POST['id_pelanggan'],
-            'kd_service' => $_POST['kode_service'],
+            'kd_service' => $_POST['kd_service'],
             'jenis_service' => $_POST['jenis_service'],
             'harga' => reset_rupiah($_POST['harga']),
             'sub_service' => $_POST['sub_service'],
@@ -839,7 +912,9 @@ class Service extends CI_Controller
         if ($this->input->is_ajax_request()) {
             $data = [
                 'spareparts' => $this->db->get('tb_spareparts')->result_array(),
-                'id_pelanggan' => $_GET['id_pelanggan']
+                'id_pelanggan' => $_GET['id_pelanggan'],
+                'id_service' => $_GET['id_service'],
+                'id_mobil' => $_GET['id_mobil']
             ];
             echo json_encode($this->load->view('menu/ajax-request/data-spareparts-pelanggan', $data));
         } else {
