@@ -1,18 +1,17 @@
 <form id="form-sub-spareparts">
-    <input type="hidden" class="form-control" value="" id="id" name="id">
+    <input type="hidden" class="form-control" value="<?=  $jenis_spareparts['id']; ?>" id="id_spareparts" name="id_spareparts">
     <div class="form-group">
         <label for="exampleFormControlInput1">Kode Spareparts<span class="required text-danger pl-1 text-sm">*</span></label>
-        <input type="text" class="form-control" value="<?= $jenis_spareparts['kd_spareparts']; ?>" id="kd_spareparts" name="kd_spareparts" readonly>
+        <input type="text" class="form-control" value="<?=  $jenis_spareparts['kd_spareparts']; ?>" id="kd_spareparts" name="kd_spareparts" readonly>
         <div id="validationServer03Feedback" class="invalid-feedback nama_spareparts_error">
         </div>
     </div>
     <div class="form-group">
         <label for="exampleFormControlInput1">Jenis Spareparts<span class="required text-danger pl-1 text-sm">*</span></label>
-        <input type="text" class="form-control" value="<?= $jenis_spareparts['jenis_spareparts']; ?>" id="jenis_spareparts" name="jenis_spareparts" readonly>
+        <input type="text" class="form-control" value="<?=  $jenis_spareparts['nama_spareparts']; ?>" id="jenis_spareparts" name="jenis_spareparts" readonly>
         <div id="validationServer03Feedback" class="invalid-feedback nama_spareparts_error">
         </div>
     </div>
-    <input type="hidden" class="form-control" value="<?= $jenis_spareparts['id_spareparts']; ?>" id="id_spareparts" name="id_spareparts">
     <div class="form-group">
         <label for="exampleFormControlInput1">Nama Spareparts<span class="required text-danger pl-1 text-sm">*</span></label>
         <input type="text" class="form-control" value="" id="nama_spareparts" name="nama_spareparts">
@@ -88,6 +87,7 @@
                         });
                     }
                 }
+                console.log(data)
             }
         });
         e.preventDefault();

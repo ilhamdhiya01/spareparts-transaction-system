@@ -29,9 +29,9 @@
                                 <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-tools"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text text-bold"><?= $riwayat['jenis_service']; ?></span>
-                                    <?php if ($status['id_status'] == 1) : ?>
+                                    <?php if (@$status['id_status'] == 1) : ?>
                                         <span class="info-box-text text-bold"><small class="badge badge-danger">Belum Service</small></span>
-                                    <?php elseif ($status['id_status'] == 2) : ?>
+                                    <?php elseif (@$status['id_status'] == 2) : ?>
                                         <span class="info-box-text text-bold"><small class="badge badge-success">Sudah Service</small></span>
                                     <?php else : ?>
                                         <span class="info-box-text text-bold"><small class="badge badge-warning">Proses Service</small></span>

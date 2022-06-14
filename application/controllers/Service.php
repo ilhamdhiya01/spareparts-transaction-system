@@ -12,6 +12,7 @@ class Service extends CI_Controller
         $this->load->model('Spareparts_model');
         $this->load->model('Data_service_model');
         cek_access_user();
+        date_default_timezone_set('Asia/Jakarta');
     }
 
     public function index()

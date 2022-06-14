@@ -6,28 +6,16 @@
     </div>
     <div class="card-body auto">
         <?php foreach ($jenis_spareparts as $spareparts) : ?>
-            <div class="card card-info card-outline">
+            <div class="card card-info card-outline" id="card-spareparts">
                 <div class="card-header">
                     <h5 class="card-title"><?= $spareparts['nama_spareparts']; ?></h5>
                     <div class="card-tools">
+                        <a href="#" class="btn btn-tool hapus-sub-spareparts" title="Hapus Spareparts" data-idjenis="<?= $spareparts['id']; ?>">
+                            <i class="fas fa-trash"></i>
+                        </a>
                         <a href="#" class="btn btn-tool tambah-sub-spareparts" title="Tambah Spareparts" data-idjenis="<?= $spareparts['id']; ?>" data-toggle="modal" data-target="#modal-form-sub">
                             <i class="fas fa-plus"></i>
                         </a>
-                        <script>
-                            $(".tambah-sub-spareparts").click(function() {
-                                $("#sub-title").html("<i class='fas fa-plus'></i> Tambah Sub Spareparts");
-                                $.ajax({
-                                    url: "<?= base_url(); ?>spareparts/load_sub_spareparts",
-                                    type: "get",
-                                    data: {
-                                        id_jenis_spareparts: $(this).data("idjenis")
-                                    },
-                                    success: function(data) {
-                                        $(".form-sub-spareparts").html(data);
-                                    }
-                                })
-                            });
-                        </script>
                     </div>
                 </div>
                 <div class="card-body auto_sub">
@@ -128,6 +116,61 @@
             },
             success: function(data) {
                 $(".form-sub-spareparts").html(data);
+            }
+        });
+    });
+
+    $(".tambah-sub-spareparts").click(function() {
+        $("#sub-title").html("<i class='fas fa-plus'></i> Tambah Sub Spareparts");
+        $.ajax({
+            url: "<?= base_url(); ?>spareparts/load_sub_spareparts",
+            type: "get",
+            data: {
+                id_jenis_spareparts: $(this).data("idjenis")
+            },
+            success: function(data) {
+                $(".form-sub-spareparts").html(data);
+            }
+        })
+        console.log($(this).data("idjenis"))
+    });
+
+    $(".hapus-sub-spareparts").click(function() {
+        $(this).closest("#card-spareparts").addClass("hapus-spareparts");
+        Swal.fire({
+            title: 'Hapus data ini ?',
+            text: 'Data yang terhapus tidak akan kembali !',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "<?= base_url(); ?>spareparts/hapus_spareparts",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        id_jenis: $(this).data("idjenis"),
+                    },
+                    success: function(data) {
+                        if (data.status == 200) {
+                            iziToast.success({
+                                title: 'Success',
+                                message: data.message,
+                                position: 'topRight'
+                            });
+                            $(".hapus-spareparts").fadeOut(1000);
+                        } else {
+                            iziToast.error({
+                                title: 'Success',
+                                message: data.message,
+                                position: 'topRight'
+                            });
+                        }
+                    }
+                })
             }
         });
     });

@@ -22,7 +22,7 @@
             <div class="col-12">
                 <!-- Default box -->
                 <div class="row">
-                    <div class="col-md-5">
+                    <!-- <div class="col-md-5">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-edit"></i> </h3>
@@ -41,8 +41,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-7">
+                    </div> -->
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-table"></i> </h3>

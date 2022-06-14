@@ -24,7 +24,7 @@
                         </button>
                         <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item delete-spareparts" href="#" data-idspareparts="<?= $spareparts['id']; ?>"><i class="fas fa-trash"></i> Hapus Spareparts</a>
-                            <a class="dropdown-item update-spareparts" href="#" data-idspareparts="<?= $spareparts['id']; ?>"><i class="fas fa-edit"></i> Ubah Spareparts
+                            <a class="dropdown-item update-spareparts" href="#" data-idspareparts="<?= $spareparts['id']; ?>"><i class="fas fa-edit"></i> Ubah Spareparts</a>
                         </div>
                     </div>
                 </td>
@@ -109,7 +109,7 @@
                             kd_spareparts: $("[name='kd_spareparts']").val(),
                             nama_spareparts: $("[name='nama_spareparts']").val()
                         },
-                        dataType: "json", 
+                        dataType: "json",
                         beforeSend: function() {
                             $(".proses-ubah-spareparts").attr('disable', 'disabled');
                             $(".proses-ubah-spareparts").html('<i class="fa fa-spin fa-spinner"></i>');
@@ -130,6 +130,13 @@
                                     type: "get",
                                     success: function(data) {
                                         $(".form-spareparts").html(data);
+                                        $.ajax({
+                                            url: "<?= base_url(); ?>spareparts/load_tb_spareparts",
+                                            type: "get",
+                                            success: function(data) {
+                                                $(".table-jenis-spareparts").html(data);
+                                            }
+                                        });
                                     }
                                 });
                             } else {

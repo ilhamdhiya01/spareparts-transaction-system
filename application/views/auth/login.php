@@ -2,8 +2,8 @@
     <a class="hiddenanchor" id="signup"></a>
     <a class="hiddenanchor" id="signin"></a>
 
-    <div class="login_wrapper">
-        <div class="animate form login_form">
+    <div class="login_wrapper ">
+        <div class="animate form login_form bg-login p-3 rounded-lg">
             <section class="login_content">
                 <form>
                     <h1>Login Form</h1>
@@ -14,17 +14,12 @@
                         <input type="password" class="form-control" name="password" id="password" placeholder="Password" />
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-sm btn-secondary" id="login">Masuk</button>
-                        <a class="reset_pass" href="#">Lost your password?</a>
+                        <button type="submit" class="btn btn-block btn-secondary" id="login">Masuk</button>
                     </div>
 
                     <div class="clearfix"></div>
 
                     <div class="separator">
-                        <p class="change_link">New to site?
-                            <a href="#signup" class="to_register"> Create Account </a>
-                        </p>
-
                         <div class="clearfix"></div>
                         <br />
 

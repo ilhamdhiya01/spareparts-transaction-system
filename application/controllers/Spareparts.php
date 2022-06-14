@@ -128,11 +128,11 @@ class Spareparts extends CI_Controller
     {
         if ($this->input->is_ajax_request()) {
             $id_jenis_spareparts = $_GET['id_jenis_spareparts'];
-            $this->db->select('kd_spareparts,tb_spareparts.id as id_spareparts, tb_spareparts.nama_spareparts as jenis_spareparts');
-            $this->db->join('tb_spareparts', 'tb_sub_spareparts.id_spareparts = tb_spareparts.id');
-            $this->db->where('id_spareparts', $id_jenis_spareparts);
+            // $this->db->select('kd_spareparts,tb_spareparts.id as id_spareparts, tb_spareparts.nama_spareparts as jenis_spareparts');
+            // $this->db->join('tb_spareparts', 'tb_sub_spareparts.id_spareparts = tb_spareparts.id');
+            // $this->db->where('tb_spareparts.id', $id_jenis_spareparts);
             $data = [
-                'jenis_spareparts' => $this->db->get('tb_sub_spareparts')->row_array()
+                'jenis_spareparts' => $this->db->get_where('tb_spareparts', ['id' => $id_jenis_spareparts])->row_array()
             ];
             echo json_encode($this->load->view('menu/ajax-request-spareparts/form-data-sub-spareparts', $data));
         } else {
@@ -242,6 +242,21 @@ class Spareparts extends CI_Controller
                     'message' => 'Data berhasil di ubah'
                 ];
             }
+            echo json_encode($msg);
+        } else {
+            echo json_encode('Request failed');
+        }
+    }
+
+    public function hapus_spareparts()
+    {
+        if ($this->input->is_ajax_request()) {
+            $id_jenis = $_POST['id_jenis'];
+            $this->db->delete('tb_spareparts', ['id' => $id_jenis]);
+            $msg = [
+                'status' => 200,
+                'message' => 'Data berhasil di hapus'
+            ];
             echo json_encode($msg);
         } else {
             echo json_encode('Request failed');

@@ -24,6 +24,17 @@
     <!-- Custom Theme Style -->
     <link href="<?= base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
     <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
+    <style>
+        .login {
+            background-image: url('<?= base_url(); ?>assets/img/bg-auth.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .bg-login {
+            transform: translate(-30%, -50%);
+            background: rgba(4, 29, 23, 0.5);
+        }
+    </style>
 </head>
 
 <body class="login">

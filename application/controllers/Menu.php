@@ -17,8 +17,8 @@ class Menu extends CI_Controller
     public function index()
     {
         $this->db->select('users.*, tb_posisi.nama_posisi');
-        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
-        $this->db->where('username',$this->session->userdata('username'));
+        $this->db->join('tb_posisi', 'users.id_posisi = tb_posisi.id');
+        $this->db->where('username', $this->session->userdata('username'));
         $data =  [
             'judul' => 'Dashboard',
             'users' => $this->db->get('users')->row_array()
@@ -33,8 +33,8 @@ class Menu extends CI_Controller
     public function dropdown_userMenu()
     {
         $this->db->select('users.*, tb_posisi.nama_posisi');
-        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
-        $this->db->where('username',$this->session->userdata('username'));
+        $this->db->join('tb_posisi', 'users.id_posisi = tb_posisi.id');
+        $this->db->where('username', $this->session->userdata('username'));
         $data =  [
             'judul' => 'User Menu',
             'users' => $this->db->get('users')->row_array()
@@ -147,8 +147,8 @@ class Menu extends CI_Controller
     public function dropdown_subMenu()
     {
         $this->db->select('users.*, tb_posisi.nama_posisi');
-        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
-        $this->db->where('username',$this->session->userdata('username'));
+        $this->db->join('tb_posisi', 'users.id_posisi = tb_posisi.id');
+        $this->db->where('username', $this->session->userdata('username'));
         $data =  [
             'judul' => 'Data Sub Menu',
             'users' => $this->db->get('users')->row_array()
@@ -312,8 +312,8 @@ class Menu extends CI_Controller
     public function dropdown_access_menu()
     {
         $this->db->select('users.*, tb_posisi.nama_posisi');
-        $this->db->join('tb_posisi','users.id_posisi = tb_posisi.id');
-        $this->db->where('username',$this->session->userdata('username'));
+        $this->db->join('tb_posisi', 'users.id_posisi = tb_posisi.id');
+        $this->db->where('username', $this->session->userdata('username'));
         $data =  [
             'judul' => 'Access Menu',
             'users' => $this->db->get('users')->row_array()
@@ -491,7 +491,7 @@ class Menu extends CI_Controller
     public function delete_access_menu()
     {
         if ($this->input->is_ajax_request()) {
-            $id = $_POST['id'];
+            $id = $_POST['userid'];
             if ($this->db->delete('users', ['id' => $id])) {
                 $msg = [
                     'response' => 'success',
@@ -642,10 +642,10 @@ class Menu extends CI_Controller
     public function userAccess()
     {
         if ($this->input->is_ajax_request()) {
-            $id = $_GET['id'];
+            // $id = $_GET['id'];
             $data = [
                 'response' => 'success',
-                'level_user' => $this->db->get_where('level_user', ['id' => $id])->row_array(),
+                // 'level_user' => $this->db->get_where('level_user', ['id' => $id])->row_array(),
                 'user_access' => $this->db->get('tb_user_menu')->result_array()
             ];
             echo json_encode($this->load->view('menu/ajax-request/data-user-access', $data));
@@ -775,5 +775,32 @@ class Menu extends CI_Controller
             // ];
             // echo json_encode($msg);
         }
+    }
+
+    public function user_active()
+    {
+        $userid = $this->input->get('userid');
+        $isactive = $this->input->get('isactive');
+        $data = [
+            'user_id' => $userid,
+            'is_active' => $isactive,
+        ];
+        $this->db->set('is_active', 1);
+        $this->db->where('id', $userid);
+        $this->db->update('users');
+        echo json_encode($data);
+    }
+    public function user_inactive()
+    {
+        $userid = $this->input->get('userid');
+        $isactive = $this->input->get('isactive');
+        $data = [
+            'user_id' => $userid,
+            'is_active' => $isactive,
+        ];
+        $this->db->set('is_active', 0);
+        $this->db->where('id', $userid);
+        $this->db->update('users');
+        echo json_encode($data);
     }
 }
