@@ -62,9 +62,27 @@ class Menu extends CI_Controller
             echo "Data tidak ditemukan";
         }
     }
+    public function formUbahMenu() {
+         if ($this->input->is_ajax_request()) {
+            echo json_encode($this->load->view('menu/ajax-request/form-ubah-menu'));
+         } else {
+            echo "Data tidak ditemukan";
+         }
+    }
+     public function formAddUser() {
+        if ($this->input->is_ajax_request()) {
+            $data = [
+                'level_user' => $this->db->get('level_user')->result_array(),
+                'posisi' => $this->db->get('tb_posisi')->result_array(),
+            ];
+            echo json_encode($this->load->view('menu/ajax-request/form-add-user', $data));
+        } else {
+            echo "Data tidak ditemukan";
+        }
+     }
     public function delete_userMenu()
     {
-        $id = $_POST['id'];
+        $id = $_GET['menu_id'];
         if ($this->input->is_ajax_request()) {
             if ($this->db->delete('tb_user_menu', ['id' => $id])) {
                 $data = [
@@ -84,39 +102,20 @@ class Menu extends CI_Controller
     }
     public function tambah_userMenu()
     {
-        $rules = [
-            [
-                'field' => 'nama-menu',
-                'label' => 'Nama menu',
-                'rules' => 'required'
-            ]
+        $data = [
+            'nama_menu' => $this->input->post('nama_menu')
         ];
-        $this->form_validation->set_rules($rules);
-        $this->form_validation->set_message('required', '{field} tidak boleh kosong');
-        if ($this->form_validation->run() == false) {
-            $msg = [
-                'nama_menu' => form_error('nama-menu'),
-                'response' => 'error',
-                'message' => 'Data gagal ditambahkan'
-            ];
-            echo json_encode($msg);
-        } else {
-            $data = [
-                'nama_menu' => $this->input->post('nama-menu')
-            ];
-            if ($this->db->insert('tb_user_menu', $data)) {
-                $msg = [
-                    'response' => 'success',
-                    'message' => 'Data berhasil ditambahkan'
-                ];
-                echo json_encode($msg);
-            }
-        }
+        $this->db->insert('tb_user_menu', $data);
+        $msg = [
+            'response' => 'success',
+            'message' => 'Data berhasil ditambahkan'
+        ];
+        echo json_encode($msg);
     }
 
     public function get_userMenuById()
     {
-        $id =  $_POST['id'];
+        $id =  $_GET['menu_id'];
         $data = [
             'menu' => $this->db->get_where('tb_user_menu', ['id' => $id])->row_array()
         ];
@@ -125,21 +124,13 @@ class Menu extends CI_Controller
 
     public function proses_ubahUserMenu()
     {
+        $this->db->set('nama_menu', $_POST['nama_menu']);
+        $this->db->where('id', $_POST['menu_id']);
+        $this->db->update('tb_user_menu');
         $data = [
-            'id' => $_POST['id_menu'],
-            'nama_menu' => $_POST['nama_menu']
+            'response' => 'success',
+            'message' => 'Data berhasil di ubah'
         ];
-        if ($this->db->update('tb_user_menu', $data, ['id' => $data['id']])) {
-            $data = [
-                'response' => 'success',
-                'message' => 'Data berhasil di ubah'
-            ];
-        } else {
-            $data = [
-                'response' => 'error',
-                'message' => 'Data gagal di ubah'
-            ];
-        }
         echo json_encode($data);
     }
 
@@ -350,100 +341,35 @@ class Menu extends CI_Controller
 
     public function add_user()
     {
-        $rules = [
-            [
-                'field' => 'nama',
-                'label' => 'Nama pegawai',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} tidak boleh kosong'
-                ]
-            ],
-            [
-                'field' => 'posisi',
-                'label' => 'Posisi',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} tidak boleh kosong'
-                ]
-            ],
-            [
-                'field' => 'level',
-                'label' => 'Level user',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} tidak boleh kosong'
-                ]
-            ],
-            [
-                'field' => 'username',
-                'label' => 'Username',
-                'rules' => 'required|is_unique[users.username]',
-                'errors' => [
-                    'required' => '{field} tidak boleh kosong',
-                    'is_unique' => 'Username atau email sudah digunakan'
-                ]
-            ],
-            [
-                'field' => 'password',
-                'label' => 'Password',
-                'rules' => 'required|min_length[8]|matches[konfirmasi_password]',
-                'errors' => [
-                    'required' => '{field} tidak boleh kosong',
-                    'min_length' => 'Password minimal 8 karakter',
-                    'matches' => 'Password dan Konfirmasi password harus sama'
-                ]
-            ],
-            [
-                'field' => 'konfirmasi_password',
-                'label' => 'Konfirmasi password',
-                'rules' => 'required|min_length[8]|matches[password]',
-                'errors' => [
-                    'required' => '{field} tidak boleh kosong',
-                    'min_length' => 'Password minimal 8 karakter',
-                    'matches' => 'Password dan Konfirmasi password harus sama'
-                ]
-            ]
-        ];
-        $this->form_validation->set_rules($rules);
+        $this->form_validation->set_rules('nama_pegawai', 'Nama pegawai', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
         if ($this->form_validation->run() == false) {
             $msg = [
                 "error" => [
-                    'nama_pegawai' => form_error('nama'),
-                    'posisi_pegawai' => form_error('posisi'),
-                    'level_id' => form_error('level'),
+                    'nama_pegawai' => form_error('nama_pegawai'),
                     'username' => form_error('username'),
                     'password' => form_error('password'),
-                    'konfirmasi_password' => form_error('konfirmasi_password')
                 ]
             ];
-            echo json_encode($msg);
         } else {
             $data = [
-                'nama_pegawai' => $_POST['nama'],
-                'id_posisi' => $_POST['posisi'],
+                'nama_pegawai' => $_POST['nama_pegawai'],
+                'id_posisi' => $_POST['id_posisi'],
                 'gambar' => 'default.png',
                 'username' => $_POST['username'],
                 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-                'level_id' => $_POST['level'],
-                'is_active' => $_POST['is_active'],
-                // 'konfirmasi_password' => $_POST['konfirmasi_password'],
+                'level_id' => $_POST['level_id'],
+                'is_active' => 0,
                 'date_created' => time()
             ];
-            if ($this->db->insert('users', $data)) {
-                $msg = [
-                    'response' => 'success',
-                    'message' => 'Data berhasil ditambahkan'
-                ];
-                echo json_encode($msg);
-            } else {
-                $msg = [
-                    'response' => 'error',
-                    'message' => 'Data gagal ditambahkan'
-                ];
-                echo json_encode($msg);
-            }
+            $this->db->insert('users', $data);
+            $msg = [
+                'response' => 'success',
+                'message' => 'Data berhasil ditambahkan'
+            ];
         }
+        echo json_encode($msg);
     }
 
     public function get_access_menu_by_id()
@@ -642,10 +568,12 @@ class Menu extends CI_Controller
     public function userAccess()
     {
         if ($this->input->is_ajax_request()) {
+            $level_id = $this->input->get('level_id');
             // $id = $_GET['id'];
             $data = [
                 'response' => 'success',
                 // 'level_user' => $this->db->get_where('level_user', ['id' => $id])->row_array(),
+                'level_id' => $level_id,
                 'user_access' => $this->db->get('tb_user_menu')->result_array()
             ];
             echo json_encode($this->load->view('menu/ajax-request/data-user-access', $data));
@@ -802,5 +730,65 @@ class Menu extends CI_Controller
         $this->db->where('id', $userid);
         $this->db->update('users');
         echo json_encode($data);
+    }
+    public function submenu_active() 
+    {
+        $subid = $this->input->get('subid');
+        $isactive = $this->input->get('isactive');
+        $data = [
+            'is_active' => $isactive,
+        ];
+        $this->db->set('is_active', 1);
+        $this->db->where('id', $subid);
+        $this->db->update('tb_user_sub_menu');
+        echo json_encode($data);
+    }
+    public function submenu_inactive()
+    {
+        $subid = $this->input->get('subid');
+        $isactive = $this->input->get('isactive');
+        $data = [
+            'is_active' => $isactive,
+        ];
+        $this->db->set('is_active', 0);
+        $this->db->where('id', $subid);
+        $this->db->update('tb_user_sub_menu');
+        echo json_encode($data);
+    }
+    public function dropdown_active()
+    {
+        $subid = $this->input->get('subid');
+        $isactive = $this->input->get('isactive');
+        $data = [
+            'dropdown' => $isactive,
+        ];
+        $this->db->set('dropdown', 1);
+        $this->db->where('id', $subid);
+        $this->db->update('tb_user_sub_menu');
+        echo json_encode($data);
+    }
+    public function dropdown_inactive()
+    {
+        $subid = $this->input->get('subid');
+        $isactive = $this->input->get('isactive');
+        $data = [
+            'dropdown' => $isactive,
+        ];
+        $this->db->set('dropdown', 0);
+        $this->db->where('id', $subid);
+        $this->db->update('tb_user_sub_menu');
+        echo json_encode($data);
+    }
+    public function add_access() 
+    {
+        $level_id = $this->input->get('level_id');
+        $menu_id = $this->input->get('menu_id');
+        $data = [
+            'level_id' => $level_id,
+            'menu_id' => $menu_id,
+        ];
+        $cek_access = $this->db->get_where('tb_user_access_menu', $data)->num_rows();
+        $cek_access > 0 ? $this->db->delete('tb_user_access_menu', $data) : $this->db->insert('tb_user_access_menu', $data);
+        echo json_encode($cek_access);
     }
 }

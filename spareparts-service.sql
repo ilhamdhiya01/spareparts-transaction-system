@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2022 at 10:20 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Generation Time: Jun 23, 2022 at 11:51 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -93,8 +93,7 @@ CREATE TABLE `tb_data_mobil` (
 --
 
 INSERT INTO `tb_data_mobil` (`id`, `id_pelanggan`, `jenis_mobil`, `tipe_mobil`, `merek_mobil`, `nomor_rangka`, `nomor_mesin`, `nomor_polisi`, `warna_mobil`, `tahun_mobil`) VALUES
-(76, 149, 'Mobil SUV', 'Mazda KR2001', 'Honda', 'MHYKZE81SEJ111222', 'MHYKZE81SEJ111221', 'H 6011 JQ', 'Hitam', '2019'),
-(77, 150, 'Mobil SUV R7', 'Mazda KR2001', 'Honda', 'MHYKZE81SEJ111221', 'MHYKZE81SEJ1C1221', 'H 6011 JU', 'Merah', '2019');
+(84, 165, 'sdfsdfsdf', 'sdfsdfsdfsd', 'sdfsdfsdf', '123123123as1212asda', '123123e3435qwee12we', 'adsqwe2', 'asdasw', '1231');
 
 -- --------------------------------------------------------
 
@@ -119,9 +118,11 @@ CREATE TABLE `tb_data_service` (
 --
 
 INSERT INTO `tb_data_service` (`id`, `id_pelanggan`, `kd_service`, `jenis_service`, `harga`, `sub_service`, `service_lain`, `tgl_service`, `info_lain`) VALUES
-(109, 149, 'SRV001', 'Service Tune Up', 150000, '', '', '2021-11-28', ''),
-(110, 150, 'SRV002', 'Service Berkala', 1500000, 'Service Berkala 1.000 km', '', '2021-12-31', 'Info lain'),
-(114, 157, 'SRV004', 'Service Berkala', 1500000, 'Service Berkala 1.000 km', '', '2022-03-16', '');
+(121, 164, 'SRV001', 'Service Tune Up', 150000, '', '', '2022-06-16', 'Info'),
+(123, 164, 'SRV002', 'Service Berkala', 1500000, 'Service Berkala 1.000 km', '', '2022-06-16', ''),
+(124, 165, 'SRV003', 'Service Berkala', 1500000, 'Service Berkala 1.000 km', '', '2022-06-18', ''),
+(125, 165, 'SRV004', 'Service Berkala', 250000, 'Service Berkala 5.000 km', '', '2022-06-18', ''),
+(126, 165, 'SRV005', 'Service Tune Up', 150000, '', '', '2022-06-23', '');
 
 -- --------------------------------------------------------
 
@@ -163,11 +164,7 @@ CREATE TABLE `tb_pelanggan` (
 --
 
 INSERT INTO `tb_pelanggan` (`id`, `nama_pelanggan`, `no_tlp`, `nik`, `alamat`) VALUES
-(149, 'Ilham Dhiya Ulhaq', '085803135909', '3374131705980005', 'Jl. Karang Jangkang RT 04 / 04'),
-(150, 'Frido', '085803135999', '3374131705980004', 'Jl. Majapahit 8'),
-(153, 'nurdin', '085803135999', '3374131705980006', 'hjfjhvas'),
-(154, 'nurdin', '085803135999', '3374131705980002', 'test'),
-(162, 'sdfsdf', '08123131313', '1231231231231231', 'czczs');
+(165, 'Ilham Dhiya Ulhaq', '085803135909', '3374131705980005', 'Jl. Karang Jangkang RT 04 RW 04');
 
 -- --------------------------------------------------------
 
@@ -232,18 +229,13 @@ CREATE TABLE `tb_spareparts_service` (
 --
 
 INSERT INTO `tb_spareparts_service` (`id`, `id_service`, `id_mobil`, `id_spareparts`, `id_sub_spareparts`, `id_pelanggan`, `id_status`) VALUES
-(220, 109, 76, 1, 1, 149, 1),
-(221, 109, 76, 2, 22, 149, 1),
-(222, 109, 76, 3, 29, 149, 1),
-(223, 109, 76, 4, 41, 149, 1),
-(260, 110, 77, 1, 3, 150, 2),
-(261, 109, 76, 4, 41, 149, 1),
-(263, 110, 77, 1, 2, 150, 2),
-(264, 110, 77, 2, 22, 150, 2),
-(265, 110, 77, 4, 41, 150, 2),
-(270, 114, 81, 1, 1, 157, 1),
-(271, 114, 81, 1, 2, 157, 1),
-(272, 114, 81, 1, 3, 157, 1);
+(282, 121, 83, 1, 1, 164, 2),
+(283, 121, 83, 2, 22, 164, 2),
+(284, 121, 83, 3, 29, 164, 2),
+(286, 124, 84, 1, 1, 165, 2),
+(287, 124, 84, 2, 22, 165, 2),
+(288, 125, 84, 2, 28, 165, 2),
+(291, 126, 84, 1, 1, 165, 2);
 
 -- --------------------------------------------------------
 
@@ -345,8 +337,8 @@ INSERT INTO `tb_sub_spareparts` (`id`, `id_spareparts`, `nama_spareparts`, `harg
 (42, 4, 'Aki 4', 700000),
 (43, 4, 'Aki 5', 450000),
 (44, 4, 'Aki 6', 320000),
-(52, 4, 'Aki 5', 450000),
-(53, 4, 'Aki 5', 450000);
+(58, 4, 'Aki 7', 200000),
+(59, 4, 'Aki 100', 10);
 
 -- --------------------------------------------------------
 
@@ -394,7 +386,8 @@ INSERT INTO `tb_user_menu` (`id`, `nama_menu`) VALUES
 (1, 'Home'),
 (2, 'Service'),
 (5, 'Setting'),
-(64, 'Spareparts');
+(64, 'Spareparts'),
+(73, 'test2');
 
 -- --------------------------------------------------------
 
@@ -446,9 +439,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nama_pegawai`, `id_posisi`, `gambar`, `username`, `password`, `level_id`, `is_active`, `date_created`) VALUES
-(1, 'Ilham Dhiya Ulhaq', 1, 'default.png', 'ilhamdhiya01', '$2y$10$p1t157Ak33H6VuPBCZEeoO1z6vgfxKzFMsgBQy0QkkEzN2QnGMzWu', 1, 1, 1629640402),
-(39, 'Annisa Wahyu Hidayah', 2, 'default.png', 'annisawahyu01', '$2y$10$bVRWQZtXYhuB1nAT5bCs9OKh8KwC6Qdyeh4j29EDKWjPLJcrHJPDi', 2, 1, 1637395503),
-(40, 'Frido Andre', 3, 'default.png', 'frido01', '$2y$10$3bUkFfut3a98e26bmAhZBuvJ9Vg6GFL.4KwYlu4//h/Q9e0gYrjHC', 3, 1, 1637679900);
+(44, 'Frido', 2, 'default.png', 'feri01', '$2y$10$g/XWH/nzaWpUVCI3.QtFUeDsFA8clu/1Ns09c.m8nQqDeNdl6Zg3e', 2, 1, 1655977251),
+(45, 'Feri Irawan', 1, 'default.png', 'feri123', '$2y$10$6786i3H.Uo9VbhdRg/7DZe6FylR4dHaC534eAf/6EuXufX/b5NblS', 1, 1, 1655977622);
 
 --
 -- Indexes for dumped tables
@@ -570,13 +562,13 @@ ALTER TABLE `level_user`
 -- AUTO_INCREMENT for table `tb_data_mobil`
 --
 ALTER TABLE `tb_data_mobil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `tb_data_service`
 --
 ALTER TABLE `tb_data_service`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `tb_jenis_service`
@@ -588,7 +580,7 @@ ALTER TABLE `tb_jenis_service`
 -- AUTO_INCREMENT for table `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT for table `tb_posisi`
@@ -600,13 +592,13 @@ ALTER TABLE `tb_posisi`
 -- AUTO_INCREMENT for table `tb_spareparts`
 --
 ALTER TABLE `tb_spareparts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tb_spareparts_service`
 --
 ALTER TABLE `tb_spareparts_service`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=273;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=292;
 
 --
 -- AUTO_INCREMENT for table `tb_status_service`
@@ -624,7 +616,7 @@ ALTER TABLE `tb_sub_jenis_service`
 -- AUTO_INCREMENT for table `tb_sub_spareparts`
 --
 ALTER TABLE `tb_sub_spareparts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `tb_user_access_menu`
@@ -636,7 +628,7 @@ ALTER TABLE `tb_user_access_menu`
 -- AUTO_INCREMENT for table `tb_user_menu`
 --
 ALTER TABLE `tb_user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `tb_user_sub_menu`
@@ -648,7 +640,7 @@ ALTER TABLE `tb_user_sub_menu`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

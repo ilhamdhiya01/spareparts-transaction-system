@@ -7,7 +7,7 @@ class Model_access_menu extends CI_Model
 {
     public function getAccessMenu()
     {
-        $this->db->select('users.*,tb_posisi.nama_posisi,level_user.level');
+        $this->db->select('users.*,tb_posisi.nama_posisi,level_user.level, level_user.id as level_id');
         $this->db->from('users');
         $this->db->join('tb_posisi', 'users.id_posisi = tb_posisi.id');
         $this->db->join('level_user', 'users.level_id = level_user.id');

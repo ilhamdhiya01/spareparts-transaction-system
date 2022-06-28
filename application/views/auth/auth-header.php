@@ -34,6 +34,17 @@
             transform: translate(-30%, -50%);
             background: rgba(4, 29, 23, 0.5);
         }
+        .login_wrapper {
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+            margin-top: 320px;
+            position: relative;
+            left: 80px;
+        }
+        #form-login {
+            width: 100%;
+        }
     </style>
 </head>
 
