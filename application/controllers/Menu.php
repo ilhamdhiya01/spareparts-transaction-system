@@ -80,6 +80,14 @@ class Menu extends CI_Controller
             echo "Data tidak ditemukan";
         }
      }
+     public function formUbahUser() {
+         $data = [
+             'level_user' => $this->db->get('level_user')->result_array(),
+             'posisi' => $this->db->get('tb_posisi')->result_array(),
+             'user' => $this->db->get_where('users', ['id' => $this->input->get('user_id')])->row_array(),
+         ];
+         echo json_encode($this->load->view('menu/ajax-request/form-ubah-user', $data));
+     }
     public function delete_userMenu()
     {
         $id = $_GET['menu_id'];
@@ -134,6 +142,21 @@ class Menu extends CI_Controller
         echo json_encode($data);
     }
 
+     public function proses_ubahSubMenu()
+     {
+        $sub_id = $this->input->post('sub_id');
+        $this->db->set('sub_menu', $this->input->post('sub_menu'));
+        $this->db->set('url', $this->input->post('url'));
+        $this->db->set('icon', $this->input->post('icon'));
+        $this->db->where('id',$sub_id);
+        $this->db->update('tb_user_sub_menu');
+        $data = [
+            'response' => 'success',
+            'message' => 'Data berhasil di ubah'
+        ];
+        echo json_encode($data);
+     }
+
     // setting dropdown_submenu
     public function dropdown_subMenu()
     {
@@ -175,78 +198,51 @@ class Menu extends CI_Controller
             ];
             echo json_encode($msg);
         }
+    } public function formUbahSubMenu()
+        {
+            $sub_id = $this->input->get('sub_id');
+            $data = [
+                'user_menu' => $this->db->get('tb_user_menu')->result_array(),
+                'sub_by_id' => $this->db->get_where('tb_user_sub_menu', ['id' => $sub_id])->row_array(),
+            ];
+            if ($this->input->is_ajax_request()) {
+                echo json_encode($this->load->view('menu/ajax-request/form-ubah-submenu', $data));
+            } else {
+                $msg = [
+                'response' => 'error',
+                'message' => 'Data tidak ditemukan'
+                ];
+            echo json_encode($msg);
+        }
     }
 
     public function tambah_subMenu()
     {
-        $rules = [
-            [
-                'field' => 'menu',
-                'label' => 'User menu',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'User menu wajib di isi'
-                ]
-            ],
-            [
-                'field' => 'sub_menu',
-                'label' => 'Sub menu',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Sub menu wajib di isi'
-                ]
-            ],
-            [
-                'field' => 'url',
-                'label' => 'Url',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Url wajib di isi'
-                ]
-            ],
-            [
-                'field' => 'icon',
-                'label' => 'Icon',
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Icon wajib di isi'
-                ]
-            ]
-        ];
-        $this->form_validation->set_rules($rules);
+        $this->form_validation->set_rules('sub_menu', 'Sub Menu', 'required');
+        $this->form_validation->set_rules('url', 'Url', 'required');
+        $this->form_validation->set_rules('icon', 'Icon', 'required');
         if ($this->form_validation->run() == false) {
             $msg = [
                 'error' => [
-                    'menu_user' => form_error('menu'),
                     'sub_menu' => form_error('sub_menu'),
                     'url' => form_error('url'),
                     'icon' => form_error('icon')
                 ]
             ];
-            echo json_encode($msg);
         } else {
             $data = [
-                'menu_id' => $_POST['menu'],
+                'menu_id' => $_POST['menu_id'],
                 'sub_menu' => $_POST['sub_menu'],
                 'url' => $_POST['url'],
                 'icon' => $_POST['icon'],
-                'is_active' => $_POST['is_active'],
-                'dropdown' => $_POST['dropdown']
             ];
-            if ($this->db->insert('tb_user_sub_menu', $data)) {
-                $msg = [
-                    'response' => 'success',
-                    'message' => 'Sub menu berhasil ditambahkan'
-                ];
-                echo json_encode($msg);
-            } else {
-                $msg = [
-                    'response' => 'error',
-                    'message' => 'Sub menu berhasil ditambahkan'
-                ];
-                echo json_encode($msg);
-            }
+            $this->db->insert('tb_user_sub_menu', $data);
+            $msg = [
+                'status' => 200,
+                'message' => 'Sub menu berhasil ditambahkan'
+            ];
         }
+        echo json_encode($msg);
     }
 
     public function get_subMenuById()
@@ -284,7 +280,7 @@ class Menu extends CI_Controller
 
     public function delete_subMenu()
     {
-        $id = $_POST['id'];
+        $id = $_GET['sub_id'];
         if ($this->db->delete('tb_user_sub_menu', ['id' => $id])) {
             $data = [
                 'response' => 'success',
@@ -790,5 +786,22 @@ class Menu extends CI_Controller
         $cek_access = $this->db->get_where('tb_user_access_menu', $data)->num_rows();
         $cek_access > 0 ? $this->db->delete('tb_user_access_menu', $data) : $this->db->insert('tb_user_access_menu', $data);
         echo json_encode($cek_access);
+    }
+    public function proses_ubahUser() {
+        $user_id = $this->input->post('id');
+        $nama_pegawai = $this->input->post('nama_pegawai');
+        $id_posisi = $this->input->post('id_posisi');
+        $level_id = $this->input->post('level_id');
+        $this->db->set('nama_pegawai', $nama_pegawai);
+        $this->db->set('id_posisi', $id_posisi);
+        $this->db->set('level_id', $level_id);
+        $this->db->set('date_created', time());
+        $this->db->where('id', $user_id);
+        $this->db->update('users');
+        $msg = [
+            'status' => 200,
+            'message' => 'Update user success'
+        ];
+        echo json_encode($msg);
     }
 }

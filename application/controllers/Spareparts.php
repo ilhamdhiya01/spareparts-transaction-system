@@ -154,17 +154,13 @@ class Spareparts extends CI_Controller
 
     public function hapus_sub()
     {
-        if ($this->input->is_ajax_request()) {
-            $id_sub = $_POST['id_sub'];
-            $this->db->delete('tb_sub_spareparts', ['id' => $id_sub]);
-            $msg = [
-                'status' => 200,
-                'message' => 'Data berhasil di hapus'
-            ];
-            echo json_encode($msg);
-        } else {
-            echo json_encode('Request failed');
-        }
+        $id_sub = $this->input->post('id_sub');
+        $this->db->delete('tb_sub_spareparts', ['id' => $id_sub]);
+        $msg = [
+            'status' => 200,
+            'message' => 'Data berhasil di hapus'
+        ];
+        echo json_encode($msg);
     }
 
     public function proses_tambah_sub_spareparts()

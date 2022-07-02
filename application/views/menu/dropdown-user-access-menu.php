@@ -84,7 +84,6 @@
 				</button>
 			</div>
 			<div class="modal-body view-form-user">
-
 			</div>
 		</div>
 	</div>
@@ -98,5 +97,4 @@
 			$('.view-form-user').html(data);
 		});
 	});
-
 </script>

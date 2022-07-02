@@ -41,7 +41,7 @@
 					<div class="dropdown-menu" role="menu">
 						<a class="dropdown-item delete-user" href="#" data-userid="<?= $access['id']; ?>"><i
 								class="fas fa-trash"></i> Delete</a>
-						<a class="dropdown-item update-spareparts" href="#" data-userid="<?= $access['id']; ?>"><i
+						<a class="dropdown-item update-user" href="#" data-userid="<?= $access['id']; ?>"><i
 								class="fas fa-edit"></i> Update</a>
 						<a class="dropdown-item add-access" data-toggle="modal" data-target="#add-access" href="#"
 							data-levelid="<?= $access['level_id']; ?>"><i class="fas fa-plus"></i> Add Access</a>
@@ -136,7 +136,7 @@
 	$('.add-access').click(function () {
 		$('#add-access .modal-title').html('Add Access User')
 		$.ajax({
-			url : '<?= base_url() ?>menu/userAccess',
+			url: '<?= base_url() ?>menu/userAccess',
 			type: 'get',
 			data: {
 				level_id: $(this).data('levelid'),
@@ -147,4 +147,13 @@
 		});
 	});
 
+	$('.update-user').click(function () {
+		$('#tambah-user').modal('show');
+		$('#modal-sub-menu-title').html('Ubah User Access ')
+		$.get('<?= base_url() ?>menu/formUbahUser', {
+			user_id: $(this).data('userid')
+		}, function (data) {
+			$('.view-form-user').html(data);
+		});
+	});
 </script>

@@ -55,9 +55,9 @@
 						<span class="sr-only">Toggle Dropdown</span>
 					</button>
 					<div class="dropdown-menu" role="menu">
-						<a class="dropdown-item delete-menu" href="#" data-menuid="<?= $menu['id']; ?>"><i
+						<a class="dropdown-item delete-sub-menu" href="#" data-subid="<?= $menu['id']; ?>"><i
 								class="fas fa-trash"></i> Delete</a>
-						<a class="dropdown-item update-menu" href="#" data-menuid="<?= $menu['id']; ?>"><i
+						<a class="dropdown-item update-sub-menu" href="#" data-subid="<?= $menu['id']; ?>"><i
 								class="fas fa-edit"></i> Update</a>
 					</div>
 				</div>
@@ -113,6 +113,29 @@
 				console.log(data);
 			});
 		}
+	});
+	$('.delete-sub-menu').click(function () {
+		$(this).closest('#show-sub-menu').addClass('hide-sub-menu');
+		$.getJSON('<?= base_url() ?>menu/delete_subMenu', {
+			sub_id: $(this).data('subid'),
+		}, function (data) {
+			if (data.response == 'success') {
+				$('.hide-sub-menu').fadeOut(800);
+			}
+		});
+	});
+	$('.update-sub-menu').click(function () {
+		$("#tambah-sub-menu").modal('show');
+		$.ajax({
+			url : '<?= base_url() ?>menu/formUbahSubMenu',
+			type: 'get',
+			data: {
+				sub_id: $(this).data('subid'),
+			},
+			success: (data) => {
+				$('.view-form-sub-menu').html(data);
+			}
+		})
 	});
 
 </script>
